@@ -5,7 +5,10 @@ import { HomePageComponent } from './home-page/home-page.component';
 const routes: Routes = [
  {path: 'app-home-page', component: HomePageComponent },
 
- { path: '', redirectTo: '/app-home-page', pathMatch: 'full' }
+ { path: '', redirectTo: '/app-home-page', pathMatch: 'full' },
+ { path: '', redirectTo: '/app-user-interface', pathMatch: 'full' }
+
+ 
 ];
 
 @NgModule({
