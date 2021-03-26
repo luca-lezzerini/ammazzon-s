@@ -1,4 +1,10 @@
+import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
+import { Automa } from '../automa-crud/automa';
+import { Automabile } from '../automa-crud/automabile';
+import { AddEvent, AnnullaEvent, ConfermaEvent, ModificaEvent, RicercaEvent, RimuoviEvent, SelezionaEvent } from '../automa-crud/eventi';
+import { ListaTaglieDto } from '../dto/lista-taglie-dto';
+import { TagliaDto } from '../dto/taglia-dto';
 import { VarianteTaglia } from '../entità/variante-taglia';
 
 @Component({
@@ -6,36 +12,125 @@ import { VarianteTaglia } from '../entità/variante-taglia';
   templateUrl: './anagrafica-taglia.component.html',
   styleUrls: ['./anagrafica-taglia.component.css']
 })
-export class AnagraficaTagliaComponent implements OnInit {
+export class AnagraficaTagliaComponent implements OnInit, Automabile {
 
+  automa: Automa;
   criterioRicerca = "";
   taglia = new VarianteTaglia();
   listaTaglie: VarianteTaglia[] = [];
-  constructor() { }
+
+  form: boolean;
+  aggiungi: boolean;
+  remove: boolean;
+  edit: boolean;
+  conf: boolean = true;
+  annull: boolean = true;
+  search: boolean;
+  tabella: boolean;
+  codiceC: boolean;
+
+  constructor(private http: HttpClient) {
+    this.automa = new Automa(this);
+  }
+
+  entraStatoRicerca() {
+    this.form = false;
+    this.aggiungi = true;
+    this.search = true;
+    this.tabella = true;
+    this.codiceC = false;
+    this.remove = false;
+    this.edit = false;
+    this.conf = false;
+    this.annull = false;
+  }
+  entraStatoAggiungi() {
+    this.form = true;
+    this.aggiungi = false;
+    this.remove = false;
+    this.edit = false;
+    this.conf = true;
+    this.annull = true;
+    this.search = false;
+    this.tabella = false;
+    this.codiceC = false;
+  }
+  entraStatoVisualizza() {
+    this.form = true;
+    this.aggiungi = true;
+    this.remove = true;
+    this.edit = true;
+    this.conf = false;
+    this.annull = false;
+    this.search = true;
+    this.tabella = true;
+    this.codiceC = true;
+  }
+  entraStatoModifica() {
+    this.form = true;
+    this.aggiungi = false;
+    this.remove = false;
+    this.edit = false;
+    this.conf = true;
+    this.annull = true;
+    this.search = false;
+    this.tabella = false;
+    this.codiceC = false;
+  }
+  entraStatoRimuovi() {
+    this.form = true;
+    this.aggiungi = false;
+    this.remove = false;
+    this.edit = false;
+    this.conf = true;
+    this.annull = true;
+    this.search = false;
+    this.tabella = false;
+    this.codiceC = true;
+  }
+
+  salvaDati() {
+    let dto = new TagliaDto();
+    dto.varianteTaglia = this.taglia;
+    this.http.post<ListaTaglieDto>("http://localhost:8080/add-taglia", dto)
+      .subscribe(r => {
+        this.listaTaglie = r.listaTaglie;
+        this.taglia = new VarianteTaglia();
+      });
+  }
+  modificaDati() {
+
+  }
+  eliminaDati() {
+    throw new Error('Method not implemented.');
+  }
+  aggiornaRisultatiRicerca() {
+    throw new Error('Method not implemented.');
+  }
 
   ngOnInit(): void {
   }
 
 
   modifica() {
-
+    this.automa.next(new ModificaEvent(), this.automa);
   }
   conferma() {
-
+    this.automa.next(new ConfermaEvent(), this.automa);
   }
   annulla() {
-
+    this.automa.next(new AnnullaEvent(), this.automa);
   }
   rimuovi() {
-
+    this.automa.next(new RimuoviEvent(), this.automa);
   }
   nuova() {
-
+    this.automa.next(new AddEvent(), this.automa);
   }
   cerca() {
-
+    this.automa.next(new RicercaEvent(), this.automa);
   }
   seleziona() {
-
+    this.automa.next(new SelezionaEvent(), this.automa);
   }
 }

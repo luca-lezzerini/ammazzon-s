@@ -20,7 +20,7 @@
         </tr>
         <tr *ngFor="let l of listaTaglie">
             <td>{{l.codice}}</td>
-            <td><button (click)="seleziona()">Seleziona</button></td>
+            <td><button (click)="seleziona(l)">Seleziona</button></td>
         </tr>
     </table>
 </div>
