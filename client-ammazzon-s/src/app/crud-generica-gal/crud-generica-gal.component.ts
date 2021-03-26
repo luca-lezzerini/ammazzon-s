@@ -1,4 +1,6 @@
+import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
+import { VarianteColore } from '../entità/variante-colore';
 
 @Component({
   selector: 'app-crud-generica-gal',
@@ -7,7 +9,10 @@ import { Component, OnInit } from '@angular/core';
 })
 export class CrudGenericaGalComponent implements OnInit {
 
-  constructor() { }
+  varianteColore = new VarianteColore();
+  variantiColori: VarianteColore[] = [];
+
+  constructor(private http: HttpClient) { }
 
   ngOnInit(): void {
   }

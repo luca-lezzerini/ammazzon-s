@@ -1,1 +1,11 @@
-<p>crud-generica-gal works!</p>
+<h1>CRUD GENERICA DEI GALLI</h1>
+<br><br>
+<div>
+<input type="text" placeholder="inserisci il codice" [(ngModel)]="varianteColore.codice" >
+<input type="text" placeholder="inserisci la descrizione" [(ngModel)]="varianteColore.descrizione" >
+<button (click)="modifica()">Modifica</button>
+<button (click)="conferma()">Conferma</button>
+<button (click)="Annulla()">Annulla</button>
+<button (click)="rimuovi()">Rimuovi</button>
+</div>
+
