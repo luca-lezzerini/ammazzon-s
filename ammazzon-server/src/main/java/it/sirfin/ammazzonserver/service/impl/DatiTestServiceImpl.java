@@ -73,15 +73,19 @@ public class DatiTestServiceImpl implements DatiTestService {
         vt3 = varianteTagliaRepository.save(vt3);
 
         ///////////creazione 1000 prodotti////////
-        int limite = 1000;
+        Prodotto p1 = new Prodotto();
+        int limite = 100;
         for (int i = 0; i < limite; i++) {
-            Prodotto p1 = new Prodotto("p1", "t-shirt", 21.0, new ArrayList<>());
+            p1 = new Prodotto("p" + i, "t-shirt", 21.0, new ArrayList<>());
             p1 = prodottoRepository.save(p1);
         }
-        
+        associaProdottoColore(p1, vc3);
+        associaProdottoColore(p1, vc2);
+
     }
-        ///////////ASSOCIAZIONI//////////////////
-        //////Prodotti con id % 3 == 0 -> 1 colore e 2 taglie/////////////
+    ///////////ASSOCIAZIONI//////////////////
+    //////Prodotti con id % 3 == 0 -> 1 colore e 2 taglie/////////////
+
     private void associaProdottoColore(Prodotto p, VarianteColore vc) {
         ProdottoColore pc = new ProdottoColore(new ArrayList<ColoreTaglia>(), vc, p);
         pc.setProdotto(p);
@@ -92,5 +96,19 @@ public class DatiTestServiceImpl implements DatiTestService {
         prodottoRepository.save(p);
         varianteColoreRepository.save(vc);
     }
+
+    private void associaProdottoTaglie(ProdottoColore pc, VarianteTaglia vt) {
+        ColoreTaglia ct = new ColoreTaglia();
+        ct.setProdottoColore(pc);
+        ct.setVarianteTaglia(vt);
+        ct = coloreTagliaRepository.save(ct);
+        pc.getColoriTaglie().add(ct);
+        vt.getColoriTaglie().add(ct);
+        pc = prodottoColoreRepository.save(pc);
+        vt = varianteTagliaRepository.save(vt);
+
+    }
+    
+    
 
 }
