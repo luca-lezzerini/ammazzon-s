@@ -14,4 +14,10 @@ export class HomePageComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  immagine1:string = "assets/css/1.jpg";
+  immagine2:string = "assets/css/2.jpg";
+  immagine3:string = "assets/css/3.jpg";
+  immagine4:string = "assets/css/4.jpg";
+  immagine5:string = "assets/css/5.jpg";
+  immagine6:string = "assets/css/6.jpg";
 }

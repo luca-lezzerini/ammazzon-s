@@ -1,14 +1,128 @@
-<body>
-    <div class="titolo">
-        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Audiowide">
-        <h1>Benvenuto in Ammazon</h1>
-        <p>Il primo e-commerce di successo</p>
-    </div>
-    <div class="link">
-        <a href="app-home-page">Home</a>
-        <a href="app-user-interface">user-interface</a>
-        <a href="app-anagrafica-colori-galli">ANAGRAFICA COLORI GALLI</a>
-        <a href="app-anagrafica-taglia">Anagrafica Taglia</a>
+<title>Ammazzon</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Poppins">
 
+<body>
+
+    <!-- menu -->
+    <nav class="w3-sidebar w3-red w3-collapse w3-top w3-large w3-padding"
+        style="z-index:3;width:300px;font-weight:bold;" id="mySidebar"><br>
+        <a href="javascript:void(0)" onclick="w3_close()" class="w3-button w3-hide-large w3-display-topleft"
+            style="width:100%;font-size:22px">Close Menu</a>
+        <div class="w3-container">
+            <h3 class="w3-padding-64"><b>Progammatori<br>Esperti</b></h3>
+        </div>
+        <div class="w3-bar-block">
+            <a href="app-home-page" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-white">Home</a>
+            <a href="/app-user-interface" onclick="w3_close()"
+                class="w3-bar-item w3-button w3-hover-white">User-Interface</a>
+            <a href="app-anagrafica-taglia" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-white">Anagrafica
+                Taglia</a>
+            <a href="app-anagrafica-colori-galli" onclick="w3_close()"
+                class="w3-bar-item w3-button w3-hover-white">Anagrafica Colori</a>
+        </div>
+    </nav>
+
+    <!-- Menu principale su schermi piccoli -->
+    <header class="w3-container w3-top w3-hide-large w3-red w3-xlarge w3-padding">
+        <a href="javascript:void(0)" class="w3-button w3-red w3-margin-right" onclick="w3_open()">☰</a>
+        <span>ammazzon</span>
+    </header>
+
+    <!-- Effetto di sovrapposizione all'apertura della barra laterale su schermi piccoli -->
+    <div class="w3-overlay w3-hide-large" onclick="w3_close()" style="cursor:pointer" title="close side menu"
+        id="myOverlay"></div>
+
+    <!-- !CONTENUTO DELLA PAGINA! -->
+    <div class="w3-main" style="margin-left:340px;margin-right:40px">
+
+        <!-- Intestazione -->
+        <div class="w3-container" style="margin-top:80px" id="showcase">
+            <h1 class="w3-jumbo"><b>AMMAZZON</b></h1>
+            <h1 class="w3-xxxlarge w3-text-red"><b>abbigliamento</b></h1>
+            <hr style="width:50px;border:5px solid red" class="w3-round">
+        </div>
+
+        <!-- Fotografie -->
+        <div class="w3-row-padding">
+            <div class="w3-half">
+                <img [src]=immagine1 style="width:100%" onclick="onClick(this)" alt="Concrete meets bricks">
+                <img [src]=immagine2 style="width:100%" onclick="onClick(this)"
+                    alt="Light, white and tight scandinavian design">
+                <img [src]=immagine3 style="width:100%" onclick="onClick(this)" alt="White walls with designer chairs">
+                <img [src]=immagine6 style="width:100%" onclick="onClick(this)">
+            </div>
+
+            <div class="w3-half">
+                <img [src]=immagine4 style="width:100%" onclick="onClick(this)" alt="Windows for the atrium">
+                <img [src]=immagine5 style="width:100%" onclick="onClick(this)">
+            </div>
+        </div>
+
+        <!-- Servizi -->
+        <div class="w3-container" id="services" style="margin-top:75px">
+            <h1 class="w3-xxxlarge w3-text-red"><b>ESPLORA LE VENDITE OVUNQUE TU SIA.</b></h1>
+            <hr style="width:50px;border:5px solid red" class="w3-round">
+            <p>
+                Grazie all'app Ammazzon, tutte le vendite saranno sempre a portata di mano. Che tu sia sull'autobus,
+                seduto al caffé o sul tuo divano, puoi trovare in ogni momento l'ispirazione che cerchi.
+            </p>
+        </div>
+
+
+        <!-- Contattaci -->
+        <div class="w3-container" id="contact" style="margin-top:75px">
+            <h1 class="w3-xxxlarge w3-text-red"><b>Contattaci</b></h1>
+            <hr style="width:50px;border:5px solid red" class="w3-round">
+            <p>Vuoi un vestito su misura? Compila il modulo e inseriscimi i dettagli :) Adoriamo conoscere nuove
+                persone!</p>
+            <form action="/action_page.php" target="_blank">
+                <div class="w3-section">
+                    <label>Nome</label>
+                    <input class="w3-input w3-border" type="text" name="Name" required>
+                </div>
+                <div class="w3-section">
+                    <label>Email</label>
+                    <input class="w3-input w3-border" type="text" name="Email" required>
+                </div>
+                <div class="w3-section">
+                    <label>Messaggio</label>
+                    <input class="w3-input w3-border" type="text" name="Message" required>
+                </div>
+                <button type="submit" class="w3-button w3-block w3-padding-large w3-red w3-margin-bottom">Invia
+                    modulo</button>
+            </form>
+        </div>
+
+        <!-- FINE CONTUNUTI -->
     </div>
+
+    <!-- Fondo -->
+    <div class="w3-light-grey w3-container w3-padding-32" style="margin-top:75px;padding-right:58px">
+        <p class="w3-right">I ragazzi del corso <a href="http://sirfinpa.it/" target="_blank"
+                class="w3-hover-opacity">Progammatore e Analista Java</a></p>
+    </div>
+
+    <script>
+        // Script to open and close sidebar
+        function w3_open() {
+            document.getElementById("mySidebar").style.display = "block";
+            document.getElementById("myOverlay").style.display = "block";
+        }
+
+        function w3_close() {
+            document.getElementById("mySidebar").style.display = "none";
+            document.getElementById("myOverlay").style.display = "none";
+        }
+
+        // Modal Image Gallery
+        function onClick(element) {
+            document.getElementById("img01").src = element.src;
+            document.getElementById("modal01").style.display = "block";
+            var captionText = document.getElementById("caption");
+            captionText.innerHTML = element.alt;
+        }
+    </script>
 </body>
