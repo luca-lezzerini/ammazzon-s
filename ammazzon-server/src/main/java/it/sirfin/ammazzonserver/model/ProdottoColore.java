@@ -33,7 +33,7 @@ public class ProdottoColore implements Serializable {
     public ProdottoColore() {
     }
 
-    public ProdottoColore(List<ColoreTaglia> coloriTaglie, VarianteColore varianteColore, Prodotto prodotto) {
+    public ProdottoColore(VarianteColore varianteColore, Prodotto prodotto) {
         this.coloriTaglie = coloriTaglie;
         this.varianteColore = varianteColore;
         this.prodotto = prodotto;
