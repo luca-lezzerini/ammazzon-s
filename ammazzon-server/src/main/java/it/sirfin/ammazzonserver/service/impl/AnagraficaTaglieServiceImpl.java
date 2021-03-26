@@ -10,6 +10,7 @@ import it.sirfin.ammazzonserver.dto.TagliaDto;
 import it.sirfin.ammazzonserver.model.VarianteTaglia;
 import it.sirfin.ammazzonserver.repository.VarianteTagliaRepository;
 import it.sirfin.ammazzonserver.service.AnagraficaTaglieService;
+import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -25,32 +26,40 @@ public class AnagraficaTaglieServiceImpl implements AnagraficaTaglieService {
 
     @Override
     public ListaTaglieDto aggiungiTaglia(VarianteTaglia vt) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        varianteTagliaRepository.save(vt);
+        return aggiorna();
     }
 
     @Override
     public ListaTaglieDto rimuoviTaglia(VarianteTaglia vt) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        varianteTagliaRepository.delete(vt);
+        return aggiorna();
     }
 
     @Override
     public ListaTaglieDto ricerca(String c) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        if (c.isBlank()) {
+            return aggiorna();
+        }
+        List<VarianteTaglia> lista = varianteTagliaRepository.trovaCodice(c);
+        return new ListaTaglieDto(lista);
     }
 
     @Override
     public TagliaDto ritornaTaglia(VarianteTaglia vt) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return new TagliaDto(vt);
     }
 
     @Override
     public ListaTaglieDto conferma(VarianteTaglia vt) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        varianteTagliaRepository.save(vt);
+        return aggiorna();
     }
 
     @Override
     public ListaTaglieDto aggiorna() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        List<VarianteTaglia> lista = varianteTagliaRepository.findAll();
+        return new ListaTaglieDto(lista);
     }
-    
+
 }
