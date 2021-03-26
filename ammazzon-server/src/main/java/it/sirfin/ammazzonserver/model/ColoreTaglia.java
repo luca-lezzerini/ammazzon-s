@@ -24,18 +24,23 @@ public class ColoreTaglia implements Serializable {
     @JsonIgnoreProperties(value = "coloreTaglia")
     @OneToMany(mappedBy = "coloreTaglia")
     private List<QtaOrdineVariante> qtaOrdiniVarianti;
-    
+
     @ManyToOne
     @JoinColumn(referencedColumnName = "id")
     private ProdottoColore prodottoColore;
 
+    @ManyToOne
+    @JoinColumn(referencedColumnName = "id")
+    private VarianteTaglia varianteTaglia;
+
     public ColoreTaglia() {
     }
 
-    public ColoreTaglia(Integer giacenza, List<QtaOrdineVariante> qtaOrdiniVarianti, ProdottoColore prodottoColore) {
+    public ColoreTaglia(Integer giacenza, List<QtaOrdineVariante> qtaOrdiniVarianti, ProdottoColore prodottoColore, VarianteTaglia varianteTaglia) {
         this.giacenza = giacenza;
         this.qtaOrdiniVarianti = qtaOrdiniVarianti;
         this.prodottoColore = prodottoColore;
+        this.varianteTaglia = varianteTaglia;
     }
 
     public Long getId() {
@@ -70,11 +75,18 @@ public class ColoreTaglia implements Serializable {
         this.prodottoColore = prodottoColore;
     }
 
+    public VarianteTaglia getVarianteTaglia() {
+        return varianteTaglia;
+    }
+
+    public void setVarianteTaglia(VarianteTaglia varianteTaglia) {
+        this.varianteTaglia = varianteTaglia;
+    }
+
     @Override
     public String toString() {
-        return "ColoreTaglia{" + "id=" + id + ", giacenza=" + giacenza + ", qtaOrdiniVarianti=" + qtaOrdiniVarianti.size() + ", prodottoColore=" + prodottoColore.getId() + '}';
+        return "ColoreTaglia{" + "id=" + id + ", giacenza=" + giacenza + ", qtaOrdiniVarianti=" + qtaOrdiniVarianti.size() + ", prodottoColore=" + prodottoColore.getId() + ", varianteTaglia=" + varianteTaglia.getId() + '}';
     }
-    
-    
 
+    
 }
