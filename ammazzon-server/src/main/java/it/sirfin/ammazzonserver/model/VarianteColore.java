@@ -30,10 +30,10 @@ public class VarianteColore implements Serializable {
     public VarianteColore() {
     }
 
-    public VarianteColore(String codice, String descrizione, List<ProdottoColore> prodottiColori) {
+    public VarianteColore(String codice, String descrizione) {
         this.codice = codice;
         this.descrizione = descrizione;
-        this.prodottiColori = prodottiColori;
+       
     }
 
     public Long getId() {

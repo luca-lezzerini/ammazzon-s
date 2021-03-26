@@ -57,27 +57,27 @@ public class DatiTestServiceImpl implements DatiTestService {
         prodottoRepository.deleteAllInBatch();
 
         //////////creazione utenti////////
-        UtenteRegistrato ur1 = new UtenteRegistrato("Nico", "Aba", "nic", "fuck", "2345678", "jhgfds", new ArrayList<>());
+        UtenteRegistrato ur1 = new UtenteRegistrato("Nico", "Aba", "nic", "fuck", "2345678", "jhgfds");
         ur1 = utenteRegistratoRepository.save(ur1);
-        UtenteRegistrato ur2 = new UtenteRegistrato("Franco", "Marzio", "xxx", "123", "98761234", "qw", new ArrayList<>());
+        UtenteRegistrato ur2 = new UtenteRegistrato("Franco", "Marzio", "xxx", "123", "98761234", "qw");
         ur2 = utenteRegistratoRepository.save(ur2);
-        UtenteRegistrato ur3 = new UtenteRegistrato("Pippo", "Pluto", "fff", "789", "6546546645", "za", new ArrayList<>());
+        UtenteRegistrato ur3 = new UtenteRegistrato("Pippo", "Pluto", "fff", "789", "6546546645", "za");
         ur3 = utenteRegistratoRepository.save(ur3);
 
         //////////creazione colori////////
-        VarianteColore vcBlu = new VarianteColore("b1", "blu", new ArrayList<>());
+        VarianteColore vcBlu = new VarianteColore("b1", "blu");
         vcBlu = varianteColoreRepository.save(vcBlu);
-        VarianteColore vcRosso = new VarianteColore("r1", "rosso", new ArrayList<>());
+        VarianteColore vcRosso = new VarianteColore("r1", "rosso");
         vcRosso = varianteColoreRepository.save(vcRosso);
-        VarianteColore vcGiallo = new VarianteColore("g1", "giallo", new ArrayList<>());
+        VarianteColore vcGiallo = new VarianteColore("g1", "giallo");
         vcGiallo = varianteColoreRepository.save(vcGiallo);
 
         //////////creazione taglia////////
-        VarianteTaglia vtS = new VarianteTaglia("S", new ArrayList<>());
+        VarianteTaglia vtS = new VarianteTaglia("S");
         vtS = varianteTagliaRepository.save(vtS);
-        VarianteTaglia vtM = new VarianteTaglia("M", new ArrayList<>());
+        VarianteTaglia vtM = new VarianteTaglia("M");
         vtM = varianteTagliaRepository.save(vtM);
-        VarianteTaglia vtL = new VarianteTaglia("L", new ArrayList<>());
+        VarianteTaglia vtL = new VarianteTaglia("L");
         vtL = varianteTagliaRepository.save(vtL);
 
         ///////////creazione 1000 prodotti////////
@@ -92,7 +92,7 @@ public class DatiTestServiceImpl implements DatiTestService {
             String pf = formatter.format(random);
             Double prezzoFormattato = Double.valueOf(pf);
 
-            p1 = new Prodotto("p" + i, "t-shirt", prezzoFormattato, new ArrayList<>());
+            p1 = new Prodotto("p" + i, "t-shirt", prezzoFormattato);
             p1 = prodottoRepository.save(p1);
             if (p1.getId() % 3 == 0) {
                
@@ -113,7 +113,7 @@ public class DatiTestServiceImpl implements DatiTestService {
     //////Prodotti con id % 3 == 0 -> 1 colore e 2 taglie/////////////
 
     private void associaProdottoColore(Prodotto p, VarianteColore vc, VarianteTaglia vt) {
-        ProdottoColore pc = new ProdottoColore(new ArrayList<ColoreTaglia>(), vc, p);
+        ProdottoColore pc = new ProdottoColore(vc, p);
         pc.setProdotto(p);
         pc.setVarianteColore(vc);
         pc = prodottoColoreRepository.save(pc);

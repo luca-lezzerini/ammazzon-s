@@ -36,14 +36,14 @@ public class UtenteRegistrato extends UtenteAnonimo implements Serializable {
     public UtenteRegistrato() {
     }
 
-    public UtenteRegistrato(String nome, String cognome, String username, String password, String codiceFiscale, String tokenRegistrato, List<Ordine> ordini) {
+    public UtenteRegistrato(String nome, String cognome, String username, String password, String codiceFiscale, String tokenRegistrato) {
         this.nome = nome;
         this.cognome = cognome;
         this.username = username;
         this.password = password;
         this.codiceFiscale = codiceFiscale;
         this.tokenRegistrato = tokenRegistrato;
-        this.ordini = ordini;
+        
     }
 
     public String getNome() {

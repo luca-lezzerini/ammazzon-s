@@ -40,12 +40,12 @@ public class Ordine implements Serializable {
     public Ordine() {
     }
 
-    public Ordine(LocalDate data, Integer numero, UtenteRegistrato utenteRegistrato, List<QtaOrdineVariante> qtaOrdiniVarianti) {
+    public Ordine(LocalDate data, Integer numero) {
         this.data = data;
         this.numero = numero;
-        this.utenteRegistrato = utenteRegistrato;
-        this.qtaOrdiniVarianti = qtaOrdiniVarianti;
     }
+
+    
 
     public Long getId() {
         return id;

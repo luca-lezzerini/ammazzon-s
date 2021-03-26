@@ -37,11 +37,9 @@ public class ColoreTaglia implements Serializable {
     public ColoreTaglia() {
     }
 
-    public ColoreTaglia(Integer giacenza, List<QtaOrdineVariante> qtaOrdiniVarianti, ProdottoColore prodottoColore, VarianteTaglia varianteTaglia) {
+    public ColoreTaglia(Integer giacenza) {
         this.giacenza = giacenza;
-        this.qtaOrdiniVarianti = qtaOrdiniVarianti;
-        this.prodottoColore = prodottoColore;
-        this.varianteTaglia = varianteTaglia;
+
     }
 
     public Long getId() {

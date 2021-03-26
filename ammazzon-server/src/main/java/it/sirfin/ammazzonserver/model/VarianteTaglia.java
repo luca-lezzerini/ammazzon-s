@@ -27,9 +27,9 @@ public class VarianteTaglia implements Serializable {
     public VarianteTaglia() {
     }
 
-    public VarianteTaglia(String codice, List<ColoreTaglia> coloriTaglie) {
+    public VarianteTaglia(String codice) {
         this.codice = codice;
-        this.coloriTaglie = coloriTaglie;
+        
     }
 
     public Long getId() {

@@ -33,12 +33,13 @@ public class Prodotto implements Serializable {
     public Prodotto() {
     }
 
-    public Prodotto(String codice, String descrizione, Double prezzo, List<ProdottoColore> prodottiColori) {
+    public Prodotto(String codice, String descrizione, Double prezzo) {
         this.codice = codice;
         this.descrizione = descrizione;
         this.prezzo = prezzo;
-        this.prodottiColori = prodottiColori;
     }
+
+    
 
     public Long getId() {
         return id;

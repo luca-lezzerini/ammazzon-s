@@ -29,10 +29,10 @@ public class QtaOrdineVariante implements Serializable {
     public QtaOrdineVariante() {
     }
 
-    public QtaOrdineVariante(Integer qta, Ordine ordine, ColoreTaglia coloreTaglia) {
+    public QtaOrdineVariante(Integer qta, Ordine ordine) {
         this.qta = qta;
         this.ordine = ordine;
-        this.coloreTaglia = coloreTaglia;
+       
     }
 
     public Long getId() {
