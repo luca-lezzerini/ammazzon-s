@@ -35,11 +35,11 @@
                 <th>Descrizione</th>
                 <th>Seleziona</th>
             </tr>
-            <tr *ngFor="let p of prodotti">
-                <td>{{p.codice}}</td>
-                <td>{{p.descrizione}}</td>
+            <tr *ngFor="let vc of variantiColori">
+                <td>{{vc.codice}}</td>
+                <td>{{vc.descrizione}}</td>
                 <td>
-                    <button (click)="seleziona(p)">Seleziona</button>
+                    <button (click)="seleziona(vc)">Seleziona</button>
                 </td>
             </tr>
         </table>

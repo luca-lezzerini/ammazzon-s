@@ -6,7 +6,8 @@ const routes: Routes = [
  {path: 'app-home-page', component: HomePageComponent },
 
  { path: '', redirectTo: '/app-home-page', pathMatch: 'full' },
- { path: '', redirectTo: '/app-user-interface', pathMatch: 'full' }
+ { path: '', redirectTo: '/app-user-interface', pathMatch: 'full' },
+ { path: '', redirectTo: '/app-crud-generica-gal', pathMatch: 'full' }
 
  
 ];
