@@ -1,4 +1,5 @@
-import { VarianteTaglia } from "../automa-crud/entità/variante-taglia";
+import { VarianteTaglia } from "../entità/variante-taglia";
+
 
 export class ListaTaglieDto {
     listaTaglie: VarianteTaglia[] = [];
