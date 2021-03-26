@@ -2,6 +2,7 @@ package it.sirfin.ammazzonserver.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -17,14 +18,14 @@ public class ProdottoColore implements Serializable {
     @GeneratedValue
     private Long id;
 
-    @JsonIgnoreProperties(value="prodottoColore")
+    @JsonIgnoreProperties(value = "prodottoColore")
     @OneToMany(mappedBy = "prodottoColore")
     private List<ColoreTaglia> coloriTaglie;
-    
+
     @ManyToOne
     @JoinColumn(referencedColumnName = "id")
     private VarianteColore varianteColore;
-    
+
     @ManyToOne
     @JoinColumn(referencedColumnName = "id")
     private Prodotto prodotto;
@@ -47,10 +48,16 @@ public class ProdottoColore implements Serializable {
     }
 
     public List<ColoreTaglia> getColoriTaglie() {
+        if (coloriTaglie == null) {
+            coloriTaglie = new ArrayList<>();
+        }
         return coloriTaglie;
     }
 
     public void setColoriTaglie(List<ColoreTaglia> coloriTaglie) {
+        if (coloriTaglie == null) {
+            coloriTaglie = new ArrayList<>();
+        }
         this.coloriTaglie = coloriTaglie;
     }
 
@@ -74,7 +81,5 @@ public class ProdottoColore implements Serializable {
     public String toString() {
         return "ProdottoColore{" + "id=" + id + ", coloriTaglie=" + coloriTaglie.size() + ", varianteColore=" + varianteColore.getId() + ", prodotto=" + prodotto.getId() + '}';
     }
-    
-    
-    
+
 }

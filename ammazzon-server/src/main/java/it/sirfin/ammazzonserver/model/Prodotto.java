@@ -2,6 +2,7 @@ package it.sirfin.ammazzonserver.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -72,10 +73,16 @@ public class Prodotto implements Serializable {
     }
 
     public List<ProdottoColore> getProdottiColori() {
+        if (prodottiColori == null) {
+            prodottiColori = new ArrayList<>();
+        }
         return prodottiColori;
     }
 
     public void setProdottiColori(List<ProdottoColore> prodottiColori) {
+        if (prodottiColori == null) {
+            prodottiColori = new ArrayList<>();
+        }
         this.prodottiColori = prodottiColori;
     }
 
@@ -83,6 +90,5 @@ public class Prodotto implements Serializable {
     public String toString() {
         return "Prodotto{" + "id=" + id + ", codice=" + codice + ", descrizione=" + descrizione + ", prezzo=" + prezzo + ", prodottiColori=" + prodottiColori.size() + '}';
     }
-    
-    
+
 }

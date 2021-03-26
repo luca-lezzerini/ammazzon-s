@@ -2,6 +2,7 @@ package it.sirfin.ammazzonserver.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -60,10 +61,16 @@ public class ColoreTaglia implements Serializable {
     }
 
     public List<QtaOrdineVariante> getQtaOrdiniVarianti() {
+        if (qtaOrdiniVarianti == null) {
+            qtaOrdiniVarianti = new ArrayList<>();
+        }
         return qtaOrdiniVarianti;
     }
 
     public void setQtaOrdiniVarianti(List<QtaOrdineVariante> qtaOrdiniVarianti) {
+        if (qtaOrdiniVarianti == null) {
+            qtaOrdiniVarianti = new ArrayList<>();
+        }
         this.qtaOrdiniVarianti = qtaOrdiniVarianti;
     }
 
@@ -88,5 +95,4 @@ public class ColoreTaglia implements Serializable {
         return "ColoreTaglia{" + "id=" + id + ", giacenza=" + giacenza + ", qtaOrdiniVarianti=" + qtaOrdiniVarianti.size() + ", prodottoColore=" + prodottoColore.getId() + ", varianteTaglia=" + varianteTaglia.getId() + '}';
     }
 
-    
 }
