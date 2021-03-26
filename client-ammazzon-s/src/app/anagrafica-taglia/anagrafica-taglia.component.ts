@@ -4,6 +4,7 @@ import { Automa } from '../automa-crud/automa';
 import { Automabile } from '../automa-crud/automabile';
 import { AddEvent, AnnullaEvent, ConfermaEvent, ModificaEvent, RicercaEvent, RimuoviEvent, SelezionaEvent } from '../automa-crud/eventi';
 import { ListaTaglieDto } from '../dto/lista-taglie-dto';
+import { RicercaTaglieDto } from '../dto/ricerca-taglie-dto';
 import { TagliaDto } from '../dto/taglia-dto';
 import { VarianteTaglia } from '../entità/variante-taglia';
 
@@ -18,6 +19,7 @@ export class AnagraficaTagliaComponent implements OnInit, Automabile {
   criterioRicerca = "";
   taglia = new VarianteTaglia();
   listaTaglie: VarianteTaglia[] = [];
+  errore = "";
 
   form: boolean;
   aggiungi: boolean;
@@ -31,6 +33,7 @@ export class AnagraficaTagliaComponent implements OnInit, Automabile {
 
   constructor(private http: HttpClient) {
     this.automa = new Automa(this);
+    this.aggiorna();
   }
 
   entraStatoRicerca() {
@@ -99,13 +102,40 @@ export class AnagraficaTagliaComponent implements OnInit, Automabile {
       });
   }
   modificaDati() {
-
+    let dto = new TagliaDto();
+    dto.varianteTaglia = this.taglia;
+    this.http.post<ListaTaglieDto>("http://localhost:8080/conf-taglia", dto)
+      .subscribe(r => {
+        this.listaTaglie = r.listaTaglie;
+      });
   }
   eliminaDati() {
-    throw new Error('Method not implemented.');
+    let dto = new TagliaDto();
+    dto.varianteTaglia = this.taglia;
+    this.http.post<ListaTaglieDto>("http://localhost:8080/rim-taglia", dto)
+      .subscribe(r => {
+        this.listaTaglie = r.listaTaglie;
+      });
   }
   aggiornaRisultatiRicerca() {
-    throw new Error('Method not implemented.');
+    let dto = new RicercaTaglieDto();
+    dto.criterioRicerca = this.criterioRicerca;
+    if (this.criterioRicerca == null) {
+      this.errore = "Inserisci il criterio di ricerca";
+    } else {
+      this.errore = "";
+      this.http.post<ListaTaglieDto>("http://localhost:8080/modifica-taglia", dto)
+        .subscribe(r => {
+          this.listaTaglie = r.listaTaglie;
+        });
+    }
+  }
+  ritornaTaglia(l: VarianteTaglia) {
+
+  }
+  aggiorna() {
+    this.http.get<ListaTaglieDto>("http://localhost:8080/agg-taglia")
+      .subscribe(r => this.listaTaglie = r.listaTaglie);
   }
 
   ngOnInit(): void {
@@ -130,7 +160,8 @@ export class AnagraficaTagliaComponent implements OnInit, Automabile {
   cerca() {
     this.automa.next(new RicercaEvent(), this.automa);
   }
-  seleziona() {
+  seleziona(l: VarianteTaglia) {
+    this.taglia = l;
     this.automa.next(new SelezionaEvent(), this.automa);
   }
 }
