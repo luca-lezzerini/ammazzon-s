@@ -6,12 +6,14 @@ import { AppComponent } from './app.component';
 import { FormsModule } from '@angular/forms';
 import { HomePageComponent } from './home-page/home-page.component';
 import { CrudGenericaGalComponent } from './crud-generica-gal/crud-generica-gal.component';
+import { AnagraficaTagliaComponent } from './anagrafica-taglia/anagrafica-taglia.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     HomePageComponent,
     CrudGenericaGalComponent,
+    AnagraficaTagliaComponent,
   ],
   imports: [
     BrowserModule,

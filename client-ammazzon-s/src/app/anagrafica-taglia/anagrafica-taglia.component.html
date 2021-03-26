@@ -1,0 +1,26 @@
+<div>
+    <input type="text" [(ngModel)]="taglia.codice" placeholder="taglia">
+    <button (click)="modifica()">Modifica</button>
+    <button (click)="conferma()">Conferma</button>
+    <button (click)="annulla()">Annulla</button>
+    <button (click)="rimuovi()">Rimuovi</button>
+</div>
+<button (click)="nuova()">Nuova</button>
+<br>
+<br>
+<div>
+    <input type="text" [(ngModel)]="criterioRicerca" placeholder="Criterio Ricerca">
+    <button (click)="cerca()">Cerca</button>
+</div>
+<div>
+    <table>
+        <tr>
+            <th>Codice</th>
+            <th>Seleziona</th>
+        </tr>
+        <tr *ngFor="let l of listaTaglie">
+            <td>{{l.codice}}</td>
+            <td><button (click)="seleziona()">Seleziona</button></td>
+        </tr>
+    </table>
+</div>
