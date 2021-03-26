@@ -11,7 +11,7 @@ import { VarianteTaglia } from '../entità/variante-taglia';
 @Component({
   selector: 'app-anagrafica-taglia',
   templateUrl: './anagrafica-taglia.component.html',
-  styleUrls: ['./anagrafica-taglia.component.css']
+  styleUrls: ['./anagrafica-taglia.component.css', '../theme.css']
 })
 export class AnagraficaTagliaComponent implements OnInit, Automabile {
 
