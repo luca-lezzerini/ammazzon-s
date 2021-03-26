@@ -1,2 +1,3 @@
-tocTab[tocTab.length] = new Array("0.5.1:1", "", "UI Casi d&#39;uso accessori", "EARoot/EA5/EA1/EA132.htm", "188.png", "249", "0", "", "Custom diagram0","{00ED7590-82C7-4543-83CE-349007F7763C}");
-tocTab[tocTab.length] = new Array("0.5.1.1", "1", "CRUD Generica", "EARoot/EA5/EA1/EA1/EA138.htm", "4.png", "", "", "{7CD67030-6BA3-4679-8885-6EE0284377FE}", "Package");
+tocTab[tocTab.length] = new Array("0.5.1:1", "", "UI Casi d&#39;uso accessori", "EARoot/EA5/EA1/EA133.htm", "188.png", "249", "0", "", "Custom diagram0","{00ED7590-82C7-4543-83CE-349007F7763C}");
+tocTab[tocTab.length] = new Array("0.5.1.1", "1", "Associa Colori a Prodotti", "EARoot/EA5/EA1/EA1/EA140.htm", "4.png", "", "", "{850184F0-AF85-46db-9CBB-9F4A281EA2C4}", "Package");
+tocTab[tocTab.length] = new Array("0.5.1.2", "1", "CRUD Generica", "EARoot/EA5/EA1/EA2/EA164.htm", "4.png", "", "", "{7CD67030-6BA3-4679-8885-6EE0284377FE}", "Package");
