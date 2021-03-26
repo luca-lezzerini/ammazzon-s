@@ -17,9 +17,10 @@ export class CrudGenericaGalComponent implements OnInit, Automabile {
 
   varianteColore = new VarianteColore();
   variantiColori: VarianteColore[] = [];
+  inputRicerca = "";
+  errore = "";
 
   //Variabili di visualizzazione
-  inputRicerca = "";
   form: boolean;
   aggiungi: boolean;
   remove: boolean;
@@ -30,21 +31,14 @@ export class CrudGenericaGalComponent implements OnInit, Automabile {
   tabella: boolean;
   codiceInput: boolean;
   descrizione: boolean;
-  errore = "";
-
 
   constructor(private http: HttpClient) {
     this.automa = new Automa(this);
-    this.aggiorna();
+    //this.aggiorna();
   }
 
   ngOnInit(): void {
   }
-  aggiorna() {
-
-
-  }
-
 
   nuova() {
     this.automa.next(new AddEvent(), this.automa);
@@ -74,6 +68,11 @@ export class CrudGenericaGalComponent implements OnInit, Automabile {
     this.automa.next(new RicercaEvent(), this.automa);
   }
 
+    
+  aggiorna() {
+
+  }
+
   entraStatoRicerca() {
     this.remove= false;
     this.edit= false;
@@ -101,15 +100,40 @@ export class CrudGenericaGalComponent implements OnInit, Automabile {
 
   }
   entraStatoVisualizza() {
-   
-
-    throw new Error('Method not implemented.');
+    this.remove= true;
+    this.edit= true;
+    this.conf= false;
+    this.annull= false;
+    this.form = true;
+    this.aggiungi = true;
+    this.search = true;
+    this.tabella = true;
+    this.codiceInput = true;
+    this.descrizione = true;
   }
   entraStatoModifica() {
-    throw new Error('Method not implemented.');
+    this.remove= false;
+    this.edit= false;
+    this.conf= true;
+    this.annull= true;
+    this.form = true;
+    this.aggiungi = false;
+    this.search = false;
+    this.tabella = false;
+    this.codiceInput = false;
+    this.descrizione = false;
   }
   entraStatoRimuovi() {
-    throw new Error('Method not implemented.');
+    this.remove= false;
+    this.edit= false;
+    this.conf= true;
+    this.annull= true;
+    this.form = true;
+    this.aggiungi = false;
+    this.search = false;
+    this.tabella = false;
+    this.codiceInput = true;
+    this.descrizione = true;
   }
   salvaDati() {
     throw new Error('Method not implemented.');
