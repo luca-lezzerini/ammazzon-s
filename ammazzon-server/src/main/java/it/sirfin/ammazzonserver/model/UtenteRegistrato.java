@@ -2,11 +2,10 @@ package it.sirfin.ammazzonserver.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.Inheritance;
-import javax.persistence.InheritanceType;
 import javax.persistence.OneToMany;
 
 @Entity
@@ -31,7 +30,7 @@ public class UtenteRegistrato extends UtenteAnonimo implements Serializable {
     private String tokenRegistrato;
 
     @JsonIgnoreProperties(value = "utenteRegistrato")
-    @OneToMany
+    @OneToMany(mappedBy = "utenteRegistrato")
     private List<Ordine> ordini;
 
     public UtenteRegistrato() {
@@ -96,10 +95,16 @@ public class UtenteRegistrato extends UtenteAnonimo implements Serializable {
     }
 
     public List<Ordine> getOrdini() {
+        if (ordini == null) {
+            ordini = new ArrayList<>();
+        }
         return ordini;
     }
 
     public void setOrdini(List<Ordine> ordini) {
+        if (ordini == null) {
+            ordini = new ArrayList<>();
+        }
         this.ordini = ordini;
     }
 
