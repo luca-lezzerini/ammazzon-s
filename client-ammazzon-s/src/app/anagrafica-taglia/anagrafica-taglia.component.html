@@ -1,26 +1,37 @@
-<div>
-    <input type="text" placeholder="taglia" [(ngModel)]="taglia.codice">
-    <button (click)="modifica()">Modifica</button>
-    <button (click)="conferma()">Conferma</button>
-    <button (click)="annulla()">Annulla</button>
-    <button (click)="rimuovi()">Rimuovi</button>
-</div>
-<button (click)="nuova()">Nuova</button>
-<br>
-<br>
-<div>
-    <input type="text" placeholder="Criterio Ricerca" [(ngModel)]="inputRicerca">
-    <button (click)="cerca()">Cerca</button>
-</div>
-<div>
-    <table>
-        <tr>
-            <th>Codice</th>
-            <th>Seleziona</th>
-        </tr>
-        <tr *ngFor="let l of listaTaglie">
-            <td>{{l.codice}}</td>
-            <td><button (click)="seleziona(l)">Seleziona</button></td>
-        </tr>
-    </table>
-</div>
+<body>
+    <div class="barranav">
+        <a href="app-home-page">Home page</a>
+    </div>
+    <br><br>
+    <button (click)="nuova()" *ngIf="aggiungi">Nuova</button>
+    <br><br>
+    <div *ngIf='form'>
+        <input type="text" placeholder="taglia" [(ngModel)]="taglia.codice" [disabled]="codiceC">
+
+        <br><br>
+        <button (click)="modifica()" *ngIf="edit">Modifica</button>
+        <button (click)="conferma()" *ngIf="conf">Conferma</button>
+        <button (click)="annulla()" *ngIf="annull">Annulla</button>
+        <button (click)="rimuovi()" *ngIf="remove">Rimuovi</button>
+    </div>
+    <h4>{{errore}}</h4>
+    <br><br>
+    <div *ngIf="search">
+        <input type="text" placeholder="Criterio Ricerca" [(ngModel)]="inputRicerca">
+        <button (click)="cerca()">Cerca</button>
+        <br>
+    </div>
+    <br><br>
+    <div class="tabella">
+        <table *ngIf="tabella">
+            <tr>
+                <th>Codice</th>
+                <th>Seleziona</th>
+            </tr>
+            <tr *ngFor="let l of listaTaglie">
+                <td>{{l.codice}}</td>
+                <td> <button (click)="seleziona(l)">Seleziona</button></td>
+            </tr>
+        </table>
+    </div>
+</body>
