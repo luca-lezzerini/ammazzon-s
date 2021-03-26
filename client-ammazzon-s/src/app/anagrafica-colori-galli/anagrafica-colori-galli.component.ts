@@ -3,6 +3,8 @@ import { Component, OnInit } from '@angular/core';
 import { Automa } from '../automa-crud/automa';
 import { Automabile } from '../automa-crud/automabile';
 import { AddEvent, AnnullaEvent, ConfermaEvent, ModificaEvent, RicercaEvent, RimuoviEvent, SelezionaEvent } from '../automa-crud/eventi';
+import { ColoreDto } from '../dto/colore-dto';
+import { ListaColoriDto } from '../dto/lista-colori-dto';
 import { VarianteColore } from '../entità/variante-colore';
 
 @Component({
@@ -19,6 +21,7 @@ export class AnagraficaColoriGalliComponent implements OnInit, Automabile {
   variantiColori: VarianteColore[] = [];
   inputRicerca = "";
   errore = "";
+  url = "http://localhost:8080/";
 
   //Variabili di visualizzazione
   form: boolean;
@@ -34,7 +37,7 @@ export class AnagraficaColoriGalliComponent implements OnInit, Automabile {
 
   constructor(private http: HttpClient) {
     this.automa = new Automa(this);
-    //this.aggiorna();
+    this.aggiorna();
   }
 
   ngOnInit(): void {
@@ -68,16 +71,17 @@ export class AnagraficaColoriGalliComponent implements OnInit, Automabile {
     this.automa.next(new RicercaEvent(), this.automa);
   }
 
-    
-  aggiorna() {
 
+  aggiorna() {
+    this.http.get<ListaColoriDto>(this.url + "aggiorna-colore")
+      .subscribe(r => this.variantiColori = r.variantiColori);
   }
 
   entraStatoRicerca() {
-    this.remove= false;
-    this.edit= false;
-    this.conf= false;
-    this.annull= false;
+    this.remove = false;
+    this.edit = false;
+    this.conf = false;
+    this.annull = false;
     this.form = false;
     this.aggiungi = true;
     this.search = true;
@@ -87,10 +91,10 @@ export class AnagraficaColoriGalliComponent implements OnInit, Automabile {
 
   }
   entraStatoAggiungi() {
-    this.remove= false;
-    this.edit= false;
-    this.conf= true;
-    this.annull= true;
+    this.remove = false;
+    this.edit = false;
+    this.conf = true;
+    this.annull = true;
     this.form = true;
     this.aggiungi = false;
     this.search = false;
@@ -100,10 +104,10 @@ export class AnagraficaColoriGalliComponent implements OnInit, Automabile {
 
   }
   entraStatoVisualizza() {
-    this.remove= true;
-    this.edit= true;
-    this.conf= false;
-    this.annull= false;
+    this.remove = true;
+    this.edit = true;
+    this.conf = false;
+    this.annull = false;
     this.form = true;
     this.aggiungi = true;
     this.search = true;
@@ -112,10 +116,10 @@ export class AnagraficaColoriGalliComponent implements OnInit, Automabile {
     this.descrizione = true;
   }
   entraStatoModifica() {
-    this.remove= false;
-    this.edit= false;
-    this.conf= true;
-    this.annull= true;
+    this.remove = false;
+    this.edit = false;
+    this.conf = true;
+    this.annull = true;
     this.form = true;
     this.aggiungi = false;
     this.search = false;
@@ -124,10 +128,10 @@ export class AnagraficaColoriGalliComponent implements OnInit, Automabile {
     this.descrizione = false;
   }
   entraStatoRimuovi() {
-    this.remove= false;
-    this.edit= false;
-    this.conf= true;
-    this.annull= true;
+    this.remove = false;
+    this.edit = false;
+    this.conf = true;
+    this.annull = true;
     this.form = true;
     this.aggiungi = false;
     this.search = false;
@@ -136,7 +140,19 @@ export class AnagraficaColoriGalliComponent implements OnInit, Automabile {
     this.descrizione = true;
   }
   salvaDati() {
-    throw new Error('Method not implemented.');
+    let dto = new ColoreDto();
+    dto.varianteColore = this.varianteColore;
+    if (this.varianteColore.codice && this.varianteColore.descrizione == "") {
+      this.errore = "Errore! Devi inserire un colore PORCA ZOZZA"
+    } else {
+      this.errore = "";
+      this.http.post<ListaColoriDto>(this.url + "aggiungi-colore", dto)
+        .subscribe(r => {
+          this.variantiColori = r.variantiColori;
+          this.varianteColore = new VarianteColore();
+          console.log("Abbiamo aggiunto un colore stupendo");
+        });
+    }
   }
   modificaDati() {
     throw new Error('Method not implemented.');
@@ -148,6 +164,6 @@ export class AnagraficaColoriGalliComponent implements OnInit, Automabile {
     throw new Error('Method not implemented.');
   }
 
- 
+
 
 }
