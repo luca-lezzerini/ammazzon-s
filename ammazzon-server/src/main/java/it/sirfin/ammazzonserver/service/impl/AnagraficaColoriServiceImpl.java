@@ -41,4 +41,12 @@ public class AnagraficaColoriServiceImpl implements AnagraficaColoriService {
         return aggiornaColori();
     }
 
+    @Override
+    public ListaColoriDto ricercaColore(String c) {
+        if (c.isBlank()) {
+            return aggiornaColori();
+        }
+        return new ListaColoriDto(varianteColoreRepository.trovaCodice(c));
+    }
+
 }

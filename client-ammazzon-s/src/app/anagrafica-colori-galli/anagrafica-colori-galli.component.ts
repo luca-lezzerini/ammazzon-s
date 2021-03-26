@@ -5,6 +5,7 @@ import { Automabile } from '../automa-crud/automabile';
 import { AddEvent, AnnullaEvent, ConfermaEvent, ModificaEvent, RicercaEvent, RimuoviEvent, SelezionaEvent } from '../automa-crud/eventi';
 import { ColoreDto } from '../dto/colore-dto';
 import { ListaColoriDto } from '../dto/lista-colori-dto';
+import { RicercaColoreDto } from '../dto/ricerca-colore-dto';
 import { VarianteColore } from '../entità/variante-colore';
 
 @Component({
@@ -142,8 +143,8 @@ export class AnagraficaColoriGalliComponent implements OnInit, Automabile {
   salvaDati() {
     let dto = new ColoreDto();
     dto.varianteColore = this.varianteColore;
-    if (this.varianteColore.codice && this.varianteColore.descrizione == "") {
-      this.errore = "Errore! Devi inserire un colore PORCA ZOZZA"
+    if (this.varianteColore.codice && this.varianteColore.descrizione == null) {
+      this.errore = "Errore! Devi inserire un colore PORCA ZOZZA";
     } else {
       this.errore = "";
       this.http.post<ListaColoriDto>(this.url + "aggiungi-colore", dto)
@@ -157,7 +158,7 @@ export class AnagraficaColoriGalliComponent implements OnInit, Automabile {
   modificaDati() {
     let dto = new ColoreDto();
     dto.varianteColore = this.varianteColore;
-    this.http.post<ListaColoriDto>("http://localhost:8080/conferma-colore", dto)
+    this.http.post<ListaColoriDto>(this.url + "modifica-colore", dto)
       .subscribe(r => {
         this.variantiColori = r.variantiColori;
       });
@@ -166,7 +167,19 @@ export class AnagraficaColoriGalliComponent implements OnInit, Automabile {
     throw new Error('Method not implemented.');
   }
   aggiornaRisultatiRicerca() {
-    throw new Error('Method not implemented.');
+    let stringa = new RicercaColoreDto();
+    stringa.criterioRicerca = this.inputRicerca;
+    if (this.inputRicerca == "") {
+      this.errore = "ERRORE! DEVI INSERIRE UN CRITERIO DI RICERCA PORCA ZZOZZA ";
+    } else {
+      this.errore = "";
+      this.http.post<ListaColoriDto>(this.url + "ricerca-colore", stringa)
+        .subscribe(r => {
+          this.variantiColori = r.variantiColori;
+          this.inputRicerca = "";
+
+        });
+    }
   }
 
 
