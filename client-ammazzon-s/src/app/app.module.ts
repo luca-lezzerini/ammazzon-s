@@ -7,13 +7,15 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HomePageComponent } from './home-page/home-page.component';
 import { AnagraficaColoriGalliComponent } from './anagrafica-colori-galli/anagrafica-colori-galli.component';
 import { AnagraficaTagliaComponent } from './anagrafica-taglia/anagrafica-taglia.component';
+import { AnagraficaClienteRegistratoComponent } from './anagrafica-cliente-registrato/anagrafica-cliente-registrato.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     HomePageComponent,
     AnagraficaColoriGalliComponent,
-    AnagraficaTagliaComponent
+    AnagraficaTagliaComponent,
+    AnagraficaClienteRegistratoComponent
   ],
   imports: [
     BrowserModule,
