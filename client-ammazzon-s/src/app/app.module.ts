@@ -5,13 +5,13 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { FormsModule } from '@angular/forms';
 import { HomePageComponent } from './home-page/home-page.component';
-import { CrudGenericaGalComponent } from './crud-generica-gal/crud-generica-gal.component';
+import { AnagraficaColoriGalliComponent } from './anagrafica-colori-galli/anagrafica-colori-galli.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     HomePageComponent,
-    CrudGenericaGalComponent,
+    AnagraficaColoriGalliComponent,
   ],
   imports: [
     BrowserModule,

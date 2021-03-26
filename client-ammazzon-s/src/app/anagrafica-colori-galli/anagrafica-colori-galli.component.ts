@@ -6,11 +6,11 @@ import { AddEvent, AnnullaEvent, ConfermaEvent, ModificaEvent, RicercaEvent, Rim
 import { VarianteColore } from '../entità/variante-colore';
 
 @Component({
-  selector: 'app-crud-generica-gal',
-  templateUrl: './crud-generica-gal.component.html',
-  styleUrls: ['./crud-generica-gal.component.css']
+  selector: 'app-anagrafica-colori-galli',
+  templateUrl: './anagrafica-colori-galli.component.html',
+  styleUrls: ['./anagrafica-colori-galli.component.css']
 })
-export class CrudGenericaGalComponent implements OnInit, Automabile {
+export class AnagraficaColoriGalliComponent implements OnInit, Automabile {
 
   automa: Automa;
 
@@ -148,5 +148,6 @@ export class CrudGenericaGalComponent implements OnInit, Automabile {
     throw new Error('Method not implemented.');
   }
 
+ 
 
 }
