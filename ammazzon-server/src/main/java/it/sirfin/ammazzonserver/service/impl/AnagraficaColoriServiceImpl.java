@@ -35,4 +35,10 @@ public class AnagraficaColoriServiceImpl implements AnagraficaColoriService {
 
     }
 
+    @Override
+    public ListaColoriDto modificaColore(VarianteColore vc) {
+        varianteColoreRepository.save(vc);
+        return aggiornaColori();
+    }
+
 }

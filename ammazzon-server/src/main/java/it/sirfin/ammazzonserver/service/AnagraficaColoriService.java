@@ -17,4 +17,6 @@ public interface AnagraficaColoriService {
     ListaColoriDto aggiungiColore(VarianteColore vc);
 
     ListaColoriDto aggiornaColori();
+    
+    ListaColoriDto modificaColore(VarianteColore vc);
 }

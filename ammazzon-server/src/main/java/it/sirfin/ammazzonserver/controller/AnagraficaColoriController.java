@@ -37,4 +37,9 @@ public class AnagraficaColoriController {
         return anagraficaColoriService.aggiornaColori();
     }
 
+     @RequestMapping("modifica-colore")
+    @ResponseBody
+    public ListaColoriDto modificaColore(@RequestBody ColoreDto dto) {
+        return anagraficaColoriService.modificaColore(dto.getVarianteColore());
+    }
 }
