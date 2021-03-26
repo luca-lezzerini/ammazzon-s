@@ -1,5 +1,5 @@
 <div>
-    <input type="text"  placeholder="taglia">
+    <input type="text" placeholder="taglia" [(ngModel)]="taglia.codice">
     <button (click)="modifica()">Modifica</button>
     <button (click)="conferma()">Conferma</button>
     <button (click)="annulla()">Annulla</button>
@@ -9,7 +9,7 @@
 <br>
 <br>
 <div>
-    <input type="text"  placeholder="Criterio Ricerca">
+    <input type="text" placeholder="Criterio Ricerca" [(ngModel)]="inputRicerca">
     <button (click)="cerca()">Cerca</button>
 </div>
 <div>
