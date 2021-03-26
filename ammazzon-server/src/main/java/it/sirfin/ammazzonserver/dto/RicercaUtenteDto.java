@@ -1,0 +1,36 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package it.sirfin.ammazzonserver.dto;
+
+/**
+ *
+ * @author Palo
+ */
+public class RicercaUtenteDto {
+
+    private String criterioRicerca;
+
+    public RicercaUtenteDto() {
+    }
+
+    public RicercaUtenteDto(String criterioRicerca) {
+        this.criterioRicerca = criterioRicerca;
+    }
+
+    public String getCriterioRicerca() {
+        return criterioRicerca;
+    }
+
+    public void setCriterioRicerca(String criterioRicerca) {
+        this.criterioRicerca = criterioRicerca;
+    }
+
+    @Override
+    public String toString() {
+        return "RicercaUtenteDto{" + "criterioRicerca=" + criterioRicerca + '}';
+    }
+
+}

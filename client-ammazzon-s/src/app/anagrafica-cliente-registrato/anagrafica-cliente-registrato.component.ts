@@ -7,7 +7,6 @@ import { ListaUtentiRegistratiDto } from '../dto/lista-utenti-registrati-dto';
 import { RicercaUtenteDto } from '../dto/ricerca-utente-dto';
 import { UtenteRegistratoDto } from '../dto/utente-registrato-dto';
 import { UtenteRegistrato } from '../entità/utente-registrato';
-import { VarianteTaglia } from '../entità/variante-taglia';
 
 @Component({
   selector: 'app-anagrafica-cliente-registrato',
@@ -97,29 +96,29 @@ export class AnagraficaClienteRegistratoComponent implements OnInit, Automabile 
 
   salvaDati() {
     let dto = new UtenteRegistratoDto();
-    dto.utente = this.utente;
+    dto.utenteRegistrato = this.utente;
     this.http.post<ListaUtentiRegistratiDto>("http://localhost:8080/aggiungi-utente", dto)
       .subscribe(r => {
-        this.listaUtenti = r.listaUtenti;
+        this.listaUtenti = r.listaUtentiRegistrati;
         this.utente = new UtenteRegistrato();
       });
   }
 
   modificaDati() {
     let dto = new UtenteRegistratoDto();
-    dto.utente = this.utente;
+    dto.utenteRegistrato = this.utente;
     this.http.post<ListaUtentiRegistratiDto>("http://localhost:8080/conferma-utente", dto)
       .subscribe(r => {
-        this.listaUtenti = r.listaUtenti;
+        this.listaUtenti = r.listaUtentiRegistrati;
       });
   }
 
   eliminaDati() {
     let dto = new UtenteRegistratoDto();
-    dto.utente = this.utente;
+    dto.utenteRegistrato = this.utente;
     this.http.post<ListaUtentiRegistratiDto>("http://localhost:8080/rimuovi-utente", dto)
       .subscribe(r => {
-        this.listaUtenti = r.listaUtenti;
+        this.listaUtenti = r.listaUtentiRegistrati;
       });
   }
 
@@ -130,25 +129,25 @@ export class AnagraficaClienteRegistratoComponent implements OnInit, Automabile 
       this.errore = "Inserisci il criterio di ricerca";
     } else {
       this.errore = "";
-      this.http.post<ListaUtentiRegistratiDto>("http://localhost:8080/ricerca-utenti", dto)
+      this.http.post<ListaUtentiRegistratiDto>("http://localhost:8080/ricerca-utente", dto)
         .subscribe(r => {
-          this.listaUtenti = r.listaUtenti;
+          this.listaUtenti = r.listaUtentiRegistrati;
         });
     }
   }
 
   ritornaTaglia(l: UtenteRegistrato) {
     let dto = new UtenteRegistratoDto();
-    dto.utente = l;
-    this.http.post<UtenteRegistratoDto>("http://localhost:8080/rit-taglia", dto)
+    dto.utenteRegistrato = l;
+    this.http.post<UtenteRegistratoDto>("http://localhost:8080/rit-utente", dto)
       .subscribe(r => {
-        this.utente = r.utente;
+        this.utente = r.utenteRegistrato;
       });
   }
 
   aggiorna() {
-    this.http.get<ListaUtentiRegistratiDto>("http://localhost:8080/aggiorna-taglia")
-      .subscribe(r => this.listaUtenti = r.listaUtenti);
+    this.http.get<ListaUtentiRegistratiDto>("http://localhost:8080/aggiorna-utente")
+      .subscribe(r => this.listaUtenti = r.listaUtentiRegistrati);
   }
 
 
