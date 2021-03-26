@@ -1,6 +1,8 @@
 package it.sirfin.ammazzonserver.service.impl;
 
+import it.sirfin.ammazzonserver.model.ColoreTaglia;
 import it.sirfin.ammazzonserver.model.Prodotto;
+import it.sirfin.ammazzonserver.model.ProdottoColore;
 import it.sirfin.ammazzonserver.model.UtenteRegistrato;
 import it.sirfin.ammazzonserver.model.VarianteColore;
 import it.sirfin.ammazzonserver.model.VarianteTaglia;
@@ -15,7 +17,6 @@ import it.sirfin.ammazzonserver.repository.VarianteColoreRepository;
 import it.sirfin.ammazzonserver.repository.VarianteTagliaRepository;
 import it.sirfin.ammazzonserver.service.DatiTestService;
 import java.util.ArrayList;
-import java.util.Set;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -77,7 +78,17 @@ public class DatiTestServiceImpl implements DatiTestService {
             Prodotto p1 = new Prodotto("p1", "t-shirt", 21.0, new ArrayList<>());
             p1 = prodottoRepository.save(p1);
         }
-
+        ///////////ASSOCIAZIONI//////////////////
+        //////Prodotti con id % 3 == 0 -> 1 colore e 2 taglie/////////////
+    private void associaProdottoColore(Prodotto p, VarianteColore vc) {
+        ProdottoColore pc = new ProdottoColore(new ArrayList<ColoreTaglia>(), vc, p);
+        pc.setProdotto(p);
+        pc.setVarianteColore(vc);
+        pc = prodottoColoreRepository.save(pc);
+        p.getProdottiColori().add(pc);
+        vc.getProdottiColori().add(pc);
+        prodottoRepository.save(p);
+        varianteColoreRepository.save(vc);
     }
 
 }

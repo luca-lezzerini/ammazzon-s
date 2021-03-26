@@ -20,6 +20,6 @@ public class DatiTestController {
 
     @RequestMapping("dati-test")
     public void datiTest() {
-        throw new UnsupportedOperationException();
+        datiTestService.datiTest();
     }
 }
