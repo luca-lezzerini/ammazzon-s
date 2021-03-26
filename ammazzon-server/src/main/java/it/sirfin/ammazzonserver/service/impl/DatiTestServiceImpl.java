@@ -1,5 +1,6 @@
 package it.sirfin.ammazzonserver.service.impl;
 
+import it.sirfin.ammazzonserver.model.Prodotto;
 import it.sirfin.ammazzonserver.model.UtenteRegistrato;
 import it.sirfin.ammazzonserver.model.VarianteColore;
 import it.sirfin.ammazzonserver.model.VarianteTaglia;
@@ -14,6 +15,7 @@ import it.sirfin.ammazzonserver.repository.VarianteColoreRepository;
 import it.sirfin.ammazzonserver.repository.VarianteTagliaRepository;
 import it.sirfin.ammazzonserver.service.DatiTestService;
 import java.util.ArrayList;
+import java.util.Set;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -68,7 +70,13 @@ public class DatiTestServiceImpl implements DatiTestService {
         vt2 = varianteTagliaRepository.save(vt2);
         VarianteTaglia vt3 = new VarianteTaglia("L", new ArrayList<>());
         vt3 = varianteTagliaRepository.save(vt3);
-        
+
+        ///////////creazione 1000 prodotti////////
+        int limite = 1000;
+        for (int i = 0; i < limite; i++) {
+            Prodotto p1 = new Prodotto("p1", "t-shirt", 21.0, new ArrayList<>());
+            p1 = prodottoRepository.save(p1);
+        }
 
     }
 
