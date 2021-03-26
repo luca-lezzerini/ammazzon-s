@@ -2,18 +2,19 @@ import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { Automa } from '../automa-crud/automa';
 import { Automabile } from '../automa-crud/automabile';
-import { AddEvent, AnnullaEvent, ConfermaEvent, ModificaEvent, RicercaEvent, RimuoviEvent, SelezionaEvent } from '../automa-crud/eventi';
+import { ModificaEvent, ConfermaEvent, AnnullaEvent, RimuoviEvent, AddEvent, RicercaEvent, SelezionaEvent } from '../automa-crud/eventi';
 import { ListaUtentiRegistratiDto } from '../dto/lista-utenti-registrati-dto';
 import { RicercaUtenteDto } from '../dto/ricerca-utente-dto';
 import { UtenteRegistratoDto } from '../dto/utente-registrato-dto';
 import { UtenteRegistrato } from '../entità/utente-registrato';
 
 @Component({
-  selector: 'app-anagrafica-cliente-registrato',
-  templateUrl: './anagrafica-cliente-registrato.component.html',
-  styleUrls: ['./anagrafica-cliente-registrato.component.css']
+  selector: 'app-anagrafica-utente-registrato',
+  templateUrl: './anagrafica-utente-registrato.component.html',
+  styleUrls: ['./anagrafica-utente-registrato.component.css']
 })
-export class AnagraficaClienteRegistratoComponent implements OnInit, Automabile {
+export class AnagraficaUtenteRegistratoComponent implements OnInit, Automabile {
+
   automa: Automa;
 
   utente = new UtenteRegistrato();
@@ -181,4 +182,5 @@ export class AnagraficaClienteRegistratoComponent implements OnInit, Automabile 
     this.ritornaTaglia(l);
     this.automa.next(new SelezionaEvent(), this.automa);
   }
+
 }

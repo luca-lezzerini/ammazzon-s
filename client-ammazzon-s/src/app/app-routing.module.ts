@@ -1,8 +1,8 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { AnagraficaClienteRegistratoComponent } from './anagrafica-cliente-registrato/anagrafica-cliente-registrato.component';
 import { AnagraficaColoriGalliComponent } from './anagrafica-colori-galli/anagrafica-colori-galli.component';
 import { AnagraficaTagliaComponent } from './anagrafica-taglia/anagrafica-taglia.component';
+import { AnagraficaUtenteRegistratoComponent } from './anagrafica-utente-registrato/anagrafica-utente-registrato.component';
 import { HomePageComponent } from './home-page/home-page.component';
 
 const routes: Routes = [
@@ -12,7 +12,7 @@ const routes: Routes = [
   { path: '', redirectTo: '/app-user-interface', pathMatch: 'full' },
   { path: 'app-anagrafica-taglia', component: AnagraficaTagliaComponent },
   { path: 'app-anagrafica-colori-galli', component: AnagraficaColoriGalliComponent },
-  { path: 'app-anagrafica-cliente-registrato', component: AnagraficaClienteRegistratoComponent }
+  { path: 'app-anagrafica-utente-registrato', component: AnagraficaUtenteRegistratoComponent }
 ];
 
 @NgModule({
