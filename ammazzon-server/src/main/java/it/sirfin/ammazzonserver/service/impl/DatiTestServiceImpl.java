@@ -78,6 +78,8 @@ public class DatiTestServiceImpl implements DatiTestService {
             Prodotto p1 = new Prodotto("p1", "t-shirt", 21.0, new ArrayList<>());
             p1 = prodottoRepository.save(p1);
         }
+        
+    }
         ///////////ASSOCIAZIONI//////////////////
         //////Prodotti con id % 3 == 0 -> 1 colore e 2 taglie/////////////
     private void associaProdottoColore(Prodotto p, VarianteColore vc) {
