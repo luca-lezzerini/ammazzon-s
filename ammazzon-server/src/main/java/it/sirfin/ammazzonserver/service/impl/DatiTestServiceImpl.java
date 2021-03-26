@@ -17,6 +17,7 @@ import it.sirfin.ammazzonserver.repository.VarianteColoreRepository;
 import it.sirfin.ammazzonserver.repository.VarianteTagliaRepository;
 import it.sirfin.ammazzonserver.service.DatiTestService;
 import java.util.ArrayList;
+import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -57,20 +58,20 @@ public class DatiTestServiceImpl implements DatiTestService {
         ur3 = utenteRegistratoRepository.save(ur3);
 
         //////////creazione colori////////
-        VarianteColore vc1 = new VarianteColore("b1", "blu", new ArrayList<>());
-        vc1 = varianteColoreRepository.save(vc1);
-        VarianteColore vc2 = new VarianteColore("r1", "rosso", new ArrayList<>());
-        vc2 = varianteColoreRepository.save(vc2);
-        VarianteColore vc3 = new VarianteColore("g1", "giallo", new ArrayList<>());
-        vc3 = varianteColoreRepository.save(vc3);
+        VarianteColore vcBlu = new VarianteColore("b1", "blu", new ArrayList<>());
+        vcBlu = varianteColoreRepository.save(vcBlu);
+        VarianteColore vcRosso = new VarianteColore("r1", "rosso", new ArrayList<>());
+        vcRosso = varianteColoreRepository.save(vcRosso);
+        VarianteColore vcGiallo = new VarianteColore("g1", "giallo", new ArrayList<>());
+        vcGiallo = varianteColoreRepository.save(vcGiallo);
 
         //////////creazione taglia////////
-        VarianteTaglia vt1 = new VarianteTaglia("S", new ArrayList<>());
-        vt1 = varianteTagliaRepository.save(vt1);
-        VarianteTaglia vt2 = new VarianteTaglia("M", new ArrayList<>());
-        vt2 = varianteTagliaRepository.save(vt2);
-        VarianteTaglia vt3 = new VarianteTaglia("L", new ArrayList<>());
-        vt3 = varianteTagliaRepository.save(vt3);
+        VarianteTaglia vtS = new VarianteTaglia("S", new ArrayList<>());
+        vtS = varianteTagliaRepository.save(vtS);
+        VarianteTaglia vtM = new VarianteTaglia("M", new ArrayList<>());
+        vtM = varianteTagliaRepository.save(vtM);
+        VarianteTaglia vtL = new VarianteTaglia("L", new ArrayList<>());
+        vtL = varianteTagliaRepository.save(vtL);
 
         ///////////creazione 1000 prodotti////////
         Prodotto p1 = new Prodotto();
@@ -79,14 +80,21 @@ public class DatiTestServiceImpl implements DatiTestService {
             p1 = new Prodotto("p" + i, "t-shirt", 21.0, new ArrayList<>());
             p1 = prodottoRepository.save(p1);
         }
-        associaProdottoColore(p1, vc3);
-        associaProdottoColore(p1, vc2);
+        associaProdottoColore(p1, vcGiallo, vtS);
+        associaProdottoColore(p1, vcGiallo, vtM);
+        associaProdottoColore(p1, vcRosso, vtL);
+        associaProdottoColore(p1, vcBlu, vtM);
+        associaProdottoColore(p1, vcBlu, vtL);
+        //List<Prodotto> prodotti = prodottoRepository.cercaProdottiTagliaM();
+//        prodotti.forEach(r -> {
+//            System.out.println(r);
+//        });
 
     }
     ///////////ASSOCIAZIONI//////////////////
     //////Prodotti con id % 3 == 0 -> 1 colore e 2 taglie/////////////
 
-    private void associaProdottoColore(Prodotto p, VarianteColore vc) {
+    private void associaProdottoColore(Prodotto p, VarianteColore vc, VarianteTaglia vt) {
         ProdottoColore pc = new ProdottoColore(new ArrayList<ColoreTaglia>(), vc, p);
         pc.setProdotto(p);
         pc.setVarianteColore(vc);
@@ -95,6 +103,7 @@ public class DatiTestServiceImpl implements DatiTestService {
         vc.getProdottiColori().add(pc);
         prodottoRepository.save(p);
         varianteColoreRepository.save(vc);
+        associaProdottoTaglie(pc, vt);
     }
 
     private void associaProdottoTaglie(ProdottoColore pc, VarianteTaglia vt) {
@@ -108,7 +117,5 @@ public class DatiTestServiceImpl implements DatiTestService {
         vt = varianteTagliaRepository.save(vt);
 
     }
-    
-    
 
 }
