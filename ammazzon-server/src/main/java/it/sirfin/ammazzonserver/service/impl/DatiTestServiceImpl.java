@@ -17,7 +17,7 @@ import it.sirfin.ammazzonserver.repository.VarianteColoreRepository;
 import it.sirfin.ammazzonserver.repository.VarianteTagliaRepository;
 import it.sirfin.ammazzonserver.service.DatiTestService;
 import java.text.DecimalFormat;
-import java.text.NumberFormat;
+
 import java.util.ArrayList;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -82,20 +82,27 @@ public class DatiTestServiceImpl implements DatiTestService {
 
         ///////////creazione 1000 prodotti////////
         Prodotto p1 = new Prodotto();
-        int limite = 100;
-        NumberFormat formatter = new DecimalFormat("#0.00");
+        int limite = 10;
+
         for (int i = 0; i < limite; i++) {
-            double random = Math.random() * (1000 - 10 + 1) + 10;
+
+            //Generazione prezzo casuale per prodotto con formattatore
+            DecimalFormat formatter = new DecimalFormat("###,##");
+            Double random = Math.random() * (1000 - 10 + 1) + 10;
             String pf = formatter.format(random);
-            double prezzoFormattato = Double.parseDouble("10.33");
+            Double prezzoFormattato = Double.valueOf(pf);
+
             p1 = new Prodotto("p" + i, "t-shirt", prezzoFormattato, new ArrayList<>());
             p1 = prodottoRepository.save(p1);
+            if (p1.getId() % 3 == 0) {
+               
+            }
         }
-        associaProdottoColore(p1, vcGiallo, vtS);
-        associaProdottoColore(p1, vcGiallo, vtM);
-        associaProdottoColore(p1, vcRosso, vtL);
-        associaProdottoColore(p1, vcBlu, vtM);
-        associaProdottoColore(p1, vcBlu, vtL);
+//        associaProdottoColore(p1, vcGiallo, vtS);
+//        associaProdottoColore(p1, vcGiallo, vtM);
+//        associaProdottoColore(p1, vcRosso, vtL);
+//        associaProdottoColore(p1, vcBlu, vtM);
+//        associaProdottoColore(p1, vcBlu, vtL);
         //List<Prodotto> prodotti = prodottoRepository.cercaProdottiTagliaM();
 //        prodotti.forEach(r -> {
 //            System.out.println(r);
