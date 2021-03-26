@@ -1,5 +1,8 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
+import { Automa } from '../automa-crud/automa';
+import { Automabile } from '../automa-crud/automabile';
+import { AddEvent, AnnullaEvent, ConfermaEvent, ModificaEvent, RicercaEvent, RimuoviEvent, SelezionaEvent } from '../automa-crud/eventi';
 import { VarianteColore } from '../entità/variante-colore';
 
 @Component({
@@ -7,11 +10,16 @@ import { VarianteColore } from '../entità/variante-colore';
   templateUrl: './crud-generica-gal.component.html',
   styleUrls: ['./crud-generica-gal.component.css']
 })
-export class CrudGenericaGalComponent implements OnInit {
+export class CrudGenericaGalComponent implements OnInit, Automabile {
+
+  automa: Automa;
+
 
   varianteColore = new VarianteColore();
   variantiColori: VarianteColore[] = [];
-  errore = "";
+
+  //Variabili di visualizzazione
+  inputRicerca = "";
   form: boolean;
   aggiungi: boolean;
   remove: boolean;
@@ -22,33 +30,99 @@ export class CrudGenericaGalComponent implements OnInit {
   tabella: boolean;
   codiceInput: boolean;
   descrizione: boolean;
+  errore = "";
 
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) {
+    this.automa = new Automa(this);
+    this.aggiorna();
+  }
 
   ngOnInit(): void {
   }
+  aggiorna() {
 
-  modifica() {
-
-  }
-
-  conferma() {
-
-  }
-  annulla() {
 
   }
 
+
+  nuova() {
+    this.automa.next(new AddEvent(), this.automa);
+  }
   rimuovi() {
+    this.automa.next(new RimuoviEvent(), this.automa);
+  }
+  modifica() {
+    this.automa.next(new ModificaEvent(), this.automa);
 
   }
+  conferma() {
+    this.automa.next(new ConfermaEvent(), this.automa);
+  }
 
-  seleziona() {
+  annulla() {
+    this.automa.next(new AnnullaEvent(), this.automa);
 
   }
+  seleziona(vc: VarianteColore) {
+    this.varianteColore = vc;
+    this.automa.next(new SelezionaEvent(), this.automa);
+  }
+
 
   cerca() {
+    this.automa.next(new RicercaEvent(), this.automa);
+  }
+
+  entraStatoRicerca() {
+    this.remove= false;
+    this.edit= false;
+    this.conf= false;
+    this.annull= false;
+    this.form = false;
+    this.aggiungi = true;
+    this.search = true;
+    this.tabella = true;
+    this.codiceInput = false;
+    this.descrizione = false;
 
   }
+  entraStatoAggiungi() {
+    this.remove= false;
+    this.edit= false;
+    this.conf= true;
+    this.annull= true;
+    this.form = true;
+    this.aggiungi = false;
+    this.search = false;
+    this.tabella = false;
+    this.codiceInput = false;
+    this.descrizione = false;
+
+  }
+  entraStatoVisualizza() {
+   
+
+    throw new Error('Method not implemented.');
+  }
+  entraStatoModifica() {
+    throw new Error('Method not implemented.');
+  }
+  entraStatoRimuovi() {
+    throw new Error('Method not implemented.');
+  }
+  salvaDati() {
+    throw new Error('Method not implemented.');
+  }
+  modificaDati() {
+    throw new Error('Method not implemented.');
+  }
+  eliminaDati() {
+    throw new Error('Method not implemented.');
+  }
+  aggiornaRisultatiRicerca() {
+    throw new Error('Method not implemented.');
+  }
+
+
 }
