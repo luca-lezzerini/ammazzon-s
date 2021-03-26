@@ -16,8 +16,9 @@ import it.sirfin.ammazzonserver.repository.UtenteRegistratoRepository;
 import it.sirfin.ammazzonserver.repository.VarianteColoreRepository;
 import it.sirfin.ammazzonserver.repository.VarianteTagliaRepository;
 import it.sirfin.ammazzonserver.service.DatiTestService;
+import java.text.DecimalFormat;
+import java.text.NumberFormat;
 import java.util.ArrayList;
-import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -49,6 +50,12 @@ public class DatiTestServiceImpl implements DatiTestService {
     @Override
     public void datiTest() {
 
+        coloreTagliaRepository.deleteAllInBatch();
+        prodottoColoreRepository.deleteAllInBatch();
+        varianteTagliaRepository.deleteAllInBatch();
+        varianteColoreRepository.deleteAllInBatch();
+        prodottoRepository.deleteAllInBatch();
+
         //////////creazione utenti////////
         UtenteRegistrato ur1 = new UtenteRegistrato("Nico", "Aba", "nic", "fuck", "2345678", "jhgfds", new ArrayList<>());
         ur1 = utenteRegistratoRepository.save(ur1);
@@ -76,8 +83,12 @@ public class DatiTestServiceImpl implements DatiTestService {
         ///////////creazione 1000 prodotti////////
         Prodotto p1 = new Prodotto();
         int limite = 100;
+        NumberFormat formatter = new DecimalFormat("#0.00");
         for (int i = 0; i < limite; i++) {
-            p1 = new Prodotto("p" + i, "t-shirt", 21.0, new ArrayList<>());
+            double random = Math.random() * (1000 - 10 + 1) + 10;
+            String pf = formatter.format(random);
+            double prezzoFormattato = Double.parseDouble("10.33");
+            p1 = new Prodotto("p" + i, "t-shirt", prezzoFormattato, new ArrayList<>());
             p1 = prodottoRepository.save(p1);
         }
         associaProdottoColore(p1, vcGiallo, vtS);
