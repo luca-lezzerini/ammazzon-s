@@ -18,13 +18,12 @@
         <button (click)="annulla()" *ngIf="annull">Annulla</button> &nbsp;
         <button (click)="rimuovi()" *ngIf="remove">Rimuovi</button> &nbsp;
     </div>
-
+    <h4>{{errore}}</h4>
     <br><br>
     <div *ngIf="search">
         <input type="text" placeholder="Criterio Ricerca" [(ngModel)]="inputRicerca">&nbsp;
         <button (click)="cerca()">Cerca</button>
         <br>
-        <h4>{{errore}}</h4>
     </div>
     <br><br>
     <div class="tabella">

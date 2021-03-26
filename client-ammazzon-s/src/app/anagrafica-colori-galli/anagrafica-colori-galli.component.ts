@@ -142,9 +142,10 @@ export class AnagraficaColoriGalliComponent implements OnInit, Automabile {
   salvaDati() {
     let dto = new ColoreDto();
     dto.varianteColore = this.varianteColore;
-    if (this.varianteColore = null) {
+    if (this.varianteColore.codice && this.varianteColore.descrizione == "") {
       this.errore = "Errore! Devi inserire un colore PORCA ZOZZA"
     } else {
+      this.errore = "";
       this.http.post<ListaColoriDto>(this.url + "aggiungi-colore", dto)
         .subscribe(r => {
           this.variantiColori = r.variantiColori;
