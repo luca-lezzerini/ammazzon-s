@@ -16,7 +16,7 @@ import { VarianteTaglia } from '../entità/variante-taglia';
 export class AnagraficaTagliaComponent implements OnInit, Automabile {
 
   automa: Automa;
-  criterioRicerca = "";
+  inputRicerca = "";
   taglia = new VarianteTaglia();
   listaTaglie: VarianteTaglia[] = [];
   errore = "";
@@ -101,6 +101,7 @@ export class AnagraficaTagliaComponent implements OnInit, Automabile {
         this.taglia = new VarianteTaglia();
       });
   }
+
   modificaDati() {
     let dto = new TagliaDto();
     dto.varianteTaglia = this.taglia;
@@ -109,6 +110,7 @@ export class AnagraficaTagliaComponent implements OnInit, Automabile {
         this.listaTaglie = r.listaTaglie;
       });
   }
+
   eliminaDati() {
     let dto = new TagliaDto();
     dto.varianteTaglia = this.taglia;
@@ -117,10 +119,11 @@ export class AnagraficaTagliaComponent implements OnInit, Automabile {
         this.listaTaglie = r.listaTaglie;
       });
   }
+
   aggiornaRisultatiRicerca() {
     let dto = new RicercaTaglieDto();
-    dto.criterioRicerca = this.criterioRicerca;
-    if (this.criterioRicerca == null) {
+    dto.criterioRicerca = this.inputRicerca;
+    if (this.inputRicerca == null) {
       this.errore = "Inserisci il criterio di ricerca";
     } else {
       this.errore = "";
@@ -130,9 +133,16 @@ export class AnagraficaTagliaComponent implements OnInit, Automabile {
         });
     }
   }
-  ritornaTaglia(l: VarianteTaglia) {
 
+  ritornaTaglia(l: VarianteTaglia) {
+    let dto = new TagliaDto();
+    dto.varianteTaglia = l;
+    this.http.post<TagliaDto>("http://localhost:8080/rit-taglia", dto)
+      .subscribe(r => {
+        this.taglia = r.varianteTaglia;
+      });
   }
+
   aggiorna() {
     this.http.get<ListaTaglieDto>("http://localhost:8080/agg-taglia")
       .subscribe(r => this.listaTaglie = r.listaTaglie);
@@ -145,23 +155,30 @@ export class AnagraficaTagliaComponent implements OnInit, Automabile {
   modifica() {
     this.automa.next(new ModificaEvent(), this.automa);
   }
+
   conferma() {
     this.automa.next(new ConfermaEvent(), this.automa);
   }
+
   annulla() {
+    this.taglia = new VarianteTaglia();
     this.automa.next(new AnnullaEvent(), this.automa);
   }
+
   rimuovi() {
     this.automa.next(new RimuoviEvent(), this.automa);
   }
+
   nuova() {
     this.automa.next(new AddEvent(), this.automa);
   }
+
   cerca() {
     this.automa.next(new RicercaEvent(), this.automa);
   }
+
   seleziona(l: VarianteTaglia) {
-    this.taglia = l;
+    this.ritornaTaglia(l);
     this.automa.next(new SelezionaEvent(), this.automa);
   }
 }
