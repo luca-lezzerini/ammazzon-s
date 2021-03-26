@@ -10,5 +10,27 @@ package it.sirfin.ammazzonserver.dto;
  * @author Admin
  */
 public class RicercaTagliaDto {
-    
+
+    private String criterioRicerca;
+
+    public RicercaTagliaDto() {
+    }
+
+    public RicercaTagliaDto(String criterioRicerca) {
+        this.criterioRicerca = criterioRicerca;
+    }
+
+    public String getCriterioRicerca() {
+        return criterioRicerca;
+    }
+
+    public void setCriterioRicerca(String criterioRicerca) {
+        this.criterioRicerca = criterioRicerca;
+    }
+
+    @Override
+    public String toString() {
+        return "RicercaTagliaDto{" + "criterioRicerca=" + criterioRicerca + '}';
+    }
+
 }

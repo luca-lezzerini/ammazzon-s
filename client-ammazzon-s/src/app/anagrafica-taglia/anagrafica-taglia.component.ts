@@ -16,7 +16,7 @@ import { VarianteTaglia } from '../entità/variante-taglia';
 export class AnagraficaTagliaComponent implements OnInit, Automabile {
 
   automa: Automa;
-  inputRicerca = "";
+  inputRicerca: string;
   taglia = new VarianteTaglia();
   listaTaglie: VarianteTaglia[] = [];
   errore = "";
@@ -34,6 +34,9 @@ export class AnagraficaTagliaComponent implements OnInit, Automabile {
   constructor(private http: HttpClient) {
     this.automa = new Automa(this);
     this.aggiorna();
+  }
+
+  ngOnInit(): void {
   }
 
   entraStatoRicerca() {
@@ -95,7 +98,7 @@ export class AnagraficaTagliaComponent implements OnInit, Automabile {
   salvaDati() {
     let dto = new TagliaDto();
     dto.varianteTaglia = this.taglia;
-    this.http.post<ListaTaglieDto>("http://localhost:8080/add-taglia", dto)
+    this.http.post<ListaTaglieDto>("http://localhost:8080/aggiungi-taglia", dto)
       .subscribe(r => {
         this.listaTaglie = r.listaTaglie;
         this.taglia = new VarianteTaglia();
@@ -105,7 +108,7 @@ export class AnagraficaTagliaComponent implements OnInit, Automabile {
   modificaDati() {
     let dto = new TagliaDto();
     dto.varianteTaglia = this.taglia;
-    this.http.post<ListaTaglieDto>("http://localhost:8080/conf-taglia", dto)
+    this.http.post<ListaTaglieDto>("http://localhost:8080/conferma-taglia", dto)
       .subscribe(r => {
         this.listaTaglie = r.listaTaglie;
       });
@@ -114,7 +117,7 @@ export class AnagraficaTagliaComponent implements OnInit, Automabile {
   eliminaDati() {
     let dto = new TagliaDto();
     dto.varianteTaglia = this.taglia;
-    this.http.post<ListaTaglieDto>("http://localhost:8080/rim-taglia", dto)
+    this.http.post<ListaTaglieDto>("http://localhost:8080/rimuovi-taglia", dto)
       .subscribe(r => {
         this.listaTaglie = r.listaTaglie;
       });
@@ -127,7 +130,7 @@ export class AnagraficaTagliaComponent implements OnInit, Automabile {
       this.errore = "Inserisci il criterio di ricerca";
     } else {
       this.errore = "";
-      this.http.post<ListaTaglieDto>("http://localhost:8080/modifica-taglia", dto)
+      this.http.post<ListaTaglieDto>("http://localhost:8080/ricerca-taglia", dto)
         .subscribe(r => {
           this.listaTaglie = r.listaTaglie;
         });
@@ -144,12 +147,10 @@ export class AnagraficaTagliaComponent implements OnInit, Automabile {
   }
 
   aggiorna() {
-    this.http.get<ListaTaglieDto>("http://localhost:8080/agg-taglia")
+    this.http.get<ListaTaglieDto>("http://localhost:8080/aggiorna-taglia")
       .subscribe(r => this.listaTaglie = r.listaTaglie);
   }
 
-  ngOnInit(): void {
-  }
 
 
   modifica() {
