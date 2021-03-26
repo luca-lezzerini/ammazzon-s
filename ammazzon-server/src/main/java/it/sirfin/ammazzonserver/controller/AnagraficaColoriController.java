@@ -38,14 +38,21 @@ public class AnagraficaColoriController {
         return anagraficaColoriService.aggiornaColori();
     }
 
-     @RequestMapping("modifica-colore")
+    @RequestMapping("modifica-colore")
     @ResponseBody
     public ListaColoriDto modificaColore(@RequestBody ColoreDto dto) {
         return anagraficaColoriService.modificaColore(dto.getVarianteColore());
     }
-     @RequestMapping("ricerca-colore")
+
+    @RequestMapping("ricerca-colore")
     @ResponseBody
     public ListaColoriDto ricercaColore(@RequestBody RicercaColoreDto dto) {
         return anagraficaColoriService.ricercaColore(dto.getCriterioRicerca());
+    }
+
+    @RequestMapping("rimuovi-colore")
+    @ResponseBody
+    public ListaColoriDto rimuoviColore(@RequestBody ColoreDto dto) {
+        return anagraficaColoriService.rimuoviColore(dto.getVarianteColore());
     }
 }

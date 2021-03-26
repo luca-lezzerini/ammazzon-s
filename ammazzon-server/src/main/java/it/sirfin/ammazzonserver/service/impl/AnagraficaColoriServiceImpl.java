@@ -49,4 +49,10 @@ public class AnagraficaColoriServiceImpl implements AnagraficaColoriService {
         return new ListaColoriDto(varianteColoreRepository.trovaCodice(c));
     }
 
+    @Override
+    public ListaColoriDto rimuoviColore(VarianteColore vc) {
+        varianteColoreRepository.delete(vc);
+        return aggiornaColori();
+    }
+
 }

@@ -21,4 +21,6 @@ public interface AnagraficaColoriService {
     ListaColoriDto modificaColore(VarianteColore vc);
     
     ListaColoriDto ricercaColore(String c);
+    
+    ListaColoriDto rimuoviColore(VarianteColore vc);
 }

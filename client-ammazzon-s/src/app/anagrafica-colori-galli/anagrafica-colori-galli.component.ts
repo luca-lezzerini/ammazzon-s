@@ -164,7 +164,12 @@ export class AnagraficaColoriGalliComponent implements OnInit, Automabile {
       });
   }
   eliminaDati() {
-    throw new Error('Method not implemented.');
+    let dto = new ColoreDto();
+    dto.varianteColore = this.varianteColore;
+    this.http.post<ListaColoriDto>(this.url + "rimuovi-colore", dto)
+      .subscribe(r => {
+        this.variantiColori = r.variantiColori;
+      });
   }
   aggiornaRisultatiRicerca() {
     let stringa = new RicercaColoreDto();
