@@ -1,8 +1,8 @@
-tocTab[tocTab.length] = new Array("0.6:1", "", "Stati", "EARoot/EA6/EA61.htm", "183.png", "60", "0", "", "Statechart diagram0","{D6653FDF-C53A-442d-A283-584A2FE424F7}");
-tocTab[tocTab.length] = new Array("0.6:2", "", "Initial", "EARoot/EA6/EA64.htm", "68.png", "E563", "0", "", "StateNode0","{0FE84CF1-A656-4769-AC5F-B5842710298F}");
-tocTab[tocTab.length] = new Array("0.6:3", "", "Ordine in bozza - carrello", "EARoot/EA6/EA65.htm", "20.png", "E564", "0", "", "State0","{7F94BA4E-DB47-49bc-9170-2FBD7584E26D}");
-tocTab[tocTab.length] = new Array("0.6:4", "", "Ordine in pagamento", "EARoot/EA6/EA66.htm", "20.png", "E565", "0", "", "State0","{C0F27D1F-789B-45b9-A460-E327F1E6BFA6}");
-tocTab[tocTab.length] = new Array("0.6:5", "", "Ordine pagato", "EARoot/EA6/EA67.htm", "20.png", "E566", "0", "", "State0","{60EE8D1B-6777-4264-BE8B-7328F158CB23}");
-tocTab[tocTab.length] = new Array("0.6:6", "", "Ordine sospeso", "EARoot/EA6/EA68.htm", "20.png", "E567", "0", "", "State0","{0556F5D2-9919-45f4-9E06-1B19022CB4FC}");
-tocTab[tocTab.length] = new Array("0.6:7", "", "pagamento ok", "EARoot/EA6/EA69.htm", "198.png", "E568", "0", "", "Trigger0","{A5399837-BD12-45d2-BE6D-9E012907336B}");
-tocTab[tocTab.length] = new Array("0.6:8", "", "pagamento rifiutato", "EARoot/EA6/EA70.htm", "198.png", "E569", "0", "", "Trigger0","{1787C0E8-751E-4341-8902-7E56F7269666}");
+tocTab[tocTab.length] = new Array("0.6:1", "", "Stati", "EARoot/EA6/EA86.htm", "183.png", "60", "0", "", "Statechart diagram0","{D6653FDF-C53A-442d-A283-584A2FE424F7}");
+tocTab[tocTab.length] = new Array("0.6:2", "", "Initial", "EARoot/EA6/EA89.htm", "68.png", "E563", "0", "", "StateNode0","{0FE84CF1-A656-4769-AC5F-B5842710298F}");
+tocTab[tocTab.length] = new Array("0.6:3", "", "Ordine in bozza - carrello", "EARoot/EA6/EA90.htm", "20.png", "E564", "0", "", "State0","{7F94BA4E-DB47-49bc-9170-2FBD7584E26D}");
+tocTab[tocTab.length] = new Array("0.6:4", "", "Ordine in pagamento", "EARoot/EA6/EA91.htm", "20.png", "E565", "0", "", "State0","{C0F27D1F-789B-45b9-A460-E327F1E6BFA6}");
+tocTab[tocTab.length] = new Array("0.6:5", "", "Ordine pagato", "EARoot/EA6/EA92.htm", "20.png", "E566", "0", "", "State0","{60EE8D1B-6777-4264-BE8B-7328F158CB23}");
+tocTab[tocTab.length] = new Array("0.6:6", "", "Ordine sospeso", "EARoot/EA6/EA93.htm", "20.png", "E567", "0", "", "State0","{0556F5D2-9919-45f4-9E06-1B19022CB4FC}");
+tocTab[tocTab.length] = new Array("0.6:7", "", "pagamento ok", "EARoot/EA6/EA94.htm", "198.png", "E568", "0", "", "Trigger0","{A5399837-BD12-45d2-BE6D-9E012907336B}");
+tocTab[tocTab.length] = new Array("0.6:8", "", "pagamento rifiutato", "EARoot/EA6/EA95.htm", "198.png", "E569", "0", "", "Trigger0","{1787C0E8-751E-4341-8902-7E56F7269666}");
