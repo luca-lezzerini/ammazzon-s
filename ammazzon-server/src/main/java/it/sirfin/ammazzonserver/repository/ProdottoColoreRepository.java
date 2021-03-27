@@ -18,4 +18,8 @@ public interface ProdottoColoreRepository extends JpaRepository<ProdottoColore, 
    @Query("SELECT pc FROM ProdottoColore pc WHERE pc.prodotto.descrizione = 'PANTALONE'"
            + "and pc.varianteColore.descrizione = 'blu'")
    List<ProdottoColore> pantaloniBlu();
+
+   @Query("SELECT pc FROM ProdottoColore pc WHERE pc.prodotto.descrizione = 'CAPPELLO'"
+           + "and pc.varianteColore.descrizione = 'rosso'")
+   List<ProdottoColore> CappelliRossi();
 }
