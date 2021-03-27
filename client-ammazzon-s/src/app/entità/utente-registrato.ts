@@ -1,7 +1,7 @@
 export class UtenteRegistrato {
     nome = "";
     cognome = "";
-    userName = "";
+    username = "";
     password = "";
     codiceFiscale = "";
     tokenRegistrato: string;
