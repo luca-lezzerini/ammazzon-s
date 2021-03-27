@@ -23,3 +23,22 @@
         </tr>
     </table>
 </div>
+<div>
+    <h3>Colori già associati</h3>
+    <br><br>
+    <table>
+        <tr>
+            <th>Descrizione Colore</th>
+            <th>Descrizione Prodotto</th>
+        </tr>
+        <tr *ngFor="let c of coloriAssociati">
+            <td>{{c.varianteColore.descrizione}}</td>
+            <td>{{c.prodotto.descrizione}}</td>
+            <td><button (click)="spostaNonAssociati(c)">></button></td>
+        </tr>
+    </table>
+</div>
+<div>
+    <button (click)="associaTutti()">Associa Tutti i Colori</button>
+    <button (click)="disassociaTutti()">Disassocia Tutti i Colori</button>
+</div>

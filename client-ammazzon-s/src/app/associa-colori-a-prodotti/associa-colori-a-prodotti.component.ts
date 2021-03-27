@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { ListaProdottiDto } from '../dto/lista-prodotti-dto';
 import { RicercaColoreOProdottoDto } from '../dto/ricerca-colore-o-prodotto-dto';
 import { Prodotto } from '../entità/prodotto';
+import { ProdottoColore } from '../entità/prodotto-colore';
 
 @Component({
   selector: 'app-associa-colori-a-prodotti',
@@ -15,6 +16,7 @@ export class AssociaColoriAProdottiComponent implements OnInit {
   prodotti: Prodotto[] = [];
   url = "http://localhost:8080/";
   messaggioErrore = "";
+  coloriAssociati: ProdottoColore[] = [];
 
   constructor(private http: HttpClient) { }
 
@@ -35,5 +37,11 @@ export class AssociaColoriAProdottiComponent implements OnInit {
         });
     }
   }
+
+  seleziona() { }
+
+  spostaNonAssociati() { }
+  associaTutti() { }
+  disassociaTutti() { }
 
 }
