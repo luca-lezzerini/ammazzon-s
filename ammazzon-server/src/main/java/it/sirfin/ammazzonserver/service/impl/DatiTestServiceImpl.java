@@ -103,6 +103,13 @@ public class DatiTestServiceImpl implements DatiTestService {
                 associaProdottoColoreTaglia(pantaloneBlu, tagliaS);
                 //pantalone/blu/M
                 associaProdottoColoreTaglia(pantaloneBlu, tagliaM);
+                //Prodotti con id % 3 == 1 -> 1 colore e tre taglie 
+            }
+            if (p.getId() % 3 == 1) {
+                p.setDescrizione("PANTALONE");
+
+            }
+            if (p.getId() % 3 == 2) {
             }
         }
 
