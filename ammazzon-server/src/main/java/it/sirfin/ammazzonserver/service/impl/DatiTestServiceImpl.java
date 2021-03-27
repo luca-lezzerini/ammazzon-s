@@ -83,7 +83,7 @@ public class DatiTestServiceImpl implements DatiTestService {
 
         ///////////creazione 1000 prodotti////////
         Prodotto p = new Prodotto();
-        int limite = 10;
+        int limite = 100;
         int contatore1 = 0;
         int contatore2 = 0;
         int contatore3 = 0;
@@ -155,8 +155,21 @@ public class DatiTestServiceImpl implements DatiTestService {
 
     @Override
     public void queryTest1() {
-        List<ProdottoColore> lista = prodottoColoreRepository.ProdottiGialli();
-        lista.forEach(l -> System.out.println(l));
+        //query per trovare tutti i pantaloni blu
+        List<ProdottoColore> pantaloniGialli = prodottoColoreRepository.pantaloniGialli();
+        System.out.println("numero pantaloni gialli trovati = " + pantaloniGialli.size());
+        pantaloniGialli.forEach(l -> System.out.println(l));
+        //query per trovare tutti i pantaloni gialli
+        List<ProdottoColore> pantaloniBlu = prodottoColoreRepository.pantaloniBlu();
+        System.out.println("numero pantaloni blu trovati = " + pantaloniBlu.size());
+        pantaloniBlu.forEach(l -> {
+            System.out.println(l);
+            System.out.println(
+                    "\nCodice prodotto = " + l.getProdotto().getCodice() + "\n"
+                    + "Descrizione prodotto = " + l.getProdotto().getDescrizione() + "\n"
+                    + "Colore = " + l.getVarianteColore().getDescrizione() + "\n"
+            );
+        });
     }
 
     @Override
@@ -173,8 +186,6 @@ public class DatiTestServiceImpl implements DatiTestService {
     public void queryTest4() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
-    
-    
 
     ///////////ASSOCIAZIONI//////////////////
     /*
