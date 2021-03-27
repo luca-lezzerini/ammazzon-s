@@ -11,7 +11,7 @@ import { VarianteColore } from '../entità/variante-colore';
 @Component({
   selector: 'app-anagrafica-colori-galli',
   templateUrl: './anagrafica-colori-galli.component.html',
-  styleUrls: ['./anagrafica-colori-galli.component.css']
+  styleUrls: ['./anagrafica-colori-galli.component.css', '../theme.css']
 })
 export class AnagraficaColoriGalliComponent implements OnInit, Automabile {
 
