@@ -19,6 +19,7 @@ import it.sirfin.ammazzonserver.service.DatiTestService;
 import java.text.DecimalFormat;
 
 import java.util.ArrayList;
+import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -151,6 +152,29 @@ public class DatiTestServiceImpl implements DatiTestService {
         System.out.println("numero cappelli creati = " + contatore3);
         System.out.println("totale prodotti creati su DB = " + prodottoRepository.findAll().size());
     }
+
+    @Override
+    public void queryTest1() {
+        List<ProdottoColore> lista = prodottoColoreRepository.ProdottiGialli();
+        lista.forEach(l -> System.out.println(l));
+    }
+
+    @Override
+    public void queryTest2() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public void queryTest3() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public void queryTest4() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+    
+    
 
     ///////////ASSOCIAZIONI//////////////////
     /*
