@@ -98,7 +98,7 @@ public class DatiTestServiceImpl implements DatiTestService {
             p = prodottoRepository.save(p);
             System.out.println("id " + p.getCodice() + " = " + p.getId());
             //Prodotti con id % 3 == 0 -> 1 colore e 2 taglie
-            if (p.getId() % 3 == 0) {
+            if (i % 3 == 0) {
                 contatore1++;
                 p.setDescrizione("PANTALONE");
                 //Ottengo un pantalone Blu
@@ -111,7 +111,7 @@ public class DatiTestServiceImpl implements DatiTestService {
             }
 
             //Prodotti con id % 3 == 1 -> 1 colore e tre taglie
-            if (p.getId() % 3 == 1) {
+            if (i % 3 == 1) {
                 contatore2++;
                 p.setDescrizione("T-SHIRT");
                 //Ottengo una t-shirt gialla
@@ -124,7 +124,7 @@ public class DatiTestServiceImpl implements DatiTestService {
                 associaProdottoColoreTaglia(tShirtGialla, tagliaL);
             }
 
-            if (p.getId() % 3 == 2) {
+            if (i % 3 == 2) {
                 contatore3++;
                 p.setDescrizione("CAPPELLO");
                 //Ottengo un cappello rosso
@@ -149,6 +149,7 @@ public class DatiTestServiceImpl implements DatiTestService {
         System.out.println("numero Pantaloni creati = " + contatore1);
         System.out.println("numero t-shirt create = " + contatore2);
         System.out.println("numero cappelli creati = " + contatore3);
+        System.out.println("totale prodotti creati su DB = " + prodottoRepository.findAll().size());
     }
 
     ///////////ASSOCIAZIONI//////////////////
