@@ -81,7 +81,7 @@ public class DatiTestServiceImpl implements DatiTestService {
         vtL = varianteTagliaRepository.save(vtL);
 
         ///////////creazione 1000 prodotti////////
-        Prodotto p1 = new Prodotto();
+        Prodotto p = new Prodotto();
         int limite = 10;
 
         for (int i = 0; i < limite; i++) {
@@ -92,9 +92,9 @@ public class DatiTestServiceImpl implements DatiTestService {
             String pf = formatter.format(random);
             Double prezzoFormattato = Double.valueOf(pf);
 
-            p1 = new Prodotto("p" + i, "t-shirt", prezzoFormattato);
-            p1 = prodottoRepository.save(p1);
-            if (p1.getId() % 3 == 0) {
+            p = new Prodotto("p" + i, "t-shirt", prezzoFormattato);
+            p = prodottoRepository.save(p);
+            if (p.getId() % 3 == 0) {
                
             }
         }
@@ -137,3 +137,7 @@ public class DatiTestServiceImpl implements DatiTestService {
     }
 
 }
+    /*
+    1) Far ritornare al primo metodo(associaProdottoColore) un ProdottoColore; 
+    successivamente associare un ProdottoColore a una varianteTaglia. 
+    */
