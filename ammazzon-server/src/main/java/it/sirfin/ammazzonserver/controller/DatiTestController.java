@@ -23,22 +23,22 @@ public class DatiTestController {
         datiTestService.datiTest();
     }
 
-    @RequestMapping("query1-test")
+    @RequestMapping("query-test1")
     void queryTest1() {
         datiTestService.queryTest1();
     }
 
-    @RequestMapping("query2-test")
+    @RequestMapping("query-test2")
     void queryTest2() {
-        throw new UnsupportedOperationException();
+        datiTestService.queryTest2();
     }
 
-    @RequestMapping("query3-test")
+    @RequestMapping("query-test3")
     void queryTest3() {
         throw new UnsupportedOperationException();
     }
 
-    @RequestMapping("query4-test")
+    @RequestMapping("query-test4")
     void queryTest4() {
         throw new UnsupportedOperationException();
     }

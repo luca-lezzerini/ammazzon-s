@@ -163,11 +163,29 @@ public class DatiTestServiceImpl implements DatiTestService {
         //query per trovare tutti i pantaloni blu
         List<ProdottoColore> pantaloniGialli = prodottoColoreRepository.pantaloniGialli();
         System.out.println("numero pantaloni gialli trovati = " + pantaloniGialli.size());
-        pantaloniGialli.forEach(l -> System.out.println(l));
+        pantaloniGialli.forEach(l -> {
+            System.out.println(l);
+            System.out.println(
+                    "\nCodice prodotto = " + l.getProdotto().getCodice() + "\n"
+                    + "Descrizione prodotto = " + l.getProdotto().getDescrizione() + "\n"
+                    + "Colore = " + l.getVarianteColore().getDescrizione() + "\n"
+            );
+        });
         //query per trovare tutti i pantaloni gialli
         List<ProdottoColore> pantaloniBlu = prodottoColoreRepository.pantaloniBlu();
-        System.out.println("numero pantaloni blu trovati = " + pantaloniBlu.size());
+        System.out.println("\nnumero pantaloni blu trovati = " + pantaloniBlu.size());
         pantaloniBlu.forEach(l -> {
+            System.out.println(l);
+            System.out.println(
+                    "\nCodice prodotto = " + l.getProdotto().getCodice() + "\n"
+                    + "Descrizione prodotto = " + l.getProdotto().getDescrizione() + "\n"
+                    + "Colore = " + l.getVarianteColore().getDescrizione() + "\n"
+            );
+        });
+        //query per trovare tutti i cappelli rossi
+        List<ProdottoColore> cappelliRossi = prodottoColoreRepository.CappelliRossi();
+        System.out.println("\nnumero cappelli Rossi trovati = " + cappelliRossi.size());
+        cappelliRossi.forEach(l -> {
             System.out.println(l);
             System.out.println(
                     "\nCodice prodotto = " + l.getProdotto().getCodice() + "\n"
@@ -179,7 +197,19 @@ public class DatiTestServiceImpl implements DatiTestService {
 
     @Override
     public void queryTest2() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        //taglie disponibili cappelli rossi
+        List<ColoreTaglia> taglieCappelliRossi = coloreTagliaRepository.taglieCappelloRosso();
+        System.out.println("\nnumero taglie associate a cappelli Rossi trovati = "
+                + taglieCappelliRossi.size());
+        taglieCappelliRossi.forEach(l -> {
+            System.out.println(l);
+            System.out.println(
+                    "\nCodice prodotto = " + l.getProdottoColore().getProdotto().getCodice() + "\n"
+                    + "Descrizione prodotto = " + l.getProdottoColore().getProdotto().getDescrizione() + "\n"
+                    + "Colore = " + l.getProdottoColore().getVarianteColore().getDescrizione() + "\n"
+                    + "Taglia = " + l.getVarianteTaglia().getCodice() + "\n"
+            );
+        });
     }
 
     @Override
