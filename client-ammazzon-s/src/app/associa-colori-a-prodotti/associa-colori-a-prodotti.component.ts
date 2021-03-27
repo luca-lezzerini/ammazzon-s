@@ -11,7 +11,7 @@ import { VarianteColore } from '../entità/variante-colore';
 @Component({
   selector: 'app-associa-colori-a-prodotti',
   templateUrl: './associa-colori-a-prodotti.component.html',
-  styleUrls: ['./associa-colori-a-prodotti.component.css']
+  styleUrls: ['./associa-colori-a-prodotti.component.css',  '../theme.css']
 })
 export class AssociaColoriAProdottiComponent implements OnInit {
 
