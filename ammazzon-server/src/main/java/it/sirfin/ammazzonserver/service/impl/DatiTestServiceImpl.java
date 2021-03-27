@@ -73,12 +73,12 @@ public class DatiTestServiceImpl implements DatiTestService {
         vcGiallo = varianteColoreRepository.save(vcGiallo);
 
         //////////creazione taglia////////
-        VarianteTaglia vtS = new VarianteTaglia("S");
-        vtS = varianteTagliaRepository.save(vtS);
-        VarianteTaglia vtM = new VarianteTaglia("M");
-        vtM = varianteTagliaRepository.save(vtM);
-        VarianteTaglia vtL = new VarianteTaglia("L");
-        vtL = varianteTagliaRepository.save(vtL);
+        VarianteTaglia tagliaS = new VarianteTaglia("S");
+        tagliaS = varianteTagliaRepository.save(tagliaS);
+        VarianteTaglia tagliaM = new VarianteTaglia("M");
+        tagliaM = varianteTagliaRepository.save(tagliaM);
+        VarianteTaglia tagliaL = new VarianteTaglia("L");
+        tagliaL = varianteTagliaRepository.save(tagliaL);
 
         ///////////creazione 1000 prodotti////////
         Prodotto p = new Prodotto();
@@ -94,8 +94,15 @@ public class DatiTestServiceImpl implements DatiTestService {
 
             p = new Prodotto("p" + i, "t-shirt", prezzoFormattato);
             p = prodottoRepository.save(p);
+            //Prodotti con id % 3 == 0 -> 1 colore e 2 taglie
             if (p.getId() % 3 == 0) {
-
+                p.setDescrizione("PANTALONE");
+                //Ottengo un pantalone Blu
+                ProdottoColore pantaloneBlu = associaProdottoColore(p, vcBlu);
+                //pantalone/blu/S
+                associaProdottoColoreTaglia(pantaloneBlu, tagliaS);
+                //pantalone/blu/M
+                associaProdottoColoreTaglia(pantaloneBlu, tagliaM);
             }
         }
 
@@ -105,8 +112,7 @@ public class DatiTestServiceImpl implements DatiTestService {
     /*
     1) Far ritornare al primo metodo(associaProdottoColore) un ProdottoColore; 
     successivamente associare un ProdottoColore a una varianteTaglia. 
-     */
-    /*
+   
     Prodotti con id % 3 == 0 -> 1 colore e 2 taglie     => PANTALONE
             pantalone/blu{
                 pantalone/blu/S
@@ -131,7 +137,7 @@ public class DatiTestServiceImpl implements DatiTestService {
                 cappello/giallo/L
     }
      */
-    private ProdottoColore associaProdottoColore(Prodotto p, VarianteColore vc, VarianteTaglia vt) {
+    private ProdottoColore associaProdottoColore(Prodotto p, VarianteColore vc) {
         ProdottoColore pc = new ProdottoColore(vc, p);
         pc.setProdotto(p);
         pc.setVarianteColore(vc);
@@ -143,7 +149,7 @@ public class DatiTestServiceImpl implements DatiTestService {
         return pc;
     }
 
-    private ColoreTaglia associaProdottoTaglie(ProdottoColore pc, VarianteTaglia vt) {
+    private ColoreTaglia associaProdottoColoreTaglia(ProdottoColore pc, VarianteTaglia vt) {
         ColoreTaglia ct = new ColoreTaglia();
         ct.setProdottoColore(pc);
         ct.setVarianteTaglia(vt);
