@@ -10,13 +10,8 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface ProdottoRepository extends JpaRepository<Prodotto, Long> {
 
-//    @Query("SELECT p,t FROM Prodotto p JOIN p.VarianteTaglia t WHERE t.codice = 'M'")
-//    List<Prodotto> cercaProdottiTagliaM();
+
     @Query("select p from Prodotto p where p.codice like concat ('%',:cod,'%') "
             + "or p.descrizione =:cod")
     List<Prodotto> trovaCodiceODescrizione(@Param("cod") String c);
-
-    //     @Query("select c from Cassiera c where c.nome LIKE CONCAT('%',:cogn,'%') "
-//            + "or c.cognome LIKE CONCAT('%',:cogn,'%') or c.codiceFiscale"
-//            + "=:cogn")
 }

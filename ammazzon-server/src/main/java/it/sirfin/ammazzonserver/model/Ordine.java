@@ -29,6 +29,7 @@ public class Ordine implements Serializable {
     @Column
     private String stato = "CARRELLO";
 
+    @JsonIgnoreProperties(value = "ordini")
     @ManyToOne
     @JoinColumn(referencedColumnName = "id")
     private UtenteRegistrato utenteRegistrato;

@@ -1,6 +1,7 @@
 package it.sirfin.ammazzonserver.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
@@ -26,8 +27,8 @@ public class Prodotto implements Serializable {
     @Column
     private Double prezzo;
 
-    @OneToMany(mappedBy = "prodotto")
     @JsonIgnoreProperties(value = "prodotto")
+    @OneToMany(mappedBy = "prodotto")
     private List<ProdottoColore> prodottiColori;
 
     public Prodotto() {

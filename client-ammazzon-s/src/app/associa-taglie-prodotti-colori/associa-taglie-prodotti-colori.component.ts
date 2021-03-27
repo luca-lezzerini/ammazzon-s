@@ -31,7 +31,7 @@ export class AssociaTaglieProdottiColoriComponent implements OnInit {
   cerca() {
     let dto = new RicercaStringaReqDto();
     dto.criterioRicerca = this.criterioRicerca;
-    this.http.post<ListaProdottiDto>("http://localhost:8080/", dto)
+    this.http.post<ListaProdottiDto>("http://localhost:8080/cerca-prodotti-codice-esatto-descrizione-like", dto)
       .subscribe(l => {
         this.prodotti = l.listaProdotti;
       });

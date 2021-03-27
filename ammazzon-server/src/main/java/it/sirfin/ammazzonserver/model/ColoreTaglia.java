@@ -26,10 +26,12 @@ public class ColoreTaglia implements Serializable {
     @OneToMany(mappedBy = "coloreTaglia")
     private List<QtaOrdineVariante> qtaOrdiniVarianti;
 
+    @JsonIgnoreProperties(value = "coloriTaglie")
     @ManyToOne
     @JoinColumn(referencedColumnName = "id")
     private ProdottoColore prodottoColore;
 
+    @JsonIgnoreProperties(value = "coloriTaglie")
     @ManyToOne
     @JoinColumn(referencedColumnName = "id")
     private VarianteTaglia varianteTaglia;

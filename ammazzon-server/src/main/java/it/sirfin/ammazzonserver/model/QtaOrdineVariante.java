@@ -1,5 +1,6 @@
 package it.sirfin.ammazzonserver.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import java.io.Serializable;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -18,10 +19,12 @@ public class QtaOrdineVariante implements Serializable {
     @Column
     private Integer qta;
 
+    @JsonIgnoreProperties(value = "qtaOrdiniVarianti")
     @ManyToOne
     @JoinColumn(referencedColumnName = "id")
     private Ordine ordine;
 
+    @JsonIgnoreProperties(value = "qtaOrdiniVarianti")
     @ManyToOne
     @JoinColumn(referencedColumnName = "id")
     private ColoreTaglia coloreTaglia;
@@ -69,7 +72,5 @@ public class QtaOrdineVariante implements Serializable {
     public String toString() {
         return "QtaOrdineVariante{" + "id=" + id + ", qta=" + qta + ", ordine=" + ordine.getId() + ", coloreTaglia=" + coloreTaglia.getId() + '}';
     }
-    
-    
 
 }
