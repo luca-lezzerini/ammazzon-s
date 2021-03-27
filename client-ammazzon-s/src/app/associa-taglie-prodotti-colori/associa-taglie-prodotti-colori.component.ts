@@ -1,6 +1,9 @@
-import { HttpClient} from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { Automa } from '../automa-crud/automa';
+import { ListaProdottiDto } from '../dto/lista-prodotti-dto';
+import { RicercaColoreDto } from '../dto/ricerca-colore-dto';
+import { RicercaStringaReqDto } from '../dto/ricerca-stringa-req-dto';
 import { ColoreTaglia } from '../entità/colore-taglia';
 import { Prodotto } from '../entità/prodotto';
 import { ProdottoColore } from '../entità/prodotto-colore';
@@ -12,22 +15,30 @@ import { ProdottoColore } from '../entità/prodotto-colore';
 })
 export class AssociaTaglieProdottiColoriComponent implements OnInit {
 
-  constructor(private http:HttpClient) { }
+  constructor(private http: HttpClient) { }
 
+  criterioRicerca = "";
   prodotto = new Prodotto();
-  prodotti: Prodotto[]=[]
+  prodotti: Prodotto[] = []
   prodottiColore: ProdottoColore[] = [];
-  coloriTaglie : ColoreTaglia[] = [];
+  coloriTaglie: ColoreTaglia[] = [];
 
-  
+
 
   ngOnInit(): void {
   }
 
-  cerca(){}
-  selezionaProdotto(){}
-  selezionaProdottoColore(){}
-  rimuoviTagliaProdotto(){}
+  cerca() {
+    let dto = new RicercaStringaReqDto();
+    dto.criterioRicerca = this.criterioRicerca;
+    this.http.post<ListaProdottiDto>("http://localhost:8080/", dto)
+      .subscribe(l => {
+        this.prodotti = l.listaProdotti;
+      });
+  }
+  selezionaProdotto() { }
+  selezionaProdottoColore() { }
+  rimuoviTagliaProdotto() { }
 
-   
+
 }
