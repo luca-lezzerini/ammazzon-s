@@ -1,1 +1,25 @@
-<p>associa-colori-a-prodotti works!</p>
+<div>
+    <input type="text" placeholder="Cerca il prodotto" [(ngModel)]="inputRicerca">&nbsp;
+    <button (click)="cerca()">Cerca</button>
+    {{messaggioErrore}}
+    <br>
+</div>
+<h3>Elenco prodotti</h3>
+<br><br>
+<div class="tabella">
+    <table>
+        <tr>
+            <th>Codice</th>
+            <th>Descrizione</th>
+            <th>Prezzo</th>
+        </tr>
+        <tr *ngFor="let p of prodotti">
+            <td>{{p.codice}}</td>
+            <td>{{p.descrizione}}</td>
+            <td>{{p.prezzo}}</td>
+            <td>
+                <button (click)="seleziona(p)">Seleziona</button>
+            </td>
+        </tr>
+    </table>
+</div>
