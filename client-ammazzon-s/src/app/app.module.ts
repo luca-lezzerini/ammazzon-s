@@ -8,6 +8,7 @@ import { HomePageComponent } from './home-page/home-page.component';
 import { AnagraficaColoriGalliComponent } from './anagrafica-colori-galli/anagrafica-colori-galli.component';
 import { AnagraficaTagliaComponent } from './anagrafica-taglia/anagrafica-taglia.component';
 import { AnagraficaUtenteRegistratoComponent } from './anagrafica-utente-registrato/anagrafica-utente-registrato.component';
+import { AssociaTaglieProdottiColoriComponent } from './associa-taglie-prodotti-colori/associa-taglie-prodotti-colori.component';
 
 @NgModule({
   declarations: [
@@ -15,7 +16,8 @@ import { AnagraficaUtenteRegistratoComponent } from './anagrafica-utente-registr
     HomePageComponent,
     AnagraficaColoriGalliComponent,
     AnagraficaTagliaComponent,
-    AnagraficaUtenteRegistratoComponent
+    AnagraficaUtenteRegistratoComponent,
+    AssociaTaglieProdottiColoriComponent
   ],
   imports: [
     BrowserModule,
