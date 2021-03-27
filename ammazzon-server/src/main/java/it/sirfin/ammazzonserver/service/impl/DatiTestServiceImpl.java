@@ -57,11 +57,11 @@ public class DatiTestServiceImpl implements DatiTestService {
         prodottoRepository.deleteAllInBatch();
 
         //////////creazione utenti////////
-        UtenteRegistrato ur1 = new UtenteRegistrato("Nico", "Aba", "nic", "fuck", "2345678", "jhgfds");
+        UtenteRegistrato ur1 = new UtenteRegistrato("Felice", "Capponi", "fc", "dskjfhk", "dfskjh", "374s");
         ur1 = utenteRegistratoRepository.save(ur1);
-        UtenteRegistrato ur2 = new UtenteRegistrato("Franco", "Marzio", "xxx", "123", "98761234", "qw");
+        UtenteRegistrato ur2 = new UtenteRegistrato("Marco", "Antoniolo", "ma", "dhsjjy", "uyrurt", "3655s");
         ur2 = utenteRegistratoRepository.save(ur2);
-        UtenteRegistrato ur3 = new UtenteRegistrato("Pippo", "Pluto", "fff", "789", "6546546645", "za");
+        UtenteRegistrato ur3 = new UtenteRegistrato("Antonio", "Rossi", "ar", "lpklpjk", "khnkhj", "678s");
         ur3 = utenteRegistratoRepository.save(ur3);
 
         //////////creazione colori////////
@@ -96,6 +96,7 @@ public class DatiTestServiceImpl implements DatiTestService {
 
             p = new Prodotto("p" + i, "t-shirt", prezzoFormattato);
             p = prodottoRepository.save(p);
+            System.out.println("id " + p.getCodice() + " = " + p.getId());
             //Prodotti con id % 3 == 0 -> 1 colore e 2 taglie
             if (p.getId() % 3 == 0) {
                 contatore1++;

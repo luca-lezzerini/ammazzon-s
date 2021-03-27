@@ -39,7 +39,6 @@ public class ColoreTaglia implements Serializable {
 
     public ColoreTaglia(Integer giacenza) {
         this.giacenza = giacenza;
-
     }
 
     public Long getId() {

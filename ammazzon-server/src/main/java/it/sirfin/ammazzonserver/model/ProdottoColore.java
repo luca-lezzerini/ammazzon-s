@@ -34,10 +34,10 @@ public class ProdottoColore implements Serializable {
     }
 
     public ProdottoColore(VarianteColore varianteColore, Prodotto prodotto) {
-        this.coloriTaglie = coloriTaglie;
         this.varianteColore = varianteColore;
         this.prodotto = prodotto;
     }
+
 
     public Long getId() {
         return id;

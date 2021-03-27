@@ -7,6 +7,7 @@ import java.util.List;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 
@@ -14,7 +15,7 @@ import javax.persistence.OneToMany;
 public class Prodotto implements Serializable {
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private Long id;
 
     @Column
@@ -38,8 +39,6 @@ public class Prodotto implements Serializable {
         this.descrizione = descrizione;
         this.prezzo = prezzo;
     }
-
-    
 
     public Long getId() {
         return id;

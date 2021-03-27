@@ -33,7 +33,6 @@ public class VarianteColore implements Serializable {
     public VarianteColore(String codice, String descrizione) {
         this.codice = codice;
         this.descrizione = descrizione;
-       
     }
 
     public Long getId() {

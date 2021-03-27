@@ -29,7 +29,6 @@ public class VarianteTaglia implements Serializable {
 
     public VarianteTaglia(String codice) {
         this.codice = codice;
-        
     }
 
     public Long getId() {

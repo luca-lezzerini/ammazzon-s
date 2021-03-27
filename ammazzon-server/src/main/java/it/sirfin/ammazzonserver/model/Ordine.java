@@ -45,8 +45,6 @@ public class Ordine implements Serializable {
         this.numero = numero;
     }
 
-    
-
     public Long getId() {
         return id;
     }

@@ -43,7 +43,6 @@ public class UtenteRegistrato extends UtenteAnonimo implements Serializable {
         this.password = password;
         this.codiceFiscale = codiceFiscale;
         this.tokenRegistrato = tokenRegistrato;
-        
     }
 
     public String getNome() {
