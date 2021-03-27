@@ -33,7 +33,7 @@
     <div *ngIf='form'>
         <input type="text" placeholder="Nome" [(ngModel)]="utente.nome" [disabled]="codiceC">
         <input type="text" placeholder="Cognome" [(ngModel)]="utente.cognome" [disabled]="codiceC">
-        <input type="text" placeholder="UserName" [(ngModel)]="utente.userName" [disabled]="codiceC">
+        <input type="text" placeholder="UserName" [(ngModel)]="utente.username" [disabled]="codiceC">
         <input type="password" placeholder="Password" [(ngModel)]="utente.password" [disabled]="codiceC">
         <input type="text" placeholder="Codice Fisclale" [(ngModel)]="utente.codiceFiscale" [disabled]="codiceC">
 
@@ -57,15 +57,13 @@
                 <th>Nome</th>
                 <th>Cognome</th>
                 <th>UserName</th>
-                <th>Password</th>
                 <th>CodiceFiscale</th>
                 <th>Seleziona</th>
             </tr>
             <tr *ngFor="let l of listaUtenti">
                 <td>{{l.nome}}</td>
                 <td>{{l.cognome}}</td>
-                <td>{{l.userName}}</td>
-                <td>{{l.password}}</td>
+                <td>{{l.username}}</td>
                 <td>{{l.codiceFiscale}}</td>
                 <td> <button (click)="seleziona(l)">Seleziona</button></td>
             </tr>
