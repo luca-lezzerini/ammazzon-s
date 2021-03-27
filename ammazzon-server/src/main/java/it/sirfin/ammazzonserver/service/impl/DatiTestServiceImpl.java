@@ -83,7 +83,9 @@ public class DatiTestServiceImpl implements DatiTestService {
         ///////////creazione 1000 prodotti////////
         Prodotto p = new Prodotto();
         int limite = 10;
-
+        int contatore1 = 0;
+        int contatore2 = 0;
+        int contatore3 = 0;
         for (int i = 0; i < limite; i++) {
 
             //Generazione prezzo casuale per prodotto con formattatore
@@ -96,6 +98,7 @@ public class DatiTestServiceImpl implements DatiTestService {
             p = prodottoRepository.save(p);
             //Prodotti con id % 3 == 0 -> 1 colore e 2 taglie
             if (p.getId() % 3 == 0) {
+                contatore1++;
                 p.setDescrizione("PANTALONE");
                 //Ottengo un pantalone Blu
                 ProdottoColore pantaloneBlu = associaProdottoColore(p, vcBlu);
@@ -105,14 +108,46 @@ public class DatiTestServiceImpl implements DatiTestService {
                 associaProdottoColoreTaglia(pantaloneBlu, tagliaM);
                 //Prodotti con id % 3 == 1 -> 1 colore e tre taglie 
             }
-            if (p.getId() % 3 == 1) {
-                p.setDescrizione("PANTALONE");
 
+            //Prodotti con id % 3 == 1 -> 1 colore e tre taglie
+            if (p.getId() % 3 == 1) {
+                contatore2++;
+                p.setDescrizione("T-SHIRT");
+                //Ottengo una t-shirt gialla
+                ProdottoColore tShirtGialla = associaProdottoColore(p, vcGiallo);
+                //t-shirt/gialla/S
+                associaProdottoColoreTaglia(tShirtGialla, tagliaS);
+                //t-shirt/gialla/M
+                associaProdottoColoreTaglia(tShirtGialla, tagliaM);
+                //t-shirt/gialla/L
+                associaProdottoColoreTaglia(tShirtGialla, tagliaL);
             }
+
             if (p.getId() % 3 == 2) {
+                contatore3++;
+                p.setDescrizione("CAPPELLO");
+                //Ottengo un cappello rosso
+                ProdottoColore cappelloRosso = associaProdottoColore(p, vcRosso);
+                //cappello/rosso/S
+                associaProdottoColoreTaglia(cappelloRosso, tagliaS);
+                //cappello/rosso/M
+                associaProdottoColoreTaglia(cappelloRosso, tagliaM);
+                //cappello/rosso/L
+                associaProdottoColoreTaglia(cappelloRosso, tagliaL);
+
+                //Ottengo un cappello giallo
+                ProdottoColore cappelloGiallo = associaProdottoColore(p, vcGiallo);
+                //cappello/Giallo/S
+                associaProdottoColoreTaglia(cappelloGiallo, tagliaS);
+                //cappello/Giallo/M
+                associaProdottoColoreTaglia(cappelloGiallo, tagliaM);
+                //cappello/Giallo/L
+                associaProdottoColoreTaglia(cappelloGiallo, tagliaL);
             }
         }
-
+        System.out.println("numero Pantaloni creati = " + contatore1);
+        System.out.println("numero t-shirt create = " + contatore2);
+        System.out.println("numero cappelli creati = " + contatore3);
     }
 
     ///////////ASSOCIAZIONI//////////////////
@@ -127,10 +162,10 @@ public class DatiTestServiceImpl implements DatiTestService {
             }
     
     Prodotti con id % 3 == 1 -> 1 colore e tre taglie   => T-SHIRT
-    cappello/rosso{
+    t-shirt/gialla{
                 t-shirt/gialla/S
-                cappello/gialla/M
-                cappello/gialla/L
+                t-shirt/gialla/M
+                t-shirt/gialla/L
             }
     Prodotti con id % 3 == 2 -> 2 colori e tre taglie per colore   =>  CAPPELLO
             cappello/rosso{
