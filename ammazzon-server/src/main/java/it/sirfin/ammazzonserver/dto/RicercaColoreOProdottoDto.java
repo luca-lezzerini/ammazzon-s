@@ -9,14 +9,14 @@ package it.sirfin.ammazzonserver.dto;
  *
  * @author Admin
  */
-public class RicercaColoreDto {
+public class RicercaColoreOProdottoDto {
 
     private String criterioRicerca;
 
-    public RicercaColoreDto() {
+    public RicercaColoreOProdottoDto() {
     }
 
-    public RicercaColoreDto(String criterioRicerca) {
+    public RicercaColoreOProdottoDto(String criterioRicerca) {
         this.criterioRicerca = criterioRicerca;
     }
 

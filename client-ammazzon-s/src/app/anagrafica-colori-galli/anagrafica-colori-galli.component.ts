@@ -5,7 +5,7 @@ import { Automabile } from '../automa-crud/automabile';
 import { AddEvent, AnnullaEvent, ConfermaEvent, ModificaEvent, RicercaEvent, RimuoviEvent, SelezionaEvent } from '../automa-crud/eventi';
 import { ColoreDto } from '../dto/colore-dto';
 import { ListaColoriDto } from '../dto/lista-colori-dto';
-import { RicercaColoreDto } from '../dto/ricerca-colore-dto';
+import { RicercaColoreOProdottoDto } from '../dto/ricerca-colore-o-prodotto-dto';
 import { VarianteColore } from '../entità/variante-colore';
 
 @Component({
@@ -172,7 +172,7 @@ export class AnagraficaColoriGalliComponent implements OnInit, Automabile {
       });
   }
   aggiornaRisultatiRicerca() {
-    let stringa = new RicercaColoreDto();
+    let stringa = new RicercaColoreOProdottoDto();
     stringa.criterioRicerca = this.inputRicerca;
     if (this.inputRicerca == "") {
       this.errore = "ERRORE! DEVI INSERIRE UN CRITERIO DI RICERCA PORCA ZZOZZA ";

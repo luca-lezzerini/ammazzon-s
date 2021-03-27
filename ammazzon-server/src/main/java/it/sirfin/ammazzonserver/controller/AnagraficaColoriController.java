@@ -7,7 +7,7 @@ package it.sirfin.ammazzonserver.controller;
 
 import it.sirfin.ammazzonserver.dto.ColoreDto;
 import it.sirfin.ammazzonserver.dto.ListaColoriDto;
-import it.sirfin.ammazzonserver.dto.RicercaColoreDto;
+import it.sirfin.ammazzonserver.dto.RicercaColoreOProdottoDto;
 import it.sirfin.ammazzonserver.service.AnagraficaColoriService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -46,7 +46,7 @@ public class AnagraficaColoriController {
 
     @RequestMapping("ricerca-colore")
     @ResponseBody
-    public ListaColoriDto ricercaColore(@RequestBody RicercaColoreDto dto) {
+    public ListaColoriDto ricercaColore(@RequestBody RicercaColoreOProdottoDto dto) {
         return anagraficaColoriService.ricercaColore(dto.getCriterioRicerca());
     }
 
