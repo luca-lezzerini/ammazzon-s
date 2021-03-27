@@ -95,24 +95,43 @@ public class DatiTestServiceImpl implements DatiTestService {
             p = new Prodotto("p" + i, "t-shirt", prezzoFormattato);
             p = prodottoRepository.save(p);
             if (p.getId() % 3 == 0) {
-               
+
             }
         }
-//        associaProdottoColore(p1, vcGiallo, vtS);
-//        associaProdottoColore(p1, vcGiallo, vtM);
-//        associaProdottoColore(p1, vcRosso, vtL);
-//        associaProdottoColore(p1, vcBlu, vtM);
-//        associaProdottoColore(p1, vcBlu, vtL);
-        //List<Prodotto> prodotti = prodottoRepository.cercaProdottiTagliaM();
-//        prodotti.forEach(r -> {
-//            System.out.println(r);
-//        });
 
     }
-    ///////////ASSOCIAZIONI//////////////////
-    //////Prodotti con id % 3 == 0 -> 1 colore e 2 taglie/////////////
 
-    private void associaProdottoColore(Prodotto p, VarianteColore vc, VarianteTaglia vt) {
+    ///////////ASSOCIAZIONI//////////////////
+    /*
+    1) Far ritornare al primo metodo(associaProdottoColore) un ProdottoColore; 
+    successivamente associare un ProdottoColore a una varianteTaglia. 
+     */
+    /*
+    Prodotti con id % 3 == 0 -> 1 colore e 2 taglie     => PANTALONE
+            pantalone/blu{
+                pantalone/blu/S
+                pantalone/blu/M
+            }
+    
+    Prodotti con id % 3 == 1 -> 1 colore e tre taglie   => T-SHIRT
+    cappello/rosso{
+                t-shirt/gialla/S
+                cappello/gialla/M
+                cappello/gialla/L
+            }
+    Prodotti con id % 3 == 2 -> 2 colori e tre taglie per colore   =>  CAPPELLO
+            cappello/rosso{
+                cappello/rosso/S
+                cappello/rosso/M
+                cappello/rosso/L
+            }
+            cappello/giallo{
+                cappello/giallo/S
+                cappello/giallo/M
+                cappello/giallo/L
+    }
+     */
+    private ProdottoColore associaProdottoColore(Prodotto p, VarianteColore vc, VarianteTaglia vt) {
         ProdottoColore pc = new ProdottoColore(vc, p);
         pc.setProdotto(p);
         pc.setVarianteColore(vc);
@@ -121,10 +140,10 @@ public class DatiTestServiceImpl implements DatiTestService {
         vc.getProdottiColori().add(pc);
         prodottoRepository.save(p);
         varianteColoreRepository.save(vc);
-        associaProdottoTaglie(pc, vt);
+        return pc;
     }
 
-    private void associaProdottoTaglie(ProdottoColore pc, VarianteTaglia vt) {
+    private ColoreTaglia associaProdottoTaglie(ProdottoColore pc, VarianteTaglia vt) {
         ColoreTaglia ct = new ColoreTaglia();
         ct.setProdottoColore(pc);
         ct.setVarianteTaglia(vt);
@@ -133,11 +152,7 @@ public class DatiTestServiceImpl implements DatiTestService {
         vt.getColoriTaglie().add(ct);
         pc = prodottoColoreRepository.save(pc);
         vt = varianteTagliaRepository.save(vt);
-
+        return ct;
     }
 
 }
-    /*
-    1) Far ritornare al primo metodo(associaProdottoColore) un ProdottoColore; 
-    successivamente associare un ProdottoColore a una varianteTaglia. 
-    */
