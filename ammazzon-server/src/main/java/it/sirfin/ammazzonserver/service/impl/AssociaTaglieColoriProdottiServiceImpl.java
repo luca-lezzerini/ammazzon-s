@@ -16,7 +16,7 @@ public class AssociaTaglieColoriProdottiServiceImpl implements AssociaTaglieColo
     public ListaProdottiDto cercaProdotti(String criterioRic) {
         ListaProdottiDto dtoRes = new ListaProdottiDto();
         dtoRes.setListaProdotti(
-                prodottoRepository.trovaCodiceODescrizione(criterioRic));
+                prodottoRepository.trovaPerCodiceODescrizioneLike(criterioRic));
         return dtoRes;
     }
 

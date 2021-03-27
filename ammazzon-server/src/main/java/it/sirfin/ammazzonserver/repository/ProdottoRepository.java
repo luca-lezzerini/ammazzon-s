@@ -14,4 +14,9 @@ public interface ProdottoRepository extends JpaRepository<Prodotto, Long> {
     @Query("select p from Prodotto p where p.codice like concat ('%',:cod,'%') "
             + "or p.descrizione =:cod")
     List<Prodotto> trovaCodiceODescrizione(@Param("cod") String c);
+    
+    
+    @Query("select p from Prodotto p where p.descrizione like concat ('%',:cod,'%') "
+            + "or p.codice =:cod")
+    List<Prodotto> trovaPerCodiceODescrizioneLike(@Param("cod") String c);
 }
