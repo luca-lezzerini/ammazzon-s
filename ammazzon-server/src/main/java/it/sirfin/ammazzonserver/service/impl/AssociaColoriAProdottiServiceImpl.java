@@ -6,6 +6,9 @@
 package it.sirfin.ammazzonserver.service.impl;
 
 import it.sirfin.ammazzonserver.dto.ListaProdottiDto;
+import it.sirfin.ammazzonserver.dto.ListaProdottoColoriDto;
+import it.sirfin.ammazzonserver.model.Prodotto;
+import it.sirfin.ammazzonserver.repository.ProdottoColoreRepository;
 import it.sirfin.ammazzonserver.repository.ProdottoRepository;
 import it.sirfin.ammazzonserver.service.AssociaColoriAProdottiService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,6 +23,8 @@ public class AssociaColoriAProdottiServiceImpl implements AssociaColoriAProdotti
 
     @Autowired
     ProdottoRepository prodottoRepository;
+        @Autowired
+    ProdottoColoreRepository prodottoColoreRepository;
 
    
 
@@ -36,6 +41,11 @@ public class AssociaColoriAProdottiServiceImpl implements AssociaColoriAProdotti
             return aggiornaProdotti();
         }
         return new ListaProdottiDto(prodottoRepository.trovaCodiceODescrizione(c));
+    }
+
+    @Override
+    public ListaProdottoColoriDto selezionaProdotto(Prodotto prodotto) {
+        return new ListaProdottoColoriDto(prodottoColoreRepository.selezionaProdotto(prodotto));
     }
 
  

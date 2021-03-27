@@ -4,10 +4,10 @@
     {{messaggioErrore}}
     <br>
 </div>
-<h3>Elenco prodotti</h3>
 <br><br>
-<div class="tabella">
-    <table *ngIf="prodotti.length>0">
+<div class="tabella" *ngIf="prodotti.length>0" >
+    <h3>Elenco prodotti</h3>
+    <table >
         <tr>
             <th>Codice</th>
             <th>Descrizione</th>
@@ -23,10 +23,10 @@
         </tr>
     </table>
 </div>
-<div>
+<div *ngIf="associazione">
     <h3>Colori già associati</h3>
     <br><br>
-    <table>
+    <table *ngIf="  coloriAssociati.length > 0">
         <tr>
             <th>Descrizione Colore</th>
             <th>Descrizione Prodotto</th>
@@ -38,7 +38,23 @@
         </tr>
     </table>
 </div>
-<div>
+<br><br>
+<div *ngIf="associazione">
     <button (click)="associaTutti()">Associa Tutti i Colori</button>
     <button (click)="disassociaTutti()">Disassocia Tutti i Colori</button>
 </div>
+<br><br>
+<table *ngIf="associazione && elencoColoriNonAssociati.length > 0">
+    <tr>
+        <th>Codice</th>
+        <th>Descrizione</th>
+        <th>Seleziona</th>
+    </tr>
+    <tr *ngFor="let vc of elencoColoriNonAssociati">
+        <td>{{vc.codice}}</td>
+        <td>{{vc.descrizione}}</td>
+        <td>
+            <button (click)="associaColore(vc)">Associa Colore</button>
+        </td>
+    </tr>
+</table>

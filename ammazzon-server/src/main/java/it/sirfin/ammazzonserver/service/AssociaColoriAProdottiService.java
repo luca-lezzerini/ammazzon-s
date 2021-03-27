@@ -6,6 +6,8 @@
 package it.sirfin.ammazzonserver.service;
 
 import it.sirfin.ammazzonserver.dto.ListaProdottiDto;
+import it.sirfin.ammazzonserver.dto.ListaProdottoColoriDto;
+import it.sirfin.ammazzonserver.model.Prodotto;
 
 /**
  *
@@ -17,4 +19,5 @@ public interface AssociaColoriAProdottiService {
 
     ListaProdottiDto aggiornaProdotti();
 
+    ListaProdottoColoriDto selezionaProdotto(Prodotto prodotto);
 }
