@@ -1,6 +1,9 @@
 import { HttpClient} from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { Automa } from '../automa-crud/automa';
+import { ColoreTaglia } from '../entità/colore-taglia';
+import { Prodotto } from '../entità/prodotto';
+import { ProdottoColore } from '../entità/prodotto-colore';
 
 @Component({
   selector: 'app-associa-taglie-prodotti-colori',
@@ -11,11 +14,20 @@ export class AssociaTaglieProdottiColoriComponent implements OnInit {
 
   constructor(private http:HttpClient) { }
 
-  automa: Automa;
+  prodotto = new Prodotto();
+  prodotti: Prodotto[]=[]
+  prodottiColore: ProdottoColore[] = [];
+  coloriTaglie : ColoreTaglia[] = [];
+
+  
 
   ngOnInit(): void {
   }
 
   cerca(){}
+  selezionaProdotto(){}
+  selezionaProdottoColore(){}
+  rimuoviTagliaProdotto(){}
+
    
 }
