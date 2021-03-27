@@ -7,7 +7,7 @@
 <h3>Elenco prodotti</h3>
 <br><br>
 <div class="tabella">
-    <table>
+    <table *ngIf="prodotti.length>0">
         <tr>
             <th>Codice</th>
             <th>Descrizione</th>
