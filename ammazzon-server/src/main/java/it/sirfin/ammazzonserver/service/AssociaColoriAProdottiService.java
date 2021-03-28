@@ -19,5 +19,5 @@ public interface AssociaColoriAProdottiService {
 
     ListaProdottiDto aggiornaProdotti();
 
-    ListaProdottoColoriDto selezionaProdotto(Prodotto prodotto);
+    ListaProdottoColoriDto selezionaProdotto(Long id);
 }

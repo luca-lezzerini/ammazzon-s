@@ -28,7 +28,7 @@ public interface ProdottoColoreRepository extends JpaRepository<ProdottoColore, 
 
     //Query non funzionante per il momento
     @Query("SELECT pc FROM ProdottoColore pc WHERE pc.prodotto.id = :p")
-    List<ProdottoColore> selezionaProdotto(@Param("p") Prodotto p);
+    List<ProdottoColore> selezionaProdotto(@Param("p") Long id);
 
     //Prova così
     @Query("SELECT pc FROM ProdottoColore pc WHERE pc.prodotto.id = :p")

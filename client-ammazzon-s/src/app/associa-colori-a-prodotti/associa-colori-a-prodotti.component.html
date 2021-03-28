@@ -52,13 +52,13 @@
         </tr>
     </table>
 </div>
-<div *ngIf="associazione">
+<br>
+<div *ngIf="  coloriAssociati.length > 0">
     <h3>Colori già associati</h3>
-    <br><br>
-    <table *ngIf="  coloriAssociati.length > 0">
+    <table >
         <tr>
-            <th>Descrizione Colore</th>
-            <th>Descrizione Prodotto</th>
+            <th>Colore</th>
+            <th>Prodotto</th>
         </tr>
         <tr *ngFor="let c of coloriAssociati">
             <td>{{c.varianteColore.descrizione}}</td>

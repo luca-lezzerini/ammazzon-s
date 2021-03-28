@@ -40,8 +40,6 @@ public class AssociaColoriAProdottiController {
     @RequestMapping ("seleziona-prodotto")
     @ResponseBody
     public ListaProdottoColoriDto selezionaProdotto (@RequestBody ProdottoDto dto){
-        return associaColoriAProdottiService.selezionaProdotto(dto.getProdotto());
+        return associaColoriAProdottiService.selezionaProdotto(dto.getProdotto().getId());
     }
-
- 
 }

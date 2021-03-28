@@ -44,8 +44,9 @@ public class AssociaColoriAProdottiServiceImpl implements AssociaColoriAProdotti
     }
 
     @Override
-    public ListaProdottoColoriDto selezionaProdotto(Prodotto prodotto) {
-        return new ListaProdottoColoriDto(prodottoColoreRepository.selezionaProdotto(prodotto));
+    public ListaProdottoColoriDto selezionaProdotto(Long id) {
+        
+        return new ListaProdottoColoriDto(prodottoColoreRepository.selezionaProdotto(id));
     }
 
  
