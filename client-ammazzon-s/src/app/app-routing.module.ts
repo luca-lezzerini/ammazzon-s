@@ -6,12 +6,13 @@ import { AnagraficaUtenteRegistratoComponent } from './anagrafica-utente-registr
 import { AssociaTaglieProdottiColoriComponent } from './associa-taglie-prodotti-colori/associa-taglie-prodotti-colori.component';
 import { AssociaColoriAProdottiComponent } from './associa-colori-a-prodotti/associa-colori-a-prodotti.component';
 import { HomePageComponent } from './home-page/home-page.component';
+import { UserInterfaceComponent } from './user-interface/user-interface.component';
 
 const routes: Routes = [
   { path: 'app-home-page', component: HomePageComponent },
 
   { path: '', redirectTo: '/app-home-page', pathMatch: 'full' },
-  { path: '', redirectTo: '/app-user-interface', pathMatch: 'full' },
+  { path: 'app-user-interface', component: UserInterfaceComponent },
   { path: 'app-anagrafica-taglia', component: AnagraficaTagliaComponent },
   { path: 'app-anagrafica-colori-galli', component: AnagraficaColoriGalliComponent },
   { path: 'app-anagrafica-utente-registrato', component: AnagraficaUtenteRegistratoComponent },
