@@ -1,8 +1,9 @@
 package it.sirfin.ammazzonserver.controller;
 
-import it.sirfin.ammazzonserver.dto.ListaColoriDto;
+import it.sirfin.ammazzonserver.dto.ListaColoreTagliaDto;
 import it.sirfin.ammazzonserver.dto.ListaProdottiDto;
 import it.sirfin.ammazzonserver.dto.ListaProdottoColoriDto;
+import it.sirfin.ammazzonserver.dto.ProdottoColoreDto;
 import it.sirfin.ammazzonserver.dto.ProdottoDto;
 import it.sirfin.ammazzonserver.dto.RicercaStringaReqDto;
 import it.sirfin.ammazzonserver.service.AssociaTaglieColoriProdottiService;
@@ -31,6 +32,13 @@ public class AssociaTaglieColoriProdottiController {
     ListaProdottoColoriDto cercaColoriAssociatiProdotto(@RequestBody ProdottoDto dto){
         return associaTaglieColoriProdottiService
                 .coloriAssociatiProdotto(dto.getProdotto().getId());
+    }
+    
+    @RequestMapping("cerca-ColoreTaglia-associati-prodottoColore")
+    @ResponseBody
+    ListaColoreTagliaDto coloriTaglieAssociateProdottoColore(@RequestBody ProdottoColoreDto dto){
+        return associaTaglieColoriProdottiService
+                .coloriTaglieAssociateProdottoColore(dto.getProdottoColore().getId());
     }
     
     

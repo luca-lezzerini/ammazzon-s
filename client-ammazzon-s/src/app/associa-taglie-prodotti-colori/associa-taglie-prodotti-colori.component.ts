@@ -1,8 +1,10 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
+import { ListaColoreTagliaDto } from '../dto/Lista-colore-taglia-dto';
 import { ListaColoriDto } from '../dto/lista-colori-dto';
 import { ListaProdottiDto } from '../dto/lista-prodotti-dto';
 import { ListaProdottoColoriDto } from '../dto/lista-prodotto-colori-dto';
+import { ProdottoColoreDto } from '../dto/prodotto-colore-dto';
 import { ProdottoDto } from '../dto/prodotto-dto';
 import { RicercaStringaReqDto } from '../dto/ricerca-stringa-req-dto';
 import { ColoreTaglia } from '../entità/colore-taglia';
@@ -21,6 +23,7 @@ export class AssociaTaglieProdottiColoriComponent implements OnInit {
 
   criterioRicerca = "";
   prodottoSelezionato = new Prodotto();
+  prodottoColoreSelezionato = new ProdottoColore();
   prodotti: Prodotto[] = []
   prodottiColore: ProdottoColore[] = [];
   coloriTaglie: ColoreTaglia[] = [];
@@ -36,18 +39,11 @@ export class AssociaTaglieProdottiColoriComponent implements OnInit {
     this.http.post<ListaProdottiDto>("http://localhost:8080/cerca-prodotti-codice-esatto-descrizione-like", dto)
       .subscribe(l => {
         this.prodotti = l.listaProdotti;
+        this.prodottiColore = [];
+        this.coloriTaglie = [];
       });
   }
-  // selezionaProdotto(p: Prodotto) {
-  //   this.prodottoSelezionato = p;
-  //   let dto = new ProdottoDto();
-  //   dto.prodotto = p;
-  //   console.log("id prodotto selezionato: ", dto.prodotto.id);
-  //   this.http.post<ListaColoriDto>("http://localhost:8080/cerca-colori-associati-prodotto", dto)
-  //     .subscribe(lc => {
-  //       this.colori = lc.variantiColori;
-  //     });
-  // }
+
   selezionaProdotto(p: Prodotto) {
     this.prodottoSelezionato = p;
     let dto = new ProdottoDto();
@@ -59,9 +55,18 @@ export class AssociaTaglieProdottiColoriComponent implements OnInit {
           this.prodottiColore = lc.listaProdottoColori;
         } 
         console.log(lc)
+        this.coloriTaglie = [];
       });
   }
-  selezionaProdottoColore() { }
+  selezionaProdottoColore(pc: ProdottoColore) {
+    this.prodottoColoreSelezionato = pc;
+    let dto = new ProdottoColoreDto();
+    dto.prodottoColore = pc;
+    this.http.post<ListaColoreTagliaDto>("http://localhost:8080/cerca-ColoreTaglia-associati-prodottoColore", dto)
+    .subscribe(ct =>{
+      this.coloriTaglie = pc.coloriTaglie;
+    });
+   }
   rimuoviTagliaProdotto() { }
 
 

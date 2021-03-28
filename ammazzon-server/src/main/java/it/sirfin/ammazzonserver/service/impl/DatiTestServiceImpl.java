@@ -209,9 +209,9 @@ public class DatiTestServiceImpl implements DatiTestService {
         int tShirtBlu = prodottoColoreRepository.prodottoColore("blu", "t-shirt").size();
         int tShirtGiallo = prodottoColoreRepository.prodottoColore("giallo", "t-shirt").size();
         
-        int cappelliRossi = prodottoColoreRepository.prodottoColore("rosso", "cappelli").size();
-        int cappelliBlu = prodottoColoreRepository.prodottoColore("blu", "cappelli").size();
-        int cappelliGialli = prodottoColoreRepository.prodottoColore("giallo", "cappelli").size();
+        int cappelliRossi = prodottoColoreRepository.prodottoColore("rosso", "cappello").size();
+        int cappelliBlu = prodottoColoreRepository.prodottoColore("blu", "cappello").size();
+        int cappelliGialli = prodottoColoreRepository.prodottoColore("giallo", "cappello").size();
         
         System.out.println("numero Pantaloni creati = " + contatore1);
         System.out.println("\t numero Pantaloni rossi: " + pantaloniRossi);
