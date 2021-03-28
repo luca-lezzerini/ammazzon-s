@@ -13,7 +13,7 @@ public interface VarianteColoreRepository extends JpaRepository<VarianteColore, 
     //ListaColoriDto findByCodiceContains(String c);
     @Query("select c from VarianteColore c where c.codice =:criterio")
     List<VarianteColore> trovaCodice(@Param("criterio") String criterio);
-    
+
     
 //     @Query("select c from Cassiera c where c.nome LIKE CONCAT('%',:cogn,'%') "
 //            + "or c.cognome LIKE CONCAT('%',:cogn,'%') or c.codiceFiscale"

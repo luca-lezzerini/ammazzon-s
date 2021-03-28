@@ -1,12 +1,14 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
-import { Automa } from '../automa-crud/automa';
+import { ListaColoriDto } from '../dto/lista-colori-dto';
 import { ListaProdottiDto } from '../dto/lista-prodotti-dto';
-import { RicercaColoreDto } from '../dto/ricerca-colore-dto';
+import { ListaProdottoColoriDto } from '../dto/lista-prodotto-colori-dto';
+import { ProdottoDto } from '../dto/prodotto-dto';
 import { RicercaStringaReqDto } from '../dto/ricerca-stringa-req-dto';
 import { ColoreTaglia } from '../entità/colore-taglia';
 import { Prodotto } from '../entità/prodotto';
 import { ProdottoColore } from '../entità/prodotto-colore';
+import { VarianteColore } from '../entità/variante-colore';
 
 @Component({
   selector: 'app-associa-taglie-prodotti-colori',
@@ -18,7 +20,7 @@ export class AssociaTaglieProdottiColoriComponent implements OnInit {
   constructor(private http: HttpClient) { }
 
   criterioRicerca = "";
-  prodotto = new Prodotto();
+  prodottoSelezionato = new Prodotto();
   prodotti: Prodotto[] = []
   prodottiColore: ProdottoColore[] = [];
   coloriTaglie: ColoreTaglia[] = [];
@@ -36,7 +38,29 @@ export class AssociaTaglieProdottiColoriComponent implements OnInit {
         this.prodotti = l.listaProdotti;
       });
   }
-  selezionaProdotto() { }
+  // selezionaProdotto(p: Prodotto) {
+  //   this.prodottoSelezionato = p;
+  //   let dto = new ProdottoDto();
+  //   dto.prodotto = p;
+  //   console.log("id prodotto selezionato: ", dto.prodotto.id);
+  //   this.http.post<ListaColoriDto>("http://localhost:8080/cerca-colori-associati-prodotto", dto)
+  //     .subscribe(lc => {
+  //       this.colori = lc.variantiColori;
+  //     });
+  // }
+  selezionaProdotto(p: Prodotto) {
+    this.prodottoSelezionato = p;
+    let dto = new ProdottoDto();
+    dto.prodotto = p;
+    console.log("id prodotto selezionato: ", dto.prodotto.id);
+    this.http.post<ListaProdottoColoriDto>("http://localhost:8080/cerca-colori-associati-prodotto", dto)
+      .subscribe(lc => {
+        if (lc.listaProdottoColori) {
+          this.prodottiColore = lc.listaProdottoColori;
+        } 
+        console.log(lc)
+      });
+  }
   selezionaProdottoColore() { }
   rimuoviTagliaProdotto() { }
 

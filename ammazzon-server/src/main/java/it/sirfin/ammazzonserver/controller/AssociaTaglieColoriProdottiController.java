@@ -1,6 +1,9 @@
 package it.sirfin.ammazzonserver.controller;
 
+import it.sirfin.ammazzonserver.dto.ListaColoriDto;
 import it.sirfin.ammazzonserver.dto.ListaProdottiDto;
+import it.sirfin.ammazzonserver.dto.ListaProdottoColoriDto;
+import it.sirfin.ammazzonserver.dto.ProdottoDto;
 import it.sirfin.ammazzonserver.dto.RicercaStringaReqDto;
 import it.sirfin.ammazzonserver.service.AssociaTaglieColoriProdottiService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,4 +25,13 @@ public class AssociaTaglieColoriProdottiController {
         return associaTaglieColoriProdottiService
                 .cercaProdotti(dto.getCriterioRicerca());
     }
+    
+    @RequestMapping("cerca-colori-associati-prodotto")
+    @ResponseBody
+    ListaProdottoColoriDto cercaColoriAssociatiProdotto(@RequestBody ProdottoDto dto){
+        return associaTaglieColoriProdottiService
+                .coloriAssociatiProdotto(dto.getProdotto().getId());
+    }
+    
+    
 }
