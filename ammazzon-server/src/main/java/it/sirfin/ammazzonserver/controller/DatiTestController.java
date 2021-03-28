@@ -35,12 +35,12 @@ public class DatiTestController {
 
     @RequestMapping("query-test3")
     void queryTest3() {
-        throw new UnsupportedOperationException();
+        datiTestService.queryTest3();
     }
 
     @RequestMapping("query-test4")
     void queryTest4() {
-        throw new UnsupportedOperationException();
+        datiTestService.queryTest4();
     }
 
 }

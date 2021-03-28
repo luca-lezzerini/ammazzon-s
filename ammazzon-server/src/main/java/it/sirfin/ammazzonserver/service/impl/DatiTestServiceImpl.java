@@ -16,9 +16,8 @@ import it.sirfin.ammazzonserver.repository.UtenteRegistratoRepository;
 import it.sirfin.ammazzonserver.repository.VarianteColoreRepository;
 import it.sirfin.ammazzonserver.repository.VarianteTagliaRepository;
 import it.sirfin.ammazzonserver.service.DatiTestService;
-import static java.lang.Long.max;
-import static java.lang.Long.min;
 import java.text.DecimalFormat;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.ThreadLocalRandom;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -85,6 +84,7 @@ public class DatiTestServiceImpl implements DatiTestService {
         ///////////creazione 1000 prodotti////////
         Prodotto p = new Prodotto();
         int limite = 100;
+        //i contatori contano quanti prodotti sono stati creati per ogni categoria
         int contatore1 = 0;
         int contatore2 = 0;
         int contatore3 = 0;
@@ -100,17 +100,26 @@ public class DatiTestServiceImpl implements DatiTestService {
             p = prodottoRepository.save(p);
             System.out.println("id " + p.getCodice() + " = " + p.getId());
             //Prodotti con id % 3 == 0 -> 1 colore e 2 taglie
-            //genera 34 pantaloni blu con taglie disponibili S o M
+            //genera 34 pantaloni con colore casuale con taglie disponibili S o M
             if (i % 3 == 0) {
                 contatore1++;
                 p.setDescrizione("PANTALONE");
                 //Ottengo un pantalone con colore casuale
                 ProdottoColore pantaloneColoreCasuale = associaProdottoColore(p, ColoreCasuale());
-                //pantalone/ColoreCasuale/S
-                associaProdottoColoreTaglia(pantaloneColoreCasuale, tagliaS);
-                //pantalone/ColoreCasuale/M
-                associaProdottoColoreTaglia(pantaloneColoreCasuale, tagliaM);
-                //Prodotti con id % 3 == 1 -> 1 colore e tre taglie 
+
+                //Genero 2 taglie casuali
+                List<VarianteTaglia> taglieCasuali = generaTaglieCasuali(2);
+                //prendo la prima taglia casuale, la associo e la consumo(cancello
+                //nell'arraylist)
+                VarianteTaglia tagliaCasuale = taglieCasuali.get(0);
+                associaProdottoColoreTaglia(pantaloneColoreCasuale, tagliaCasuale);
+                taglieCasuali.remove(tagliaCasuale);
+
+                //prendo la prima taglia casuale, la associo e la consumo(cancello
+                //nell'arraylist)
+                tagliaCasuale = taglieCasuali.get(0);
+                associaProdottoColoreTaglia(pantaloneColoreCasuale, tagliaCasuale);
+                taglieCasuali.remove(tagliaCasuale);
             }
 
             //Prodotti con id % 3 == 1 -> 1 colore e tre taglie
@@ -120,12 +129,21 @@ public class DatiTestServiceImpl implements DatiTestService {
                 p.setDescrizione("T-SHIRT");
                 //Ottengo una t-shirt con colore casuale
                 ProdottoColore tShirtColoreCasuale = associaProdottoColore(p, ColoreCasuale());
-                //t-shirt/ColoreCasuale/S
-                associaProdottoColoreTaglia(tShirtColoreCasuale, tagliaS);
-                //t-shirt/ColoreCasuale/M
-                associaProdottoColoreTaglia(tShirtColoreCasuale, tagliaM);
-                //t-shirt/ColoreCasuale/L
-                associaProdottoColoreTaglia(tShirtColoreCasuale, tagliaL);
+                //Genero 3 taglie casuali
+                List<VarianteTaglia> taglieCasuali = generaTaglieCasuali(3);
+                //prendo la prima taglia casuale, la associo e la consumo(cancello
+                //nell'arraylist)
+                VarianteTaglia tagliaCasuale = taglieCasuali.get(0);
+                associaProdottoColoreTaglia(tShirtColoreCasuale, tagliaCasuale);
+                taglieCasuali.remove(tagliaCasuale);
+
+                tagliaCasuale = taglieCasuali.get(0);
+                associaProdottoColoreTaglia(tShirtColoreCasuale, tagliaCasuale);
+                taglieCasuali.remove(tagliaCasuale);
+
+                tagliaCasuale = taglieCasuali.get(0);
+                associaProdottoColoreTaglia(tShirtColoreCasuale, tagliaCasuale);
+                taglieCasuali.remove(tagliaCasuale);
             }
 
             //Prodotti con id % 3 == 2 -> 2 colori e tre taglie per colore
@@ -134,28 +152,82 @@ public class DatiTestServiceImpl implements DatiTestService {
             if (i % 3 == 2) {
                 contatore3++;
                 p.setDescrizione("CAPPELLO");
-                //Ottengo un cappello rosso
-                ProdottoColore cappelloRosso = associaProdottoColore(p, vcRosso);
-                //cappello/rosso/S
-                associaProdottoColoreTaglia(cappelloRosso, tagliaS);
-                //cappello/rosso/M
-                associaProdottoColoreTaglia(cappelloRosso, tagliaM);
-                //cappello/rosso/L
-                associaProdottoColoreTaglia(cappelloRosso, tagliaL);
+                //Genero 2 colori casuali
+                List<VarianteColore> coloriCasuali = generaColoriCasuali(2);
+                //prendo il primo colore casuale, lo associo e lo consumo(cancello
+                //nell'arraylist)
+                VarianteColore coloreCasuale = coloriCasuali.get(0);
+                ProdottoColore cappellocoloreCasuale = associaProdottoColore(p, coloreCasuale);
+                coloriCasuali.remove(coloreCasuale);
 
-                //Ottengo un cappello giallo
-                ProdottoColore cappelloGiallo = associaProdottoColore(p, vcGiallo);
+                //genero 3 taglie casuali
+                List<VarianteTaglia> taglieCasuali = generaTaglieCasuali(3);
+                //prendo la prima taglia casuale, la associo e la consumo(cancello
+                //nell'arraylist)
+                VarianteTaglia tagliaCasuale = taglieCasuali.get(0);
+                associaProdottoColoreTaglia(cappellocoloreCasuale, tagliaCasuale);
+                taglieCasuali.remove(tagliaCasuale);
+
+                tagliaCasuale = taglieCasuali.get(0);
+                associaProdottoColoreTaglia(cappellocoloreCasuale, tagliaCasuale);
+                taglieCasuali.remove(tagliaCasuale);
+
+                tagliaCasuale = taglieCasuali.get(0);
+                associaProdottoColoreTaglia(cappellocoloreCasuale, tagliaCasuale);
+                taglieCasuali.remove(tagliaCasuale);
+
+                //prendo il primo colore casuale, lo associo e lo consumo(cancello
+                //nell'arraylist)
+                coloreCasuale = coloriCasuali.get(0);
+                ProdottoColore cappellocoloreCasuale2 = associaProdottoColore(p, coloreCasuale);
+                coloriCasuali.remove(coloreCasuale);
+
+                //genero 3 taglie casuali
+                List<VarianteTaglia> taglieCasuali2 = generaTaglieCasuali(3);
+                //prendo la prima taglia casuale, la associo e la consumo(cancello
+                //nell'arraylist)
                 //cappello/Giallo/S
-                associaProdottoColoreTaglia(cappelloGiallo, tagliaS);
-                //cappello/Giallo/M
-                associaProdottoColoreTaglia(cappelloGiallo, tagliaM);
-                //cappello/Giallo/L
-                associaProdottoColoreTaglia(cappelloGiallo, tagliaL);
+                VarianteTaglia tagliaCasuale2 = taglieCasuali2.get(0);
+                associaProdottoColoreTaglia(cappellocoloreCasuale2, tagliaCasuale2);
+                taglieCasuali2.remove(tagliaCasuale2);
+
+                tagliaCasuale2 = taglieCasuali2.get(0);
+                associaProdottoColoreTaglia(cappellocoloreCasuale2, tagliaCasuale2);
+                taglieCasuali2.remove(tagliaCasuale2);
+
+                tagliaCasuale2 = taglieCasuali2.get(0);
+                associaProdottoColoreTaglia(cappellocoloreCasuale2, tagliaCasuale2);
+                taglieCasuali2.remove(tagliaCasuale2);
             }
         }
+        //Queries per numero di prodotti/colore trovati
+        int pantaloniRossi = prodottoColoreRepository.prodottoColore("rosso", "pantalone").size();
+        int pantaloniBlu = prodottoColoreRepository.prodottoColore("blu", "pantalone").size();
+        int pantaloniGialli = prodottoColoreRepository.prodottoColore("giallo", "pantalone").size();
+        
+        int tShirtRosse = prodottoColoreRepository.prodottoColore("rosso", "t-shirt").size();
+        int tShirtBlu = prodottoColoreRepository.prodottoColore("blu", "t-shirt").size();
+        int tShirtGiallo = prodottoColoreRepository.prodottoColore("giallo", "t-shirt").size();
+        
+        int cappelliRossi = prodottoColoreRepository.prodottoColore("rosso", "cappelli").size();
+        int cappelliBlu = prodottoColoreRepository.prodottoColore("blu", "cappelli").size();
+        int cappelliGialli = prodottoColoreRepository.prodottoColore("giallo", "cappelli").size();
+        
         System.out.println("numero Pantaloni creati = " + contatore1);
+        System.out.println("\t numero Pantaloni rossi: " + pantaloniRossi);
+        System.out.println("\t numero Pantaloni blu: " + pantaloniBlu);
+        System.out.println("\t numero Pantaloni gialli: " + pantaloniGialli);
+
         System.out.println("numero t-shirt create = " + contatore2);
+        System.out.println("\t numero t-shirt rossi: " + tShirtRosse);
+        System.out.println("\t numero t-shirt blu: " + tShirtBlu);
+        System.out.println("\t numero t-shirt gialli: " + tShirtGiallo);
+        
         System.out.println("numero cappelli creati = " + contatore3);
+        System.out.println("\t numero cappelli rossi: " + cappelliRossi);
+        System.out.println("\t numero cappelli blu: " + cappelliBlu);
+        System.out.println("\t numero cappelli gialli: " + cappelliGialli);
+        
         System.out.println("totale prodotti creati su DB = " + prodottoRepository.findAll().size());
     }
 
@@ -215,7 +287,26 @@ public class DatiTestServiceImpl implements DatiTestService {
 
     @Override
     public void queryTest3() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        System.out.println("GENERO 2 COLORI CASUALI");
+        List<VarianteColore> coloriCasuali = generaColoriCasuali(2);
+        coloriCasuali.forEach(cc -> {
+            System.out.println(cc.getDescrizione());
+        });
+        System.out.println("GENERO 1 COLORI CASUALI");
+        List<VarianteColore> coloriCasuali1 = generaColoriCasuali(1);
+        coloriCasuali1.forEach(cc -> {
+            System.out.println(cc.getDescrizione());
+        });
+        System.out.println("GENERO 3 COLORI CASUALI");
+        List<VarianteColore> coloriCasuali3 = generaColoriCasuali(3);
+        coloriCasuali3.forEach(cc -> {
+            System.out.println(cc.getDescrizione());
+        });
+        System.out.println("PROVO A GENERARE 4 COLORI CASUALI");
+        List<VarianteColore> coloriCasuali4 = generaColoriCasuali(4);
+        coloriCasuali4.forEach(cc -> {
+            System.out.println(cc.getDescrizione());
+        });
     }
 
     @Override
@@ -277,7 +368,8 @@ public class DatiTestServiceImpl implements DatiTestService {
     }
 
     /**
-     *Genera un colore casuale tra quelli presenti su DB
+     * Genera un colore casuale tra quelli presenti su DB
+     *
      * @return VarianteColore
      */
     private VarianteColore ColoreCasuale() {
@@ -287,5 +379,58 @@ public class DatiTestServiceImpl implements DatiTestService {
         int randomNum = ThreadLocalRandom.current().nextInt(min, max + 1);
         VarianteColore coloreCasuale = colori.get(randomNum);
         return coloreCasuale;
+    }
+
+    /**
+     * Genera una quantità variabile di colori casuali, se quella quantità è
+     * maggiore uguale il totale colori su DB otteniamo tutti i colori presenti
+     * su DB
+     *
+     * @param num
+     * @return List<VarianteColore>
+     */
+    private List<VarianteColore> generaColoriCasuali(int num) {
+
+        List<VarianteColore> colori = varianteColoreRepository.findAll();
+        List<VarianteColore> coloriCasuali = new ArrayList<>();
+        if (colori.size() <= num) {
+            coloriCasuali = colori;
+        } else {
+            int max;
+            for (int i = 0; i < num; i++) {
+                max = colori.size() - 1;
+                int randomNum = ThreadLocalRandom.current().nextInt(0, max + 1);
+                VarianteColore coloreCasuale = colori.get(randomNum);
+                coloriCasuali.add(coloreCasuale);
+                colori.remove(coloreCasuale);
+            }
+        }
+        return coloriCasuali;
+    }
+
+    /**
+     * Genera una quantità variabile di talie casuali, se quella quantità è
+     * maggiore uguale il totale taglie su DB otteniamo tutte le taglie presenti
+     * su DB
+     *
+     * @param num
+     * @return List<VarianteTaglia>
+     */
+    private List<VarianteTaglia> generaTaglieCasuali(int num) {
+        List<VarianteTaglia> taglie = varianteTagliaRepository.findAll();
+        List<VarianteTaglia> taglieCasuali = new ArrayList<>();
+        if (taglie.size() <= num) {
+            taglieCasuali = taglie;
+        } else {
+            int max;
+            for (int i = 0; i < num; i++) {
+                max = taglie.size() - 1;
+                int randomNum = ThreadLocalRandom.current().nextInt(0, max + 1);
+                VarianteTaglia tagliaCasuale = taglie.get(randomNum);
+                taglieCasuali.add(tagliaCasuale);
+                taglie.remove(tagliaCasuale);
+            }
+        }
+        return taglieCasuali;
     }
 }

@@ -33,5 +33,14 @@ public interface ProdottoColoreRepository extends JpaRepository<ProdottoColore, 
     //Prova così
     @Query("SELECT pc FROM ProdottoColore pc WHERE pc.prodotto.id = :p")
     List<ProdottoColore> selezionaProdotto1(@Param("p") Long id);
-
+    
+/**
+ * trova tutti i prodotti di un dato colore
+ * @param nomeColore
+ * @param nomeProdotto
+ * @return 
+ */
+    @Query("SELECT pc FROM ProdottoColore pc WHERE pc.prodotto.descrizione = (?2)"
+            + "and pc.varianteColore.descrizione = (?1)")
+    List<ProdottoColore> prodottoColore(String nomeColore, String nomeProdotto);
 }
