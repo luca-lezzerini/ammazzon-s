@@ -5,4 +5,5 @@ export class UtenteRegistrato {
     password = "";
     codiceFiscale = "";
     tokenRegistrato: string;
+    
 }
