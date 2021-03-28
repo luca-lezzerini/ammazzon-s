@@ -34,9 +34,9 @@
     <br>
 </div>
 <br><br>
-<div class="tabella" *ngIf="prodotti.length>0" >
+<div class="tabella" *ngIf="prodotti.length>0">
     <h3>Elenco prodotti</h3>
-    <table >
+    <table>
         <tr>
             <th>Codice</th>
             <th>Descrizione</th>
@@ -55,12 +55,14 @@
 <br>
 <div *ngIf="  coloriAssociati.length > 0">
     <h3>Colori già associati</h3>
-    <table >
+    <table>
         <tr>
+            <th>Codice del colore</th>
             <th>Colore</th>
             <th>Prodotto</th>
         </tr>
         <tr *ngFor="let c of coloriAssociati">
+            <td>{{c.varianteColore.codice}}</td>
             <td>{{c.varianteColore.descrizione}}</td>
             <td>{{c.prodotto.descrizione}}</td>
             <td><button (click)="spostaNonAssociati(c)">></button></td>
@@ -73,17 +75,20 @@
     <button (click)="disassociaTutti()">Disassocia Tutti i Colori</button>
 </div>
 <br><br>
-<table *ngIf="associazione && elencoColoriNonAssociati.length > 0">
-    <tr>
-        <th>Codice</th>
-        <th>Descrizione</th>
-        <th>Seleziona</th>
-    </tr>
-    <tr *ngFor="let vc of elencoColoriNonAssociati">
-        <td>{{vc.codice}}</td>
-        <td>{{vc.descrizione}}</td>
-        <td>
-            <button (click)="associaColore(vc)">Associa Colore</button>
-        </td>
-    </tr>
-</table>
+<div>
+    <table *ngIf="elencoColoriNonAssociati.length > 0">
+    <h3>Colori non associati</h3>
+        <tr>
+            <th>Codice</th>
+            <th>Descrizione</th>
+            <th>Seleziona</th>
+        </tr>
+        <tr *ngFor="let vc of elencoColoriNonAssociati">
+            <td>{{vc.codice}}</td>
+            <td>{{vc.descrizione}}</td>
+            <td>
+                <button (click)="associaColore(vc)">Associa Colore</button>
+            </td>
+        </tr>
+    </table>
+</div>
