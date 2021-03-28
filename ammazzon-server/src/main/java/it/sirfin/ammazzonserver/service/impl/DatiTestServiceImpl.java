@@ -16,10 +16,11 @@ import it.sirfin.ammazzonserver.repository.UtenteRegistratoRepository;
 import it.sirfin.ammazzonserver.repository.VarianteColoreRepository;
 import it.sirfin.ammazzonserver.repository.VarianteTagliaRepository;
 import it.sirfin.ammazzonserver.service.DatiTestService;
+import static java.lang.Long.max;
+import static java.lang.Long.min;
 import java.text.DecimalFormat;
-
-import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.ThreadLocalRandom;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -103,12 +104,12 @@ public class DatiTestServiceImpl implements DatiTestService {
             if (i % 3 == 0) {
                 contatore1++;
                 p.setDescrizione("PANTALONE");
-                //Ottengo un pantalone Blu
-                ProdottoColore pantaloneBlu = associaProdottoColore(p, vcBlu);
-                //pantalone/blu/S
-                associaProdottoColoreTaglia(pantaloneBlu, tagliaS);
-                //pantalone/blu/M
-                associaProdottoColoreTaglia(pantaloneBlu, tagliaM);
+                //Ottengo un pantalone con colore casuale
+                ProdottoColore pantaloneColoreCasuale = associaProdottoColore(p, ColoreCasuale());
+                //pantalone/ColoreCasuale/S
+                associaProdottoColoreTaglia(pantaloneColoreCasuale, tagliaS);
+                //pantalone/ColoreCasuale/M
+                associaProdottoColoreTaglia(pantaloneColoreCasuale, tagliaM);
                 //Prodotti con id % 3 == 1 -> 1 colore e tre taglie 
             }
 
@@ -117,14 +118,14 @@ public class DatiTestServiceImpl implements DatiTestService {
             if (i % 3 == 1) {
                 contatore2++;
                 p.setDescrizione("T-SHIRT");
-                //Ottengo una t-shirt gialla
-                ProdottoColore tShirtGialla = associaProdottoColore(p, vcGiallo);
-                //t-shirt/gialla/S
-                associaProdottoColoreTaglia(tShirtGialla, tagliaS);
-                //t-shirt/gialla/M
-                associaProdottoColoreTaglia(tShirtGialla, tagliaM);
-                //t-shirt/gialla/L
-                associaProdottoColoreTaglia(tShirtGialla, tagliaL);
+                //Ottengo una t-shirt con colore casuale
+                ProdottoColore tShirtColoreCasuale = associaProdottoColore(p, ColoreCasuale());
+                //t-shirt/ColoreCasuale/S
+                associaProdottoColoreTaglia(tShirtColoreCasuale, tagliaS);
+                //t-shirt/ColoreCasuale/M
+                associaProdottoColoreTaglia(tShirtColoreCasuale, tagliaM);
+                //t-shirt/ColoreCasuale/L
+                associaProdottoColoreTaglia(tShirtColoreCasuale, tagliaL);
             }
 
             //Prodotti con id % 3 == 2 -> 2 colori e tre taglie per colore
@@ -275,4 +276,16 @@ public class DatiTestServiceImpl implements DatiTestService {
         return ct;
     }
 
+    /**
+     *Genera un colore casuale tra quelli presenti su DB
+     * @return VarianteColore
+     */
+    private VarianteColore ColoreCasuale() {
+        List<VarianteColore> colori = varianteColoreRepository.findAll();
+        int min = 0;
+        int max = colori.size() - 1;
+        int randomNum = ThreadLocalRandom.current().nextInt(min, max + 1);
+        VarianteColore coloreCasuale = colori.get(randomNum);
+        return coloreCasuale;
+    }
 }
