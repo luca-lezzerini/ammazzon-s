@@ -64,6 +64,7 @@ export class AssociaTaglieProdottiColoriComponent implements OnInit {
         } 
         console.log(lc)
         this.coloriTaglie = [];
+        this.taglieNonAssociate = [];
       });
   }
   selezionaProdottoColore(pc: ProdottoColore) {
