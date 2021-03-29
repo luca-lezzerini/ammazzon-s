@@ -80,6 +80,8 @@ public class DatiTestServiceImpl implements DatiTestService {
         tagliaM = varianteTagliaRepository.save(tagliaM);
         VarianteTaglia tagliaL = new VarianteTaglia("L");
         tagliaL = varianteTagliaRepository.save(tagliaL);
+        VarianteTaglia tagliaXL = new VarianteTaglia("XL");
+        tagliaL = varianteTagliaRepository.save(tagliaXL);
 
         ///////////creazione 1000 prodotti////////
         Prodotto p = new Prodotto();

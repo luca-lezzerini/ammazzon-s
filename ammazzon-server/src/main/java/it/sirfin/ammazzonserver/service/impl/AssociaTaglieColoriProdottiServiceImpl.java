@@ -12,6 +12,9 @@ import it.sirfin.ammazzonserver.repository.ProdottoRepository;
 import it.sirfin.ammazzonserver.repository.VarianteColoreRepository;
 import it.sirfin.ammazzonserver.repository.VarianteTagliaRepository;
 import it.sirfin.ammazzonserver.service.AssociaTaglieColoriProdottiService;
+import java.time.Duration;
+import java.time.Instant;
+import java.util.ArrayList;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -58,6 +61,11 @@ public class AssociaTaglieColoriProdottiServiceImpl implements AssociaTaglieColo
         ListaColoreTagliaDto dtoRes = new ListaColoreTagliaDto();
         List<ColoreTaglia> coloriTaglieAssociate = coloreTagliaRepository.taglieProdottoColore(id);
         List<VarianteTaglia> taglieNonAssociate = taglieNonAssociate(coloriTaglieAssociate);
+        //rimuovo colori taglie nel risultato per il client per velocizzare l'
+        //operazione
+        taglieNonAssociate.forEach(tna -> {
+            tna.setColoriTaglie(new ArrayList<>());
+        });
         dtoRes.setColoriTaglie(coloriTaglieAssociate);
         dtoRes.setNotColoriTaglie(taglieNonAssociate);
         dtoRes.getNotColoriTaglie().forEach(n -> {
@@ -74,6 +82,8 @@ public class AssociaTaglieColoriProdottiServiceImpl implements AssociaTaglieColo
      * @return
      */
     private List<VarianteTaglia> taglieNonAssociate(List<ColoreTaglia> coloriTaglieAssociate) {
+        Instant i = Instant.now();
+        System.out.println("");
         System.out.println("\n*************************************************");
         System.out.println("SIAMO IN TaglieNonAssociate()");
         List<VarianteTaglia> tutteLeTaglie = varianteTagliaRepository.findAll();
@@ -82,8 +92,10 @@ public class AssociaTaglieColoriProdottiServiceImpl implements AssociaTaglieColo
             tutteLeTaglie.remove(cta.getVarianteTaglia());
         });
         System.out.println("numero taglie dopo rimozione: " + tutteLeTaglie.size());
-        System.out.println("\n*************************************************");
         //ritorno tutte le taglie dopo aver rimosso quelle associate
+        Instant i2 = Instant.now();
+        System.out.println("durata operazine taglie non associate: " + Duration.between(i, i2).toMillis());
+        System.out.println("\n*************************************************");
         return tutteLeTaglie;
     }
 
