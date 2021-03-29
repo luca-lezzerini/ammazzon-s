@@ -91,9 +91,9 @@
         <tr>
             <th>Codice</th>
         </tr>
-        <tr *ngFor="let t of taglieNonAssociate">
-            <td>{{t.codice}}</td>
-            <td><button (click)="associaTagliaProdottoColore(t)">associa</button></td>
+        <tr *ngFor="let vt of taglieNonAssociate">
+            <td>{{vt.codice}}</td>
+            <td><button (click)="associaTagliaProdottoColore(vt)">associa</button></td>
         </tr>
     </table>
 </div>
