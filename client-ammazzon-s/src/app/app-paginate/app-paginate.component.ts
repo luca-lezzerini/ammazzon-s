@@ -37,7 +37,7 @@ export class AppPaginateComponent implements OnInit {
   onfirst() {
 
   }
-  onLast() {
+  onPrevious() {
 //this.totalPages, this.numPag -1;
   }
   onNext() {
