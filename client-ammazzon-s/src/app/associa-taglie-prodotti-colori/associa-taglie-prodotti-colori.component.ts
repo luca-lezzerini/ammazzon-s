@@ -4,9 +4,12 @@ import { ListaColoreTagliaDto } from '../dto/Lista-colore-taglia-dto';
 import { ListaColoriDto } from '../dto/lista-colori-dto';
 import { ListaProdottiDto } from '../dto/lista-prodotti-dto';
 import { ListaProdottoColoriDto } from '../dto/lista-prodotto-colori-dto';
+import { ListaTagliaProdottoDto } from '../dto/lista-taglia-prodotto-dto';
 import { ProdottoColoreDto } from '../dto/prodotto-colore-dto';
 import { ProdottoDto } from '../dto/prodotto-dto';
 import { RicercaStringaReqDto } from '../dto/ricerca-stringa-req-dto';
+import { RimuoviTagliaProdottoDto } from '../dto/rimuovi-taglia-prodotto-dto';
+import { TagliaDto } from '../dto/taglia-dto';
 import { ColoreTaglia } from '../entità/colore-taglia';
 import { Prodotto } from '../entità/prodotto';
 import { ProdottoColore } from '../entità/prodotto-colore';
@@ -24,6 +27,9 @@ export class AssociaTaglieProdottiColoriComponent implements OnInit {
   criterioRicerca = "";
   prodottoSelezionato = new Prodotto();
   prodottoColoreSelezionato = new ProdottoColore();
+  //colori taglie non associati a ProdottoColore
+  notColoriTaglie: ColoreTaglia[] = [];
+  rimuoviTaglieProdotti = new ColoreTaglia();
   prodotti: Prodotto[] = []
   prodottiColore: ProdottoColore[] = [];
   coloriTaglie: ColoreTaglia[] = [];
@@ -64,10 +70,23 @@ export class AssociaTaglieProdottiColoriComponent implements OnInit {
     dto.prodottoColore = pc;
     this.http.post<ListaColoreTagliaDto>("http://localhost:8080/cerca-ColoreTaglia-associati-prodottoColore", dto)
     .subscribe(ct =>{
-      this.coloriTaglie = pc.coloriTaglie;
+      this.coloriTaglie = ct.coloriTaglie;
+      this.notColoriTaglie = ct.notColoriTaglie;
+      console.log(this.notColoriTaglie);
     });
    }
-  rimuoviTagliaProdotto() { }
+
+  //rimuoviTagliaProdotto(ct : ColoreTaglia) { 
+  //this.rimuoviTaglieProdotti = ct;
+  //  let dto = new RimuoviTagliaProdottoDto();
+   // dto.coloriTaglie = ct;
+   // this.http.post<ListaTagliaProdottoDto>("http://localhost:8080/rimuovi-taglia-prodotti", dto)
+  //  .subscribe(a =>{
+   ///   this.coloriTaglie = ct.varianteTaglia;
+ //   });
 
 
-}
+  }
+
+
+

@@ -18,4 +18,10 @@ public interface ColoreTagliaRepository extends JpaRepository<ColoreTaglia, Long
     @Query("SELECT ct FROM ColoreTaglia ct WHERE "
             + "ct.prodottoColore.id = :id ")
     List<ColoreTaglia> taglieProdottoColore(@Param("id") Long id);
+    
+    @Query("SELECT ct FROM ColoreTaglia ct WHERE "
+            + "ct.prodottoColore.id != :id ")
+    List<ColoreTaglia> notTaglieProdottoColore(@Param("id") Long id);
+    
+    
 }
