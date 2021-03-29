@@ -4,6 +4,7 @@ import it.sirfin.ammazzonserver.dto.ListaColoreTagliaDto;
 import it.sirfin.ammazzonserver.dto.ListaProdottiDto;
 import it.sirfin.ammazzonserver.dto.ListaProdottoColoriDto;
 import it.sirfin.ammazzonserver.model.ColoreTaglia;
+import it.sirfin.ammazzonserver.model.Prodotto;
 import it.sirfin.ammazzonserver.model.ProdottoColore;
 import it.sirfin.ammazzonserver.model.VarianteTaglia;
 import it.sirfin.ammazzonserver.repository.ColoreTagliaRepository;
@@ -40,8 +41,11 @@ public class AssociaTaglieColoriProdottiServiceImpl implements AssociaTaglieColo
     @Override
     public ListaProdottiDto cercaProdotti(String criterioRic) {
         ListaProdottiDto dtoRes = new ListaProdottiDto();
-        dtoRes.setListaProdotti(
-                prodottoRepository.trovaPerCodiceODescrizioneLike(criterioRic));
+        List<Prodotto> prodotti = prodottoRepository.trovaPerCodiceODescrizioneLike(criterioRic);
+        prodotti.forEach(p -> {
+            p.setProdottiColori(new ArrayList<>());
+        });
+        dtoRes.setListaProdotti(prodotti);
         return dtoRes;
     }
 
@@ -73,6 +77,15 @@ public class AssociaTaglieColoriProdottiServiceImpl implements AssociaTaglieColo
         });
         return dtoRes;
     }
+
+    @Override
+    public ListaColoreTagliaDto disassociaTaglia(Long idColoreTaglia, Long idProdottoColore) {
+        System.out.println("\n\n\n idColoreTaglia: " + idColoreTaglia + "idProdottoColore: " + idProdottoColore);
+        coloreTagliaRepository.deleteById(idColoreTaglia);
+        return coloriTaglieAssociateProdottoColore(idProdottoColore);
+    }
+    
+    
 
     /**
      * Ottiene tutte le taglie non associate date, date tutte le taglie

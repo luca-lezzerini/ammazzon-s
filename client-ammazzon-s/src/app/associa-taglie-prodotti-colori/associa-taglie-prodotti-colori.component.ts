@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
+import { DisassociaTagliaRequestDto } from '../dto/disassocia-taglia-request-dto';
 import { ListaColoreTagliaDto } from '../dto/Lista-colore-taglia-dto';
 import { ListaColoriDto } from '../dto/lista-colori-dto';
 import { ListaProdottiDto } from '../dto/lista-prodotti-dto';
@@ -61,7 +62,7 @@ export class AssociaTaglieProdottiColoriComponent implements OnInit {
       .subscribe(lc => {
         if (lc.listaProdottoColori) {
           this.prodottiColore = lc.listaProdottoColori;
-        } 
+        }
         console.log(lc)
         this.coloriTaglie = [];
         this.taglieNonAssociate = [];
@@ -72,24 +73,29 @@ export class AssociaTaglieProdottiColoriComponent implements OnInit {
     let dto = new ProdottoColoreDto();
     dto.prodottoColore = pc;
     this.http.post<ListaColoreTagliaDto>("http://localhost:8080/cerca-ColoreTaglia-associati-prodottoColore", dto)
-    .subscribe(ct =>{
-      this.coloriTaglie = ct.coloriTaglie;
-      this.taglieNonAssociate = ct.notColoriTaglie;
-      console.log("taglie non associate: ", ct.notColoriTaglie);
-    });
-   }
-
-  //rimuoviTagliaProdotto(ct : ColoreTaglia) { 
-  //this.rimuoviTaglieProdotti = ct;
-  //  let dto = new RimuoviTagliaProdottoDto();
-   // dto.coloriTaglie = ct;
-   // this.http.post<ListaTagliaProdottoDto>("http://localhost:8080/rimuovi-taglia-prodotti", dto)
-  //  .subscribe(a =>{
-   ///   this.coloriTaglie = ct.varianteTaglia;
- //   });
-
-
+      .subscribe(ct => {
+        this.coloriTaglie = ct.coloriTaglie;
+        this.taglieNonAssociate = ct.notColoriTaglie;
+        console.log("taglie non associate: ", ct.notColoriTaglie);
+      });
   }
+
+  rimuoviTagliaProdotto(ct: ColoreTaglia) {
+    let dtoReq = new DisassociaTagliaRequestDto();
+    dtoReq.idProdottoColore = this.prodottoColoreSelezionato.id;
+    dtoReq.idColoreTaglia = ct.id
+    this.http.post<ListaColoreTagliaDto>("http://localhost:8080/disassocia-taglia", dtoReq)
+      .subscribe(ct => {
+        this.coloriTaglie = ct.coloriTaglie;
+        this.taglieNonAssociate = ct.notColoriTaglie;
+      });
+  }
+
+  associaTagliaProdottoColore() {
+    
+  }
+
+}
 
 
 

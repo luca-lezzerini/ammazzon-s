@@ -6,7 +6,6 @@ import { AddEvent, AnnullaEvent, ConfermaEvent, ModificaEvent, RicercaEvent, Rim
 import { ColoreDto } from '../dto/colore-dto';
 import { ListaColoriDto } from '../dto/lista-colori-dto';
 import { RicercaColoreOProdottoDto } from '../dto/ricerca-colore-o-prodotto-dto';
-import { VarianteColoreDto } from '../dto/variante-colore-dto';
 import { VarianteColore } from '../entità/variante-colore';
 
 @Component({
@@ -23,7 +22,7 @@ export class AnagraficaColoriGalliComponent implements OnInit, Automabile {
   inputRicerca = "";
   errore = "";
   url = "http://localhost:8080/";
-  contenitore= new VarianteColore();
+  contenitore = new VarianteColore();
 
   //Variabili di visualizzazione
   form: boolean;
@@ -59,7 +58,7 @@ export class AnagraficaColoriGalliComponent implements OnInit, Automabile {
     this.automa.next(new ConfermaEvent(), this.automa);
   }
   annulla() {
-    this.varianteColore= this.contenitore;
+    this.varianteColore = this.contenitore;
     console.log("Questo è il contenitore dentro annulla", this.contenitore);
     this.automa.next(new AnnullaEvent(), this.automa);
   }
@@ -171,25 +170,30 @@ export class AnagraficaColoriGalliComponent implements OnInit, Automabile {
   aggiornaRisultatiRicerca() {
     let stringa = new RicercaColoreOProdottoDto();
     stringa.criterioRicerca = this.inputRicerca;
-    if (this.inputRicerca == "") {
-      this.errore = "ERRORE! DEVI INSERIRE UN CRITERIO DI RICERCA PORCA ZZOZZA ";
+    if (this.inputRicerca == null) {
+      this.errore = "ERRORE! DEVI INSERIRE UN CRITERIO DI RICERCA PORCA ZOZZA ";
     } else {
       this.errore = "";
       this.http.post<ListaColoriDto>(this.url + "ricerca-colore", stringa)
         .subscribe(r => {
-          this.variantiColori = r.variantiColori;
-          this.inputRicerca = "";
+          if (r.variantiColori.length > 0) {
+            this.variantiColori = r.variantiColori;
+            this.inputRicerca = "";
+          } else {
+            this.errore = "Nessun elemento trovato";
+          }
+
         });
     }
   }
   ritornaColore(c: VarianteColore) {
     let dto = new ColoreDto();
     dto.varianteColore = c;
-    this.contenitore= c;
+    this.contenitore = c;
     this.http.post<ColoreDto>(this.url + "ritorna-colore", dto)
       .subscribe(r => {
         this.varianteColore = r.varianteColore;
-        console.log("contenitore dentro la lambda",this.contenitore);
+        console.log("contenitore dentro la lambda", this.contenitore);
       });
   }
 }
