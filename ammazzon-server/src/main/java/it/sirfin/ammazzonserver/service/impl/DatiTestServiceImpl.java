@@ -83,12 +83,12 @@ public class DatiTestServiceImpl implements DatiTestService {
 
         ///////////creazione 1000 prodotti////////
         Prodotto p = new Prodotto();
-        int limite = 1000;
+        int prodottiDaGenerare = 1000;
         //i contatori contano quanti prodotti sono stati creati per ogni categoria
         int contatore1 = 0;
         int contatore2 = 0;
         int contatore3 = 0;
-        for (int i = 0; i < limite; i++) {
+        for (int i = 0; i < prodottiDaGenerare; i++) {
 
             //Generazione prezzo casuale per prodotto con formattatore
             DecimalFormat formatter = new DecimalFormat("###,##");
