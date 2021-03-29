@@ -62,6 +62,7 @@ public class AssociaTaglieColoriProdottiServiceImpl implements AssociaTaglieColo
 
     @Override
     public ListaColoreTagliaDto coloriTaglieAssociateProdottoColore(Long id) {
+        System.out.println("siamo in  coloriTaglieAssociateProdottoColore");
         ListaColoreTagliaDto dtoRes = new ListaColoreTagliaDto();
         List<ColoreTaglia> coloriTaglieAssociate = coloreTagliaRepository.taglieProdottoColore(id);
         List<VarianteTaglia> taglieNonAssociate = taglieNonAssociate(coloriTaglieAssociate);
@@ -117,21 +118,20 @@ public class AssociaTaglieColoriProdottiServiceImpl implements AssociaTaglieColo
     }
 
     private ColoreTaglia associaProdottoColoreTaglia(ProdottoColore pc, VarianteTaglia vt) {
-        System.out.println("\n\nSiamo nel metodo di associazione pc/vt");
+        //recupero pc, vt
+        pc = prodottoColoreRepository.findById(pc.getId()).get();
+        vt = varianteTagliaRepository.findById(vt.getId()).get();
+        
         ColoreTaglia ct = new ColoreTaglia();
         ct = coloreTagliaRepository.save(ct);
-        System.out.println("sto per settare le associazioni per: " + ct.getId());
         ct.setProdottoColore(pc);
         ct.setVarianteTaglia(vt);
         ct = coloreTagliaRepository.save(ct);
         pc.getColoriTaglie().add(ct);
         vt.getColoriTaglie().add(ct);
-        System.out.println("Sto per salvare pc : " + pc.getId());
-        System.out.println("siamo alla riga: 131\n\n");
-        pc = prodottoColoreRepository.save(pc);
-        System.out.println("siamo alla riga: 133\n\n");
-        vt = varianteTagliaRepository.save(vt);
-        System.out.println("siamo alla riga: 135\n\n");
+        System.out.println("Sto per salvare pc : " + pc);
+        varianteTagliaRepository.save(vt);
+        prodottoColoreRepository.save(pc);
         return ct;
     }
 
