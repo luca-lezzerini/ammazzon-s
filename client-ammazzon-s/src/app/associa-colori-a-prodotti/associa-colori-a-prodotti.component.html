@@ -4,12 +4,10 @@
 <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Poppins">
 
-<nav class="w3-sidebar w3-red w3-collapse w3-top w3-large w3-padding" style="z-index:3;width:300px;font-weight:bold;"
-    id="mySidebar"><br>
-    <a href="javascript:void(0)" onclick="w3_close()" class="w3-button w3-hide-large w3-display-topleft"
-        style="width:100%;font-size:22px">Close Menu</a>
+<nav class="w3-sidebar w3-red w3-collapse w3-top w3-large w3-padding" style="z-index:3;width:300px;font-weight:bold;" id="mySidebar"><br>
+    <a href="javascript:void(0)" onclick="w3_close()" class="w3-button w3-hide-large w3-display-topleft" style="width:100%;font-size:22px">Close Menu</a>
     <div class="w3-container">
-        <h3 class="w3-padding-64"><b>Progammatori<br>Esperti</b></h3>
+        <h3 class="w3-padding-64"><b>Programmatori<br>Esperti</b></h3>
     </div>
     <div class="w3-bar-block">
         <a href="app-home-page" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-white">Home</a>
@@ -17,20 +15,16 @@
             class="w3-bar-item w3-button w3-hover-white">User-Interface</a>-->
         <a href="app-anagrafica-taglia" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-white">Anagrafica
             Taglia</a>
-        <a href="app-anagrafica-colori-galli" onclick="w3_close()"
-            class="w3-bar-item w3-button w3-hover-white">Anagrafica Colori</a>
-        <a href="app-anagrafica-utente-registrato" onclick="w3_close()"
-            class="w3-bar-item w3-button w3-hover-white">Anagrafica Utente Registrato</a>
-        <a href="app-associa-taglie-prodotti-colori" onclick="w3_close()"
-            class="w3-bar-item w3-button w3-hover-white">Associa Taglie Prodotti Colori</a>
+        <a href="app-anagrafica-colori-galli" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-white">Anagrafica Colori</a>
+        <a href="app-anagrafica-utente-registrato" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-white">Anagrafica Utente Registrato</a>
+        <a href="app-associa-taglie-prodotti-colori" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-white">Associa Taglie Prodotti Colori</a>
     </div>
 </nav>
 <br><br>
 
 <div class="w3-main" style="margin-left:340px;margin-right:40px">
     <input type="text" placeholder="Cerca il prodotto" [(ngModel)]="inputRicerca">&nbsp;
-    <button (click)="cerca()">Cerca</button>
-    {{messaggioErrore}}
+    <button (click)="cerca()">Cerca</button> {{messaggioErrore}}
     <br>
 </div>
 <br><br>
@@ -77,7 +71,7 @@
 <br><br>
 <div>
     <table *ngIf="elencoColoriNonAssociati.length > 0">
-    <h3>Colori non associati</h3>
+        <h3>Colori non associati</h3>
         <tr>
             <th>Codice</th>
             <th>Descrizione</th>
