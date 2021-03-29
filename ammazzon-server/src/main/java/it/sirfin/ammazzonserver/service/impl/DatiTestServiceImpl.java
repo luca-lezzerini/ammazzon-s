@@ -83,7 +83,7 @@ public class DatiTestServiceImpl implements DatiTestService {
 
         ///////////creazione 1000 prodotti////////
         Prodotto p = new Prodotto();
-        int limite = 100;
+        int limite = 1000;
         //i contatori contano quanti prodotti sono stati creati per ogni categoria
         int contatore1 = 0;
         int contatore2 = 0;
