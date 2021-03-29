@@ -62,10 +62,9 @@ public class AssociaTaglieColoriProdottiController {
     @RequestMapping("associa-taglia")
     @ResponseBody
     ListaColoreTagliaDto associaTaglia(@RequestBody AssociaTagliaRequestDto dtoReq) {
-        System.out.println("\n\nProdottoColore: " + dtoReq.getPc());
-        System.out.println("VarianteTaglia: " + dtoReq.getVt() + "\n\n");
         ListaColoreTagliaDto dtoRes = associaTaglieColoriProdottiService
                 .associaTaglia(dtoReq.getPc(), dtoReq.getVt());
+        System.out.println("Ritorna dtoRes da associaTaglia");
         return dtoRes;
     }
     

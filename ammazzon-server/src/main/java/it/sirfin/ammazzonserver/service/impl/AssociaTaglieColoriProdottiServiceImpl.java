@@ -119,6 +119,7 @@ public class AssociaTaglieColoriProdottiServiceImpl implements AssociaTaglieColo
 
     private ColoreTaglia associaProdottoColoreTaglia(ProdottoColore pc, VarianteTaglia vt) {
         //recupero pc, vt
+        System.out.println("siamo in associaProdottoColoreTaglia");
         pc = prodottoColoreRepository.findById(pc.getId()).get();
         vt = varianteTagliaRepository.findById(vt.getId()).get();
         

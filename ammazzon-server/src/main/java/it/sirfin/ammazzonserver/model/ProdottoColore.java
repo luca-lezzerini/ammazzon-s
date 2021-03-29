@@ -93,7 +93,7 @@ public class ProdottoColore implements Serializable {
 
     @Override
     public String toString() {
-        return "ProdottoColore{" + "id=" + id + ", coloriTaglie=" + coloriTaglie + ", varianteColore=" + varianteColore + ", prodotto=" + prodotto + '}';
+        return "ProdottoColore{" + "id=" + id + ", coloriTaglie=" + coloriTaglie.size() + ", varianteColore=" + varianteColore + ", prodotto=" + prodotto + '}';
     }
     
 }
