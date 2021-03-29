@@ -7,9 +7,10 @@ package it.sirfin.ammazzonserver.service.impl;
 
 import it.sirfin.ammazzonserver.dto.ListaProdottiDto;
 import it.sirfin.ammazzonserver.dto.ListaProdottoColoriDto;
-import it.sirfin.ammazzonserver.model.Prodotto;
+import it.sirfin.ammazzonserver.model.ProdottoColore;
 import it.sirfin.ammazzonserver.repository.ProdottoColoreRepository;
 import it.sirfin.ammazzonserver.repository.ProdottoRepository;
+import it.sirfin.ammazzonserver.repository.VarianteColoreRepository;
 import it.sirfin.ammazzonserver.service.AssociaColoriAProdottiService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -23,10 +24,10 @@ public class AssociaColoriAProdottiServiceImpl implements AssociaColoriAProdotti
 
     @Autowired
     ProdottoRepository prodottoRepository;
-        @Autowired
+    @Autowired
     ProdottoColoreRepository prodottoColoreRepository;
-
-   
+    @Autowired
+    VarianteColoreRepository varianteColoreRepository;
 
     @Override
     public ListaProdottiDto aggiornaProdotti() {
@@ -34,7 +35,6 @@ public class AssociaColoriAProdottiServiceImpl implements AssociaColoriAProdotti
 
     }
 
-   
     @Override
     public ListaProdottiDto ricercaProdotto(String c) {
         if (c.isBlank()) {
@@ -45,9 +45,33 @@ public class AssociaColoriAProdottiServiceImpl implements AssociaColoriAProdotti
 
     @Override
     public ListaProdottoColoriDto selezionaProdotto(Long id) {
-        
+
         return new ListaProdottoColoriDto(prodottoColoreRepository.selezionaProdotto(id));
     }
 
- 
+    @Override
+    public ListaProdottoColoriDto spostaNonAssociati(Long idProd, Long idCol) {
+        //Recupero prodotto da db
+
+        //Recuperare colore da db
+//        ProdottoColore pc = prodottoColoreRepository.findById(id).get();
+        //TROVA L?UNICO PRODOTTO_COLORE CON IL PRODOTTO E COLORE DATI
+        ProdottoColore pc = prodottoColoreRepository.trovaProdottoColore(idProd, idCol);
+        //RIMUOVE LE DUE ASSOCIAZIONI CHE FANNO PERNO SU PRODOTTO_COLORE 
+        //RIMUOVERE PRODOTTO COLORE
+        //Rimuovere colore dall'associazione con prodotto
+        pc.setVarianteColore(null);
+        //Rimuovere prodotto dall'associazione con colore
+        pc.setProdotto(null);
+        //Salvare entrambi
+        prodottoColoreRepository.save(pc);
+        //Riaggiornare le liste che vanno inserite nelle tabelle e ritornarle
+        return null;
+    }
+
+    @Override
+    public ListaProdottoColoriDto aggiornaProdottiColore() {
+        return new ListaProdottoColoriDto(prodottoColoreRepository.findAll());
+    }
+
 }

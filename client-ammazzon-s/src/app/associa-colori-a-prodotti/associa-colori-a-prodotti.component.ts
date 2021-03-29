@@ -26,7 +26,7 @@ export class AssociaColoriAProdottiComponent implements OnInit {
   url = "http://localhost:8080/";
   messaggioErrore = "";
   coloriAssociati: ProdottoColore[] = [];
-  elencoColoriNonAssociati: VarianteColore[] = [];
+  elencoColoriNonAssociati: ProdottoColore[] = [];
   associazione = false;
   constructor(private http: HttpClient) { }
 
@@ -64,9 +64,9 @@ export class AssociaColoriAProdottiComponent implements OnInit {
     let dto = new ProdottoColoreDto();
     //Preparo la richiesta
     dto.prodottoColore = this.prodottoColore;
-    this.http.post<ListaColoriDto>(this.url + "sposta-colori-non-associati", dto)
+    this.http.post<ListaProdottoColoriDto>(this.url + "sposta-colori-non-associati", dto)
       .subscribe(r => {
-        this.elencoColoriNonAssociati = r.variantiColori;
+        this.elencoColoriNonAssociati = r.listaProdottoColori;
         this.associazione = true;
       });
   }

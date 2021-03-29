@@ -5,34 +5,47 @@
  */
 package it.sirfin.ammazzonserver.dto;
 
+import it.sirfin.ammazzonserver.model.Prodotto;
 import it.sirfin.ammazzonserver.model.ProdottoColore;
+import it.sirfin.ammazzonserver.model.VarianteColore;
 
 /**
  *
  * @author laptop
  */
 public class ProdottoColoreDto {
-    private ProdottoColore prodottoColore;
+    private Prodotto prodotto;
+    private VarianteColore colore;
 
     public ProdottoColoreDto() {
     }
 
-    public ProdottoColoreDto(ProdottoColore prodottoColore) {
-        this.prodottoColore = prodottoColore;
+    public ProdottoColoreDto(Prodotto prodotto, VarianteColore colore) {
+        this.prodotto = prodotto;
+        this.colore = colore;
     }
 
-    public ProdottoColore getProdottoColore() {
-        return prodottoColore;
+    public Prodotto getProdotto() {
+        return prodotto;
     }
 
-    public void setProdottoColore(ProdottoColore prodottoColore) {
-        this.prodottoColore = prodottoColore;
+    public void setProdotto(Prodotto prodotto) {
+        this.prodotto = prodotto;
+    }
+
+    public VarianteColore getColore() {
+        return colore;
+    }
+
+    public void setColore(VarianteColore colore) {
+        this.colore = colore;
     }
 
     @Override
     public String toString() {
-        return "ProdottoColoreDto{" + "prodottoColore=" + prodottoColore + '}';
+        return "ProdottoColoreDto{" + "prodotto=" + prodotto + ", colore=" + colore + '}';
     }
     
     
+
 }

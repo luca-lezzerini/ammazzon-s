@@ -22,7 +22,7 @@ public interface ProdottoColoreRepository extends JpaRepository<ProdottoColore, 
     @Query("SELECT pc FROM ProdottoColore pc WHERE pc.prodotto.descrizione = 'CAPPELLO'"
             + "and pc.varianteColore.descrizione = 'rosso'")
     List<ProdottoColore> CappelliRossi();
-    
+
     @Query("SELECT pc FROM ProdottoColore pc WHERE pc.prodotto.id = :p")
     List<ProdottoColore> coloriAssociatiProdotto(@Param("p") Long id);
 
@@ -33,13 +33,21 @@ public interface ProdottoColoreRepository extends JpaRepository<ProdottoColore, 
     //Prova così
     @Query("SELECT pc FROM ProdottoColore pc WHERE pc.prodotto.id = :p")
     List<ProdottoColore> selezionaProdotto1(@Param("p") Long id);
-    
-/**
- * trova tutti i prodotti di un dato colore
- * @param nomeColore
- * @param nomeProdotto
- * @return 
- */
+
+    @Query("SELECT pc FROM ProdottoColore pc"
+            + " JOIN pc.varianteColore vc"
+            + " JOIN pc.prodotto p"
+            + " WHERE p.id = :prodId"
+            + " AND vc.id = :colId")
+    ProdottoColore trovaProdottoColore(@Param("prodId") Long idProdotto, @Param("colId") Long idColore);
+
+    /**
+     * trova tutti i prodotti di un dato colore
+     *
+     * @param nomeColore
+     * @param nomeProdotto
+     * @return
+     */
     @Query("SELECT pc FROM ProdottoColore pc WHERE pc.prodotto.descrizione = (?2)"
             + "and pc.varianteColore.descrizione = (?1)")
     List<ProdottoColore> prodottoColore(String nomeColore, String nomeProdotto);
