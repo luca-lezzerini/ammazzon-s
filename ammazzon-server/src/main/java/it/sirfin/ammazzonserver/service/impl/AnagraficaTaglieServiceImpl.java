@@ -10,6 +10,7 @@ import it.sirfin.ammazzonserver.dto.TagliaDto;
 import it.sirfin.ammazzonserver.model.VarianteTaglia;
 import it.sirfin.ammazzonserver.repository.VarianteTagliaRepository;
 import it.sirfin.ammazzonserver.service.AnagraficaTaglieService;
+import java.util.ArrayList;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -59,6 +60,9 @@ public class AnagraficaTaglieServiceImpl implements AnagraficaTaglieService {
     @Override
     public ListaTaglieDto aggiorna() {
         List<VarianteTaglia> lista = varianteTagliaRepository.findAll();
+        lista.forEach(l -> {
+            l.setColoriTaglie(new ArrayList<>());
+        });
         return new ListaTaglieDto(lista);
     }
 
