@@ -64,8 +64,8 @@ export class AssociaColoriAProdottiComponent implements OnInit {
     this.prodottoColore = pc;
     let dto = new ProdottoColoreDtoGal();
     //Preparo la richiesta
-    dto.prodotto = this.prodotto;
-    dto.colore = this.varianteColore;
+    dto.prodotto = pc.prodotto;
+    dto.colore = pc.varianteColore;
     this.http.post<ListaProdottoColoriDto>(this.url + "sposta-colori-non-associati", dto)
       .subscribe(r => {
         this.elencoColoriNonAssociati = r.listaProdottoColori;

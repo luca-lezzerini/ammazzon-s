@@ -62,7 +62,7 @@ public class AssociaColoriAProdottiServiceImpl implements AssociaColoriAProdotti
         //RIMUOVE LE DUE ASSOCIAZIONI CHE FANNO PERNO SU PRODOTTO_COLORE 
         //RIMUOVERE PRODOTTO COLORE
         //Rimuovere colore dall'associazione con prodotto
-        System.out.println("--------------" + pc.getVarianteColore() + "fungeeeeeeeeeeeeeeeeeeeeeeeee");
+        System.out.println("--------------" + pc.getId() + "fungeeeeeeeeeeeeeeeeeeeeeeeee");
         pc.setVarianteColore(new VarianteColore());     
         //Rimuovere prodotto dall'associazione con colore
         pc.setProdotto(null);
