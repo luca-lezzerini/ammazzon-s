@@ -52,7 +52,9 @@ public class AssociaTaglieColoriProdottiServiceImpl implements AssociaTaglieColo
     public ListaColoreTagliaDto coloriTaglieAssociateProdottoColore(Long id) {
         ListaColoreTagliaDto dtoRes = new ListaColoreTagliaDto();
         List<ColoreTaglia> coloriTaglie = coloreTagliaRepository.taglieProdottoColore(id);
+        List<ColoreTaglia> notColoriTaglie = coloreTagliaRepository.notTaglieProdottoColore(id);
         dtoRes.setColoriTaglie(coloriTaglie);
+        dtoRes.setNotColoriTaglie(notColoriTaglie);
         return dtoRes;
     }
 
