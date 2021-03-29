@@ -17,4 +17,6 @@ public interface AssociaTaglieColoriProdottiService {
     ListaColoreTagliaDto disassociaTaglia(Long idColoreTaglia, Long idProdottoColore);
     
     ListaColoreTagliaDto associaTaglia(ProdottoColore pc, VarianteTaglia vt);
+    
+    ListaColoreTagliaDto disassociaTutti(Long idProdottoColore);
 }

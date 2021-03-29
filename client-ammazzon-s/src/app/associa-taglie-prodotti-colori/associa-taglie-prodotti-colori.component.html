@@ -84,8 +84,15 @@
             <td><button (click)="rimuoviTagliaProdotto(ct)">rimuovi</button></td>
         </tr>
     </table>
+    <br>
+    <br>
+<button (click)="disassociaTutti()">Disassocia tutti</button>
 </div>
+<br>
 <div *ngIf="taglieNonAssociate.length>0">
+    <button (click)="associaTutti()">Associa tutti</button>
+    <br>
+    <br>
     <h3>Taglie non assegnate</h3>
     <table>
         <tr>

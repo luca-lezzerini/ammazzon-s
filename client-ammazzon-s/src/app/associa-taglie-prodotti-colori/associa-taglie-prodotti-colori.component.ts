@@ -102,6 +102,15 @@ export class AssociaTaglieProdottiColoriComponent implements OnInit {
       });
   }
 
+  associaTutti() { }
+  disassociaTutti() {
+    let dto = new ProdottoColoreDto();
+    dto.prodottoColore = this.prodottoColoreSelezionato;
+    this.http.post<ListaColoreTagliaDto>("http://localhost:8080/disassocia-tutti", dto)
+      .subscribe(t => {
+        this.selezionaProdottoColore(this.prodottoColoreSelezionato);
+      });
+  }
 }
 
 

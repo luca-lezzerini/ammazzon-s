@@ -61,10 +61,10 @@ public class AssociaTaglieColoriProdottiServiceImpl implements AssociaTaglieColo
     }
 
     @Override
-    public ListaColoreTagliaDto coloriTaglieAssociateProdottoColore(Long id) {
+    public ListaColoreTagliaDto coloriTaglieAssociateProdottoColore(Long idProdottoColore) {
         System.out.println("siamo in  coloriTaglieAssociateProdottoColore");
         ListaColoreTagliaDto dtoRes = new ListaColoreTagliaDto();
-        List<ColoreTaglia> coloriTaglieAssociate = coloreTagliaRepository.taglieProdottoColore(id);
+        List<ColoreTaglia> coloriTaglieAssociate = coloreTagliaRepository.taglieProdottoColore(idProdottoColore);
         List<VarianteTaglia> taglieNonAssociate = taglieNonAssociate(coloriTaglieAssociate);
         //rimuovo colori taglie nel risultato per il client per velocizzare l'
         //operazione
@@ -86,9 +86,24 @@ public class AssociaTaglieColoriProdottiServiceImpl implements AssociaTaglieColo
         return coloriTaglieAssociateProdottoColore(idProdottoColore);
     }
 
+    //DA RIVEDERE
     @Override
     public ListaColoreTagliaDto associaTaglia(ProdottoColore pc, VarianteTaglia vt) {
         associaProdottoColoreTaglia(pc, vt);
+        return new ListaColoreTagliaDto();
+    }
+
+    @Override
+    public ListaColoreTagliaDto disassociaTutti(Long idProdottoColore) {
+        //recupero prodotto colore
+        ProdottoColore pc = prodottoColoreRepository.findById(idProdottoColore).get();
+        //recupero le associazioni
+        List<ColoreTaglia> coloriTaglie = pc.getColoriTaglie();
+        //le cancello su db
+        coloriTaglie.forEach(ct -> {
+            coloreTagliaRepository.deleteById(ct.getId());
+        });
+        //IL METODO POTREBBE ANCHE ESSERE VOID
         return new ListaColoreTagliaDto();
     }
 
@@ -122,7 +137,7 @@ public class AssociaTaglieColoriProdottiServiceImpl implements AssociaTaglieColo
         System.out.println("siamo in associaProdottoColoreTaglia");
         pc = prodottoColoreRepository.findById(pc.getId()).get();
         vt = varianteTagliaRepository.findById(vt.getId()).get();
-        
+
         ColoreTaglia ct = new ColoreTaglia();
         ct = coloreTagliaRepository.save(ct);
         ct.setProdottoColore(pc);
