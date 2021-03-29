@@ -63,19 +63,31 @@ public class ProdottoColore implements Serializable {
         this.coloriTaglie = coloriTaglie;
     }
 
-    public VarianteColore getVarianteColore() {
+    public VarianteColore getVarianteColore() {     
+        if (varianteColore == null) {
+            varianteColore = new VarianteColore();
+        }
         return varianteColore;
     }
 
     public void setVarianteColore(VarianteColore varianteColore) {
+        if (varianteColore == null) {
+            varianteColore = new VarianteColore();
+        }
         this.varianteColore = varianteColore;
     }
 
     public Prodotto getProdotto() {
+        if (prodotto == null) {
+            prodotto = new Prodotto();
+        }
         return prodotto;
     }
 
     public void setProdotto(Prodotto prodotto) {
+        if (prodotto == null) {
+            prodotto = new Prodotto();
+        }
         this.prodotto = prodotto;
     }
 

@@ -4,6 +4,7 @@ import { ListaColoriDto } from '../dto/lista-colori-dto';
 import { ListaProdottiDto } from '../dto/lista-prodotti-dto';
 import { ListaProdottoColoriDto } from '../dto/lista-prodotto-colori-dto';
 import { ProdottoColoreDto } from '../dto/prodotto-colore-dto';
+import { ProdottoColoreDtoGal } from '../dto/prodotto-colore-dto-gal';
 import { ProdottoDto } from '../dto/prodotto-dto';
 import { RicercaColoreOProdottoDto } from '../dto/ricerca-colore-o-prodotto-dto';
 import { VarianteColoreDto } from '../dto/variante-colore-dto';
@@ -61,9 +62,10 @@ export class AssociaColoriAProdottiComponent implements OnInit {
 
   spostaNonAssociati(pc: ProdottoColore) {
     this.prodottoColore = pc;
-    let dto = new ProdottoColoreDto();
+    let dto = new ProdottoColoreDtoGal();
     //Preparo la richiesta
-    dto.prodottoColore = this.prodottoColore;
+    dto.prodotto = this.prodotto;
+    dto.colore = this.varianteColore;
     this.http.post<ListaProdottoColoriDto>(this.url + "sposta-colori-non-associati", dto)
       .subscribe(r => {
         this.elencoColoriNonAssociati = r.listaProdottoColori;
@@ -71,6 +73,7 @@ export class AssociaColoriAProdottiComponent implements OnInit {
       });
   }
   associaTutti() { }
+
   disassociaTutti() { }
 
   associaColore(vc: VarianteColore) {
