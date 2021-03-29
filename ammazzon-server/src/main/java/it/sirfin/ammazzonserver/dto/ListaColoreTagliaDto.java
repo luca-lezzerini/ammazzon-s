@@ -1,17 +1,18 @@
 package it.sirfin.ammazzonserver.dto;
 
 import it.sirfin.ammazzonserver.model.ColoreTaglia;
+import it.sirfin.ammazzonserver.model.VarianteTaglia;
 import java.util.List;
 
 
 public class ListaColoreTagliaDto {
     private List<ColoreTaglia> coloriTaglie;
-    private List<ColoreTaglia> notColoriTaglie;
+    private List<VarianteTaglia> notColoriTaglie;
 
     public ListaColoreTagliaDto() {
     }
 
-    public ListaColoreTagliaDto(List<ColoreTaglia> coloriTaglie, List<ColoreTaglia> notColoriTaglie) {
+    public ListaColoreTagliaDto(List<ColoreTaglia> coloriTaglie, List<VarianteTaglia> notColoriTaglie) {
         this.coloriTaglie = coloriTaglie;
         this.notColoriTaglie = notColoriTaglie;
     }
@@ -24,11 +25,11 @@ public class ListaColoreTagliaDto {
         this.coloriTaglie = coloriTaglie;
     }
 
-    public List<ColoreTaglia> getNotColoriTaglie() {
+    public List<VarianteTaglia> getNotColoriTaglie() {
         return notColoriTaglie;
     }
 
-    public void setNotColoriTaglie(List<ColoreTaglia> notColoriTaglie) {
+    public void setNotColoriTaglie(List<VarianteTaglia> notColoriTaglie) {
         this.notColoriTaglie = notColoriTaglie;
     }
 
@@ -37,5 +38,6 @@ public class ListaColoreTagliaDto {
         return "ListaColoreTagliaDto{" + "coloriTaglie=" + coloriTaglie + ", notColoriTaglie=" + notColoriTaglie + '}';
     }
 
+    
     
 }

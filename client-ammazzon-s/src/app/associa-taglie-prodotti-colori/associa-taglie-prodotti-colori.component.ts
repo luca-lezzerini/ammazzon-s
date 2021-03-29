@@ -14,6 +14,7 @@ import { ColoreTaglia } from '../entità/colore-taglia';
 import { Prodotto } from '../entità/prodotto';
 import { ProdottoColore } from '../entità/prodotto-colore';
 import { VarianteColore } from '../entità/variante-colore';
+import { VarianteTaglia } from '../entità/variante-taglia';
 
 @Component({
   selector: 'app-associa-taglie-prodotti-colori',
@@ -28,7 +29,7 @@ export class AssociaTaglieProdottiColoriComponent implements OnInit {
   prodottoSelezionato = new Prodotto();
   prodottoColoreSelezionato = new ProdottoColore();
   //colori taglie non associati a ProdottoColore
-  notColoriTaglie: ColoreTaglia[] = [];
+  taglieNonAssociate: VarianteTaglia[] = [];
   rimuoviTaglieProdotti = new ColoreTaglia();
   prodotti: Prodotto[] = []
   prodottiColore: ProdottoColore[] = [];
@@ -47,6 +48,7 @@ export class AssociaTaglieProdottiColoriComponent implements OnInit {
         this.prodotti = l.listaProdotti;
         this.prodottiColore = [];
         this.coloriTaglie = [];
+        this.taglieNonAssociate = [];
       });
   }
 
@@ -71,8 +73,8 @@ export class AssociaTaglieProdottiColoriComponent implements OnInit {
     this.http.post<ListaColoreTagliaDto>("http://localhost:8080/cerca-ColoreTaglia-associati-prodottoColore", dto)
     .subscribe(ct =>{
       this.coloriTaglie = ct.coloriTaglie;
-      this.notColoriTaglie = ct.notColoriTaglie;
-      console.log(this.notColoriTaglie);
+      this.taglieNonAssociate = ct.notColoriTaglie;
+      console.log("taglie non associate: ", ct.notColoriTaglie);
     });
    }
 

@@ -15,6 +15,11 @@ public interface ColoreTagliaRepository extends JpaRepository<ColoreTaglia, Long
             + "and ct.prodottoColore.varianteColore.descrizione  = 'rosso'")
     List<ColoreTaglia> taglieCappelloRosso();
     
+    /**
+     * Trova tutte le taglie associate a un prodotto colore dato un prodottoColore id
+     * @param id
+     * @return 
+     */
     @Query("SELECT ct FROM ColoreTaglia ct WHERE "
             + "ct.prodottoColore.id = :id ")
     List<ColoreTaglia> taglieProdottoColore(@Param("id") Long id);
@@ -23,5 +28,6 @@ public interface ColoreTagliaRepository extends JpaRepository<ColoreTaglia, Long
             + "ct.prodottoColore.id != :id ")
     List<ColoreTaglia> notTaglieProdottoColore(@Param("id") Long id);
     
+
     
 }
