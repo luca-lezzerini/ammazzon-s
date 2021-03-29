@@ -151,8 +151,6 @@ export class AnagraficaTagliaComponent implements OnInit, Automabile {
       .subscribe(r => this.listaTaglie = r.listaTaglie);
   }
 
-
-
   modifica() {
     this.automa.next(new ModificaEvent(), this.automa);
   }

@@ -55,4 +55,10 @@ public class AnagraficaColoriController {
     public ListaColoriDto rimuoviColore(@RequestBody ColoreDto dto) {
         return anagraficaColoriService.rimuoviColore(dto.getVarianteColore());
     }
+
+    @RequestMapping("ritorna-colore")
+    @ResponseBody
+    public ColoreDto ritornaColore(@RequestBody ColoreDto dto) {
+        return anagraficaColoriService.ritornaColore(dto.getVarianteColore());
+    }
 }

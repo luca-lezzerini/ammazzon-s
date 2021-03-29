@@ -6,6 +6,7 @@ import { AddEvent, AnnullaEvent, ConfermaEvent, ModificaEvent, RicercaEvent, Rim
 import { ColoreDto } from '../dto/colore-dto';
 import { ListaColoriDto } from '../dto/lista-colori-dto';
 import { RicercaColoreOProdottoDto } from '../dto/ricerca-colore-o-prodotto-dto';
+import { VarianteColoreDto } from '../dto/variante-colore-dto';
 import { VarianteColore } from '../entità/variante-colore';
 
 @Component({
@@ -17,12 +18,12 @@ export class AnagraficaColoriGalliComponent implements OnInit, Automabile {
 
   automa: Automa;
 
-
   varianteColore = new VarianteColore();
   variantiColori: VarianteColore[] = [];
   inputRicerca = "";
   errore = "";
   url = "http://localhost:8080/";
+  contenitore= new VarianteColore();
 
   //Variabili di visualizzazione
   form: boolean;
@@ -57,22 +58,18 @@ export class AnagraficaColoriGalliComponent implements OnInit, Automabile {
   conferma() {
     this.automa.next(new ConfermaEvent(), this.automa);
   }
-
   annulla() {
+    this.varianteColore= this.contenitore;
+    console.log("Questo è il contenitore dentro annulla", this.contenitore);
     this.automa.next(new AnnullaEvent(), this.automa);
-
   }
   seleziona(vc: VarianteColore) {
-    this.varianteColore = vc;
+    this.ritornaColore(vc);
     this.automa.next(new SelezionaEvent(), this.automa);
   }
-
-
   cerca() {
     this.automa.next(new RicercaEvent(), this.automa);
   }
-
-
   aggiorna() {
     this.http.get<ListaColoriDto>(this.url + "aggiorna-colore")
       .subscribe(r => this.variantiColori = r.variantiColori);
@@ -182,11 +179,17 @@ export class AnagraficaColoriGalliComponent implements OnInit, Automabile {
         .subscribe(r => {
           this.variantiColori = r.variantiColori;
           this.inputRicerca = "";
-
         });
     }
   }
-
-
-
+  ritornaColore(c: VarianteColore) {
+    let dto = new ColoreDto();
+    dto.varianteColore = c;
+    this.contenitore= c;
+    this.http.post<ColoreDto>(this.url + "ritorna-colore", dto)
+      .subscribe(r => {
+        this.varianteColore = r.varianteColore;
+        console.log("contenitore dentro la lambda",this.contenitore);
+      });
+  }
 }

@@ -5,6 +5,7 @@
  */
 package it.sirfin.ammazzonserver.service.impl;
 
+import it.sirfin.ammazzonserver.dto.ColoreDto;
 import it.sirfin.ammazzonserver.dto.ListaColoriDto;
 import it.sirfin.ammazzonserver.model.VarianteColore;
 import it.sirfin.ammazzonserver.repository.VarianteColoreRepository;
@@ -53,6 +54,11 @@ public class AnagraficaColoriServiceImpl implements AnagraficaColoriService {
     public ListaColoriDto rimuoviColore(VarianteColore vc) {
         varianteColoreRepository.delete(vc);
         return aggiornaColori();
+    }
+
+    @Override
+    public ColoreDto ritornaColore(VarianteColore vc) {
+        return new ColoreDto(vc);
     }
 
 }

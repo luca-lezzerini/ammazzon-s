@@ -5,6 +5,7 @@
  */
 package it.sirfin.ammazzonserver.service;
 
+import it.sirfin.ammazzonserver.dto.ColoreDto;
 import it.sirfin.ammazzonserver.dto.ListaColoriDto;
 import it.sirfin.ammazzonserver.model.VarianteColore;
 
@@ -23,4 +24,6 @@ public interface AnagraficaColoriService {
     ListaColoriDto ricercaColore(String c);
     
     ListaColoriDto rimuoviColore(VarianteColore vc);
+    
+    ColoreDto ritornaColore(VarianteColore vc);
 }
