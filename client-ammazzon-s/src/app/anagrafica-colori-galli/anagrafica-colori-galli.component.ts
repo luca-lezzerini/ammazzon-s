@@ -6,8 +6,6 @@ import { AddEvent, AnnullaEvent, ConfermaEvent, ModificaEvent, RicercaEvent, Rim
 import { ColoreDto } from '../dto/colore-dto';
 import { ListaColoriDto } from '../dto/lista-colori-dto';
 import { RicercaColoreOProdottoDto } from '../dto/ricerca-colore-o-prodotto-dto';
-import { RicercaStringaReqDto } from '../dto/ricerca-stringa-req-dto';
-import { VarianteColoreDto } from '../dto/variante-colore-dto';
 import { VarianteColore } from '../entità/variante-colore';
 
 @Component({
@@ -172,8 +170,8 @@ export class AnagraficaColoriGalliComponent implements OnInit, Automabile {
   aggiornaRisultatiRicerca() {
     let stringa = new RicercaColoreOProdottoDto();
     stringa.criterioRicerca = this.inputRicerca;
-    if (this.inputRicerca == "") {
-      this.errore = "ERRORE! DEVI INSERIRE UN CRITERIO DI RICERCA PORCA ZZOZZA ";
+    if (this.inputRicerca == null) {
+      this.errore = "ERRORE! DEVI INSERIRE UN CRITERIO DI RICERCA PORCA ZOZZA ";
     } else {
       this.errore = "";
       this.http.post<ListaColoriDto>(this.url + "ricerca-colore", stringa)
