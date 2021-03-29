@@ -84,8 +84,12 @@ public class AssociaTaglieColoriProdottiServiceImpl implements AssociaTaglieColo
         coloreTagliaRepository.deleteById(idColoreTaglia);
         return coloriTaglieAssociateProdottoColore(idProdottoColore);
     }
-    
-    
+
+    @Override
+    public ListaColoreTagliaDto associaTaglia(ProdottoColore pc, VarianteTaglia vt) {
+        associaProdottoColoreTaglia(pc, vt);
+        return new ListaColoreTagliaDto();
+    }
 
     /**
      * Ottiene tutte le taglie non associate date, date tutte le taglie
@@ -110,6 +114,25 @@ public class AssociaTaglieColoriProdottiServiceImpl implements AssociaTaglieColo
         System.out.println("durata operazine taglie non associate: " + Duration.between(i, i2).toMillis());
         System.out.println("\n*************************************************");
         return tutteLeTaglie;
+    }
+
+    private ColoreTaglia associaProdottoColoreTaglia(ProdottoColore pc, VarianteTaglia vt) {
+        System.out.println("\n\nSiamo nel metodo di associazione pc/vt");
+        ColoreTaglia ct = new ColoreTaglia();
+        ct = coloreTagliaRepository.save(ct);
+        System.out.println("sto per settare le associazioni per: " + ct.getId());
+        ct.setProdottoColore(pc);
+        ct.setVarianteTaglia(vt);
+        ct = coloreTagliaRepository.save(ct);
+        pc.getColoriTaglie().add(ct);
+        vt.getColoriTaglie().add(ct);
+        System.out.println("Sto per salvare pc : " + pc.getId());
+        System.out.println("siamo alla riga: 131\n\n");
+        pc = prodottoColoreRepository.save(pc);
+        System.out.println("siamo alla riga: 133\n\n");
+        vt = varianteTagliaRepository.save(vt);
+        System.out.println("siamo alla riga: 135\n\n");
+        return ct;
     }
 
 }

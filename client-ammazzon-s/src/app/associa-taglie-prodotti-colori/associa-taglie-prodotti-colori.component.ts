@@ -1,7 +1,8 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
+import { AssociaTagliaRequestDto } from '../dto/associa-taglia-request-dto';
 import { DisassociaTagliaRequestDto } from '../dto/disassocia-taglia-request-dto';
-import { ListaColoreTagliaDto } from '../dto/Lista-colore-taglia-dto';
+import { ListaColoreTagliaDto } from '../dto/lista-colore-taglia-dto';
 import { ListaColoriDto } from '../dto/lista-colori-dto';
 import { ListaProdottiDto } from '../dto/lista-prodotti-dto';
 import { ListaProdottoColoriDto } from '../dto/lista-prodotto-colori-dto';
@@ -91,8 +92,14 @@ export class AssociaTaglieProdottiColoriComponent implements OnInit {
       });
   }
 
-  associaTagliaProdottoColore() {
-    
+  associaTagliaProdottoColore(vt: VarianteTaglia) {
+    let dtoReq = new AssociaTagliaRequestDto();
+    dtoReq.pc = this.prodottoColoreSelezionato;
+    dtoReq.vt = vt;
+    this.http.post<ListaColoreTagliaDto>("http://localhost:8080/associa-taglia", dtoReq)
+      .subscribe(ct => {
+        this.selezionaProdottoColore(this.prodottoColoreSelezionato);
+      });
   }
 
 }

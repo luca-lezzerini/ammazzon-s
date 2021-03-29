@@ -1,5 +1,6 @@
 package it.sirfin.ammazzonserver.controller;
 
+import it.sirfin.ammazzonserver.dto.AssociaTagliaRequestDto;
 import it.sirfin.ammazzonserver.dto.DisassociaTagliaRequestDto;
 import it.sirfin.ammazzonserver.dto.ListaColoreTagliaDto;
 import it.sirfin.ammazzonserver.dto.ListaProdottiDto;
@@ -55,6 +56,16 @@ public class AssociaTaglieColoriProdottiController {
     ListaColoreTagliaDto disassociaTaglia(@RequestBody DisassociaTagliaRequestDto dtoReq) {
         ListaColoreTagliaDto dtoRes = associaTaglieColoriProdottiService
                 .disassociaTaglia(dtoReq.getIdColoreTaglia(), dtoReq.getIdProdottoColore());
+        return dtoRes;
+    }
+   
+    @RequestMapping("associa-taglia")
+    @ResponseBody
+    ListaColoreTagliaDto associaTaglia(@RequestBody AssociaTagliaRequestDto dtoReq) {
+        System.out.println("\n\nProdottoColore: " + dtoReq.getPc());
+        System.out.println("VarianteTaglia: " + dtoReq.getVt() + "\n\n");
+        ListaColoreTagliaDto dtoRes = associaTaglieColoriProdottiService
+                .associaTaglia(dtoReq.getPc(), dtoReq.getVt());
         return dtoRes;
     }
     
