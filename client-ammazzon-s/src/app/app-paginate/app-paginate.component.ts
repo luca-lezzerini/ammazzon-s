@@ -10,28 +10,32 @@ export class AppPaginateComponent implements OnInit {
 
   constructor(private http: HttpClient) { }
 
-  @Input() numeroPaginaCorrente: number;
-  numeroMaxPagine: number;
+  //@Input() numeroPaginaCorrente: number;
+  @Input() totalPages : number;
+  //numeroMaxPagine: number;
   url = "http://localhost:8080/";
 
   ngOnInit(): void {
   }
 
-  vaiAPrimaPagina() {
+ // vaiAPrimaPagina() {
 
-  }
+ // }
 
-  vaiAPrecedente() {
+  ///vaiAPrecedente() {
 
-  }
+  //}
 
-  vaiASuccessivo() {
+  ///vaiASuccessivo() {
 
-  }
+  //}
 
-  vaiAUltima() {
+  ///vaiAUltima() {
 
-  }
+  //}
+  onNext(){}
+
+  onLast(){}
 
 
 }
