@@ -1,5 +1,22 @@
-<button (click)="vaiAPrimaPagina()"> << </button>
+<!--<button (click)="vaiAPrimaPagina()"> << </button>
 <button (click)="vaiAPrecedente()"> < </button>
  <input type=number placeholder="Numero Pagina" [(ngModel)]="numeroPaginaCorrente">
 <button (click)="vaiASuccessivo()"> > </button>
  <button (click)="vaiAUltima()"> >> </button>
+-->
+ 
+     input che da i valori all inpaginazione
+     <br> <br>
+     <button (click) = "onLast()">indietro</button>
+ <input
+ type = number
+ min="1"
+ max ="10"
+ totalPages ="10"
+ value="1"
+ />
+     <button (click) = "onNext()">next</button>
+     
+
+
+ 
