@@ -6,12 +6,14 @@ import java.util.List;
 
 public class ListaColoreTagliaDto {
     private List<ColoreTaglia> coloriTaglie;
+    private List<ColoreTaglia> notColoriTaglie;
 
     public ListaColoreTagliaDto() {
     }
 
-    public ListaColoreTagliaDto(List<ColoreTaglia> coloriTaglie) {
+    public ListaColoreTagliaDto(List<ColoreTaglia> coloriTaglie, List<ColoreTaglia> notColoriTaglie) {
         this.coloriTaglie = coloriTaglie;
+        this.notColoriTaglie = notColoriTaglie;
     }
 
     public List<ColoreTaglia> getColoriTaglie() {
@@ -22,8 +24,18 @@ public class ListaColoreTagliaDto {
         this.coloriTaglie = coloriTaglie;
     }
 
+    public List<ColoreTaglia> getNotColoriTaglie() {
+        return notColoriTaglie;
+    }
+
+    public void setNotColoriTaglie(List<ColoreTaglia> notColoriTaglie) {
+        this.notColoriTaglie = notColoriTaglie;
+    }
+
     @Override
     public String toString() {
-        return "ListaColoreTagliaDto{" + "coloriTaglie=" + coloriTaglie + '}';
+        return "ListaColoreTagliaDto{" + "coloriTaglie=" + coloriTaglie + ", notColoriTaglie=" + notColoriTaglie + '}';
     }
+
+    
 }
