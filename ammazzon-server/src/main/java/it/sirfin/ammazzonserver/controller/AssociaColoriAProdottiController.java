@@ -7,7 +7,7 @@ package it.sirfin.ammazzonserver.controller;
 
 import it.sirfin.ammazzonserver.dto.ListaProdottiDto;
 import it.sirfin.ammazzonserver.dto.ListaProdottoColoriDto;
-import it.sirfin.ammazzonserver.dto.ProdottoColoreGal;
+import it.sirfin.ammazzonserver.dto.ProdottoColoreDtoGal;
 import it.sirfin.ammazzonserver.dto.ProdottoDto;
 import it.sirfin.ammazzonserver.dto.RicercaColoreOProdottoDto;
 import it.sirfin.ammazzonserver.service.AssociaColoriAProdottiService;
@@ -43,7 +43,7 @@ public class AssociaColoriAProdottiController {
 
     @RequestMapping("sposta-colori-non-associati")
     @ResponseBody
-    public ListaProdottoColoriDto spostaNonAssociati(@RequestBody ProdottoColoreGal dto) {
+    public ListaProdottoColoriDto spostaNonAssociati(@RequestBody ProdottoColoreDtoGal dto) {
         return associaColoriAProdottiService.spostaNonAssociati(dto.getProdotto().getId(), dto.getColore().getId());
     }
 

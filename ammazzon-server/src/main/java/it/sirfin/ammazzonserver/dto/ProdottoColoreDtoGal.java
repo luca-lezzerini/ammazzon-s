@@ -12,15 +12,15 @@ import it.sirfin.ammazzonserver.model.VarianteColore;
  *
  * @author feder
  */
-public class ProdottoColoreGal {
+public class ProdottoColoreDtoGal {
     private Prodotto prodotto;
     private VarianteColore colore;
 
-    public ProdottoColoreGal() {
+    public ProdottoColoreDtoGal() {
     }
     
 
-    public ProdottoColoreGal(Prodotto prodotto, VarianteColore colore) {
+    public ProdottoColoreDtoGal(Prodotto prodotto, VarianteColore colore) {
         this.prodotto = prodotto;
         this.colore = colore;
     }
