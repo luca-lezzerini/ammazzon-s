@@ -76,6 +76,15 @@ public class AssociaTaglieColoriProdottiController {
         return dtoRes;
     }
     
+    @RequestMapping("associa-tutti")
+    @ResponseBody
+    ListaColoreTagliaDto associaTutti(@RequestBody ProdottoColoreDto dto) {
+        System.out.println("Siamo in associa tutti*/*/*/*/**/*/*/*/*/*/*/*");
+        ListaColoreTagliaDto dtoRes = associaTaglieColoriProdottiService
+                .associaTutti(dto.getProdottoColore().getId());
+        return dtoRes;
+    }
+    
     
 
 }

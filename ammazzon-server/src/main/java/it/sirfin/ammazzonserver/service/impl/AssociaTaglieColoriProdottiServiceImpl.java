@@ -107,6 +107,24 @@ public class AssociaTaglieColoriProdottiServiceImpl implements AssociaTaglieColo
         return new ListaColoreTagliaDto();
     }
 
+    @Override
+    public ListaColoreTagliaDto associaTutti(Long idProdottoColore) {
+        //recupera tutte le taglie 
+        List<VarianteTaglia> taglie = varianteTagliaRepository.findAll();
+        //recupero prodotto colore (non mi fido del client)
+        ProdottoColore pc = prodottoColoreRepository.findById(idProdottoColore).get();
+        // associa tutte le taglie al prodottoColore
+        System.out.println("numero taglie trovate : " + taglie.size());
+        taglie.forEach(t -> {
+            System.out.println("*/*/**/*/*/*/*/*/*/*/*");
+            System.out.println("Sto associando: " + pc.getProdotto().getCodice() 
+                    + ", " + t.getCodice());
+            associaProdottoColoreTaglia(pc, t);
+        });
+        //IL METODO POTREBBE ANCHE ESSERE VOID
+        return new ListaColoreTagliaDto();
+    }
+
     /**
      * Ottiene tutte le taglie non associate date, date tutte le taglie
      * associate

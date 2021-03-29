@@ -102,7 +102,22 @@ export class AssociaTaglieProdottiColoriComponent implements OnInit {
       });
   }
 
-  associaTutti() { }
+  associaTutti() {
+    //////////////lOGICA///////////////////////
+    //prima disassocia da tutti
+    //recupera tutte le taglie 
+    //le associa tutte al prodottoColore ricevuo
+    //aggiorna client
+    this.disassociaTutti();
+    let dto = new ProdottoColoreDto();
+    dto.prodottoColore = this.prodottoColoreSelezionato;
+    this.http.post<ListaColoreTagliaDto>("http://localhost:8080/associa-tutti", dto)
+    .subscribe(t => {
+      this.selezionaProdottoColore(this.prodottoColoreSelezionato);
+    });
+   }
+
+
   disassociaTutti() {
     let dto = new ProdottoColoreDto();
     dto.prodottoColore = this.prodottoColoreSelezionato;
@@ -111,6 +126,8 @@ export class AssociaTaglieProdottiColoriComponent implements OnInit {
         this.selezionaProdottoColore(this.prodottoColoreSelezionato);
       });
   }
+
+  
 }
 
 
