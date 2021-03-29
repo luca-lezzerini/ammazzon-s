@@ -7,6 +7,7 @@ import { AssociaTaglieProdottiColoriComponent } from './associa-taglie-prodotti-
 import { AssociaColoriAProdottiComponent } from './associa-colori-a-prodotti/associa-colori-a-prodotti.component';
 import { HomePageComponent } from './home-page/home-page.component';
 import { UserInterfaceComponent } from './user-interface/user-interface.component';
+import { AppPaginateComponent } from './app-paginate/app-paginate.component';
 
 const routes: Routes = [
   { path: 'app-home-page', component: HomePageComponent },
@@ -17,6 +18,7 @@ const routes: Routes = [
   { path: 'app-anagrafica-colori-galli', component: AnagraficaColoriGalliComponent },
   { path: 'app-anagrafica-utente-registrato', component: AnagraficaUtenteRegistratoComponent },
   { path: 'app-associa-taglie-prodotti-colori', component: AssociaTaglieProdottiColoriComponent },
+  { path: 'app-paginate-component', component: AppPaginateComponent },
   { path: 'app-associa-colori-a-prodotti', component: AssociaColoriAProdottiComponent }
 ];
 

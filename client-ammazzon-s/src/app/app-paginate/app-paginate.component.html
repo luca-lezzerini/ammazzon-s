@@ -1,1 +1,5 @@
-<p>app-paginate works!</p>
+<button (click)="vaiAPrimaPagina()"> << </button>
+<button (click)="vaiAPrecedente()"> < </button>
+ <input type=number placeholder="Numero Pagina" [(ngModel)]="numeroPaginaCorrente">
+<button (click)="vaiASuccessivo()"> > </button>
+ <button (click)="vaiAUltima()"> >> </button>

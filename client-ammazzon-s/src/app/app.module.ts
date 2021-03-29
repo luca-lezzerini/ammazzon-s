@@ -12,6 +12,7 @@ import { AssociaTaglieProdottiColoriComponent } from './associa-taglie-prodotti-
 import { AssociaColoriAProdottiComponent } from './associa-colori-a-prodotti/associa-colori-a-prodotti.component';
 import { AppPaginateComponent } from './app-paginate/app-paginate.component';
 
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -28,7 +29,8 @@ import { AppPaginateComponent } from './app-paginate/app-paginate.component';
     AppRoutingModule,
     HttpClientModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+
   ],
   providers: [],
   bootstrap: [AppComponent]

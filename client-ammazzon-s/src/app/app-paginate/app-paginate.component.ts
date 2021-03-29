@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { Component, Input, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-app-paginate',
@@ -7,9 +8,30 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AppPaginateComponent implements OnInit {
 
-  constructor() { }
+  constructor(private http: HttpClient) { }
+
+  @Input() numeroPaginaCorrente: number;
+  numeroMaxPagine: number;
+  url = "http://localhost:8080/";
 
   ngOnInit(): void {
   }
+
+  vaiAPrimaPagina() {
+
+  }
+
+  vaiAPrecedente() {
+
+  }
+
+  vaiASuccessivo() {
+
+  }
+
+  vaiAUltima() {
+
+  }
+
 
 }
