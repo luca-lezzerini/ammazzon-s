@@ -38,7 +38,7 @@ public class AssociaTaglieColoriProdottiController {
     @ResponseBody
     ListaColoreTagliaDto coloriTaglieAssociateProdottoColore(@RequestBody ProdottoColoreDto dto){
         return associaTaglieColoriProdottiService
-                .coloriTaglieAssociateProdottoColore(dto.getColore().getId());
+                .coloriTaglieAssociateProdottoColore(dto.getProdottoColore().getId());
     }
     
     
