@@ -92,7 +92,7 @@ export class AssociaTaglieProdottiColoriComponent implements OnInit {
   }
 
   associaTagliaProdottoColore() {
-
+    
   }
 
 }
