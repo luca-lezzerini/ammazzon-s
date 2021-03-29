@@ -10,6 +10,8 @@ import it.sirfin.ammazzonserver.dto.ListaColoriDto;
 import it.sirfin.ammazzonserver.model.VarianteColore;
 import it.sirfin.ammazzonserver.repository.VarianteColoreRepository;
 import it.sirfin.ammazzonserver.service.AnagraficaColoriService;
+import java.util.ArrayList;
+import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -32,8 +34,11 @@ public class AnagraficaColoriServiceImpl implements AnagraficaColoriService {
 
     @Override
     public ListaColoriDto aggiornaColori() {
-        return new ListaColoriDto(varianteColoreRepository.findAll());
-
+        List<VarianteColore> colori = varianteColoreRepository.findAll();
+        colori.forEach(c -> {
+            c.setProdottiColori(new ArrayList<>());
+        });
+        return new ListaColoriDto(colori);
     }
 
     @Override
