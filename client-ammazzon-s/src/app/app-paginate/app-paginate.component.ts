@@ -11,16 +11,17 @@ export class AppPaginateComponent implements OnInit {
   constructor(private http: HttpClient) { }
 
   //@Input() numeroPaginaCorrente: number;
-  @Input() totalPages : number;
+  @Input() totalPages: number;
+  numPag: number = 1;
   //numeroMaxPagine: number;
   url = "http://localhost:8080/";
 
   ngOnInit(): void {
   }
 
- // vaiAPrimaPagina() {
+  // vaiAPrimaPagina() {
 
- // }
+  // }
 
   ///vaiAPrecedente() {
 
@@ -33,9 +34,19 @@ export class AppPaginateComponent implements OnInit {
   ///vaiAUltima() {
 
   //}
-  onNext(){}
+  onfirst() {
 
-  onLast(){}
+  }
+  onLast() {
+//this.totalPages, this.numPag -1;
+  }
+  onNext() {
+   //this.setPage (Math.min(this.totalPages, this.numPag +1)) ;
+  }
+
+  onfin() {
+
+  }
 
 
 }
