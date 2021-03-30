@@ -10,9 +10,9 @@ public interface AssociaTaglieColoriProdottiService {
 
     ListaProdottiDto cercaProdotti(String criterioRic);
 
-    ListaProdottoColoriDto coloriAssociatiProdotto(Long idProdotto);
+    ListaProdottoColoriDto selezionaProdotto(Long idProdotto);
     
-    ListaColoreTagliaDto coloriTaglieAssociateProdottoColore(Long idProdottoColore);
+    ListaColoreTagliaDto selezionaProdottoColore(Long idProdottoColore);
     
     ListaColoreTagliaDto disassociaTaglia(Long idColoreTaglia, Long idProdottoColore);
     

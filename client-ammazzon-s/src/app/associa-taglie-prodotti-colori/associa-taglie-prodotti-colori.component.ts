@@ -106,7 +106,7 @@ export class AssociaTaglieProdottiColoriComponent implements OnInit {
     //////////////lOGICA///////////////////////
     //prima disassocia da tutti
     //recupera tutte le taglie 
-    //le associa tutte al prodottoColore ricevuo
+    //le associa tutte al prodottoColore ricevuto
     //aggiorna client
     this.disassociaTutti();
     let dto = new ProdottoColoreDto();

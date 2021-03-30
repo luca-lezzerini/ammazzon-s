@@ -50,7 +50,7 @@ public class AssociaTaglieColoriProdottiServiceImpl implements AssociaTaglieColo
     }
 
     @Override
-    public ListaProdottoColoriDto coloriAssociatiProdotto(Long id) {
+    public ListaProdottoColoriDto selezionaProdotto(Long id) {
         ListaProdottoColoriDto dtoRes = new ListaProdottoColoriDto();
         List<ProdottoColore> lista = prodottoColoreRepository.coloriAssociatiProdotto(id);
         dtoRes.setListaProdottoColori(lista);
@@ -61,7 +61,7 @@ public class AssociaTaglieColoriProdottiServiceImpl implements AssociaTaglieColo
     }
 
     @Override
-    public ListaColoreTagliaDto coloriTaglieAssociateProdottoColore(Long idProdottoColore) {
+    public ListaColoreTagliaDto selezionaProdottoColore(Long idProdottoColore) {
         System.out.println("siamo in  coloriTaglieAssociateProdottoColore");
         ListaColoreTagliaDto dtoRes = new ListaColoreTagliaDto();
         List<ColoreTaglia> coloriTaglieAssociate = coloreTagliaRepository.taglieProdottoColore(idProdottoColore);
@@ -83,10 +83,10 @@ public class AssociaTaglieColoriProdottiServiceImpl implements AssociaTaglieColo
     public ListaColoreTagliaDto disassociaTaglia(Long idColoreTaglia, Long idProdottoColore) {
         System.out.println("\n\n\n idColoreTaglia: " + idColoreTaglia + "idProdottoColore: " + idProdottoColore);
         coloreTagliaRepository.deleteById(idColoreTaglia);
-        return coloriTaglieAssociateProdottoColore(idProdottoColore);
+        return selezionaProdottoColore(idProdottoColore);
     }
 
-    //DA RIVEDERE
+    //PUò ANCHE ESSERE VOID
     @Override
     public ListaColoreTagliaDto associaTaglia(ProdottoColore pc, VarianteTaglia vt) {
         associaProdottoColoreTaglia(pc, vt);
@@ -107,6 +107,7 @@ public class AssociaTaglieColoriProdottiServiceImpl implements AssociaTaglieColo
         return new ListaColoreTagliaDto();
     }
 
+    //POTREBBE ESSERE VOID
     @Override
     public ListaColoreTagliaDto associaTutti(Long idProdottoColore) {
         //recupera tutte le taglie 

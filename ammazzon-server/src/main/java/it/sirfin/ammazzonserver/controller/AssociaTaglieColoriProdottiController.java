@@ -34,14 +34,14 @@ public class AssociaTaglieColoriProdottiController {
     @ResponseBody
     ListaProdottoColoriDto cercaColoriAssociatiProdotto(@RequestBody ProdottoDto dto) {
         return associaTaglieColoriProdottiService
-                .coloriAssociatiProdotto(dto.getProdotto().getId());
+                .selezionaProdotto(dto.getProdotto().getId());
     }
 
     @RequestMapping("cerca-ColoreTaglia-associati-prodottoColore")
     @ResponseBody
     ListaColoreTagliaDto coloriTaglieAssociateProdottoColore(@RequestBody ProdottoColoreDto dto) {
         ListaColoreTagliaDto dtoRes = associaTaglieColoriProdottiService
-                .coloriTaglieAssociateProdottoColore(dto.getProdottoColore().getId());
+                .selezionaProdottoColore(dto.getProdottoColore().getId());
         return dtoRes;
     }
     
