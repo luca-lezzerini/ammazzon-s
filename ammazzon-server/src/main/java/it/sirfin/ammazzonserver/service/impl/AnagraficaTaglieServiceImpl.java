@@ -51,8 +51,8 @@ public class AnagraficaTaglieServiceImpl implements AnagraficaTaglieService {
     }
 
     @Override
-    public TagliaDto ritornaTaglia(VarianteTaglia vt, int pagina) {
-        return new TagliaDto(vt);
+    public TagliaDto ritornaTaglia(VarianteTaglia vt, int pageNum, int totalPages) {
+        return new TagliaDto(vt, pageNum, totalPages);
     }
 
     @Override

@@ -5,9 +5,12 @@
  */
 package it.sirfin.ammazzonserver.controller;
 
+import it.sirfin.ammazzonserver.dto.ListaPagineDto;
 import it.sirfin.ammazzonserver.dto.ListaTaglieDto;
+import it.sirfin.ammazzonserver.dto.PaginaDto;
 import it.sirfin.ammazzonserver.dto.RicercaTagliaDto;
 import it.sirfin.ammazzonserver.dto.TagliaDto;
+import it.sirfin.ammazzonserver.model.VarianteTaglia;
 import it.sirfin.ammazzonserver.service.AnagraficaTaglieService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -20,31 +23,34 @@ import org.springframework.web.bind.annotation.RestController;
  *
  * @author Admin
  */
-//@CrossOrigin("*")
-//@RestController
-//public class AnagraficaTaglieController {
-//
-//    @Autowired
-//    AnagraficaTaglieService anagraficaTaglieService;
-//
-//    @RequestMapping("/aggiorna-taglia")
-//    @ResponseBody
-//    public ListaTaglieDto aggiornaTaglie() {
-//        return anagraficaTaglieService.aggiorna();
-//    }
-//
-//    @RequestMapping("aggiungi-taglia")
-//    @ResponseBody
-//    public ListaTaglieDto aggiungiColore(@RequestBody TagliaDto dto) {
-//        return anagraficaTaglieService.aggiungiTaglia(dto.getVarianteTaglia());
-//    }
-//
-//    @RequestMapping("rimuovi-taglia")
-//    @ResponseBody
-//    public ListaTaglieDto rimuoviTaglia(@RequestBody TagliaDto dto) {
-//        return anagraficaTaglieService.rimuoviTaglia(dto.getVarianteTaglia());
-//    }
-//
+@CrossOrigin("*")
+@RestController
+public class AnagraficaTaglieController {
+
+    @Autowired
+    AnagraficaTaglieService anagraficaTaglieService;
+
+    @RequestMapping("/aggiorna-taglia")
+    @ResponseBody
+    public ListaPagineDto<VarianteTaglia> aggiornaTaglie(@RequestBody TagliaDto dto) {
+        var pag = anagraficaTaglieService.aggiorna(dto.getPageNum());
+        return new ListaPagineDto<>(pag.getContent(), pag.getPageable().getPageNumber(), pag.getTotalPages());
+    }
+
+    @RequestMapping("aggiungi-taglia")
+    @ResponseBody
+    public ListaPagineDto<VarianteTaglia> aggiungiColore(@RequestBody TagliaDto dto) {
+        var pag = anagraficaTaglieService.aggiungiTaglia(dto.getVarianteTaglia(), dto.getPageNum());
+        return new ListaPagineDto<>(pag.getContent(), pag.getPageable().getPageNumber(), pag.getTotalPages());
+    }
+
+    @RequestMapping("rimuovi-taglia")
+    @ResponseBody
+    public ListaPagineDto<VarianteTaglia> rimuoviTaglia(@RequestBody TagliaDto dto) {
+        var pag = anagraficaTaglieService.rimuoviTaglia(dto.getVarianteTaglia(), dto.getPageNum());
+        return new ListaPagineDto<>(pag.getContent(), pag.getPageable().getPageNumber(), pag.getTotalPages());
+    }
+
 //    @RequestMapping("conferma-taglia")
 //    @ResponseBody
 //    public ListaTaglieDto confermaTaglia(@RequestBody TagliaDto dto) {
@@ -57,12 +63,9 @@ import org.springframework.web.bind.annotation.RestController;
 //        return anagraficaTaglieService.ritornaTaglia(dto.getVarianteTaglia());
 //    }
 //
-////    @RequestMapping("ricerca-taglia")
-////    @ResponseBody
-////    public ListaTaglieDto confermaTaglia(@RequestBody RicercaTagliaDto dto) {
-////        return anagraficaTaglieService.ricerca(dto.getCriterioRicerca());
-////    }
-//    
-//
-//    
-//}
+//    @RequestMapping("ricerca-taglia")
+//    @ResponseBody
+//    public ListaTaglieDto confermaTaglia(@RequestBody RicercaTagliaDto dto) {
+//        return anagraficaTaglieService.ricerca(dto.getCriterioRicerca());
+//    }
+}
