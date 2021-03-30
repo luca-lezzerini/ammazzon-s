@@ -23,6 +23,8 @@ export class AnagraficaColoriGalliComponent implements OnInit, Automabile {
   errore = "";
   url = "http://localhost:8080/";
   contenitore = new VarianteColore();
+  paginaCorrente = 1;
+  numeroPagine = 5;
 
   //Variabili di visualizzazione
   form: boolean;
@@ -44,6 +46,21 @@ export class AnagraficaColoriGalliComponent implements OnInit, Automabile {
   ngOnInit(): void {
   }
 
+  primo(event) {
+    console.log(event);
+  }
+  successivo(event) {
+    console.log(event);
+  }
+  precedente(event) {
+    console.log(event);
+  }
+  ultimo(event) {
+    console.log(event);
+  }
+  numero(event) {
+    console.log(event);
+  }
   nuova() {
     this.automa.next(new AddEvent(), this.automa);
   }
