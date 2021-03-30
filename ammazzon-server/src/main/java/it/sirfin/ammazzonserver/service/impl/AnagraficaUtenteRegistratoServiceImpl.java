@@ -5,6 +5,7 @@
  */
 package it.sirfin.ammazzonserver.service.impl;
 
+import it.sirfin.ammazzonserver.dto.ListaPagineDto;
 import it.sirfin.ammazzonserver.dto.ListaUtentiRegistratiDto;
 import it.sirfin.ammazzonserver.dto.UtenteRegistratoDto;
 import it.sirfin.ammazzonserver.model.UtenteRegistrato;
@@ -32,11 +33,7 @@ public class AnagraficaUtenteRegistratoServiceImpl implements AnagraficaUtenteRe
         return aggiorna();
     }
 
-    @Override
-    public ListaUtentiRegistratiDto ricerca(String c) {
-        List<UtenteRegistrato> lista = utenteRegistratoRepository.trovaUtenteRegistrato(c);
-        return new ListaUtentiRegistratiDto(lista);
-    }
+    
 
     @Override
     public UtenteRegistratoDto ritornaUtente(UtenteRegistrato ur) {
@@ -50,8 +47,14 @@ public class AnagraficaUtenteRegistratoServiceImpl implements AnagraficaUtenteRe
     }
 
     @Override
-    public ListaUtentiRegistratiDto aggiorna() {
+    public ListaPagineDto<UtenteRegistrato> aggiorna() {
         List<UtenteRegistrato> lista = utenteRegistratoRepository.findAll();
+        return new ListaUtentiRegistratiDto(lista);
+    }
+
+    @Override
+    public ListaUtentiRegistratiDto ricerca(String c) {
+        List<UtenteRegistrato> lista = utenteRegistratoRepository.trovaUtenteRegistrato(c, pageable);
         return new ListaUtentiRegistratiDto(lista);
     }
 

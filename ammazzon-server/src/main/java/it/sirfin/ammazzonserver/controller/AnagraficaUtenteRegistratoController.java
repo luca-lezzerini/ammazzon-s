@@ -25,7 +25,7 @@ public class AnagraficaUtenteRegistratoController {
 
     @RequestMapping("/aggiorna-utente")
     @ResponseBody
-    public ListaUtentiRegistratiDto aggiornaTaglie() {
+    public ListaUtentiRegistratiDto aggiornaUtente() {
         return anagraficaUtenteRegistratoService.aggiorna();
     }
 

@@ -15,12 +15,16 @@ import java.util.List;
 public class ListaUtentiRegistratiDto {
 
     private List<UtenteRegistrato> listaUtentiRegistrati;
+    private Integer numPag;
+    private Integer totalPages;
 
     public ListaUtentiRegistratiDto() {
     }
 
-    public ListaUtentiRegistratiDto(List<UtenteRegistrato> listaUtentiRegistrati) {
+    public ListaUtentiRegistratiDto(List<UtenteRegistrato> listaUtentiRegistrati, Integer numPag, Integer totalPages) {
         this.listaUtentiRegistrati = listaUtentiRegistrati;
+        this.numPag = numPag;
+        this.totalPages = totalPages;
     }
 
     public List<UtenteRegistrato> getListaUtentiRegistrati() {
@@ -31,9 +35,23 @@ public class ListaUtentiRegistratiDto {
         this.listaUtentiRegistrati = listaUtentiRegistrati;
     }
 
-    @Override
-    public String toString() {
-        return "ListaUtentiRegistratiDto{" + "listaUtentiRegistrati=" + listaUtentiRegistrati + '}';
+    public Integer getNumPag() {
+        return numPag;
     }
+
+    public void setNumPag(Integer numPag) {
+        this.numPag = numPag;
+    }
+
+    public Integer getTotalPages() {
+        return totalPages;
+    }
+
+    public void setTotalPages(Integer totalPages) {
+        this.totalPages = totalPages;
+    }
+    
+    
+    
 
 }
