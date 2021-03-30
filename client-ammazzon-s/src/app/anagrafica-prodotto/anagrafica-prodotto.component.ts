@@ -37,7 +37,7 @@ export class AnagraficaProdottoComponent implements OnInit, Automabile {
   inputRicerca: string;
   errore = "";
 
-  paginaCorrente = 0;
+  paginaCorrente = 1;
   numeroPagine: number;
 
   constructor(private http: HttpClient) {
@@ -162,7 +162,7 @@ export class AnagraficaProdottoComponent implements OnInit, Automabile {
     this.http.post<ListaProdottiDto>("http://localhost:8080/aggiorna-prodotti", paginaCompletaDto)
       .subscribe(r => this.listaProdotti = r.listaProdotti);
   }
-
+//
   ricercaPaginata(numPagina: number, criterioRicerca?: String) {
     console.log("numero di pagina per ricerca: ", numPagina)
     let dto = new ChiediPaginaDto();
@@ -209,22 +209,18 @@ export class AnagraficaProdottoComponent implements OnInit, Automabile {
     this.automa.next(new SelezionaEvent(), this.automa);
   }
 
-  primo(event) {
-    this.paginaCorrente = 0;
-    this.ricercaPaginata(this.paginaCorrente)
+  primo(event: PaginaDto) {
+    this.ricercaPaginata(event.pageNum);
   }
-  precedente(event) {
-    this.paginaCorrente--;
-    this.ricercaPaginata(this.paginaCorrente);
+  precedente(event: PaginaDto) {
+    this.ricercaPaginata(event.pageNum);
   }
-  numero(event) { }
-  successivo(event) {
-    this.paginaCorrente++;
-    this.ricercaPaginata(this.paginaCorrente);
+  numero(event: PaginaDto) { }
+  successivo(event: PaginaDto) {
+    this.ricercaPaginata(event.pageNum);
   }
-  ultimo(event) {
-    this.paginaCorrente = this.numeroPagine;
-    this.ricercaPaginata(this.paginaCorrente);
+  ultimo(event: PaginaDto) {
+    this.ricercaPaginata(event.pageNum);
    }
 
 }

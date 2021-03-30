@@ -71,7 +71,7 @@ public class AnagraficaProdottoServiceImpl implements AnagraficaProdottoService 
 
     @Override
     public ListaPagineDto<Prodotto> ricercaProdottiPaginata(String criterioRicerca, int numeroPagina) {
-        Pageable pageRequest = PageRequest.of(numeroPagina, 10);
+        Pageable pageRequest = PageRequest.of(numeroPagina - 1, 10);
         Page p = prodottoRepository
                 .findAll(pageRequest);
         System.out.println("contenuto della pagina: " + p.getContent() + "\n"
