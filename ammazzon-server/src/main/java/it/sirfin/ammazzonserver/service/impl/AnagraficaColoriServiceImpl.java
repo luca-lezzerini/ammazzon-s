@@ -24,51 +24,54 @@ import org.springframework.stereotype.Service;
  */
 @Service
 public class AnagraficaColoriServiceImpl implements AnagraficaColoriService {
-
+    
     @Autowired
     VarianteColoreRepository varianteColoreRepository;
-
+    
     @Override
-    public ListaColoriDto aggiungiColore(VarianteColore vc) {
+    public ListaPagineDto<VarianteColore> aggiungiColore(VarianteColore vc, int pagina) {
         varianteColoreRepository.save(vc);
-        return aggiornaColori();
-
+        return aggiornaColori(pagina);
+        
     }
-
+    
     @Override
-    public ListaColoriDto aggiornaColori() {
-        List<VarianteColore> colori = varianteColoreRepository.findAll();
+    public ListaPagineDto<VarianteColore> aggiornaColori(int pagina) {
+        PageRequest pg = PageRequest.of(pagina, 5);
+        Page<VarianteColore> colori = varianteColoreRepository.findAll(pg);
         colori.forEach(c -> {
             c.setProdottiColori(new ArrayList<>());
         });
-        return new ListaColoriDto(colori);
+        return new ListaPagineDto(colori.getContent(), colori.getPageable().getPageNumber(), colori.getTotalPages());
     }
-
+    
     @Override
-    public ListaColoriDto modificaColore(VarianteColore vc) {
+    public ListaPagineDto<VarianteColore> modificaColore(VarianteColore vc, int pagina) {
         varianteColoreRepository.save(vc);
-        return aggiornaColori();
+        return aggiornaColori(pagina);
     }
-
+    
     @Override
-    public ListaColoriDto ricercaColore(String c) {
+    public ListaPagineDto<VarianteColore> ricercaColore(String c, int pagina) {
         if (c.isBlank()) {
-            return aggiornaColori();
+            return aggiornaColori(pagina);
         }
-        return new ListaColoriDto(varianteColoreRepository.trovaCodice(c));
+        PageRequest pg = PageRequest.of(pagina, 5);
+        Page<VarianteColore> lista = varianteColoreRepository.trovaCodice(c, pg);
+        return new ListaPagineDto(lista.getContent(), lista.getPageable().getPageNumber(), lista.getTotalPages());
     }
-
+    
     @Override
-    public ListaColoriDto rimuoviColore(VarianteColore vc) {
+    public ListaPagineDto<VarianteColore> rimuoviColore(VarianteColore vc, int pagina) {
         varianteColoreRepository.delete(vc);
-        return aggiornaColori();
+        return aggiornaColori(pagina);
     }
-
+    
     @Override
-    public ColoreDto ritornaColore(VarianteColore vc) {
-        return new ColoreDto(vc);
+    public ColoreDto ritornaColore(VarianteColore vc, Integer pageNum, Integer totalPages) {
+        return new ColoreDto(vc, pageNum, totalPages);
     }
-
+    
     @Override
     public ListaPagineDto ritornaRecordPaginati(int pagina) {
         PageRequest pg = PageRequest.of(pagina, 5);

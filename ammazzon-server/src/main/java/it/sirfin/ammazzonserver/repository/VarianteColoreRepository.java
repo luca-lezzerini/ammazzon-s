@@ -14,7 +14,7 @@ public interface VarianteColoreRepository extends JpaRepository<VarianteColore, 
 
     //ListaColoriDto findByCodiceContains(String c);
     @Query("select c from VarianteColore c where c.codice =:criterio")
-    List<VarianteColore> trovaCodice(@Param("criterio") String criterio);
+    Page<VarianteColore> trovaCodice(@Param("criterio") String criterio, Pageable pageable);
 
 //    @Query(value = "select * from VarianteColore where codice =:cod",
 //            countQuery = "select count(*) from VarianteColore where codice =:cod",

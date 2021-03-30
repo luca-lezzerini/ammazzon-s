@@ -12,12 +12,16 @@ package it.sirfin.ammazzonserver.dto;
 public class RicercaColoreOProdottoDto {
 
     private String criterioRicerca;
+    private Integer pageNum;
+    private Integer totalPages;
 
     public RicercaColoreOProdottoDto() {
     }
 
-    public RicercaColoreOProdottoDto(String criterioRicerca) {
+    public RicercaColoreOProdottoDto(String criterioRicerca, Integer pageNum, Integer totalPages) {
         this.criterioRicerca = criterioRicerca;
+        this.pageNum = pageNum;
+        this.totalPages = totalPages;
     }
 
     public String getCriterioRicerca() {
@@ -28,9 +32,25 @@ public class RicercaColoreOProdottoDto {
         this.criterioRicerca = criterioRicerca;
     }
 
-    @Override
-    public String toString() {
-        return "RicercaTagliaDto{" + "criterioRicerca=" + criterioRicerca + '}';
+    public Integer getPageNum() {
+        return pageNum;
     }
 
+    public void setPageNum(Integer pageNum) {
+        this.pageNum = pageNum;
+    }
+
+    public Integer getTotalPages() {
+        return totalPages;
+    }
+
+    public void setTotalPages(Integer totalPages) {
+        this.totalPages = totalPages;
+    }
+
+    @Override
+    public String toString() {
+        return "RicercaColoreOProdottoDto{" + "criterioRicerca=" + criterioRicerca + ", pageNum=" + pageNum + ", totalPages=" + totalPages + '}';
+    }
+    
 }

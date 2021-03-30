@@ -6,7 +6,6 @@
 package it.sirfin.ammazzonserver.controller;
 
 import it.sirfin.ammazzonserver.dto.ColoreDto;
-import it.sirfin.ammazzonserver.dto.ListaColoriDto;
 import it.sirfin.ammazzonserver.dto.ListaPagineDto;
 import it.sirfin.ammazzonserver.dto.PaginaDto;
 import it.sirfin.ammazzonserver.dto.RicercaColoreOProdottoDto;
@@ -32,43 +31,43 @@ public class AnagraficaColoriController {
 
     @RequestMapping("aggiungi-colore")
     @ResponseBody
-    public ListaColoriDto aggiungiColore(@RequestBody ColoreDto dto) {
-        return anagraficaColoriService.aggiungiColore(dto.getVarianteColore());
+    public ListaPagineDto<VarianteColore> aggiungiColore(@RequestBody ColoreDto dto) {
+        return anagraficaColoriService.aggiungiColore(dto.getVarianteColore(), dto.getPageNum());
     }
 
     @RequestMapping("aggiorna-colore")
-    public ListaColoriDto aggiornaColore() {
-        return anagraficaColoriService.aggiornaColori();
+    public ListaPagineDto<VarianteColore> aggiornaColore(@RequestBody ColoreDto dto) {
+        return anagraficaColoriService.aggiornaColori(dto.getPageNum());
     }
 
     @RequestMapping("modifica-colore")
     @ResponseBody
-    public ListaColoriDto modificaColore(@RequestBody ColoreDto dto) {
-        return anagraficaColoriService.modificaColore(dto.getVarianteColore());
+    public ListaPagineDto<VarianteColore> modificaColore(@RequestBody ColoreDto dto) {
+        return anagraficaColoriService.modificaColore(dto.getVarianteColore(), dto.getPageNum());
     }
 
     @RequestMapping("ricerca-colore")
     @ResponseBody
-    public ListaColoriDto ricercaColore(@RequestBody RicercaColoreOProdottoDto dto) {
-        return anagraficaColoriService.ricercaColore(dto.getCriterioRicerca());
+    public ListaPagineDto<VarianteColore> ricercaColore(@RequestBody RicercaColoreOProdottoDto dto) {
+        return anagraficaColoriService.ricercaColore(dto.getCriterioRicerca(),1);
     }
 
     @RequestMapping("rimuovi-colore")
     @ResponseBody
-    public ListaColoriDto rimuoviColore(@RequestBody ColoreDto dto) {
-        return anagraficaColoriService.rimuoviColore(dto.getVarianteColore());
+    public ListaPagineDto<VarianteColore> rimuoviColore(@RequestBody ColoreDto dto) {
+        return anagraficaColoriService.rimuoviColore(dto.getVarianteColore(), dto.getPageNum());
     }
 
     @RequestMapping("ritorna-colore")
     @ResponseBody
     public ColoreDto ritornaColore(@RequestBody ColoreDto dto) {
-        return anagraficaColoriService.ritornaColore(dto.getVarianteColore());
+        return anagraficaColoriService.ritornaColore(dto.getVarianteColore(), dto.getPageNum(), dto.getTotalPages());
     }
 
     @RequestMapping("ritorna-colore-paginato")
     @ResponseBody
     public ListaPagineDto<VarianteColore> ritornaColorePaginato(@RequestBody PaginaDto dto) {
-        return null;
+        return anagraficaColoriService.ritornaRecordPaginati(dto.getPageNum());
     }
 
 }

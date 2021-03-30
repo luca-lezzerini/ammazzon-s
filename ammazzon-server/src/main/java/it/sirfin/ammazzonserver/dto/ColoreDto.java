@@ -10,12 +10,16 @@ import it.sirfin.ammazzonserver.model.VarianteColore;
 public class ColoreDto {
 
     private VarianteColore varianteColore;
+    private Integer pageNum;
+    private Integer totalPages;
 
     public ColoreDto() {
     }
 
-    public ColoreDto(VarianteColore varianteColore) {
+    public ColoreDto(VarianteColore varianteColore, Integer pageNum, Integer totalPages) {
         this.varianteColore = varianteColore;
+        this.pageNum = pageNum;
+        this.totalPages = totalPages;
     }
 
     public VarianteColore getVarianteColore() {
@@ -26,10 +30,25 @@ public class ColoreDto {
         this.varianteColore = varianteColore;
     }
 
-    @Override
-    public String toString() {
-        return "ColoreDto{" + "varianteColore=" + varianteColore + '}';
+    public Integer getPageNum() {
+        return pageNum;
     }
 
-   
+    public void setPageNum(Integer pageNum) {
+        this.pageNum = pageNum;
+    }
+
+    public Integer getTotalPages() {
+        return totalPages;
+    }
+
+    public void setTotalPages(Integer totalPages) {
+        this.totalPages = totalPages;
+    }
+
+    @Override
+    public String toString() {
+        return "ColoreDto{" + "varianteColore=" + varianteColore + ", pageNum=" + pageNum + ", totalPages=" + totalPages + '}';
+    }
+
 }

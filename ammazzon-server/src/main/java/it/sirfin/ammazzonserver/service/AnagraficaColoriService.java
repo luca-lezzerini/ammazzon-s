@@ -16,17 +16,17 @@ import it.sirfin.ammazzonserver.model.VarianteColore;
  */
 public interface AnagraficaColoriService {
 
-    ListaColoriDto aggiungiColore(VarianteColore vc);
+    ListaPagineDto<VarianteColore> aggiungiColore(VarianteColore vc, int pagina);
 
-    ListaColoriDto aggiornaColori();
-    
-    ListaColoriDto modificaColore(VarianteColore vc);
-    
-    ListaColoriDto ricercaColore(String c);
-    
-    ListaColoriDto rimuoviColore(VarianteColore vc);
-    
-    ColoreDto ritornaColore(VarianteColore vc);
-    
-    ListaPagineDto ritornaRecordPaginati(int pagina);
+    ListaPagineDto<VarianteColore> aggiornaColori(int pagina);
+
+    ListaPagineDto<VarianteColore> modificaColore(VarianteColore vc, int pagina);
+
+    ListaPagineDto<VarianteColore> ricercaColore(String c, int pagina);
+
+    ListaPagineDto<VarianteColore> rimuoviColore(VarianteColore vc, int pagina);
+
+    ColoreDto ritornaColore(VarianteColore vc, Integer pageNum, Integer totalPages);
+
+    ListaPagineDto<VarianteColore> ritornaRecordPaginati(int pagina);
 }
