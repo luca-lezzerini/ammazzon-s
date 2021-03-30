@@ -48,7 +48,7 @@ export class AppPaginateComponent implements OnInit {
     this.ultimo.emit(this.paginaDto);
   }
 
-  numeroPagina(){
+  numeroPagina() {
     this.numero.emit(this.paginaDto);
   }
 
