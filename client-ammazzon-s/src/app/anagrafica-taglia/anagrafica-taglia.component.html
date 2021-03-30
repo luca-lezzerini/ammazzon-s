@@ -1,3 +1,5 @@
+
+
 <title>Ammazzon</title>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -45,6 +47,10 @@
         <br>
     </div>
     <br><br>
+    <app-app-paginate [pagina]="paginaCorrente" [totali]="numeroPagine"
+    (primo)="primo($event)" (precedente)="precedente($event)" (numero)="numero($event)"
+    (successivo)="successivo($event)" (ultimo)="ultimo($event)"></app-app-paginate>
+    <hr>
     <div class="tabella">
         <table *ngIf="tabella">
             <tr>
@@ -57,3 +63,7 @@
             </tr>
         </table>
     </div>
+    <br><br>
+    <app-app-paginate [pagina]="paginaCorrente" [totali]="numeroPagine"
+    (primo)="primo($event)" (precedente)="precedente($event)" (numero)="numero($event)"
+    (successivo)="successivo($event)" (ultimo)="ultimo($event)"></app-app-paginate>

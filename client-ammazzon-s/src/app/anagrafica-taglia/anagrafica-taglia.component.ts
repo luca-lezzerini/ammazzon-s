@@ -20,6 +20,8 @@ export class AnagraficaTagliaComponent implements OnInit, Automabile {
   taglia = new VarianteTaglia();
   listaTaglie: VarianteTaglia[] = [];
   errore = "";
+  paginaCorrente = 1;
+  numeroPagine = 10;
 
   form: boolean;
   aggiungi: boolean;
@@ -37,6 +39,22 @@ export class AnagraficaTagliaComponent implements OnInit, Automabile {
   }
 
   ngOnInit(): void {
+  }
+
+  primo(event) {
+    console.log(event);
+  }
+  successivo(event) {
+    console.log(event);
+  }
+  numero(event) {
+    console.log(event);
+  }
+  precedente(event) {
+    console.log(event);
+  }
+  ultimo(event) {
+    console.log(event);
   }
 
   entraStatoRicerca() {
