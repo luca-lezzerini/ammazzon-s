@@ -23,6 +23,11 @@ public interface ProdottoColoreRepository extends JpaRepository<ProdottoColore, 
             + "and pc.varianteColore.descrizione = 'rosso'")
     List<ProdottoColore> CappelliRossi();
 
+    /**
+     * Trova tutti i prodottoColore associati al prodotto con id dato in inpt
+     * @param id
+     * @return List<ProdottoColore>
+     */
     @Query("SELECT pc FROM ProdottoColore pc WHERE pc.prodotto.id = :p")
     List<ProdottoColore> coloriAssociatiProdotto(@Param("p") Long id);
 

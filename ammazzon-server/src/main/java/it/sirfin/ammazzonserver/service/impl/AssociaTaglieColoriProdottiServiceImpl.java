@@ -38,44 +38,35 @@ public class AssociaTaglieColoriProdottiServiceImpl implements AssociaTaglieColo
     @Autowired
     ColoreTagliaRepository coloreTagliaRepository;
 
+    
     @Override
     public ListaProdottiDto cercaProdotti(String criterioRic) {
-        ListaProdottiDto dtoRes = new ListaProdottiDto();
         List<Prodotto> prodotti = prodottoRepository.trovaPerCodiceODescrizioneLike(criterioRic);
         prodotti.forEach(p -> {
             p.setProdottiColori(new ArrayList<>());
         });
-        dtoRes.setListaProdotti(prodotti);
+        ListaProdottiDto dtoRes = new ListaProdottiDto(prodotti);
         return dtoRes;
     }
 
     @Override
     public ListaProdottoColoriDto selezionaProdotto(Long id) {
-        ListaProdottoColoriDto dtoRes = new ListaProdottoColoriDto();
         List<ProdottoColore> lista = prodottoColoreRepository.coloriAssociatiProdotto(id);
-        dtoRes.setListaProdottoColori(lista);
-        lista.forEach(l -> {
-            System.out.println(l);
-        });
+        ListaProdottoColoriDto dtoRes = new ListaProdottoColoriDto(lista);
         return dtoRes;
     }
 
     @Override
     public ListaColoreTagliaDto selezionaProdottoColore(Long idProdottoColore) {
-        System.out.println("siamo in  coloriTaglieAssociateProdottoColore");
-        ListaColoreTagliaDto dtoRes = new ListaColoreTagliaDto();
         List<ColoreTaglia> coloriTaglieAssociate = coloreTagliaRepository.taglieProdottoColore(idProdottoColore);
-        List<VarianteTaglia> taglieNonAssociate = taglieNonAssociate(coloriTaglieAssociate);
+        List<VarianteTaglia> taglieNonAssociate = trovaTaglieNonAssociate(coloriTaglieAssociate);
         //rimuovo colori taglie nel risultato per il client per velocizzare l'
         //operazione
         taglieNonAssociate.forEach(tna -> {
             tna.setColoriTaglie(new ArrayList<>());
         });
-        dtoRes.setColoriTaglie(coloriTaglieAssociate);
-        dtoRes.setNotColoriTaglie(taglieNonAssociate);
-        dtoRes.getNotColoriTaglie().forEach(n -> {
-            System.out.println(n);
-        });
+        ListaColoreTagliaDto dtoRes = new ListaColoreTagliaDto(
+                coloriTaglieAssociate, taglieNonAssociate);
         return dtoRes;
     }
 
@@ -118,14 +109,16 @@ public class AssociaTaglieColoriProdottiServiceImpl implements AssociaTaglieColo
         System.out.println("numero taglie trovate : " + taglie.size());
         taglie.forEach(t -> {
             System.out.println("*/*/**/*/*/*/*/*/*/*/*");
-            System.out.println("Sto associando: " + pc.getProdotto().getCodice() 
+            System.out.println("Sto associando: " + pc.getProdotto().getCodice()
                     + ", " + t.getCodice());
             associaProdottoColoreTaglia(pc, t);
         });
         //IL METODO POTREBBE ANCHE ESSERE VOID
         return new ListaColoreTagliaDto();
     }
-
+    ///////////////////////////////////////////////////////////////////////
+    //////////////////////////////////METODI PRIVATI///////////////////////
+    ///////////////////////////////////////////////////////////////////////
     /**
      * Ottiene tutte le taglie non associate date, date tutte le taglie
      * associate
@@ -133,7 +126,7 @@ public class AssociaTaglieColoriProdottiServiceImpl implements AssociaTaglieColo
      * @param coloriTaglieAssociate
      * @return
      */
-    private List<VarianteTaglia> taglieNonAssociate(List<ColoreTaglia> coloriTaglieAssociate) {
+    private List<VarianteTaglia> trovaTaglieNonAssociate(List<ColoreTaglia> coloriTaglieAssociate) {
         Instant i = Instant.now();
         System.out.println("");
         System.out.println("\n*************************************************");
