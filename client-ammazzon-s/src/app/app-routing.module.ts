@@ -8,6 +8,7 @@ import { AssociaColoriAProdottiComponent } from './associa-colori-a-prodotti/ass
 import { HomePageComponent } from './home-page/home-page.component';
 import { UserInterfaceComponent } from './user-interface/user-interface.component';
 import { AppPaginateComponent } from './app-paginate/app-paginate.component';
+import { AnagraficaProdottoComponent } from './anagrafica-prodotto/anagrafica-prodotto.component';
 
 const routes: Routes = [
   { path: 'app-home-page', component: HomePageComponent },
@@ -19,7 +20,8 @@ const routes: Routes = [
   { path: 'app-anagrafica-utente-registrato', component: AnagraficaUtenteRegistratoComponent },
   { path: 'app-associa-taglie-prodotti-colori', component: AssociaTaglieProdottiColoriComponent },
   { path: 'app-paginate-component', component: AppPaginateComponent },
-  { path: 'app-associa-colori-a-prodotti', component: AssociaColoriAProdottiComponent }
+  { path: 'app-associa-colori-a-prodotti', component: AssociaColoriAProdottiComponent },
+  { path: 'app-anagrafica-prodotto', component: AnagraficaProdottoComponent }
 ];
 
 @NgModule({

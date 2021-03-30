@@ -11,6 +11,7 @@ import { AnagraficaUtenteRegistratoComponent } from './anagrafica-utente-registr
 import { AssociaTaglieProdottiColoriComponent } from './associa-taglie-prodotti-colori/associa-taglie-prodotti-colori.component';
 import { AssociaColoriAProdottiComponent } from './associa-colori-a-prodotti/associa-colori-a-prodotti.component';
 import { AppPaginateComponent } from './app-paginate/app-paginate.component';
+import { AnagraficaProdottoComponent } from './anagrafica-prodotto/anagrafica-prodotto.component';
 
 
 @NgModule({
@@ -22,7 +23,8 @@ import { AppPaginateComponent } from './app-paginate/app-paginate.component';
     AnagraficaUtenteRegistratoComponent,
     AssociaTaglieProdottiColoriComponent,
     AssociaColoriAProdottiComponent,
-    AppPaginateComponent
+    AppPaginateComponent,
+    AnagraficaProdottoComponent
   ],
   imports: [
     BrowserModule,
