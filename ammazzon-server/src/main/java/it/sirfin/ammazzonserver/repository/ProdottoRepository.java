@@ -21,4 +21,9 @@ public interface ProdottoRepository extends JpaRepository<Prodotto, Long> {
             + "or p.codice =:cod")
     List<Prodotto> trovaPerCodiceODescrizioneLike(@Param("cod") String c);
     
+    @Query("update Prodotto p set p.codice = :codice, p.descrizione =:descrizione, p.prezzo = :prezzo where p.id =:id")
+    void modificaProdotto(@Param("codice") String codice, @Param("descrizione") String descrizione, @Param("prezzo") Double prezzo, @Param("id") Long id);
+    
+    List<Prodotto> findByCodiceContainsOrDescrizioneContainsOrPrezzoContains(String codice, String descrizione, Double prezzo);
+    
 }

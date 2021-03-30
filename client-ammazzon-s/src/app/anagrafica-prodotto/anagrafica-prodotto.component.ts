@@ -141,7 +141,7 @@ export class AnagraficaProdottoComponent implements OnInit, Automabile {
   selezionaProdotto(p:Prodotto) {
     let dto = new ProdottoDto();
     dto.prodotto = p;
-    this.http.post<ProdottoDto>("http://localhost:8080/seleziona-prodotto", dto)
+    this.http.post<ProdottoDto>("http://localhost:8080/seleziona-prodotti", dto)
       .subscribe(r => {
         this.prodotto = r.prodotto;
       });
