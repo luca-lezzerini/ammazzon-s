@@ -73,9 +73,4 @@ public class VarianteColore implements Serializable {
         this.prodottiColori = prodottiColori;
     }
 
-    @Override
-    public String toString() {
-        return "VarianteColore{" + "id=" + id + ", codice=" + codice + ", descrizione=" + descrizione + ", prodottiColori=" + prodottiColori.size() + '}';
-    }
-
 }

@@ -87,8 +87,12 @@ export class AnagraficaColoriGalliComponent implements OnInit, Automabile {
     this.automa.next(new RicercaEvent(), this.automa);
   }
   aggiorna() {
-    this.http.get<ListaColoriDto>(this.url + "aggiorna-colore")
-      .subscribe(r => this.variantiColori = r.variantiColori);
+    let dto = new ColoreDto();
+    dto.pageNum = 4;
+    this.http.post<ListaColoriDto>(this.url + "aggiorna-colore", dto)
+      .subscribe(r => {
+        this.variantiColori = r.listaPagine;
+      });
   }
 
   entraStatoRicerca() {
@@ -156,13 +160,16 @@ export class AnagraficaColoriGalliComponent implements OnInit, Automabile {
   salvaDati() {
     let dto = new ColoreDto();
     dto.varianteColore = this.varianteColore;
+    dto.pageNum = 1;
+    dto.totalPages = 5;
     if (this.varianteColore.codice && this.varianteColore.descrizione == null) {
       this.errore = "Errore! Devi inserire un colore PORCA ZOZZA";
     } else {
       this.errore = "";
       this.http.post<ListaColoriDto>(this.url + "aggiungi-colore", dto)
         .subscribe(r => {
-          this.variantiColori = r.variantiColori;
+          this.variantiColori = r.listaPagine;
+          console.log(this.varianteColore);
           this.varianteColore = new VarianteColore();
           console.log("Abbiamo aggiunto un colore stupendo");
         });
@@ -173,28 +180,32 @@ export class AnagraficaColoriGalliComponent implements OnInit, Automabile {
     dto.varianteColore = this.varianteColore;
     this.http.post<ListaColoriDto>(this.url + "modifica-colore", dto)
       .subscribe(r => {
-        this.variantiColori = r.variantiColori;
+        this.variantiColori = r.listaPagine;
       });
   }
   eliminaDati() {
     let dto = new ColoreDto();
     dto.varianteColore = this.varianteColore;
+    dto.pageNum = 1;
+    dto.totalPages = 5;
     this.http.post<ListaColoriDto>(this.url + "rimuovi-colore", dto)
       .subscribe(r => {
-        this.variantiColori = r.variantiColori;
+        this.variantiColori = r.listaPagine;
       });
   }
   aggiornaRisultatiRicerca() {
     let stringa = new RicercaColoreOProdottoDto();
     stringa.criterioRicerca = this.inputRicerca;
+    stringa.pageNum = 1;
+    stringa.totalPages = 5;
     if (this.inputRicerca == null) {
       this.errore = "ERRORE! DEVI INSERIRE UN CRITERIO DI RICERCA PORCA ZOZZA ";
     } else {
       this.errore = "";
       this.http.post<ListaColoriDto>(this.url + "ricerca-colore", stringa)
         .subscribe(r => {
-          if (r.variantiColori.length > 0) {
-            this.variantiColori = r.variantiColori;
+          if (r.listaPagine.length > 0) {
+            this.variantiColori = r.listaPagine;
             this.inputRicerca = "";
           } else {
             this.errore = "Nessun elemento trovato";

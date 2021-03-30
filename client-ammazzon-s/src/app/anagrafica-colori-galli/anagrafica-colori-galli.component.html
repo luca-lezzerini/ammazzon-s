@@ -41,6 +41,7 @@
         <input type="text" placeholder="codice" [(ngModel)]="varianteColore.codice" [disabled]="codiceInput"> &nbsp;
         <input type="text" placeholder="descrizione" [(ngModel)]="varianteColore.descrizione"
             [disabled]="descrizione">&nbsp;
+        <br>
         <br><br>
         <button (click)="modifica()" *ngIf="edit">Modifica</button> &nbsp;
         <button (click)="conferma()" *ngIf="conf">Conferma</button> &nbsp;
@@ -60,7 +61,7 @@
             (precedente)="precedente($event)" (numero)="numero($event)" (successivo)="successivo($event)"
             (ultimo)="ultimo($event)">
         </app-app-paginate>
-        <table *ngIf="tabella && variantiColori.length>0">
+        <table *ngIf="tabella">
             <tr>
                 <th>Codice</th>
                 <th>Descrizione</th>
@@ -74,6 +75,7 @@
                 </td>
             </tr>
         </table>
+        <br>
         <app-app-paginate [pagina]="paginaCorrente" [totali]="numeroPagine" (primo)="primo($event)"
             (precedente)="precedente($event)" (numero)="numero($event)" (successivo)="successivo($event)"
             (ultimo)="ultimo($event)">

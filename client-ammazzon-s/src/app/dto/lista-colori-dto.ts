@@ -1,5 +1,8 @@
+import { ProdottoColore } from "../entità/prodotto-colore";
 import { VarianteColore } from "../entità/variante-colore";
 
 export class ListaColoriDto {
-    variantiColori: VarianteColore[] = [];
+    listaPagine: VarianteColore[] = [];
+    pageNum: number;
+    totalPages: number;
 }
