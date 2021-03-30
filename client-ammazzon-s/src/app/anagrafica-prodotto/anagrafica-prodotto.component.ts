@@ -99,6 +99,7 @@ export class AnagraficaProdottoComponent implements OnInit, Automabile {
   salvaDati() {
     let dto = new ProdottoDto();
     dto.prodotto = this.prodotto;
+    console.log(dto);
     this.http.post<ListaProdottiDto>("http://localhost:8080/aggiungi-prodotto", dto)
       .subscribe(r => {
         this.listaProdotti = r.listaProdotti;

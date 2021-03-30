@@ -25,7 +25,8 @@ public class AnagraficaProdottoController {
 
     @RequestMapping("/aggiungi-prodotto")
     @ResponseBody
-    public ListaProdottiDto inserisci(ProdottoDto dto) {
+    public ListaProdottiDto inserisci(@RequestBody ProdottoDto dto) {
+
         return anagraficaProdottoService.inserisci(dto.getProdotto());
     }
 

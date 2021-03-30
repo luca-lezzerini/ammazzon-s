@@ -4,6 +4,7 @@ import it.sirfin.ammazzonserver.model.Prodotto;
 import it.sirfin.ammazzonserver.model.VarianteColore;
 import java.util.List;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
@@ -21,6 +22,7 @@ public interface ProdottoRepository extends JpaRepository<Prodotto, Long> {
             + "or p.codice =:cod")
     List<Prodotto> trovaPerCodiceODescrizioneLike(@Param("cod") String c);
     
+    @Modifying
     @Query("update Prodotto p set p.codice = :codice, p.descrizione =:descrizione, p.prezzo = :prezzo where p.id =:id")
     void modificaProdotto(@Param("codice") String codice, @Param("descrizione") String descrizione, @Param("prezzo") Double prezzo, @Param("id") Long id);
     

@@ -3,16 +3,20 @@ package it.sirfin.ammazzonserver.service.impl;
 import it.sirfin.ammazzonserver.dto.ListaProdottiDto;
 import it.sirfin.ammazzonserver.dto.ProdottoDto;
 import it.sirfin.ammazzonserver.model.Prodotto;
+import it.sirfin.ammazzonserver.repository.ProdottoColoreRepository;
 import it.sirfin.ammazzonserver.repository.ProdottoRepository;
 import it.sirfin.ammazzonserver.service.AnagraficaProdottoService;
+import javax.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+@Transactional
 @Service
 public class AnagraficaProdottoServiceImpl implements AnagraficaProdottoService {
 
     @Autowired
     ProdottoRepository prodottoRepository;
+    
 
     @Override
     public ListaProdottiDto inserisci(Prodotto p) {
@@ -22,6 +26,7 @@ public class AnagraficaProdottoServiceImpl implements AnagraficaProdottoService 
 
     @Override
     public ListaProdottiDto elimina(Prodotto p) {
+        
         prodottoRepository.delete(p);
         return aggiorna();
     }
