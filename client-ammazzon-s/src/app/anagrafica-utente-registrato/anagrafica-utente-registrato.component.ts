@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { PaginaDto } from '../app-paginate/pagina-dto';
 import { Automa } from '../automa-crud/automa';
 import { Automabile } from '../automa-crud/automabile';
 import { ModificaEvent, ConfermaEvent, AnnullaEvent, RimuoviEvent, AddEvent, RicercaEvent, SelezionaEvent } from '../automa-crud/eventi';
@@ -19,6 +20,17 @@ export class AnagraficaUtenteRegistratoComponent implements OnInit, Automabile {
 
   utente = new UtenteRegistrato();
   listaUtenti: UtenteRegistrato[] = [];
+  paginaDto = new PaginaDto();
+  paginaCorrente: number = 1;
+  numeroPagine: number = 12;
+  @Input() pagina: number;
+  @Input() totali: number;
+
+  @Output() primo: EventEmitter<PaginaDto> = new EventEmitter<PaginaDto>();
+  @Output() precedente: EventEmitter<PaginaDto> = new EventEmitter<PaginaDto>();
+  @Output() numero: EventEmitter<PaginaDto> = new EventEmitter<PaginaDto>();
+  @Output() successivo: EventEmitter<PaginaDto> = new EventEmitter<PaginaDto>();
+  @Output() ultimo: EventEmitter<PaginaDto> = new EventEmitter<PaginaDto>();
 
   form: boolean;
   aggiungi: boolean;
@@ -37,6 +49,7 @@ export class AnagraficaUtenteRegistratoComponent implements OnInit, Automabile {
     this.aggiorna();
   }
   ngOnInit(): void {
+
   }
 
   entraStatoRicerca() {
@@ -181,6 +194,24 @@ export class AnagraficaUtenteRegistratoComponent implements OnInit, Automabile {
   seleziona(l: UtenteRegistrato) {
     this.ritornaTaglia(l);
     this.automa.next(new SelezionaEvent(), this.automa);
+  }
+  //-------------------------------------------
+  //metodi del paginate
+  
+  primoE(event) {
+    console.log(event);
+  }
+  successivoE(event) {
+    console.log(event);
+  }
+  numeroE(event) {
+    console.log(event);
+  }
+  precedenteE(event) {
+    console.log(event);
+  }
+  ultimoE(event) {
+    console.log(event);
   }
 
 }

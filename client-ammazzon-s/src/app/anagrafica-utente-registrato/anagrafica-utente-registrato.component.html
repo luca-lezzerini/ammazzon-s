@@ -58,7 +58,11 @@
     <br><br>
 
     <div class="tabella">
-        <app-app-paginate></app-app-paginate>
+        <app-app-paginate [pagina]="paginaCorrente" [totali]="numeroPagine" (primo)="primoE($event)"
+            (precedente)="precedenteE($event)" (numero)="numeroE($event)" (successivo)="successivoE($event)"
+            (ultimo)="ultimoE($event)"></app-app-paginate>
+
+        <br>
         <table *ngIf="tabella">
             <tr>
                 <th>Nome</th>
@@ -75,5 +79,7 @@
                 <td> <button (click)="seleziona(l)">Seleziona</button></td>
             </tr>
         </table>
-        <app-app-paginate></app-app-paginate>
+        <app-app-paginate [pagina]="paginaCorrente" [totali]="numeroPagine" (primo)="primoE($event)"
+            (precedente)="precedenteE($event)" (numero)="numeroE($event)" (successivo)="successivoE($event)"
+            (ultimo)="ultimoE($event)"></app-app-paginate>
     </div>
