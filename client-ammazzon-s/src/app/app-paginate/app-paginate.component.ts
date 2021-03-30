@@ -1,5 +1,6 @@
+import { PaginaDto } from './pagina-dto';
 import { HttpClient } from '@angular/common/http';
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 
 @Component({
   selector: 'app-app-paginate',
@@ -10,42 +11,45 @@ export class AppPaginateComponent implements OnInit {
 
   constructor(private http: HttpClient) { }
 
-  //@Input() numeroPaginaCorrente: number;
-  @Input() totalPages: number;
-  numPag: number = 1;
-  //numeroMaxPagine: number;
+  @Input() pagina: number;
+  @Input() totali: number;
+
+  @Output() primo: EventEmitter<PaginaDto> = new EventEmitter<PaginaDto>();
+  @Output() precedente: EventEmitter<PaginaDto> = new EventEmitter<PaginaDto>();
+  @Output() numero: EventEmitter<PaginaDto> = new EventEmitter<PaginaDto>();
+  @Output() successivo: EventEmitter<PaginaDto> = new EventEmitter<PaginaDto>();
+  @Output() ultimo: EventEmitter<PaginaDto> = new EventEmitter<PaginaDto>();
+
+  paginaDto = new PaginaDto();
+
   url = "http://localhost:8080/";
 
   ngOnInit(): void {
+    console.log(this.pagina);
+    console.log(this.totali);
+    this.paginaDto.pageNum = this.pagina;
+    this.paginaDto.totalPages = this.totali;
   }
 
-  // vaiAPrimaPagina() {
-
-  // }
-
-  ///vaiAPrecedente() {
-
-  //}
-
-  ///vaiASuccessivo() {
-
-  //}
-
-  ///vaiAUltima() {
-
-  //}
-  onfirst() {
-
+  onFirst() {
+    this.paginaDto.pageNum = 1;
   }
   onPrevious() {
-//this.totalPages, this.numPag -1;
+    this.paginaDto.pageNum--;
+    this.primo.emit(this.paginaDto);
   }
   onNext() {
-   //this.setPage (Math.min(this.totalPages, this.numPag +1)) ;
+    this.paginaDto.pageNum++;
+    this.successivo.emit(this.paginaDto);
   }
 
-  onfin() {
+  onFin() {
+    this.paginaDto.pageNum = this.paginaDto.totalPages;
+    this.ultimo.emit(this.paginaDto);
+  }
 
+  numeroPagina(){
+    this.numero.emit(this.paginaDto);
   }
 
 
