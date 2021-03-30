@@ -33,39 +33,41 @@ public class AnagraficaTaglieController {
     @RequestMapping("/aggiorna-taglia")
     @ResponseBody
     public ListaPagineDto<VarianteTaglia> aggiornaTaglie(@RequestBody TagliaDto dto) {
-        var pag = anagraficaTaglieService.aggiorna(dto.getPageNum());
+        var pag = anagraficaTaglieService.aggiorna(dto.getPageNum(), dto.getTotalPages());
         return new ListaPagineDto<>(pag.getContent(), pag.getPageable().getPageNumber(), pag.getTotalPages());
     }
 
     @RequestMapping("aggiungi-taglia")
     @ResponseBody
     public ListaPagineDto<VarianteTaglia> aggiungiColore(@RequestBody TagliaDto dto) {
-        var pag = anagraficaTaglieService.aggiungiTaglia(dto.getVarianteTaglia(), dto.getPageNum());
+        var pag = anagraficaTaglieService.aggiungiTaglia(dto.getVarianteTaglia(), dto.getPageNum(), dto.getTotalPages());
         return new ListaPagineDto<>(pag.getContent(), pag.getPageable().getPageNumber(), pag.getTotalPages());
     }
 
     @RequestMapping("rimuovi-taglia")
     @ResponseBody
     public ListaPagineDto<VarianteTaglia> rimuoviTaglia(@RequestBody TagliaDto dto) {
-        var pag = anagraficaTaglieService.rimuoviTaglia(dto.getVarianteTaglia(), dto.getPageNum());
+        var pag = anagraficaTaglieService.rimuoviTaglia(dto.getVarianteTaglia(), dto.getPageNum(), dto.getTotalPages());
         return new ListaPagineDto<>(pag.getContent(), pag.getPageable().getPageNumber(), pag.getTotalPages());
     }
 
-//    @RequestMapping("conferma-taglia")
-//    @ResponseBody
-//    public ListaTaglieDto confermaTaglia(@RequestBody TagliaDto dto) {
-//        return anagraficaTaglieService.conferma(dto.getVarianteTaglia());
-//    }
-//
-//    @RequestMapping("rit-taglia")
-//    @ResponseBody
-//    public TagliaDto ritornaTaglia(@RequestBody TagliaDto dto) {
-//        return anagraficaTaglieService.ritornaTaglia(dto.getVarianteTaglia());
-//    }
-//
-//    @RequestMapping("ricerca-taglia")
-//    @ResponseBody
-//    public ListaTaglieDto confermaTaglia(@RequestBody RicercaTagliaDto dto) {
-//        return anagraficaTaglieService.ricerca(dto.getCriterioRicerca());
-//    }
+    @RequestMapping("conferma-taglia")
+    @ResponseBody
+    public ListaPagineDto<VarianteTaglia> confermaTaglia(@RequestBody TagliaDto dto) {
+        var pag = anagraficaTaglieService.conferma(dto.getVarianteTaglia(), dto.getPageNum(), dto.getTotalPages());
+        return new ListaPagineDto<>(pag.getContent(), pag.getPageable().getPageNumber(), pag.getTotalPages());
+    }
+
+    @RequestMapping("rit-taglia")
+    @ResponseBody
+    public TagliaDto ritornaTaglia(@RequestBody TagliaDto dto) {
+        return anagraficaTaglieService.ritornaTaglia(dto.getVarianteTaglia(), dto.getPageNum(), dto.getTotalPages());
+    }
+
+    @RequestMapping("ricerca-taglia")
+    @ResponseBody
+    public ListaPagineDto<VarianteTaglia> ricercaTaglia(@RequestBody RicercaTagliaDto dto) {
+        var pag = anagraficaTaglieService.ricerca(dto.getCriterioRicerca(), dto.getPageNum(), dto.getTotalPages());
+        return new ListaPagineDto<>(pag.getContent(), pag.getPageable().getPageNumber(), pag.getTotalPages());
+    }
 }

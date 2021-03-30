@@ -16,17 +16,17 @@ import org.springframework.data.domain.Page;
  */
 public interface AnagraficaTaglieService {
 
-    Page <VarianteTaglia>  aggiungiTaglia(VarianteTaglia vt, int pagina);
+    Page <VarianteTaglia>  aggiungiTaglia(VarianteTaglia vt, int pagina, int totalPages);
 
-    Page <VarianteTaglia>  rimuoviTaglia(VarianteTaglia vt,int pagina);
+    Page <VarianteTaglia>  rimuoviTaglia(VarianteTaglia vt,int pagina, int totalPages);
 
-    Page <VarianteTaglia>  ricerca(String c, int pagina);
+    Page <VarianteTaglia>  ricerca(String c, int pagina, int totalPages);
 
     TagliaDto ritornaTaglia(VarianteTaglia vt, int pageNum, int totalPages);
 
-    Page <VarianteTaglia>  conferma(VarianteTaglia vt, int pagina);
+    Page <VarianteTaglia>  conferma(VarianteTaglia vt, int pagina, int totalPages);
 
-    Page <VarianteTaglia> aggiorna(int pagina);
+    Page <VarianteTaglia> aggiorna(int pagina, int totalPages);
     
    
 }

@@ -29,23 +29,23 @@ public class AnagraficaTaglieServiceImpl implements AnagraficaTaglieService {
     VarianteTagliaRepository varianteTagliaRepository;
 
     @Override
-    public Page <VarianteTaglia>  aggiungiTaglia(VarianteTaglia vt, int pagina) {
+    public Page <VarianteTaglia>  aggiungiTaglia(VarianteTaglia vt, int pagina, int totalPages) {
         varianteTagliaRepository.save(vt);
-        return aggiorna(pagina);
+        return aggiorna(pagina,totalPages);
     }
 
     @Override
-    public Page <VarianteTaglia>  rimuoviTaglia(VarianteTaglia vt, int pagina) {
+    public Page <VarianteTaglia>  rimuoviTaglia(VarianteTaglia vt, int pagina, int totalPages) {
         varianteTagliaRepository.delete(vt);
-        return aggiorna(pagina);
+        return aggiorna(pagina,totalPages);
     }
 
     @Override
-    public Page<VarianteTaglia> ricerca(String c, int pagina) {
+    public Page<VarianteTaglia> ricerca(String c, int pageNum, int totalPages) {
         if (c.isBlank()) {
-            return aggiorna(pagina);
+            return aggiorna(pageNum,totalPages);
         }
-        Pageable primaPaginaCinqueElementi = PageRequest.of(0, 5);
+        Pageable primaPaginaCinqueElementi = PageRequest.of(pageNum, totalPages);
         Page<VarianteTaglia> lista = varianteTagliaRepository.trovaCodice(c,primaPaginaCinqueElementi);
         return lista;
     }
@@ -56,14 +56,14 @@ public class AnagraficaTaglieServiceImpl implements AnagraficaTaglieService {
     }
 
     @Override
-    public Page<VarianteTaglia> conferma(VarianteTaglia vt, int pagina) {
+    public Page<VarianteTaglia> conferma(VarianteTaglia vt, int pagina, int totalPages) {
         varianteTagliaRepository.save(vt);
-        return aggiorna(pagina);
+        return aggiorna(pagina,totalPages);
     }
 
     @Override
-    public Page<VarianteTaglia> aggiorna(int pagina) {
-        Pageable primaPaginaCinqueElementi = PageRequest.of(pagina, 5);
+    public Page<VarianteTaglia> aggiorna(int pagina, int totalPages) {
+        Pageable primaPaginaCinqueElementi = PageRequest.of(pagina, totalPages);
         Page<VarianteTaglia> lista = varianteTagliaRepository.findAll(primaPaginaCinqueElementi);
         lista.forEach(l -> {
             l.setColoriTaglie(new ArrayList<>());

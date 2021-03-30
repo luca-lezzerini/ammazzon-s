@@ -119,6 +119,8 @@ export class AnagraficaTagliaComponent implements OnInit, Automabile {
     this.http.post<ListaTaglieDto>("http://localhost:8080/aggiungi-taglia", dto)
       .subscribe(r => {
         this.listaTaglie = r.listaTaglie;
+        this.paginaCorrente= r.pageNum;
+        this.numeroPagine= r.totalPages;
         this.taglia = new VarianteTaglia();
       });
   }
@@ -129,6 +131,8 @@ export class AnagraficaTagliaComponent implements OnInit, Automabile {
     this.http.post<ListaTaglieDto>("http://localhost:8080/conferma-taglia", dto)
       .subscribe(r => {
         this.listaTaglie = r.listaTaglie;
+        this.paginaCorrente= r.pageNum;
+        this.numeroPagine= r.totalPages;
       });
   }
 
@@ -138,6 +142,8 @@ export class AnagraficaTagliaComponent implements OnInit, Automabile {
     this.http.post<ListaTaglieDto>("http://localhost:8080/rimuovi-taglia", dto)
       .subscribe(r => {
         this.listaTaglie = r.listaTaglie;
+        this.paginaCorrente= r.pageNum;
+        this.numeroPagine= r.totalPages;
       });
   }
 
@@ -151,6 +157,8 @@ export class AnagraficaTagliaComponent implements OnInit, Automabile {
       this.http.post<ListaTaglieDto>("http://localhost:8080/ricerca-taglia", dto)
         .subscribe(r => {
           this.listaTaglie = r.listaTaglie;
+          this.paginaCorrente= r.pageNum;
+          this.numeroPagine= r.totalPages;
         });
     }
   }
@@ -161,12 +169,18 @@ export class AnagraficaTagliaComponent implements OnInit, Automabile {
     this.http.post<TagliaDto>("http://localhost:8080/rit-taglia", dto)
       .subscribe(r => {
         this.taglia = r.varianteTaglia;
+        this.paginaCorrente= r.pageNum;
+        this.numeroPagine= r.totalPages;
       });
   }
 
   aggiorna() {
     this.http.get<ListaTaglieDto>("http://localhost:8080/aggiorna-taglia")
-      .subscribe(r => this.listaTaglie = r.listaTaglie);
+      .subscribe(r =>{ 
+        this.listaTaglie = r.listaTaglie;
+        this.paginaCorrente= r.pageNum;
+        this.numeroPagine= r.totalPages;
+      });
   }
 
   modifica() {

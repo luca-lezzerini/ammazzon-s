@@ -49,7 +49,7 @@
     <br><br>
     <app-app-paginate [pagina]="paginaCorrente" [totali]="numeroPagine"
     (primo)="primo($event)" (precedente)="precedente($event)" (numero)="numero($event)"
-    (successivo)="successivo($event)" (ultimo)="ultimo($event)"></app-app-paginate>
+    (successivo)="successivo($event)" (ultimo)="ultimo($event)" (click)="aggiorna()"></app-app-paginate>
     <hr>
     <div class="tabella">
         <table *ngIf="tabella">
