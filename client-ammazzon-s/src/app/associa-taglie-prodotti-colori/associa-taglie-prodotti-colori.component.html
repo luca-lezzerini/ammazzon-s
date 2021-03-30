@@ -14,8 +14,6 @@
     </div>
     <div class="w3-bar-block">
         <a href="app-home-page" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-white">Home</a>
-        <!--<a href="/app-user-interface" onclick="w3_close()"
-            class="w3-bar-item w3-button w3-hover-white">User-Interface</a>-->
         <a href="app-anagrafica-taglia" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-white">Anagrafica
             Taglia</a>
         <a href="app-anagrafica-colori-galli" onclick="w3_close()"
@@ -24,6 +22,10 @@
             class="w3-bar-item w3-button w3-hover-white">Anagrafica Utente Registrato</a>
         <a href="app-associa-colori-a-prodotti" onclick="w3_close()"
             class="w3-bar-item w3-button w3-hover-white">Associa I Colori Ai Prodotti</a>
+        <a href="app-paginate-component" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-white">Paginate</a>
+        <a href="app-associa-taglie-prodotti-colori" onclick="w3_close()"
+            class="w3-bar-item w3-button w3-hover-white">Associa taglie a prodotti e colori</a>
+
     </div>
 </nav>
 <br><br>
@@ -31,76 +33,77 @@
     <input class="c-checkbox" type="checkbox" id="checkbox">
     <div class="c-formContainer">
         <form class="c-form" action="">
-            <input class="c-form__input" placeholder="es.pantalone" type="text" [(ngModel)] = "criterioRicerca" [ngModelOptions]="{standalone: true}"
-                pattern="[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{1,63}$" required>
+            <input class="c-form__input" placeholder="es.pantalone" type="text" [(ngModel)]="criterioRicerca"
+                [ngModelOptions]="{standalone: true}" pattern="[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{1,63}$"
+                required>
             <label class="c-form__buttonLabel" for="checkbox">
                 <button class="c-form__button" type="button" (click)="cerca()">Cerca</button>
             </label>
             <label class="c-form__toggle" for="checkbox" data-title="Cliccami"></label>
         </form>
     </div>
-<br>
-<br>
-<table *ngIf="prodotti.length>0">
-    <tr>
-        <th>Codice</th>
-        <th>Descrizione</th>
-        <th>Prezzo</th>
-    </tr>
-    <tr *ngFor="let p of prodotti">
-        <td>{{p.codice}}</td>
-        <td>{{p.descrizione}}</td>
-        <td>{{p.prezzo}}</td>
-        <td><button (click)="selezionaProdotto(p)">Seleziona</button></td>
-    </tr>
-</table>
-<br>
-<br>
-<div *ngIf="prodottiColore.length>0">
-    <h3>Colori associati a prodotto: {{prodottoSelezionato.codice}}</h3>
-    <table>
-        <tr>
-            <th>Codice colore</th>
-            <th>Colore</th>
-        </tr>
-        <tr *ngFor="let pc of prodottiColore">
-            <td>{{pc.varianteColore.codice}}</td>
-            <td>{{pc.varianteColore.descrizione}}</td>
-            <td><button (click)="selezionaProdottoColore(pc)">Seleziona</button></td>
-        </tr>
-    </table>
-</div>
-<br>
-<br>
-<div *ngIf="coloriTaglie.length>0">
-    <h3>Taglie disponibili per {{prodottoSelezionato.codice}}
-        {{prodottoColoreSelezionato.varianteColore.descrizione}}</h3>
-    <table>
+    <br>
+    <br>
+    <table *ngIf="prodotti.length>0">
         <tr>
             <th>Codice</th>
+            <th>Descrizione</th>
+            <th>Prezzo</th>
         </tr>
-        <tr *ngFor="let ct of coloriTaglie">
-            <td>{{ct.varianteTaglia.codice}}</td>
-            <td><button (click)="rimuoviTagliaProdotto(ct)">rimuovi</button></td>
-        </tr>
-    </table>
-    <br>
-    <br>
-<button (click)="disassociaTutti()">Disassocia tutti</button>
-</div>
-<br>
-<div *ngIf="taglieNonAssociate.length>0">
-    <button (click)="associaTutti()">Associa tutti</button>
-    <br>
-    <br>
-    <h3>Taglie non assegnate</h3>
-    <table>
-        <tr>
-            <th>Codice</th>
-        </tr>
-        <tr *ngFor="let vt of taglieNonAssociate">
-            <td>{{vt.codice}}</td>
-            <td><button (click)="associaTagliaProdottoColore(vt)">associa</button></td>
+        <tr *ngFor="let p of prodotti">
+            <td>{{p.codice}}</td>
+            <td>{{p.descrizione}}</td>
+            <td>{{p.prezzo}}</td>
+            <td><button (click)="selezionaProdotto(p)">Seleziona</button></td>
         </tr>
     </table>
-</div>
+    <br>
+    <br>
+    <div *ngIf="prodottiColore.length>0">
+        <h3>Colori associati a prodotto: {{prodottoSelezionato.codice}}</h3>
+        <table>
+            <tr>
+                <th>Codice colore</th>
+                <th>Colore</th>
+            </tr>
+            <tr *ngFor="let pc of prodottiColore">
+                <td>{{pc.varianteColore.codice}}</td>
+                <td>{{pc.varianteColore.descrizione}}</td>
+                <td><button (click)="selezionaProdottoColore(pc)">Seleziona</button></td>
+            </tr>
+        </table>
+    </div>
+    <br>
+    <br>
+    <div *ngIf="coloriTaglie.length>0">
+        <h3>Taglie disponibili per {{prodottoSelezionato.codice}}
+            {{prodottoColoreSelezionato.varianteColore.descrizione}}</h3>
+        <table>
+            <tr>
+                <th>Codice</th>
+            </tr>
+            <tr *ngFor="let ct of coloriTaglie">
+                <td>{{ct.varianteTaglia.codice}}</td>
+                <td><button (click)="rimuoviTagliaProdotto(ct)">rimuovi</button></td>
+            </tr>
+        </table>
+        <br>
+        <br>
+        <button (click)="disassociaTutti()">Disassocia tutti</button>
+    </div>
+    <br>
+    <div *ngIf="taglieNonAssociate.length>0">
+        <button (click)="associaTutti()">Associa tutti</button>
+        <br>
+        <br>
+        <h3>Taglie non assegnate</h3>
+        <table>
+            <tr>
+                <th>Codice</th>
+            </tr>
+            <tr *ngFor="let vt of taglieNonAssociate">
+                <td>{{vt.codice}}</td>
+                <td><button (click)="associaTagliaProdottoColore(vt)">associa</button></td>
+            </tr>
+        </table>
+    </div>
