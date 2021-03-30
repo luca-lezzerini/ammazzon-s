@@ -30,18 +30,13 @@
 </nav>
 <br><br>
 <div class="w3-main" style="margin-left:340px;margin-right:40px">
-    <input class="c-checkbox" type="checkbox" id="checkbox">
-    <div class="c-formContainer">
-        <form class="c-form" action="">
-            <input class="c-form__input" placeholder="es.pantalone" type="text" [(ngModel)]="criterioRicerca"
-                [ngModelOptions]="{standalone: true}" pattern="[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{1,63}$"
-                required>
-            <label class="c-form__buttonLabel" for="checkbox">
-                <button class="c-form__button" type="button" (click)="cerca()">Cerca</button>
-            </label>
-            <label class="c-form__toggle" for="checkbox" data-title="Cliccami"></label>
-        </form>
-    </div>
+    <form  class="flex-form">
+        <label for="from">
+          <i class="ion-location"></i>
+        </label>
+        <input type="search" placeholder="Cosa stai cercando?" [(ngModel)] = "criterioRicerca">
+        <input type="submit" value="Cerca" (click)="cerca()">
+      </form>
     <br>
     <br>
     <table *ngIf="prodotti.length>0">
@@ -54,7 +49,7 @@
             <td>{{p.codice}}</td>
             <td>{{p.descrizione}}</td>
             <td>{{p.prezzo}}</td>
-            <td><button (click)="selezionaProdotto(p)">Seleziona</button></td>
+            <td><input type="submit" value="seleziona" (click)="selezionaProdotto(p)"></td>
         </tr>
     </table>
     <br>
