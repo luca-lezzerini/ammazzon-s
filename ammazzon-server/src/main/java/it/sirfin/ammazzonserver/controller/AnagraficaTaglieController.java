@@ -20,49 +20,49 @@ import org.springframework.web.bind.annotation.RestController;
  *
  * @author Admin
  */
-@CrossOrigin("*")
-@RestController
-public class AnagraficaTaglieController {
-
-    @Autowired
-    AnagraficaTaglieService anagraficaTaglieService;
-
-    @RequestMapping("/aggiorna-taglia")
-    @ResponseBody
-    public ListaTaglieDto aggiornaTaglie() {
-        return anagraficaTaglieService.aggiorna();
-    }
-
-    @RequestMapping("aggiungi-taglia")
-    @ResponseBody
-    public ListaTaglieDto aggiungiColore(@RequestBody TagliaDto dto) {
-        return anagraficaTaglieService.aggiungiTaglia(dto.getVarianteTaglia());
-    }
-
-    @RequestMapping("rimuovi-taglia")
-    @ResponseBody
-    public ListaTaglieDto rimuoviTaglia(@RequestBody TagliaDto dto) {
-        return anagraficaTaglieService.rimuoviTaglia(dto.getVarianteTaglia());
-    }
-
-    @RequestMapping("conferma-taglia")
-    @ResponseBody
-    public ListaTaglieDto confermaTaglia(@RequestBody TagliaDto dto) {
-        return anagraficaTaglieService.conferma(dto.getVarianteTaglia());
-    }
-
-    @RequestMapping("rit-taglia")
-    @ResponseBody
-    public TagliaDto ritornaTaglia(@RequestBody TagliaDto dto) {
-        return anagraficaTaglieService.ritornaTaglia(dto.getVarianteTaglia());
-    }
-
-    @RequestMapping("ricerca-taglia")
-    @ResponseBody
-    public ListaTaglieDto confermaTaglia(@RequestBody RicercaTagliaDto dto) {
-        return anagraficaTaglieService.ricerca(dto.getCriterioRicerca());
-    }
-    
-
-    
-}
+//@CrossOrigin("*")
+//@RestController
+//public class AnagraficaTaglieController {
+//
+//    @Autowired
+//    AnagraficaTaglieService anagraficaTaglieService;
+//
+//    @RequestMapping("/aggiorna-taglia")
+//    @ResponseBody
+//    public ListaTaglieDto aggiornaTaglie() {
+//        return anagraficaTaglieService.aggiorna();
+//    }
+//
+//    @RequestMapping("aggiungi-taglia")
+//    @ResponseBody
+//    public ListaTaglieDto aggiungiColore(@RequestBody TagliaDto dto) {
+//        return anagraficaTaglieService.aggiungiTaglia(dto.getVarianteTaglia());
+//    }
+//
+//    @RequestMapping("rimuovi-taglia")
+//    @ResponseBody
+//    public ListaTaglieDto rimuoviTaglia(@RequestBody TagliaDto dto) {
+//        return anagraficaTaglieService.rimuoviTaglia(dto.getVarianteTaglia());
+//    }
+//
+//    @RequestMapping("conferma-taglia")
+//    @ResponseBody
+//    public ListaTaglieDto confermaTaglia(@RequestBody TagliaDto dto) {
+//        return anagraficaTaglieService.conferma(dto.getVarianteTaglia());
+//    }
+//
+//    @RequestMapping("rit-taglia")
+//    @ResponseBody
+//    public TagliaDto ritornaTaglia(@RequestBody TagliaDto dto) {
+//        return anagraficaTaglieService.ritornaTaglia(dto.getVarianteTaglia());
+//    }
+//
+////    @RequestMapping("ricerca-taglia")
+////    @ResponseBody
+////    public ListaTaglieDto confermaTaglia(@RequestBody RicercaTagliaDto dto) {
+////        return anagraficaTaglieService.ricerca(dto.getCriterioRicerca());
+////    }
+//    
+//
+//    
+//}
