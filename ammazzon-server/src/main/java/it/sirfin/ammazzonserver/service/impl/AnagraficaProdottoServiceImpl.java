@@ -45,7 +45,7 @@ public class AnagraficaProdottoServiceImpl implements AnagraficaProdottoService 
 
     @Override
     public ListaProdottiDto ricerca(String criterio) {
-      return new ListaProdottiDto(prodottoRepository.findByCodiceContainsOrDescrizioneContainsOrPrezzoContains(criterio,criterio,Double.valueOf(criterio)));
+      return new ListaProdottiDto(prodottoRepository.trovaCodiceODescrizione(criterio));
     }
 
     @Override
