@@ -62,5 +62,7 @@ public class AnagraficaTaglieController {
     public ListaTaglieDto confermaTaglia(@RequestBody RicercaTagliaDto dto) {
         return anagraficaTaglieService.ricerca(dto.getCriterioRicerca());
     }
+    
 
+    
 }

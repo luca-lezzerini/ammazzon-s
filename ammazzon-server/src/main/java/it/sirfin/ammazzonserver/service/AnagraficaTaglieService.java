@@ -8,6 +8,7 @@ package it.sirfin.ammazzonserver.service;
 import it.sirfin.ammazzonserver.dto.ListaTaglieDto;
 import it.sirfin.ammazzonserver.dto.TagliaDto;
 import it.sirfin.ammazzonserver.model.VarianteTaglia;
+import org.springframework.data.domain.Page;
 
 /**
  *
@@ -26,4 +27,6 @@ public interface AnagraficaTaglieService {
     ListaTaglieDto conferma(VarianteTaglia vt);
 
     ListaTaglieDto aggiorna();
+    
+   
 }
