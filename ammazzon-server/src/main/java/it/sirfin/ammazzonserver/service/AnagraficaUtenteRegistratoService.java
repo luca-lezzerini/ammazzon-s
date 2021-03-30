@@ -5,6 +5,7 @@
  */
 package it.sirfin.ammazzonserver.service;
 
+import it.sirfin.ammazzonserver.dto.ListaPagineDto;
 import it.sirfin.ammazzonserver.dto.ListaUtentiRegistratiDto;
 import it.sirfin.ammazzonserver.dto.UtenteRegistratoDto;
 import it.sirfin.ammazzonserver.model.UtenteRegistrato;
@@ -15,15 +16,15 @@ import it.sirfin.ammazzonserver.model.UtenteRegistrato;
  */
 public interface AnagraficaUtenteRegistratoService {
 
-    ListaUtentiRegistratiDto aggiungiUtente(UtenteRegistrato ur);
+    ListaPagineDto<UtenteRegistrato> aggiungiUtente(UtenteRegistrato ur);
 
-    ListaUtentiRegistratiDto rimuoviUtente(UtenteRegistrato ur);
+    ListaPagineDto<UtenteRegistrato> rimuoviUtente(UtenteRegistrato ur);
 
-    ListaUtentiRegistratiDto ricerca(String c);
+    ListaPagineDto<UtenteRegistrato> ricerca(String c, int pagina);
 
     UtenteRegistratoDto ritornaUtente(UtenteRegistrato ur);
 
-    ListaUtentiRegistratiDto conferma(UtenteRegistrato ur);
+    ListaPagineDto<UtenteRegistrato> conferma(UtenteRegistrato ur);
 
-    ListaUtentiRegistratiDto aggiorna();
+    ListaPagineDto<UtenteRegistrato> aggiorna(int pagina);
 }

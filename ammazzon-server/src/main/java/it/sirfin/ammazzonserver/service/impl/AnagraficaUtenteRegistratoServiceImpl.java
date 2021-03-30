@@ -13,6 +13,8 @@ import it.sirfin.ammazzonserver.repository.UtenteRegistratoRepository;
 import it.sirfin.ammazzonserver.service.AnagraficaUtenteRegistratoService;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -22,18 +24,16 @@ public class AnagraficaUtenteRegistratoServiceImpl implements AnagraficaUtenteRe
     UtenteRegistratoRepository utenteRegistratoRepository;
 
     @Override
-    public ListaUtentiRegistratiDto aggiungiUtente(UtenteRegistrato ur) {
+    public ListaPagineDto<UtenteRegistrato> aggiungiUtente(UtenteRegistrato ur) {
         utenteRegistratoRepository.save(ur);
-        return aggiorna();
+        return aggiorna(1);
     }
 
     @Override
-    public ListaUtentiRegistratiDto rimuoviUtente(UtenteRegistrato ur) {
+    public ListaPagineDto<UtenteRegistrato> rimuoviUtente(UtenteRegistrato ur) {
         utenteRegistratoRepository.delete(ur);
-        return aggiorna();
+        return aggiorna(1);
     }
-
-    
 
     @Override
     public UtenteRegistratoDto ritornaUtente(UtenteRegistrato ur) {
@@ -41,21 +41,27 @@ public class AnagraficaUtenteRegistratoServiceImpl implements AnagraficaUtenteRe
     }
 
     @Override
-    public ListaUtentiRegistratiDto conferma(UtenteRegistrato ur) {
+    public ListaPagineDto<UtenteRegistrato> conferma(UtenteRegistrato ur) {
         utenteRegistratoRepository.save(ur);
-        return aggiorna();
+        return aggiorna(1);
     }
 
     @Override
-    public ListaPagineDto<UtenteRegistrato> aggiorna() {
-        List<UtenteRegistrato> lista = utenteRegistratoRepository.findAll();
-        return new ListaUtentiRegistratiDto(lista);
+    public ListaPagineDto<UtenteRegistrato> aggiorna(int pagina) {
+        Page<UtenteRegistrato> page = utenteRegistratoRepository.findAll(PageRequest.of(pagina, 3));
+        return new ListaPagineDto<UtenteRegistrato>(
+                page.getContent(),  // lista elementi nella pagina
+                page.getPageable().getPageNumber(),     // numero della pagina corrente
+                page.getTotalPages());  // numero complessivo di pagine
     }
 
     @Override
-    public ListaUtentiRegistratiDto ricerca(String c) {
-        List<UtenteRegistrato> lista = utenteRegistratoRepository.trovaUtenteRegistrato(c, pageable);
-        return new ListaUtentiRegistratiDto(lista);
+    public ListaPagineDto<UtenteRegistrato> ricerca(String c, int pagina) {
+        Page<UtenteRegistrato> page = utenteRegistratoRepository.trovaUtenteRegistrato(c, PageRequest.of(pagina, 3));
+        return new ListaPagineDto<UtenteRegistrato>(
+                page.getContent(),  // lista elementi nella pagina
+                page.getPageable().getPageNumber(),     // numero della pagina corrente
+                page.getTotalPages());  // numero complessivo di pagine
     }
 
 }

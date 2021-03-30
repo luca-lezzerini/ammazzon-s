@@ -12,12 +12,13 @@ package it.sirfin.ammazzonserver.dto;
 public class RicercaUtenteDto {
 
     private String criterioRicerca;
+    private int pagina;
 
     public RicercaUtenteDto() {
     }
 
-    public RicercaUtenteDto(String criterioRicerca) {
-        this.criterioRicerca = criterioRicerca;
+    public RicercaUtenteDto(int pagina) {
+        this.pagina = pagina;
     }
 
     public String getCriterioRicerca() {
@@ -28,9 +29,12 @@ public class RicercaUtenteDto {
         this.criterioRicerca = criterioRicerca;
     }
 
-    @Override
-    public String toString() {
-        return "RicercaUtenteDto{" + "criterioRicerca=" + criterioRicerca + '}';
+    public int getPagina() {
+        return pagina;
+    }
+
+    public void setPagina(int pagina) {
+        this.pagina = pagina;
     }
 
 }

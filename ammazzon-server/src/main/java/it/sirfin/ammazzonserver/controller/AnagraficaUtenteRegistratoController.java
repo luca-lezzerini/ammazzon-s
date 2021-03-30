@@ -5,9 +5,10 @@
  */
 package it.sirfin.ammazzonserver.controller;
 
-import it.sirfin.ammazzonserver.dto.ListaUtentiRegistratiDto;
+import it.sirfin.ammazzonserver.dto.ListaPagineDto;
 import it.sirfin.ammazzonserver.dto.RicercaUtenteDto;
 import it.sirfin.ammazzonserver.dto.UtenteRegistratoDto;
+import it.sirfin.ammazzonserver.model.UtenteRegistrato;
 import it.sirfin.ammazzonserver.service.AnagraficaUtenteRegistratoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -25,25 +26,25 @@ public class AnagraficaUtenteRegistratoController {
 
     @RequestMapping("/aggiorna-utente")
     @ResponseBody
-    public ListaUtentiRegistratiDto aggiornaUtente() {
-        return anagraficaUtenteRegistratoService.aggiorna();
+    public ListaPagineDto<UtenteRegistrato> aggiornaUtente() {
+        return anagraficaUtenteRegistratoService.aggiorna(1);
     }
 
     @RequestMapping("aggiungi-utente")
     @ResponseBody
-    public ListaUtentiRegistratiDto aggiungiColore(@RequestBody UtenteRegistratoDto dto) {
+    public ListaPagineDto<UtenteRegistrato> aggiungiColore(@RequestBody UtenteRegistratoDto dto) {
         return anagraficaUtenteRegistratoService.aggiungiUtente(dto.getUtenteRegistrato());
     }
 
     @RequestMapping("rimuovi-utente")
     @ResponseBody
-    public ListaUtentiRegistratiDto rimuoviTaglia(@RequestBody UtenteRegistratoDto dto) {
+    public ListaPagineDto<UtenteRegistrato> rimuoviTaglia(@RequestBody UtenteRegistratoDto dto) {
         return anagraficaUtenteRegistratoService.rimuoviUtente(dto.getUtenteRegistrato());
     }
 
     @RequestMapping("conferma-utente")
     @ResponseBody
-    public ListaUtentiRegistratiDto confermaTaglia(@RequestBody UtenteRegistratoDto dto) {
+    public ListaPagineDto<UtenteRegistrato> confermaTaglia(@RequestBody UtenteRegistratoDto dto) {
         return anagraficaUtenteRegistratoService.conferma(dto.getUtenteRegistrato());
     }
 
@@ -55,8 +56,8 @@ public class AnagraficaUtenteRegistratoController {
 
     @RequestMapping("ricerca-utente")
     @ResponseBody
-    public ListaUtentiRegistratiDto confermaTaglia(@RequestBody RicercaUtenteDto dto) {
-        return anagraficaUtenteRegistratoService.ricerca(dto.getCriterioRicerca());
+    public ListaPagineDto<UtenteRegistrato> confermaTaglia(@RequestBody RicercaUtenteDto dto) {
+        return anagraficaUtenteRegistratoService.ricerca(dto.getCriterioRicerca(), dto.getPagina());
     }
 
 }
