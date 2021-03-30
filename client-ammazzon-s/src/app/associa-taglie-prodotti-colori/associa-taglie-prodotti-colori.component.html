@@ -34,7 +34,7 @@
         <label for="from">
           <i class="ion-location"></i>
         </label>
-        <input type="search" placeholder="Cosa stai cercando?" [(ngModel)] = "criterioRicerca">
+        <input type="search" placeholder="Cosa stai cercando?" [(ngModel)] = "criterioRicerca" [ngModelOptions]="{standalone: true}">
         <input type="submit" value="Cerca" (click)="cerca()">
       </form>
     <br>
