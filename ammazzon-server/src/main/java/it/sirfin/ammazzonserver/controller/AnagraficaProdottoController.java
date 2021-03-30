@@ -5,9 +5,13 @@
  */
 package it.sirfin.ammazzonserver.controller;
 
+import it.sirfin.ammazzonserver.dto.ChiediPaginaDto;
+import it.sirfin.ammazzonserver.dto.ListaPagineDto;
 import it.sirfin.ammazzonserver.dto.ListaProdottiDto;
+import it.sirfin.ammazzonserver.dto.PaginaCompletaDto;
 import it.sirfin.ammazzonserver.dto.ProdottoDto;
 import it.sirfin.ammazzonserver.dto.RicercaProdottoDto;
+import it.sirfin.ammazzonserver.model.Prodotto;
 import it.sirfin.ammazzonserver.service.AnagraficaProdottoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -32,7 +36,7 @@ public class AnagraficaProdottoController {
 
     @RequestMapping("aggiorna-prodotti")
     @ResponseBody
-    public ListaProdottiDto aggiorna() {
+    public ListaProdottiDto aggiorna(@RequestBody PaginaCompletaDto pag) {
         return anagraficaProdottoService.aggiorna();
     }
 
@@ -59,4 +63,12 @@ public class AnagraficaProdottoController {
     public ListaProdottiDto confermaTaglia(@RequestBody RicercaProdottoDto dto) {
         return anagraficaProdottoService.ricerca(dto.getCriterioRicerca());
     }
+    
+    @RequestMapping("ricerca-prodotti-paginata")
+    @ResponseBody
+    public ListaPagineDto<Prodotto> ricercaProdottiPaginata(@RequestBody ChiediPaginaDto dto) {
+        return anagraficaProdottoService.ricercaProdottiPaginata(
+                dto.getCriterioRicerca(), dto.getNumeroPagina());
+    }
+    
 }

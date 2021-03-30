@@ -36,7 +36,7 @@ export class AppPaginateComponent implements OnInit {
   }
   onPrevious() {
     this.paginaDto.pageNum--;
-    this.primo.emit(this.paginaDto);
+    this.precedente.emit(this.paginaDto);
   }
   onNext() {
     this.paginaDto.pageNum++;

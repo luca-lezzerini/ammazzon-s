@@ -1,9 +1,13 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
+import { PaginaDto } from '../app-paginate/pagina-dto';
 import { Automa } from '../automa-crud/automa';
 import { Automabile } from '../automa-crud/automabile';
 import { ModificaEvent, ConfermaEvent, AnnullaEvent, RimuoviEvent, AddEvent, RicercaEvent, SelezionaEvent } from '../automa-crud/eventi';
+import { ChiediPaginaDto } from '../dto/chiedi-pagina-dto';
+import { ListaPagineDto } from '../dto/lista-pagine-dto';
 import { ListaProdottiDto } from '../dto/lista-prodotti-dto';
+import { PaginaCompletaDto } from '../dto/pagina-completa-dto';
 import { ProdottoDto } from '../dto/prodotto-dto';
 import { RicercaProdottoDto } from '../dto/ricerca-prodotto-dto';
 import { Prodotto } from '../entità/prodotto';
@@ -32,6 +36,9 @@ export class AnagraficaProdottoComponent implements OnInit, Automabile {
   codiceC: boolean;
   inputRicerca: string;
   errore = "";
+
+  paginaCorrente = 0;
+  numeroPagine: number;
 
   constructor(private http: HttpClient) {
     this.automa = new Automa(this);
@@ -139,7 +146,7 @@ export class AnagraficaProdottoComponent implements OnInit, Automabile {
     }
   }
 
-  selezionaProdotto(p:Prodotto) {
+  selezionaProdotto(p: Prodotto) {
     let dto = new ProdottoDto();
     dto.prodotto = p;
     this.http.post<ProdottoDto>("http://localhost:8080/seleziona-prodotti", dto)
@@ -149,11 +156,28 @@ export class AnagraficaProdottoComponent implements OnInit, Automabile {
   }
 
   aggiorna() {
-    this.http.get<ListaProdottiDto>("http://localhost:8080/aggiorna-prodotti")
+    let paginaCompletaDto = new PaginaCompletaDto();
+    paginaCompletaDto.pageNum = this.paginaCorrente;
+    paginaCompletaDto.totalPages = this.numeroPagine;
+    this.http.post<ListaProdottiDto>("http://localhost:8080/aggiorna-prodotti", paginaCompletaDto)
       .subscribe(r => this.listaProdotti = r.listaProdotti);
   }
 
-
+  ricercaPaginata(numPagina: number, criterioRicerca?: String) {
+    console.log("numero di pagina per ricerca: ", numPagina)
+    let dto = new ChiediPaginaDto();
+    dto.criterioRicerca = this.inputRicerca;
+    dto.numeroPagina = numPagina;
+    this.http.post<ListaPagineDto>("http://localhost:8080/ricerca-prodotti-paginata", dto)
+      .subscribe(pc => {
+        this.listaProdotti = pc.listaPagine;
+        console.log(pc.listaPagine);
+        this.paginaCorrente = pc.pageNum;
+        console.log(pc.pageNum);
+        this.numeroPagine = pc.totalPages;
+        console.log(this.numeroPagine);
+      });
+  }
 
   modifica() {
     this.automa.next(new ModificaEvent(), this.automa);
@@ -180,9 +204,27 @@ export class AnagraficaProdottoComponent implements OnInit, Automabile {
     this.automa.next(new RicercaEvent(), this.automa);
   }
 
-  seleziona(p:Prodotto) {
+  seleziona(p: Prodotto) {
     this.selezionaProdotto(p);
     this.automa.next(new SelezionaEvent(), this.automa);
   }
+
+  primo(event) {
+    this.paginaCorrente = 0;
+    this.ricercaPaginata(this.paginaCorrente)
+  }
+  precedente(event) {
+    this.paginaCorrente--;
+    this.ricercaPaginata(this.paginaCorrente);
+  }
+  numero(event) { }
+  successivo(event) {
+    this.paginaCorrente++;
+    this.ricercaPaginata(this.paginaCorrente);
+  }
+  ultimo(event) {
+    this.paginaCorrente = this.numeroPagine;
+    this.ricercaPaginata(this.paginaCorrente);
+   }
 
 }
