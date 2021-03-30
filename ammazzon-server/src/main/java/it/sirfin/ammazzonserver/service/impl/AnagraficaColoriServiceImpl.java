@@ -6,13 +6,11 @@
 package it.sirfin.ammazzonserver.service.impl;
 
 import it.sirfin.ammazzonserver.dto.ColoreDto;
-import it.sirfin.ammazzonserver.dto.ListaColoriDto;
 import it.sirfin.ammazzonserver.dto.ListaPagineDto;
 import it.sirfin.ammazzonserver.model.VarianteColore;
 import it.sirfin.ammazzonserver.repository.VarianteColoreRepository;
 import it.sirfin.ammazzonserver.service.AnagraficaColoriService;
 import java.util.ArrayList;
-import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
