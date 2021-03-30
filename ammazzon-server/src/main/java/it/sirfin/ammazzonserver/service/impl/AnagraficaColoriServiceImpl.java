@@ -13,6 +13,8 @@ import it.sirfin.ammazzonserver.service.AnagraficaColoriService;
 import java.util.ArrayList;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
 /**
@@ -66,4 +68,10 @@ public class AnagraficaColoriServiceImpl implements AnagraficaColoriService {
         return new ColoreDto(vc);
     }
 
+    @Override
+    public ListaColoriDto ritornaRecordPaginati() {
+        PageRequest pg = PageRequest.of(0, 10);
+        Page<VarianteColore> lista = varianteColoreRepository.findAll(pg);
+        return null;
+    }
 }

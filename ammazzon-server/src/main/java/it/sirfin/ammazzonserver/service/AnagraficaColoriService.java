@@ -26,4 +26,6 @@ public interface AnagraficaColoriService {
     ListaColoriDto rimuoviColore(VarianteColore vc);
     
     ColoreDto ritornaColore(VarianteColore vc);
+    
+    ListaColoriDto ritornaRecordPaginati();
 }

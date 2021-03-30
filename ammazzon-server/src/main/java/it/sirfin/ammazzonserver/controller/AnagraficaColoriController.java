@@ -61,4 +61,11 @@ public class AnagraficaColoriController {
     public ColoreDto ritornaColore(@RequestBody ColoreDto dto) {
         return anagraficaColoriService.ritornaColore(dto.getVarianteColore());
     }
+
+    @RequestMapping("ritorna-colore-paginato")
+    @ResponseBody
+    public ListaColoriDto ritornaColorePaginato() {
+        return anagraficaColoriService.ritornaRecordPaginati();
+    }
+
 }
