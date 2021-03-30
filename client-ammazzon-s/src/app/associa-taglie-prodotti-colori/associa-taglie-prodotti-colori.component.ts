@@ -36,6 +36,7 @@ export class AssociaTaglieProdottiColoriComponent implements OnInit {
   prodotti: Prodotto[] = []
   prodottiColore: ProdottoColore[] = [];
   coloriTaglie: ColoreTaglia[] = [];
+  messaggioErrore = "";
 
 
 
@@ -47,7 +48,13 @@ export class AssociaTaglieProdottiColoriComponent implements OnInit {
     dto.criterioRicerca = this.criterioRicerca;
     this.http.post<ListaProdottiDto>("http://localhost:8080/cerca-prodotti-codice-esatto-descrizione-like", dto)
       .subscribe(l => {
-        this.prodotti = l.listaProdotti;
+        if (l.listaProdotti.length < 1) {
+          this.messaggioErrore = "Nessun prodotto trovato"
+          this.prodotti = l.listaProdotti;
+        } else {
+          this.messaggioErrore = "";
+          this.prodotti = l.listaProdotti;
+        }
         this.prodottiColore = [];
         this.coloriTaglie = [];
         this.taglieNonAssociate = [];

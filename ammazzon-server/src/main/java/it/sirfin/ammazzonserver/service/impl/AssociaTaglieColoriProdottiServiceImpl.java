@@ -100,7 +100,11 @@ public class AssociaTaglieColoriProdottiServiceImpl implements AssociaTaglieColo
         return selezionaProdottoColore(idProdottoColore);
     }
 
-    //POTREBBE ESSERE VOID
+    /**
+     * Associa tutte le taglie presenti sul db a un ProdottoColore scelto
+     * @param idProdottoColore
+     * @return ListaColoreTagliaDto
+     */
     @Override
     public ListaColoreTagliaDto associaTutti(Long idProdottoColore) {
         //recupera tutte le taglie 
@@ -111,7 +115,6 @@ public class AssociaTaglieColoriProdottiServiceImpl implements AssociaTaglieColo
         taglie.forEach(t -> {
             associaProdottoColoreTaglia(pc, t);
         });
-        //IL METODO POTREBBE ANCHE ESSERE VOID
         return selezionaProdottoColore(idProdottoColore);
     }
     ///////////////////////////////////////////////////////////////////////

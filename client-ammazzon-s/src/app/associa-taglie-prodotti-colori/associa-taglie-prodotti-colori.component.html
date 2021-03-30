@@ -30,13 +30,14 @@
 </nav>
 <br><br>
 <div class="w3-main" style="margin-left:340px;margin-right:40px">
-    <form  class="flex-form">
+    <form class="flex-form">
         <label for="from">
-          <i class="ion-location"></i>
+            <i class="ion-location"></i>
         </label>
-        <input type="search" placeholder="Cosa stai cercando?" [(ngModel)] = "criterioRicerca" [ngModelOptions]="{standalone: true}">
+        <input type="search" placeholder="Cosa stai cercando?" [(ngModel)]="criterioRicerca"
+            [ngModelOptions]="{standalone: true}">
         <input type="submit" value="Cerca" (click)="cerca()">
-      </form>
+    </form>
     <br>
     <br>
     <table *ngIf="prodotti.length>0">
@@ -71,6 +72,9 @@
     <br>
     <br>
     <div *ngIf="coloriTaglie.length>0">
+        <h4 *ngIf="taglieNonAssociate.length<1">
+            {{prodottoSelezionato.codice}} {{prodottoColoreSelezionato.varianteColore.descrizione}}
+            è disponibile in tutte le taglie!</h4>
         <h3>Taglie disponibili per {{prodottoSelezionato.codice}}
             {{prodottoColoreSelezionato.varianteColore.descrizione}}</h3>
         <table>
@@ -88,10 +92,12 @@
     </div>
     <br>
     <div *ngIf="taglieNonAssociate.length>0">
+        <h3 *ngIf="coloriTaglie.length<1">Nessuna taglia disponibile per
+            {{prodottoSelezionato.codice}} {{prodottoColoreSelezionato.varianteColore.descrizione}}</h3>
         <button (click)="associaTutti()">Associa tutti</button>
         <br>
         <br>
-        <h3>Taglie non assegnate</h3>
+        <h4>Taglie non disponibili</h4>
         <table>
             <tr>
                 <th>Codice</th>
@@ -102,3 +108,4 @@
             </tr>
         </table>
     </div>
+    {{messaggioErrore}}
