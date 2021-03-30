@@ -7,7 +7,10 @@ package it.sirfin.ammazzonserver.controller;
 
 import it.sirfin.ammazzonserver.dto.ColoreDto;
 import it.sirfin.ammazzonserver.dto.ListaColoriDto;
+import it.sirfin.ammazzonserver.dto.ListaPagineDto;
+import it.sirfin.ammazzonserver.dto.PaginaDto;
 import it.sirfin.ammazzonserver.dto.RicercaColoreOProdottoDto;
+import it.sirfin.ammazzonserver.model.VarianteColore;
 import it.sirfin.ammazzonserver.service.AnagraficaColoriService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -64,8 +67,8 @@ public class AnagraficaColoriController {
 
     @RequestMapping("ritorna-colore-paginato")
     @ResponseBody
-    public ListaColoriDto ritornaColorePaginato() {
-        return anagraficaColoriService.ritornaRecordPaginati();
+    public ListaPagineDto<VarianteColore> ritornaColorePaginato(@RequestBody PaginaDto dto) {
+        return null;
     }
 
 }

@@ -7,6 +7,7 @@ package it.sirfin.ammazzonserver.service.impl;
 
 import it.sirfin.ammazzonserver.dto.ColoreDto;
 import it.sirfin.ammazzonserver.dto.ListaColoriDto;
+import it.sirfin.ammazzonserver.dto.ListaPagineDto;
 import it.sirfin.ammazzonserver.model.VarianteColore;
 import it.sirfin.ammazzonserver.repository.VarianteColoreRepository;
 import it.sirfin.ammazzonserver.service.AnagraficaColoriService;
@@ -69,9 +70,9 @@ public class AnagraficaColoriServiceImpl implements AnagraficaColoriService {
     }
 
     @Override
-    public ListaColoriDto ritornaRecordPaginati() {
-        PageRequest pg = PageRequest.of(0, 10);
+    public ListaPagineDto ritornaRecordPaginati(int pagina) {
+        PageRequest pg = PageRequest.of(pagina, 5);
         Page<VarianteColore> lista = varianteColoreRepository.findAll(pg);
-        return null;
+        return new ListaPagineDto(lista.getContent(), lista.getPageable().getPageNumber(), lista.getTotalPages());
     }
 }

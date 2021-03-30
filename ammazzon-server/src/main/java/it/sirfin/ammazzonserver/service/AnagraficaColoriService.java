@@ -7,6 +7,7 @@ package it.sirfin.ammazzonserver.service;
 
 import it.sirfin.ammazzonserver.dto.ColoreDto;
 import it.sirfin.ammazzonserver.dto.ListaColoriDto;
+import it.sirfin.ammazzonserver.dto.ListaPagineDto;
 import it.sirfin.ammazzonserver.model.VarianteColore;
 
 /**
@@ -27,5 +28,5 @@ public interface AnagraficaColoriService {
     
     ColoreDto ritornaColore(VarianteColore vc);
     
-    ListaColoriDto ritornaRecordPaginati();
+    ListaPagineDto ritornaRecordPaginati(int pagina);
 }

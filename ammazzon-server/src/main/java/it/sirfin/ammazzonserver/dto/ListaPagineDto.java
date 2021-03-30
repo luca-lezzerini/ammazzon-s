@@ -6,8 +6,6 @@
 package it.sirfin.ammazzonserver.dto;
 
 import java.util.List;
-import org.springframework.data.domain.Page;
-
 /**
  *
  * @author Admin

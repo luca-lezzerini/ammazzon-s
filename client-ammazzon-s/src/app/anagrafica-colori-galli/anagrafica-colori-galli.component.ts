@@ -48,28 +48,18 @@ export class AnagraficaColoriGalliComponent implements OnInit, Automabile {
 
   primo(event) {
     console.log(event);
-    this.http.get<ListaColoriDto>(this.url + "ritorna-colore-paginato")
-    .subscribe(r=> this.variantiColori=r.variantiColori);
   }
   successivo(event) {
     console.log(event);
-    this.http.get<ListaColoriDto>(this.url + "ritorna-colore-paginato")
-    .subscribe(r=> this.variantiColori=r.variantiColori);
   }
   precedente(event) {
     console.log(event);
-    this.http.get<ListaColoriDto>(this.url + "ritorna-colore-paginato")
-    .subscribe(r=> this.variantiColori=r.variantiColori);
   }
   ultimo(event) {
     console.log(event);
-    this.http.get<ListaColoriDto>(this.url + "ritorna-colore-paginato")
-    .subscribe(r=> this.variantiColori=r.variantiColori);
   }
   numero(event) {
     console.log(event);
-    this.http.get<ListaColoriDto>(this.url + "ritorna-colore-paginato")
-    .subscribe(r=> this.variantiColori=r.variantiColori);
   }
   nuova() {
     this.automa.next(new AddEvent(), this.automa);
