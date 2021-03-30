@@ -98,7 +98,8 @@ export class AssociaTaglieProdottiColoriComponent implements OnInit {
     dtoReq.vt = vt;
     this.http.post<ListaColoreTagliaDto>("http://localhost:8080/associa-taglia", dtoReq)
       .subscribe(ct => {
-        this.selezionaProdottoColore(this.prodottoColoreSelezionato);
+        this.coloriTaglie = ct.coloriTaglie;
+        this.taglieNonAssociate = ct.notColoriTaglie;
       });
   }
 
@@ -112,22 +113,24 @@ export class AssociaTaglieProdottiColoriComponent implements OnInit {
     let dto = new ProdottoColoreDto();
     dto.prodottoColore = this.prodottoColoreSelezionato;
     this.http.post<ListaColoreTagliaDto>("http://localhost:8080/associa-tutti", dto)
-    .subscribe(t => {
-      this.selezionaProdottoColore(this.prodottoColoreSelezionato);
-    });
-   }
+      .subscribe(ct => {
+        this.coloriTaglie = ct.coloriTaglie;
+        this.taglieNonAssociate = ct.notColoriTaglie;
+      });
+  }
 
 
   disassociaTutti() {
     let dto = new ProdottoColoreDto();
     dto.prodottoColore = this.prodottoColoreSelezionato;
     this.http.post<ListaColoreTagliaDto>("http://localhost:8080/disassocia-tutti", dto)
-      .subscribe(t => {
-        this.selezionaProdottoColore(this.prodottoColoreSelezionato);
+      .subscribe(ct => {
+        this.coloriTaglie = ct.coloriTaglie;
+        this.taglieNonAssociate = ct.notColoriTaglie;
       });
   }
 
-  
+
 }
 
 

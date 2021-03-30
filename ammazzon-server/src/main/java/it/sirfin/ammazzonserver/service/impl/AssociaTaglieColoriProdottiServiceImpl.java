@@ -13,8 +13,6 @@ import it.sirfin.ammazzonserver.repository.ProdottoRepository;
 import it.sirfin.ammazzonserver.repository.VarianteColoreRepository;
 import it.sirfin.ammazzonserver.repository.VarianteTagliaRepository;
 import it.sirfin.ammazzonserver.service.AssociaTaglieColoriProdottiService;
-import java.time.Duration;
-import java.time.Instant;
 import java.util.ArrayList;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -56,6 +54,12 @@ public class AssociaTaglieColoriProdottiServiceImpl implements AssociaTaglieColo
         return dtoRes;
     }
 
+    /**
+     * Trova tutte le taglie associate e non a un prodottoColore, dato in input
+     * l'id del prodotto colore desiderato.
+     * @param idProdottoColore
+     * @return 
+     */
     @Override
     public ListaColoreTagliaDto selezionaProdottoColore(Long idProdottoColore) {
         List<ColoreTaglia> coloriTaglieAssociate = coloreTagliaRepository.taglieProdottoColore(idProdottoColore);
@@ -72,16 +76,14 @@ public class AssociaTaglieColoriProdottiServiceImpl implements AssociaTaglieColo
 
     @Override
     public ListaColoreTagliaDto disassociaTaglia(Long idColoreTaglia, Long idProdottoColore) {
-        System.out.println("\n\n\n idColoreTaglia: " + idColoreTaglia + "idProdottoColore: " + idProdottoColore);
         coloreTagliaRepository.deleteById(idColoreTaglia);
         return selezionaProdottoColore(idProdottoColore);
     }
 
-    //PUò ANCHE ESSERE VOID
     @Override
     public ListaColoreTagliaDto associaTaglia(ProdottoColore pc, VarianteTaglia vt) {
         associaProdottoColoreTaglia(pc, vt);
-        return new ListaColoreTagliaDto();
+        return selezionaProdottoColore(pc.getId());
     }
 
     @Override
@@ -95,7 +97,7 @@ public class AssociaTaglieColoriProdottiServiceImpl implements AssociaTaglieColo
             coloreTagliaRepository.deleteById(ct.getId());
         });
         //IL METODO POTREBBE ANCHE ESSERE VOID
-        return new ListaColoreTagliaDto();
+        return selezionaProdottoColore(idProdottoColore);
     }
 
     //POTREBBE ESSERE VOID
@@ -106,50 +108,36 @@ public class AssociaTaglieColoriProdottiServiceImpl implements AssociaTaglieColo
         //recupero prodotto colore (non mi fido del client)
         ProdottoColore pc = prodottoColoreRepository.findById(idProdottoColore).get();
         // associa tutte le taglie al prodottoColore
-        System.out.println("numero taglie trovate : " + taglie.size());
         taglie.forEach(t -> {
-            System.out.println("*/*/**/*/*/*/*/*/*/*/*");
-            System.out.println("Sto associando: " + pc.getProdotto().getCodice()
-                    + ", " + t.getCodice());
             associaProdottoColoreTaglia(pc, t);
         });
         //IL METODO POTREBBE ANCHE ESSERE VOID
-        return new ListaColoreTagliaDto();
+        return selezionaProdottoColore(idProdottoColore);
     }
     ///////////////////////////////////////////////////////////////////////
     //////////////////////////////////METODI PRIVATI///////////////////////
     ///////////////////////////////////////////////////////////////////////
     /**
-     * Ottiene tutte le taglie non associate date, date tutte le taglie
-     * associate
+     * Ottiene tutte le taglie non associate, date tutte le taglie
+     * associate in input
      *
      * @param coloriTaglieAssociate
      * @return
      */
+    //DA MIGLIORARE
     private List<VarianteTaglia> trovaTaglieNonAssociate(List<ColoreTaglia> coloriTaglieAssociate) {
-        Instant i = Instant.now();
-        System.out.println("");
-        System.out.println("\n*************************************************");
-        System.out.println("SIAMO IN TaglieNonAssociate()");
         List<VarianteTaglia> tutteLeTaglie = varianteTagliaRepository.findAll();
-        System.out.println("Taglie trovate: " + tutteLeTaglie.size());
         coloriTaglieAssociate.forEach(cta -> {
             tutteLeTaglie.remove(cta.getVarianteTaglia());
         });
-        System.out.println("numero taglie dopo rimozione: " + tutteLeTaglie.size());
-        //ritorno tutte le taglie dopo aver rimosso quelle associate
-        Instant i2 = Instant.now();
-        System.out.println("durata operazine taglie non associate: " + Duration.between(i, i2).toMillis());
-        System.out.println("\n*************************************************");
+        //ritorno tutte le taglie dopo aver rimosso quelle che erano già associate
         return tutteLeTaglie;
     }
 
     private ColoreTaglia associaProdottoColoreTaglia(ProdottoColore pc, VarianteTaglia vt) {
         //recupero pc, vt
-        System.out.println("siamo in associaProdottoColoreTaglia");
         pc = prodottoColoreRepository.findById(pc.getId()).get();
         vt = varianteTagliaRepository.findById(vt.getId()).get();
-
         ColoreTaglia ct = new ColoreTaglia();
         ct = coloreTagliaRepository.save(ct);
         ct.setProdottoColore(pc);
@@ -157,7 +145,6 @@ public class AssociaTaglieColoriProdottiServiceImpl implements AssociaTaglieColo
         ct = coloreTagliaRepository.save(ct);
         pc.getColoriTaglie().add(ct);
         vt.getColoriTaglie().add(ct);
-        System.out.println("Sto per salvare pc : " + pc);
         varianteTagliaRepository.save(vt);
         prodottoColoreRepository.save(pc);
         return ct;
