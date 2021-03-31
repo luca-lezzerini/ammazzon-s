@@ -10,7 +10,8 @@ import it.sirfin.ammazzonserver.dto.ListaPagineDto;
 import it.sirfin.ammazzonserver.model.VarianteColore;
 import it.sirfin.ammazzonserver.repository.VarianteColoreRepository;
 import it.sirfin.ammazzonserver.service.AnagraficaColoriService;
-import java.util.ArrayList;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -23,21 +24,23 @@ import org.springframework.stereotype.Service;
 @Service
 public class AnagraficaColoriServiceImpl implements AnagraficaColoriService {
 
+    static final Logger logger = LoggerFactory.getLogger(AnagraficaColoriServiceImpl.class);
+
     @Autowired
     VarianteColoreRepository varianteColoreRepository;
 
     @Override
     public ListaPagineDto<VarianteColore> aggiungiColore(VarianteColore vc, int pagina) {
         varianteColoreRepository.save(vc);
-        System.out.println("---------------------");
-        System.out.println(pagina);
-        System.out.println("---------------------");
+        logger.info("---------------------");
+        logger.info("Sono qui" + pagina);
+        logger.info("---------------------");
         PageRequest pg = PageRequest.of(pagina, 5);
         Page<VarianteColore> lista = varianteColoreRepository.findAll(pg);
-        System.out.println("-------------Listtttt--------------");
-        System.out.println(lista);
-        System.out.println(lista.getContent());
-        System.out.println("---------------------------");
+        logger.info("-------------Listtttt--------------");
+        logger.info("Sono qui" + lista);
+        logger.info("Sono qui" + lista.getContent());
+        logger.info("---------------------------");
         return new ListaPagineDto(lista.getContent(), lista.getPageable().getPageNumber(), lista.getTotalPages());
 
     }
@@ -49,9 +52,9 @@ public class AnagraficaColoriServiceImpl implements AnagraficaColoriService {
 //        colori.forEach(c -> {
 //            c.setProdottiColori(new ArrayList<>());
 //        });
-        System.out.println("---------------------");
-        System.out.println(new ListaPagineDto(colori.getContent(), colori.getPageable().getPageNumber(), colori.getTotalPages()));
-        System.out.println("---------------------");
+        logger.info("---------------------");
+        logger.info("Sono qui" + new ListaPagineDto(colori.getContent(), colori.getPageable().getPageNumber(), colori.getTotalPages()));
+        logger.info("---------------------");
         return new ListaPagineDto(colori.getContent(), colori.getPageable().getPageNumber(), colori.getTotalPages());
     }
 
