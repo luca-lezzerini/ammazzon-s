@@ -61,7 +61,9 @@ public class AnagraficaColoriServiceImpl implements AnagraficaColoriService {
     @Override
     public ListaPagineDto<VarianteColore> modificaColore(VarianteColore vc, int pagina) {
         varianteColoreRepository.save(vc);
-        return aggiornaColori(pagina);
+        PageRequest pg = PageRequest.of(pagina, 5);
+        Page<VarianteColore> lista = varianteColoreRepository.findAll(pg);
+        return new ListaPagineDto(lista.getContent(), lista.getPageable().getPageNumber(), lista.getTotalPages());
     }
 
     @Override

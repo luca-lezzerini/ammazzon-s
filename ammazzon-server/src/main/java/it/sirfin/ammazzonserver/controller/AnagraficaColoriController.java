@@ -43,13 +43,13 @@ public class AnagraficaColoriController {
     @RequestMapping("modifica-colore")
     @ResponseBody
     public ListaPagineDto<VarianteColore> modificaColore(@RequestBody ColoreDto dto) {
-        return anagraficaColoriService.modificaColore(dto.getVarianteColore(), dto.getPageNum());
+        return anagraficaColoriService.modificaColore(dto.getVarianteColore(), 1);
     }
 
     @RequestMapping("ricerca-colore")
     @ResponseBody
     public ListaPagineDto<VarianteColore> ricercaColore(@RequestBody RicercaColoreOProdottoDto dto) {
-        return anagraficaColoriService.ricercaColore(dto.getCriterioRicerca(),1);
+        return anagraficaColoriService.ricercaColore(dto.getCriterioRicerca(), 1);
     }
 
     @RequestMapping("rimuovi-colore")

@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
+import { PaginaDto } from '../app-paginate/pagina-dto';
 import { Automa } from '../automa-crud/automa';
 import { Automabile } from '../automa-crud/automabile';
 import { AddEvent, AnnullaEvent, ConfermaEvent, ModificaEvent, RicercaEvent, RimuoviEvent, SelezionaEvent } from '../automa-crud/eventi';
@@ -40,26 +41,35 @@ export class AnagraficaColoriGalliComponent implements OnInit, Automabile {
 
   constructor(private http: HttpClient) {
     this.automa = new Automa(this);
-    this.aggiorna();
+    let dto = new PaginaDto();
+    dto.pageNum = 1;
+    this.aggiorna(dto);
   }
 
   ngOnInit(): void {
   }
 
-  primo(event) {
+  primo(event: PaginaDto) {
     console.log(event);
+    event.pageNum = 1;
+    this.aggiorna(event);
   }
-  successivo(event) {
+  successivo(event: PaginaDto) {
     console.log(event);
+    this.aggiorna(event);
   }
-  precedente(event) {
+  precedente(event: PaginaDto) {
     console.log(event);
+    this.aggiorna(event);
   }
-  ultimo(event) {
+  ultimo(event: PaginaDto) {
     console.log(event);
+    event.pageNum = this.numeroPagine;
+    this.aggiorna(event);
   }
-  numero(event) {
+  numero(event: PaginaDto) {
     console.log(event);
+    this.aggiorna(event);
   }
   nuova() {
     this.automa.next(new AddEvent(), this.automa);
@@ -86,12 +96,12 @@ export class AnagraficaColoriGalliComponent implements OnInit, Automabile {
   cerca() {
     this.automa.next(new RicercaEvent(), this.automa);
   }
-  aggiorna() {
-    let dto = new ColoreDto();
-    dto.pageNum = 4;
-    this.http.post<ListaColoriDto>(this.url + "aggiorna-colore", dto)
+  aggiorna(dtox: PaginaDto) {
+    this.http.post<ListaColoriDto>(this.url + "aggiorna-colore", dtox)
       .subscribe(r => {
         this.variantiColori = r.listaPagine;
+        this.paginaCorrente = r.pageNum;
+        this.numeroPagine = r.totalPages;
       });
   }
 
@@ -178,9 +188,11 @@ export class AnagraficaColoriGalliComponent implements OnInit, Automabile {
   modificaDati() {
     let dto = new ColoreDto();
     dto.varianteColore = this.varianteColore;
+    dto.pageNum = this.paginaCorrente;
     this.http.post<ListaColoriDto>(this.url + "modifica-colore", dto)
       .subscribe(r => {
         this.variantiColori = r.listaPagine;
+        this.paginaCorrente = r.pageNum;
       });
   }
   eliminaDati() {
