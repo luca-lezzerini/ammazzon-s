@@ -80,7 +80,7 @@ class AmmazzonServerApplicationTests {
     
     @Test
     void test3His() {
-       associaTaglieColoriProdottiService.cercaProdotti("pan");
+       associaTaglieColoriProdottiService.cercaProdotti("pan", 1);
        associaTaglieColoriProdottiService.selezionaProdottoColore(2099L);
     }
 }

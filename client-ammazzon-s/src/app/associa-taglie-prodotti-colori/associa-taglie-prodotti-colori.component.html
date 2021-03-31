@@ -36,7 +36,7 @@
         </label>
         <input type="search" placeholder="Cosa stai cercando?" [(ngModel)]="criterioRicerca"
             [ngModelOptions]="{standalone: true}">
-        <input type="submit" value="Cerca" >
+        <input type="submit" value="Cerca" (click)="cerca()">
     </form>
     <br>
     <br>

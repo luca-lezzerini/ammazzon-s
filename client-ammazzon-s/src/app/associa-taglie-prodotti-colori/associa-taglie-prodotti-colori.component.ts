@@ -41,7 +41,7 @@ export class AssociaTaglieProdottiColoriComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  cerca(numPag: number) {
+  cerca(numPag?: number) {
     let dto = new ChiediPaginaDto();
     dto.criterioRicerca = this.criterioRicerca;
     if (numPag) {
