@@ -42,7 +42,7 @@ export class AnagraficaProdottoComponent implements OnInit, Automabile {
 
   constructor(private http: HttpClient) {
     this.automa = new Automa(this);
-    this.aggiorna();
+    this.ricercaPaginata(1,this.inputRicerca);
   }
   ngOnInit(): void {
   }
@@ -215,7 +215,9 @@ export class AnagraficaProdottoComponent implements OnInit, Automabile {
   precedente(event: PaginaDto) {
     this.ricercaPaginata(event.pageNum);
   }
-  numero(event: PaginaDto) { }
+  numero(event: PaginaDto) { 
+    this.ricercaPaginata(event.pageNum)
+  }
   successivo(event: PaginaDto) {
     this.ricercaPaginata(event.pageNum);
   }
