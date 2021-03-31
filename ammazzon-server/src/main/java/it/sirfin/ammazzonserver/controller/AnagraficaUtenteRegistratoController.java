@@ -34,26 +34,26 @@ public class AnagraficaUtenteRegistratoController {
     
     @RequestMapping("/aggiorna-tabella")
     @ResponseBody
-    public ListaPagineDto<UtenteRegistrato> aggiornaPag(@RequestBody ListaPagineDto PagDto) {
-        return anagraficaUtenteRegistratoService.aggiornaPag(PagDto);
+    public ListaPagineDto<UtenteRegistrato> aggiornaPag(@RequestBody ListaPagineDto ap) {
+        return anagraficaUtenteRegistratoService.aggiornaPag(ap);
     }
     
 
     @RequestMapping("aggiungi-utente")
     @ResponseBody
-    public ListaPagineDto<UtenteRegistrato> aggiungiColore(@RequestBody UtenteRegistratoDto dto) {
+    public ListaPagineDto<UtenteRegistrato> aggiungiUtente(@RequestBody UtenteRegistratoDto dto) {
         return anagraficaUtenteRegistratoService.aggiungiUtente(dto.getUtenteRegistrato());
     }
 
     @RequestMapping("rimuovi-utente")
     @ResponseBody
-    public ListaPagineDto<UtenteRegistrato> rimuoviTaglia(@RequestBody UtenteRegistratoDto dto) {
+    public ListaPagineDto<UtenteRegistrato> rimuoviUtente(@RequestBody UtenteRegistratoDto dto) {
         return anagraficaUtenteRegistratoService.rimuoviUtente(dto.getUtenteRegistrato());
     }
 
     @RequestMapping("conferma-utente")
     @ResponseBody
-    public ListaPagineDto<UtenteRegistrato> confermaTaglia(@RequestBody UtenteRegistratoDto dto) {
+    public ListaPagineDto<UtenteRegistrato> confermaUtente(@RequestBody UtenteRegistratoDto dto) {
         return anagraficaUtenteRegistratoService.conferma(dto.getUtenteRegistrato());
     }
 
@@ -65,7 +65,7 @@ public class AnagraficaUtenteRegistratoController {
 
     @RequestMapping("ricerca-utente")
     @ResponseBody
-    public ListaPagineDto<UtenteRegistrato> confermaTaglia(@RequestBody RicercaUtenteDto dto) {
+    public ListaPagineDto<UtenteRegistrato> confermaUtente(@RequestBody RicercaUtenteDto dto) {
         return anagraficaUtenteRegistratoService.ricerca(dto.getCriterioRicerca(), dto.getPagina());
     }
 
