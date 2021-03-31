@@ -30,6 +30,7 @@ public class AnagraficaUtenteRegistratoServiceImpl implements AnagraficaUtenteRe
     @Override
     public ListaPagineDto<UtenteRegistrato> aggiungiUtente(UtenteRegistrato ur) {
         utenteRegistratoRepository.save(ur);
+        logger.info("id " + ur.getCodiceFiscale() + " = " + ur.getId());
         return aggiorna(1);
     }
 

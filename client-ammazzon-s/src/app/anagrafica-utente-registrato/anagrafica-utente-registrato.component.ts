@@ -4,6 +4,7 @@ import { PaginaDto } from '../app-paginate/pagina-dto';
 import { Automa } from '../automa-crud/automa';
 import { Automabile } from '../automa-crud/automabile';
 import { ModificaEvent, ConfermaEvent, AnnullaEvent, RimuoviEvent, AddEvent, RicercaEvent, SelezionaEvent } from '../automa-crud/eventi';
+import { ListaPagineDto } from '../dto/lista-pagine-dto';
 import { ListaUtentiRegistratiDto } from '../dto/lista-utenti-registrati-dto';
 import { RicercaUtenteDto } from '../dto/ricerca-utente-dto';
 import { UtenteRegistratoDto } from '../dto/utente-registrato-dto';
@@ -19,10 +20,13 @@ export class AnagraficaUtenteRegistratoComponent implements OnInit, Automabile {
   automa: Automa;
 
   utente = new UtenteRegistrato();
-  listaUtenti: UtenteRegistrato[] = [];
+  listaUtenti: ListaPagineDto[] = [];
   paginaDto = new PaginaDto();
   paginaCorrente: number = 1;
   numeroPagine: number = 12;
+
+  listaUtentiPag:UtenteRegistrato[] = [];
+
   @Input() pagina: number;
   @Input() totali: number;
 
@@ -111,9 +115,9 @@ export class AnagraficaUtenteRegistratoComponent implements OnInit, Automabile {
   salvaDati() {
     let dto = new UtenteRegistratoDto();
     dto.utenteRegistrato = this.utente;
-    this.http.post<ListaUtentiRegistratiDto>("http://localhost:8080/aggiungi-utente", dto)
+    this.http.post<ListaPagineDto>("http://localhost:8080/aggiungi-utente", dto)
       .subscribe(r => {
-        this.listaUtenti = r.listaUtentiRegistrati;
+        this.listaUtenti = r.listaPagine;
         this.utente = new UtenteRegistrato();
       });
   }
@@ -121,18 +125,18 @@ export class AnagraficaUtenteRegistratoComponent implements OnInit, Automabile {
   modificaDati() {
     let dto = new UtenteRegistratoDto();
     dto.utenteRegistrato = this.utente;
-    this.http.post<ListaUtentiRegistratiDto>("http://localhost:8080/conferma-utente", dto)
+    this.http.post<ListaPagineDto>("http://localhost:8080/conferma-utente", dto)
       .subscribe(r => {
-        this.listaUtenti = r.listaUtentiRegistrati;
+        this.listaUtenti = r.listaPagine;
       });
   }
 
   eliminaDati() {
     let dto = new UtenteRegistratoDto();
     dto.utenteRegistrato = this.utente;
-    this.http.post<ListaUtentiRegistratiDto>("http://localhost:8080/rimuovi-utente", dto)
+    this.http.post<ListaPagineDto>("http://localhost:8080/rimuovi-utente", dto)
       .subscribe(r => {
-        this.listaUtenti = r.listaUtentiRegistrati;
+        this.listaUtenti = r.listaPagine;
       });
   }
 
@@ -143,9 +147,9 @@ export class AnagraficaUtenteRegistratoComponent implements OnInit, Automabile {
       this.errore = "Inserisci il criterio di ricerca";
     } else {
       this.errore = "";
-      this.http.post<ListaUtentiRegistratiDto>("http://localhost:8080/ricerca-utente", dto)
+      this.http.post<ListaPagineDto>("http://localhost:8080/ricerca-utente", dto)
         .subscribe(r => {
-          this.listaUtenti = r.listaUtentiRegistrati;
+          this.listaUtenti = r.listaPagine;
         });
     }
   }
@@ -160,8 +164,8 @@ export class AnagraficaUtenteRegistratoComponent implements OnInit, Automabile {
   }
 
   aggiorna() {
-    this.http.get<ListaUtentiRegistratiDto>("http://localhost:8080/aggiorna-utente")
-      .subscribe(r => this.listaUtenti = r.listaUtentiRegistrati);
+    this.http.get<ListaPagineDto>("http://localhost:8080/aggiorna-utente")
+      .subscribe(r => this.listaUtenti = r.listaPagine);
   }
 
 
