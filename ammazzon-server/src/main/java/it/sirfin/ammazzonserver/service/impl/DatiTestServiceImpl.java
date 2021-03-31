@@ -21,6 +21,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.ThreadLocalRandom;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Example;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -231,6 +232,13 @@ public class DatiTestServiceImpl implements DatiTestService {
         System.out.println("\t numero cappelli gialli: " + cappelliGialli);
         
         System.out.println("totale prodotti creati su DB = " + prodottoRepository.findAll().size());
+        
+        // Query by example
+        Prodotto ppp = new Prodotto();
+        ppp.setCodice("p1");
+        List<Prodotto> listaPPP = prodottoRepository.findAll(Example.of(ppp));
+        System.out.println("\n\n\n Lista prodotto con query by example " + listaPPP);
+                
     }
 
     @Override
