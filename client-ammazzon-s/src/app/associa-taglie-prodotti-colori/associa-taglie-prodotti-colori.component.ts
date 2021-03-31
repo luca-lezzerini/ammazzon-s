@@ -37,6 +37,7 @@ export class AssociaTaglieProdottiColoriComponent implements OnInit {
   prodottiColore: ProdottoColore[] = [];
   coloriTaglie: ColoreTaglia[] = [];
   messaggioErrore = "";
+  
 
 
 

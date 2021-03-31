@@ -40,6 +40,11 @@ public class AssociaTaglieColoriProdottiServiceImpl implements AssociaTaglieColo
 
     static final Logger logger = LoggerFactory.getLogger(AssociaTaglieColoriProdottiServiceImpl.class);
 
+    /**
+     * Ricerca prodotto per criterio di ricerca (Codice o DescrizioneLike)
+     * @param criterioRic
+     * @return ListaProdottiDto
+     */
     @Override
     public ListaProdottiDto cercaProdotti(String criterioRic) {
         logger.debug("Sto cercando per: " + criterioRic + " = Codice o DescrizioneLike");
