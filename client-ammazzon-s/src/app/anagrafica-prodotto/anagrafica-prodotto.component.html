@@ -1,38 +1,21 @@
-<title>Ammazzon</title>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
-<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Poppins">
-
 <!-- menu -->
-<nav class="w3-sidebar w3-red w3-collapse w3-top w3-large w3-padding" style="z-index:3;width:300px;font-weight:bold;"
-    id="mySidebar"><br>
-    <a href="javascript:void(0)" onclick="w3_close()" class="w3-button w3-hide-large w3-display-topleft"
-        style="width:100%;font-size:22px">Close Menu</a>
-    <div class="w3-container">
-        <h3 class="w3-padding-64"><b>Programmatori<br>Esperti</b></h3>
-    </div>
-    <div class="w3-bar-block">
-        <a href="app-home-page" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-white">Home</a>
-        <a href="app-anagrafica-taglia" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-white">Anagrafica
-            Taglia</a>
-        <a href="app-anagrafica-colori-galli" onclick="w3_close()"
-            class="w3-bar-item w3-button w3-hover-white">Anagrafica Colori</a>
-        <a href="app-anagrafica-utente-registrato" onclick="w3_close()"
-            class="w3-bar-item w3-button w3-hover-white">Anagrafica Utente Registrato</a>
-        <a href="app-associa-colori-a-prodotti" onclick="w3_close()"
-            class="w3-bar-item w3-button w3-hover-white">Associa I Colori Ai Prodotti</a>
-        <a href="app-paginate-component" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-white">Paginate</a>
-        <a href="app-associa-taglie-prodotti-colori" onclick="w3_close()"
-            class="w3-bar-item w3-button w3-hover-white">Associa taglie a prodotti e colori</a>
-
-    </div>
-</nav>
+<div class="menulaterale">
+    <h3><a href="app-anagrafica-taglia">Anagrafica taglia</a></h3>
+    <h3><a href="app-anagrafica-colori-galli">Anagrafica Colori</a></h3>
+    <h3><a href="app-anagrafica-utente-registrato">Anagrafica utente registrato</a></h3>
+    <h3><a href="app-associa-colori-a-prodotti">Associa i colori ai prodotti</a></h3>
+    <h3><a href="app-paginate-component">Paginate</a></h3>
+    <h3><a href="app-associa-taglie-prodotti-colori">Associa taglie a prodotti e colori</a></h3>
+    <h3><a href="app-anagrafica-prodotto">Anagrafica prodotto</a></h3>
+</div>
 <br><br>
-
-<div class="w3-main" style="margin-left:340px;margin-right:40px">
+<div class="contenuto">
+    <app-app-paginate [pagina]="paginaCorrente" [totali]="numeroPagine" (primo)="primo($event)"
+        (precedente)="precedente($event)" (numero)="numero($event)" (successivo)="successivo($event)"
+        (ultimo)="ultimo($event)"></app-app-paginate>
+    <hr>
     <br><br>
-    <button (click)="nuova()" *ngIf="aggiungi">Nuova</button>
+    <button class="pulsante" (click)="nuova()" *ngIf="aggiungi">Nuova</button>
     <br><br>
     <div *ngIf='form'>
         <input type="text" placeholder="codice" [(ngModel)]="prodotto.codice" [disabled]="codiceC">
@@ -40,24 +23,21 @@
         <input type="text" placeholder="prezzo" [(ngModel)]="prodotto.prezzo" [disabled]="codiceC">
 
         <br><br>
-        <button (click)="modifica()" *ngIf="edit">Modifica</button>
-        <button (click)="conferma()" *ngIf="conf">Conferma</button>
-        <button (click)="annulla()" *ngIf="annull">Annulla</button>
-        <button (click)="rimuovi()" *ngIf="remove">Rimuovi</button>
+        <button class="pulsate" (click)="modifica()" *ngIf="edit">Modifica</button>
+        <button class="pulsante" (click)="conferma()" *ngIf="conf">Conferma</button>
+        <button class="pulsante" (click)="annulla()" *ngIf="annull">Annulla</button>
+        <button class="pulsante" (click)="rimuovi()" *ngIf="remove">Rimuovi</button>
     </div>
     <h4>{{errore}}</h4>
     <br><br>
     <div *ngIf="search">
         <input type="text" placeholder="Criterio Ricerca" [(ngModel)]="inputRicerca">
-        <button (click)="cerca()">Cerca</button>
-        <button (click)="ricercaPaginata()">Ricerca paginata</button>
+        <button class="pulsante" (click)="cerca()">Cerca</button>
+        <button class="pulsante" (click)="ricercaPaginata()">Ricerca paginata</button>
         <br>
     </div>
     <br><br>
     <div class="tabella">
-        <app-app-paginate [pagina]="paginaCorrente" [totali]="numeroPagine" (primo)="primo($event)"
-            (precedente)="precedente($event)" (numero)="numero($event)" (successivo)="successivo($event)"
-            (ultimo)="ultimo($event)"></app-app-paginate>
         <table *ngIf="tabella">
             <tr>
                 <th>Codice</th>
@@ -68,10 +48,7 @@
                 <td>{{p.codice}}</td>
                 <td>{{p.descrizione}}</td>
                 <td>{{p.prezzo}}</td>
-                <td> <button (click)="seleziona(p)">Seleziona</button></td>
+                <td> <button class="pulsante" (click)="seleziona(p)">Seleziona</button></td>
             </tr>
         </table>
-        <app-app-paginate [pagina]="paginaCorrente" [totali]="numeroPagine" (primo)="primo($event)"
-            (precedente)="precedente($event)" (numero)="numero($event)" (successivo)="successivo($event)"
-            (ultimo)="ultimo($event)"></app-app-paginate>
     </div>

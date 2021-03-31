@@ -16,7 +16,7 @@ import { UtenteRegistrato } from '../entità/utente-registrato';
 @Component({
   selector: 'app-anagrafica-prodotto',
   templateUrl: './anagrafica-prodotto.component.html',
-  styleUrls: ['./anagrafica-prodotto.component.css']
+  styleUrls: ['./anagrafica-prodotto.component.css', '../theme.css']
 })
 export class AnagraficaProdottoComponent implements OnInit, Automabile {
 

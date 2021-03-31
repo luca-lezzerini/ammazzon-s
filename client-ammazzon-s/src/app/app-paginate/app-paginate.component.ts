@@ -5,7 +5,7 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 @Component({
   selector: 'app-app-paginate',
   templateUrl: './app-paginate.component.html',
-  styleUrls: ['./app-paginate.component.css']
+  styleUrls: ['./app-paginate.component.css', '../theme.css']
 })
 export class AppPaginateComponent implements OnInit {
 

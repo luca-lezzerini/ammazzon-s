@@ -1,117 +1,88 @@
-<title>Ammazzon</title>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
-<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Poppins">
-
-<!-- menu -->
-<nav class="w3-sidebar w3-red w3-collapse w3-top w3-large w3-padding" style="z-index:3;width:300px;font-weight:bold;"
-    id="mySidebar"><br>
-    <a href="javascript:void(0)" onclick="w3_close()" class="w3-button w3-hide-large w3-display-topleft"
-        style="width:100%;font-size:22px">Close Menu</a>
-    <div class="w3-container">
-        <h3 class="w3-padding-64"><b>Progammatori<br>Esperti</b></h3>
-    </div>
-    <div class="w3-bar-block">
-        <a href="app-home-page" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-white">Home</a>
-        <a href="app-anagrafica-taglia" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-white">Anagrafica
-            Taglia</a>
-        <a href="app-anagrafica-colori-galli" onclick="w3_close()"
-            class="w3-bar-item w3-button w3-hover-white">Anagrafica Colori</a>
-        <a href="app-anagrafica-utente-registrato" onclick="w3_close()"
-            class="w3-bar-item w3-button w3-hover-white">Anagrafica Utente Registrato</a>
-        <a href="app-associa-colori-a-prodotti" onclick="w3_close()"
-            class="w3-bar-item w3-button w3-hover-white">Associa I Colori Ai Prodotti</a>
-        <a href="app-paginate-component" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-white">Paginate</a>
-        <a href="app-associa-taglie-prodotti-colori" onclick="w3_close()"
-            class="w3-bar-item w3-button w3-hover-white">Associa taglie a prodotti e colori</a>
-
-    </div>
-</nav>
-<br><br>
-<div class="w3-main" style="margin-left:340px;margin-right:40px">
-    <form class="flex-form">
-        <label for="from">
-            <i class="ion-location"></i>
-        </label>
-        <input type="search" placeholder="Cosa stai cercando?" [(ngModel)]="criterioRicerca"
-            [ngModelOptions]="{standalone: true}">
-        <input type="submit" value="Cerca" (click)="cerca()">
-    </form>
-    <br>
-    <br>
+<div class="menulaterale">
+    <h3><a href="app-anagrafica-taglia">Anagrafica taglia</a></h3>
+    <h3><a href="app-anagrafica-colori-galli">Anagrafica Colori</a></h3>
+    <h3><a href="app-anagrafica-utente-registrato">Anagrafica utente registrato</a></h3>
+    <h3><a href="app-associa-colori-a-prodotti">Associa i colori ai prodotti</a></h3>
+    <h3><a href="app-paginate-component">Paginate</a></h3>
+    <h3><a href="app-associa-taglie-prodotti-colori">Associa taglie a prodotti e colori</a></h3>
+    <h3><a href="app-anagrafica-prodotto">Anagrafica prodotto</a></h3>
+</div>
+<div class="contenuto">
     <app-app-paginate [pagina]="paginaCorrente" [totali]="numeroPagine" (primo)="primo($event)"
         (precedente)="precedente($event)" (numero)="numero($event)" (successivo)="successivo($event)"
-        (ultimo)="ultimo($event)">
-    </app-app-paginate>
-    <div *ngIf="prodotti.length>0">
-        <table>
-            <tr>
-                <th>Codice</th>
-                <th>Descrizione</th>
-                <th>Prezzo</th>
-            </tr>
-            <tr *ngFor="let p of prodotti">
-                <td>{{p.codice}}</td>
-                <td>{{p.descrizione}}</td>
-                <td>{{p.prezzo}}</td>
-                <td><button (click)="selezionaProdotto(p)">Seleziona</button></td>
-            </tr>
-        </table>
-    </div>
+        (ultimo)="ultimo($event)"></app-app-paginate>
+    <hr>
+    <input type="search" placeholder="Cosa stai cercando?" [(ngModel)]="criterioRicerca" [ngModelOptions]="{standalone: true}">
+    <button class="pulsante" (click)="cerca()">Cerca</button>
     <br>
     <br>
-    <div *ngIf="prodottiColore.length>0">
-        <h3>Colori associati a prodotto: {{prodottoSelezionato.codice}}</h3>
-        <table>
-            <tr>
-                <th>Codice colore</th>
-                <th>Colore</th>
-            </tr>
-            <tr *ngFor="let pc of prodottiColore">
-                <td>{{pc.varianteColore.codice}}</td>
-                <td>{{pc.varianteColore.descrizione}}</td>
-                <td><button (click)="selezionaProdottoColore(pc)">Seleziona</button></td>
-            </tr>
-        </table>
-    </div>
+    <table *ngIf="prodotti.length>0">
+        <tr>
+            <th>Codice</th>
+            <th>Descrizione</th>
+            <th>Prezzo</th>
+        </tr>
+        <tr *ngFor="let p of prodotti">
+            <td>{{p.codice}}</td>
+            <td>{{p.descrizione}}</td>
+            <td>{{p.prezzo}}</td>
+            <td><button class="pulsante" (click)="selezionaProdotto(p)">Seleziona</button></td>
+        </tr>
+    </table>
+</div>
+<br>
+<br>
+<div *ngIf="prodottiColore.length>0">
+    <h3>Colori associati a prodotto: {{prodottoSelezionato.codice}}</h3>
+    <table>
+        <tr>
+            <th>Codice colore</th>
+            <th>Colore</th>
+        </tr>
+        <tr *ngFor="let pc of prodottiColore">
+            <td>{{pc.varianteColore.codice}}</td>
+            <td>{{pc.varianteColore.descrizione}}</td>
+            <td><button class="pulsante" (click)="selezionaProdottoColore(pc)">Seleziona</button></td>
+        </tr>
+    </table>
+</div>
+<br>
+<br>
+<div *ngIf="coloriTaglie.length>0">
+    <h4 *ngIf="taglieNonAssociate.length<1">
+        {{prodottoSelezionato.codice}} {{prodottoColoreSelezionato.varianteColore.descrizione}}
+        è disponibile in tutte le taglie!</h4>
+    <h3>Taglie disponibili per {{prodottoSelezionato.codice}}
+        {{prodottoColoreSelezionato.varianteColore.descrizione}}</h3>
+    <table>
+        <tr>
+            <th>Codice</th>
+        </tr>
+        <tr *ngFor="let ct of coloriTaglie">
+            <td>{{ct.varianteTaglia.codice}}</td>
+            <td><button class="pulsante" (click)="rimuoviTagliaProdotto(ct)">rimuovi</button></td>
+        </tr>
+    </table>
     <br>
     <br>
-    <div *ngIf="coloriTaglie.length>0">
-        <h4 *ngIf="taglieNonAssociate.length<1">
-            {{prodottoSelezionato.codice}} {{prodottoColoreSelezionato.varianteColore.descrizione}}
-            è disponibile in tutte le taglie!</h4>
-        <h3>Taglie disponibili per {{prodottoSelezionato.codice}}
-            {{prodottoColoreSelezionato.varianteColore.descrizione}}</h3>
-        <table>
-            <tr>
-                <th>Codice</th>
-            </tr>
-            <tr *ngFor="let ct of coloriTaglie">
-                <td>{{ct.varianteTaglia.codice}}</td>
-                <td><button (click)="rimuoviTagliaProdotto(ct)">rimuovi</button></td>
-            </tr>
-        </table>
-        <br>
-        <br>
-        <button (click)="disassociaTutti()">Disassocia tutti</button>
-    </div>
+    <button class="pulsante" (click)="disassociaTutti()">Disassocia tutti</button>
+</div>
+<br>
+<div *ngIf="taglieNonAssociate.length>0">
+    <h3 *ngIf="coloriTaglie.length<1">Nessuna taglia disponibile per
+        {{prodottoSelezionato.codice}} {{prodottoColoreSelezionato.varianteColore.descrizione}}</h3>
+    <button class="pulsante" (click)="associaTutti()">Associa tutti</button>
     <br>
-    <div *ngIf="taglieNonAssociate.length>0">
-        <h3 *ngIf="coloriTaglie.length<1">Nessuna taglia disponibile per
-            {{prodottoSelezionato.codice}} {{prodottoColoreSelezionato.varianteColore.descrizione}}</h3>
-        <button (click)="associaTutti()">Associa tutti</button>
-        <br>
-        <br>
-        <h4>Taglie non disponibili</h4>
-        <table>
-            <tr>
-                <th>Codice</th>
-            </tr>
-            <tr *ngFor="let vt of taglieNonAssociate">
-                <td>{{vt.codice}}</td>
-                <td><button (click)="associaTagliaProdottoColore(vt)">associa</button></td>
-            </tr>
-        </table>
-    </div>
-    {{messaggioErrore}}
+    <br>
+    <h4>Taglie non disponibili</h4>
+    <table>
+        <tr>
+            <th>Codice</th>
+        </tr>
+        <tr *ngFor="let vt of taglieNonAssociate">
+            <td>{{vt.codice}}</td>
+            <td><button class="pulsante" (click)="associaTagliaProdottoColore(vt)">associa</button></td>
+        </tr>
+    </table>
+</div>
+{{messaggioErrore}}

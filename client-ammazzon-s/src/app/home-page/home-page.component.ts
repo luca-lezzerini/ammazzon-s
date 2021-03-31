@@ -23,6 +23,8 @@ export class HomePageComponent implements OnInit {
   immagine4: string = "assets/css/4.jpg";
   immagine5: string = "assets/css/5.jpg";
   immagine6: string = "assets/css/6.jpg";
+  immagine7: string = "assets/css/7.jpg";
+  immagine8: string = "assets/css/8.jpg";
 
   primo(event) {
     console.log(event);

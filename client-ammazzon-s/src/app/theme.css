@@ -1,61 +1,100 @@
-@import url('https://fonts.googleapis.com/css?family=Lato:400,700');
-
-body, h1, h2, h3, h4, h5 {
-    font-family: "Poppins", sans-serif
+@import url("https://fonts.googleapis.com/css?family=Audiowide|Sofia|Trirong");
+* {
+    box-sizing: border-box;
 }
 
-body {
-    font-size: 16px;
+/* stile della navigazione laterale */
+
+.menulaterale {
+    height: 100%;
+    width: 200px;
+    position: fixed;
+    z-index: 1;
+    top: 0;
+    left: 0;
+    background-color: orangered;
+    overflow-x: hidden;
 }
 
-.w3-half img {
-    margin-bottom: -6px;
-    margin-top: 16px;
-    opacity: 0.8;
-    cursor: pointer
+/* Collegamenti di navigazione laterali */
+
+.menulaterale a {
+    color: white;
+    padding: 16px;
+    text-decoration: none;
+    display: block;
 }
 
-.w3-half img:hover {
-    opacity: 1
+/* Cambia colore al passaggio del mouse */
+
+.menulaterale a:hover {
+    background-color: #ddd;
+    color: black;
 }
 
-.flex-form input[type="submit"] {
-    background: #ef3f5a;
-    border: 1px solid #ef3f5a;
-    color: #fff;
-    padding: 0 30px;
-    cursor: pointer;
-    -webkit-transition: all 0.2s;
-    -moz-transition: all 0.2s;
-    transition: all 0.2s;
+/* Stile del contenuto */
+
+.contenuto {
+    margin-left: 200px;
+    padding-left: 20px;
 }
 
-.flex-form input[type="submit"]:hover {
-    background: #d73851;
-    border: 1px solid #d73851;
+
+/* Stile titolo */
+
+.titolo {
+    font-family: "Trirong", serif;
+    font-size: 30px;
+    text-align: center;
 }
 
-.flex-form {
-    display: -webkit-box;
+/* Stile immagini */
+
+.row {
     display: flex;
-    z-index: 10;
-    position: relative;
-    width: 500px;
-    box-shadow: 4px 8px 16px rgba(0, 0, 0, 0.3);
+    flex-wrap: wrap;
+    padding: 0 4px;
 }
 
-.flex-form>* {
-    border: 0;
-    padding: 0 0 0 10px;
-    background: #fff;
-    line-height: 50px;
-    font-size: 1rem;
-    border-radius: 0;
-    outline: 0;
-    -webkit-appearance: none;
+/* Layout reattivo: crea un layout a due colonne*/
+
+@media screen and (max-width: 800px) {
+    .column {
+        flex: 50%;
+        max-width: 60%;
+    }
 }
 
-input[type="search"] {
-    flex-basis: 500px;
+/* Stile colanna immagini */
+
+.column img {
+    margin-top: 8px;
+    vertical-align: middle;
+    border-radius: 1%;
 }
 
+/* Stile pulsanti */
+
+.pulsante {
+    display: inline-block;
+    padding: 5px 15px;
+    font-size: 15px;
+    cursor: pointer;
+    text-align: center;
+    text-decoration: none;
+    outline: none;
+    color: #fff;
+    background-color: blue;
+    border: none;
+    border-radius: 15px;
+    box-shadow: 0 9px #999;
+    margin: 0.5%;
+  }
+  
+  .pulsante:hover {background-color: blue}
+  
+  .pulsante:active {
+    background-color: blue;
+    box-shadow: 0 5px #666;
+    transform: translateY(4px);
+  }
