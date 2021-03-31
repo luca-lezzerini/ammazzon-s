@@ -27,4 +27,7 @@ public interface AnagraficaUtenteRegistratoService {
     ListaPagineDto<UtenteRegistrato> conferma(UtenteRegistrato ur);
 
     ListaPagineDto<UtenteRegistrato> aggiorna(int pagina);
+    
+    ListaPagineDto<UtenteRegistrato> aggiornaPag(ListaPagineDto ap);
+    
 }

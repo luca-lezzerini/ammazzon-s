@@ -29,6 +29,15 @@ public class AnagraficaUtenteRegistratoController {
     public ListaPagineDto<UtenteRegistrato> aggiornaUtente() {
         return anagraficaUtenteRegistratoService.aggiorna(1);
     }
+    
+    
+    
+    @RequestMapping("/aggiorna-tabella")
+    @ResponseBody
+    public ListaPagineDto<UtenteRegistrato> aggiornaPag(@RequestBody ListaPagineDto PagDto) {
+        return anagraficaUtenteRegistratoService.aggiornaPag(PagDto);
+    }
+    
 
     @RequestMapping("aggiungi-utente")
     @ResponseBody

@@ -24,8 +24,8 @@ export class AnagraficaUtenteRegistratoComponent implements OnInit, Automabile {
   paginaDto = new PaginaDto();
   paginaCorrente: number = 1;
   numeroPagine: number = 12;
-
-  listaUtentiPag:UtenteRegistrato[] = [];
+  prova = "";
+  listaUtentiPag: UtenteRegistrato[] = [];
 
   @Input() pagina: number;
   @Input() totali: number;
@@ -201,12 +201,17 @@ export class AnagraficaUtenteRegistratoComponent implements OnInit, Automabile {
   }
   //-------------------------------------------
   //metodi del paginate
-  
+
   primoE(event) {
     console.log(event);
+
   }
   successivoE(event) {
     console.log(event);
+    let PagDto = new ListaPagineDto();
+    PagDto.pageNum = this.paginaCorrente;
+    this.http.post<ListaPagineDto>("http://localhost:8080/aggiorna-tabella", PagDto)
+      .subscribe(r => this.listaUtenti = r.listaPagine);
   }
   numeroE(event) {
     console.log(event);
