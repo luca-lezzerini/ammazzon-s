@@ -33,35 +33,35 @@ public class AnagraficaTaglieController {
     @RequestMapping("/aggiorna-taglia")
     @ResponseBody
     public ListaPagineDto<VarianteTaglia> aggiornaTaglie(@RequestBody TagliaDto dto) {
-        var pag = anagraficaTaglieService.aggiorna(dto.getPageNum(), dto.getTotalPages());
+        var pag = anagraficaTaglieService.aggiorna(dto.getPageNum(), 0);
         return new ListaPagineDto<>(pag.getContent(), pag.getPageable().getPageNumber(), pag.getTotalPages());
     }
 
     @RequestMapping("aggiungi-taglia")
     @ResponseBody
     public ListaPagineDto<VarianteTaglia> aggiungiColore(@RequestBody TagliaDto dto) {
-        var pag = anagraficaTaglieService.aggiungiTaglia(dto.getVarianteTaglia(), dto.getPageNum(), dto.getTotalPages());
+        var pag = anagraficaTaglieService.aggiungiTaglia(dto.getVarianteTaglia(), dto.getPageNum(), 0);
         return new ListaPagineDto<>(pag.getContent(), pag.getPageable().getPageNumber(), pag.getTotalPages());
     }
 
     @RequestMapping("rimuovi-taglia")
     @ResponseBody
     public ListaPagineDto<VarianteTaglia> rimuoviTaglia(@RequestBody TagliaDto dto) {
-        var pag = anagraficaTaglieService.rimuoviTaglia(dto.getVarianteTaglia(), dto.getPageNum(), dto.getTotalPages());
+        var pag = anagraficaTaglieService.rimuoviTaglia(dto.getVarianteTaglia(), dto.getPageNum(), 0);
         return new ListaPagineDto<>(pag.getContent(), pag.getPageable().getPageNumber(), pag.getTotalPages());
     }
 
     @RequestMapping("conferma-taglia")
     @ResponseBody
     public ListaPagineDto<VarianteTaglia> confermaTaglia(@RequestBody TagliaDto dto) {
-        var pag = anagraficaTaglieService.conferma(dto.getVarianteTaglia(), dto.getPageNum(), dto.getTotalPages());
+        var pag = anagraficaTaglieService.conferma(dto.getVarianteTaglia(), dto.getPageNum(), 0);
         return new ListaPagineDto<>(pag.getContent(), pag.getPageable().getPageNumber(), pag.getTotalPages());
     }
 
     @RequestMapping("rit-taglia")
     @ResponseBody
     public TagliaDto ritornaTaglia(@RequestBody TagliaDto dto) {
-        return anagraficaTaglieService.ritornaTaglia(dto.getVarianteTaglia(), dto.getPageNum(), dto.getTotalPages());
+        return anagraficaTaglieService.ritornaTaglia(dto.getVarianteTaglia(), dto.getPageNum());
     }
 
     @RequestMapping("ricerca-taglia")

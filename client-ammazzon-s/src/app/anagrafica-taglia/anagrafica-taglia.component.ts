@@ -180,7 +180,11 @@ export class AnagraficaTagliaComponent implements OnInit, Automabile {
   }
 
   aggiorna(dto: PaginaDto) {
-    this.http.post<ListaPagineDto>("http://localhost:8080/aggiorna-taglia", dto)
+    let dto2 = new TagliaDto();
+    dto2.pageNum = dto.pageNum;
+    console.log(dto2.pageNum);
+    
+    this.http.post<ListaPagineDto>("http://localhost:8080/aggiorna-taglia", dto2)
       .subscribe(r => {
         this.listaTaglie = r.listaPagine;
         this.paginaCorrente = r.pageNum;

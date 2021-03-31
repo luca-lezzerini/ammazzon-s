@@ -6,9 +6,7 @@ public class TagliaDto {
 
     private VarianteTaglia varianteTaglia;
     private Integer pageNum;
-    private Integer totalPages;
-    
-    
+  
 
     public VarianteTaglia getVarianteTaglia() {
         return varianteTaglia;
@@ -26,18 +24,10 @@ public class TagliaDto {
         this.pageNum = pageNum;
     }
 
-    public Integer getTotalPages() {
-        return totalPages;
-    }
 
-    public void setTotalPages(Integer totalPages) {
-        this.totalPages = totalPages;
-    }
-
-    public TagliaDto(VarianteTaglia varianteTaglia, Integer pageNum, Integer totalPages) {
+    public TagliaDto(VarianteTaglia varianteTaglia, Integer pageNum) {
         this.varianteTaglia = varianteTaglia;
         this.pageNum = pageNum;
-        this.totalPages = totalPages;
     }
 
     public TagliaDto() {
@@ -45,7 +35,7 @@ public class TagliaDto {
 
     @Override
     public String toString() {
-        return "TagliaDto{" + "varianteTaglia=" + varianteTaglia + ", pageNum=" + pageNum + ", totalPages=" + totalPages + '}';
+        return "TagliaDto{" + "varianteTaglia=" + varianteTaglia + ", pageNum=" + pageNum +'}';
     }
     
 

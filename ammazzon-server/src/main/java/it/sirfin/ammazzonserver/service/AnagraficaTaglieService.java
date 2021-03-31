@@ -22,7 +22,7 @@ public interface AnagraficaTaglieService {
 
     Page <VarianteTaglia>  ricerca(String c, int pagina, int totalPages);
 
-    TagliaDto ritornaTaglia(VarianteTaglia vt, int pageNum, int totalPages);
+    TagliaDto ritornaTaglia(VarianteTaglia vt, int pageNum);
 
     Page <VarianteTaglia>  conferma(VarianteTaglia vt, int pagina, int totalPages);
 
