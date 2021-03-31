@@ -1,9 +1,9 @@
 package it.sirfin.ammazzonserver.repository;
 
-import it.sirfin.ammazzonserver.model.Prodotto;
 import it.sirfin.ammazzonserver.model.ProdottoColore;
 import java.util.List;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
@@ -25,6 +25,7 @@ public interface ProdottoColoreRepository extends JpaRepository<ProdottoColore, 
 
     /**
      * Trova tutti i prodottoColore associati al prodotto con id dato in inpt
+     *
      * @param id
      * @return List<ProdottoColore>
      */
@@ -56,4 +57,9 @@ public interface ProdottoColoreRepository extends JpaRepository<ProdottoColore, 
     @Query("SELECT pc FROM ProdottoColore pc WHERE pc.prodotto.descrizione = (?2)"
             + "and pc.varianteColore.descrizione = (?1)")
     List<ProdottoColore> prodottoColore(String nomeColore, String nomeProdotto);
+
+    @Modifying
+    @Query("update ProdottoColore pc set pc.prodotto.id = null where pc.prodotto.id =:id")
+    void disassociaColoreProdotto(@Param("id") Long id);
+
 }

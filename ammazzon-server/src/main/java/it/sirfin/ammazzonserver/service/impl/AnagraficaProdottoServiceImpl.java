@@ -4,6 +4,8 @@ import it.sirfin.ammazzonserver.dto.ListaPagineDto;
 import it.sirfin.ammazzonserver.dto.ListaProdottiDto;
 import it.sirfin.ammazzonserver.dto.ProdottoDto;
 import it.sirfin.ammazzonserver.model.Prodotto;
+import it.sirfin.ammazzonserver.model.ProdottoColore;
+import it.sirfin.ammazzonserver.repository.ProdottoColoreRepository;
 import it.sirfin.ammazzonserver.repository.ProdottoRepository;
 import it.sirfin.ammazzonserver.service.AnagraficaProdottoService;
 import java.util.List;
@@ -21,6 +23,9 @@ public class AnagraficaProdottoServiceImpl implements AnagraficaProdottoService 
     @Autowired
     ProdottoRepository prodottoRepository;
 
+    @Autowired
+    ProdottoColoreRepository prodottoColoreRepository;
+
     @Override
     public ListaProdottiDto inserisci(Prodotto p) {
         prodottoRepository.save(p);
@@ -29,6 +34,13 @@ public class AnagraficaProdottoServiceImpl implements AnagraficaProdottoService 
 
     @Override
     public ListaProdottiDto elimina(Prodotto p) {
+
+        List<ProdottoColore> listaProdottiColori
+                = prodottoColoreRepository.findAll();
+
+        listaProdottiColori.forEach(prodottoColore -> {
+            prodottoColoreRepository.disassociaColoreProdotto(p.getId());      
+        });
 
         prodottoRepository.delete(p);
         return aggiorna();
