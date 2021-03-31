@@ -22,21 +22,22 @@ import org.springframework.stereotype.Service;
 @Service
 public class AnagraficaUtenteRegistratoServiceImpl implements AnagraficaUtenteRegistratoService {
 
-    static final Logger logger = LoggerFactory.getLogger(AnagraficaUtenteRegistratoServiceImpl.class);
-
     @Autowired
     UtenteRegistratoRepository utenteRegistratoRepository;
+
+    static final Logger logger = LoggerFactory.getLogger(AnagraficaUtenteRegistratoServiceImpl.class);
 
     @Override
     public ListaPagineDto<UtenteRegistrato> aggiungiUtente(UtenteRegistrato ur) {
         utenteRegistratoRepository.save(ur);
-        logger.info("id AnagraficaUtenteRegistrato" + ur);
+        logger.debug("id AnagraficaUtenteRegistrato" + ur);
         return aggiorna(1);
     }
 
     @Override
     public ListaPagineDto<UtenteRegistrato> rimuoviUtente(UtenteRegistrato ur) {
         utenteRegistratoRepository.delete(ur);
+        logger.debug("bella zio");
         return aggiorna(1);
     }
 
@@ -77,8 +78,5 @@ public class AnagraficaUtenteRegistratoServiceImpl implements AnagraficaUtenteRe
                 page.getPageable().getPageNumber(), // numero della pagina corrente
                 page.getTotalPages());  // numero complessivo di pagine
     }
-    
-    
-    
 
 }
