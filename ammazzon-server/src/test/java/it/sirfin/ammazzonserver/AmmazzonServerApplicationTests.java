@@ -3,6 +3,7 @@ package it.sirfin.ammazzonserver;
 import it.sirfin.ammazzonserver.model.Prodotto;
 import it.sirfin.ammazzonserver.repository.ProdottoRepository;
 import it.sirfin.ammazzonserver.service.AnagraficaProdottoService;
+import it.sirfin.ammazzonserver.service.AnagraficaUtenteRegistratoService;
 import it.sirfin.ammazzonserver.service.AssociaTaglieColoriProdottiService;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.AfterEach;
@@ -29,13 +30,21 @@ class AmmazzonServerApplicationTests {
 
     @Autowired
     AssociaTaglieColoriProdottiService associaTaglieColoriProdottiService;
+    
+    @Autowired
+    AnagraficaUtenteRegistratoService anagraficaUtenteRegistratoService;
 
     @BeforeAll
     static void setupIniziale() {
         System.out.println("Siamo in setupIniziale");
         logger.debug("Siamo in setupIniziale");
     }
-
+    
+    /*@BeforeAll
+    static void prova() {
+        logger.debug("Siamo in prova");
+    }*/
+    
     @BeforeEach
     void init() {
         System.out.println("Siamo in init");
@@ -86,4 +95,10 @@ class AmmazzonServerApplicationTests {
         associaTaglieColoriProdottiService.cercaProdotti("pan", 1);
         associaTaglieColoriProdottiService.selezionaProdottoColore(2099L);
     }
+    
+    /*@Test
+    void test4 () {
+        anagraficaUtenteRegistratoService.aggiungiUtente(ur);
+    }*/
+    
 }
