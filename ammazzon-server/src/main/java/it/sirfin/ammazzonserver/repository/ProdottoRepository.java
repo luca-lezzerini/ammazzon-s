@@ -13,8 +13,14 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface ProdottoRepository extends JpaRepository<Prodotto, Long> {
 
-    @Query("select p from Prodotto p where p.codice like concat ('%',:cod,'%') "
-            + "or p.descrizione =:cod")
+    /**
+     * Trova e pagina prodotti per codice totale o descrizione like
+     * @param c
+     * @param pageable
+     * @return Page
+     */
+    @Query("select p from Prodotto p where p.descrizione like concat ('%',:cod,'%') "
+            + "or p.codice =:cod")
     Page trovaCodiceODescrizionePageable(@Param("cod") String c, Pageable pageable);
 
     @Query("select p from Prodotto p where p.codice like concat ('%',:cod,'%') "

@@ -1,6 +1,7 @@
 package it.sirfin.ammazzonserver.service.impl;
 
 import it.sirfin.ammazzonserver.dto.ListaColoreTagliaDto;
+import it.sirfin.ammazzonserver.dto.ListaPagineDto;
 import it.sirfin.ammazzonserver.dto.ListaProdottiDto;
 import it.sirfin.ammazzonserver.dto.ListaProdottoColoriDto;
 import it.sirfin.ammazzonserver.model.ColoreTaglia;
@@ -18,6 +19,9 @@ import java.util.List;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -42,19 +46,28 @@ public class AssociaTaglieColoriProdottiServiceImpl implements AssociaTaglieColo
 
     /**
      * Ricerca prodotto per criterio di ricerca (Codice o DescrizioneLike)
+     *
      * @param criterioRic
      * @return ListaProdottiDto
      */
     @Override
-    public ListaProdottiDto cercaProdotti(String criterioRic) {
+    public ListaPagineDto<Prodotto> cercaProdotti(String criterioRic, int numeroPagina) {
         logger.debug("Sto cercando per: " + criterioRic + " = Codice o DescrizioneLike");
-        List<Prodotto> prodotti = prodottoRepository.trovaPerCodiceODescrizioneLike(criterioRic);
-        prodotti.forEach(p -> {
-            p.setProdottiColori(new ArrayList<>());
-        });
-        logger.debug("Ho trovato " + prodotti.size() + " risultati ");
-        ListaProdottiDto dtoRes = new ListaProdottiDto(prodotti);
-        return dtoRes;
+        try {
+            Page pag = prodottoRepository.trovaCodiceODescrizionePageable(
+                    criterioRic,
+                    PageRequest.of(numeroPagina - 1, 10));
+            ListaPagineDto<Prodotto> prodottiPag = new ListaPagineDto<>(
+                    pag.getContent(),
+                    pag.getPageable().getPageNumber(),
+                    pag.getTotalPages());
+            return prodottiPag;
+        } catch (Exception e) {
+            logger.error("PAGINA RICHIESTA < 0");
+            ListaPagineDto<Prodotto> prodottiPag = new ListaPagineDto<Prodotto>();
+            return prodottiPag;
+
+        }
     }
 
     @Override

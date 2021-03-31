@@ -1,21 +1,17 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
+import { PaginaDto } from '../app-paginate/pagina-dto';
 import { AssociaTagliaRequestDto } from '../dto/associa-taglia-request-dto';
+import { ChiediPaginaDto } from '../dto/chiedi-pagina-dto';
 import { DisassociaTagliaRequestDto } from '../dto/disassocia-taglia-request-dto';
 import { ListaColoreTagliaDto } from '../dto/lista-colore-taglia-dto';
-import { ListaColoriDto } from '../dto/lista-colori-dto';
-import { ListaProdottiDto } from '../dto/lista-prodotti-dto';
+import { ListaPagineDto } from '../dto/lista-pagine-dto';
 import { ListaProdottoColoriDto } from '../dto/lista-prodotto-colori-dto';
-import { ListaTagliaProdottoDto } from '../dto/lista-taglia-prodotto-dto';
 import { ProdottoColoreDto } from '../dto/prodotto-colore-dto';
 import { ProdottoDto } from '../dto/prodotto-dto';
-import { RicercaStringaReqDto } from '../dto/ricerca-stringa-req-dto';
-import { RimuoviTagliaProdottoDto } from '../dto/rimuovi-taglia-prodotto-dto';
-import { TagliaDto } from '../dto/taglia-dto';
 import { ColoreTaglia } from '../entità/colore-taglia';
 import { Prodotto } from '../entità/prodotto';
 import { ProdottoColore } from '../entità/prodotto-colore';
-import { VarianteColore } from '../entità/variante-colore';
 import { VarianteTaglia } from '../entità/variante-taglia';
 
 @Component({
@@ -37,28 +33,35 @@ export class AssociaTaglieProdottiColoriComponent implements OnInit {
   prodottiColore: ProdottoColore[] = [];
   coloriTaglie: ColoreTaglia[] = [];
   messaggioErrore = "";
-  
 
 
+  paginaCorrente = 1;
+  numeroPagine: number;
 
   ngOnInit(): void {
   }
 
-  cerca() {
-    let dto = new RicercaStringaReqDto();
+  cerca(numPag: number) {
+    let dto = new ChiediPaginaDto();
     dto.criterioRicerca = this.criterioRicerca;
-    this.http.post<ListaProdottiDto>("http://localhost:8080/cerca-prodotti-codice-esatto-descrizione-like", dto)
+    if (numPag) {
+      dto.numeroPagina = numPag;
+    } else dto.numeroPagina = 1;
+    console.log("voglio la pagina numero: ", numPag);
+    this.http.post<ListaPagineDto>("http://localhost:8080/cerca-prodotti-codice-esatto-descrizione-like", dto)
       .subscribe(l => {
-        if (l.listaProdotti.length < 1) {
+        if (l.listaPagine.length < 1) {
           this.messaggioErrore = "Nessun prodotto trovato"
-          this.prodotti = l.listaProdotti;
+          this.prodotti = l.listaPagine;
         } else {
           this.messaggioErrore = "";
-          this.prodotti = l.listaProdotti;
+          this.prodotti = l.listaPagine;
         }
         this.prodottiColore = [];
         this.coloriTaglie = [];
         this.taglieNonAssociate = [];
+        this.numeroPagine = l.totalPages;
+        this.paginaCorrente = l.pageNum;
       });
   }
 
@@ -136,6 +139,22 @@ export class AssociaTaglieProdottiColoriComponent implements OnInit {
         this.coloriTaglie = ct.coloriTaglie;
         this.taglieNonAssociate = ct.notColoriTaglie;
       });
+  }
+
+  primo(event: PaginaDto) {
+    this.cerca(event.pageNum);
+  }
+  precedente(event: PaginaDto) {
+    this.cerca(event.pageNum);
+  }
+  numero(event: PaginaDto) {
+    this.cerca(event.pageNum);
+  }
+  successivo(event: PaginaDto) {
+    this.cerca(event.pageNum);
+  }
+  ultimo(event: PaginaDto) {
+    this.cerca(event.pageNum);
   }
 
 

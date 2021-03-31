@@ -1,13 +1,14 @@
 package it.sirfin.ammazzonserver.controller;
 
 import it.sirfin.ammazzonserver.dto.AssociaTagliaRequestDto;
+import it.sirfin.ammazzonserver.dto.ChiediPaginaDto;
 import it.sirfin.ammazzonserver.dto.DisassociaTagliaRequestDto;
 import it.sirfin.ammazzonserver.dto.ListaColoreTagliaDto;
-import it.sirfin.ammazzonserver.dto.ListaProdottiDto;
+import it.sirfin.ammazzonserver.dto.ListaPagineDto;
 import it.sirfin.ammazzonserver.dto.ListaProdottoColoriDto;
 import it.sirfin.ammazzonserver.dto.ProdottoColoreDto;
 import it.sirfin.ammazzonserver.dto.ProdottoDto;
-import it.sirfin.ammazzonserver.dto.RicercaStringaReqDto;
+import it.sirfin.ammazzonserver.model.Prodotto;
 import it.sirfin.ammazzonserver.service.AssociaTaglieColoriProdottiService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -25,9 +26,9 @@ public class AssociaTaglieColoriProdottiController {
 
     @RequestMapping("cerca-prodotti-codice-esatto-descrizione-like")
     @ResponseBody
-    ListaProdottiDto cercaProdotti(@RequestBody RicercaStringaReqDto dto) {
+    ListaPagineDto<Prodotto> cercaProdotti(@RequestBody ChiediPaginaDto dto) {
         return associaTaglieColoriProdottiService
-                .cercaProdotti(dto.getCriterioRicerca());
+                .cercaProdotti(dto.getCriterioRicerca(), dto.getNumeroPagina());
     }
 
     @RequestMapping("cerca-colori-associati-prodotto")
