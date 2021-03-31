@@ -49,7 +49,7 @@ public class AnagraficaColoriController {
     @RequestMapping("ricerca-colore")
     @ResponseBody
     public ListaPagineDto<VarianteColore> ricercaColore(@RequestBody RicercaColoreOProdottoDto dto) {
-        return anagraficaColoriService.ricercaColore(dto.getCriterioRicerca(), 1);
+        return anagraficaColoriService.ricercaColore(dto.getCriterioRicerca(), dto.getPageNum());
     }
 
     @RequestMapping("rimuovi-colore")

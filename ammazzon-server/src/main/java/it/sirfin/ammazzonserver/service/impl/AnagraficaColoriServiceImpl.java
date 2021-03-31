@@ -71,8 +71,14 @@ public class AnagraficaColoriServiceImpl implements AnagraficaColoriService {
         if (c.isBlank()) {
             return aggiornaColori(pagina);
         }
+        logger.debug("----------------------------");
+        logger.debug("Criterio di ricerca" + c);
+        logger.debug("----------------------------");
         PageRequest pg = PageRequest.of(pagina, 5);
         Page<VarianteColore> lista = varianteColoreRepository.trovaCodice(c, pg);
+        logger.debug("----------------------------");
+        logger.debug("Lista elementi corrispondenti" + varianteColoreRepository.trovaCodice(c, pg));
+        logger.debug("----------------------------");
         return new ListaPagineDto(lista.getContent(), lista.getPageable().getPageNumber(), lista.getTotalPages());
     }
 

@@ -208,7 +208,7 @@ export class AnagraficaColoriGalliComponent implements OnInit, Automabile {
   aggiornaRisultatiRicerca() {
     let stringa = new RicercaColoreOProdottoDto();
     stringa.criterioRicerca = this.inputRicerca;
-    stringa.pageNum = 1;
+    stringa.pageNum = 0;
     stringa.totalPages = 5;
     if (this.inputRicerca == null) {
       this.errore = "ERRORE! DEVI INSERIRE UN CRITERIO DI RICERCA PORCA ZOZZA ";
