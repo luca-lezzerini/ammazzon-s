@@ -68,7 +68,7 @@ public class AnagraficaTaglieServiceImpl implements AnagraficaTaglieService {
 
     @Override
     public Page<VarianteTaglia> aggiorna(int pagina, int totalPages) {
-        Pageable primaPaginaCinqueElementi = PageRequest.of(pagina, 3);
+        Pageable primaPaginaCinqueElementi = PageRequest.of(pagina-1, 2);
         Page<VarianteTaglia> lista = varianteTagliaRepository.findAll(primaPaginaCinqueElementi);
         lista.forEach(l -> {
             l.setColoriTaglie(new ArrayList<>());

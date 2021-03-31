@@ -56,6 +56,7 @@ export class AnagraficaTagliaComponent implements OnInit, Automabile {
     console.log(event);
   }
   precedente(event) {
+    this.aggiorna(event);
     console.log(event);
   }
   ultimo(event) {
@@ -159,9 +160,9 @@ export class AnagraficaTagliaComponent implements OnInit, Automabile {
       this.errore = "Inserisci il criterio di ricerca";
     } else {
       this.errore = "";
-      this.http.post<ListaTaglieDto>("http://localhost:8080/ricerca-taglia", dto)
+      this.http.post<ListaPagineDto>("http://localhost:8080/ricerca-taglia", dto)
         .subscribe(r => {
-          this.listaTaglie = r.listaTaglie;
+          this.listaTaglie = r.listaPagine;
           this.paginaCorrente = r.pageNum;
           this.numeroPagine = r.totalPages;
         });
