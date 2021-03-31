@@ -15,6 +15,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Slice;
 import org.springframework.stereotype.Service;
 
 /**
@@ -49,8 +50,9 @@ public class AnagraficaColoriServiceImpl implements AnagraficaColoriService {
     public ListaPagineDto<VarianteColore> aggiornaColori(int pagina) {
         PageRequest pg = PageRequest.of(pagina, 5);
         Page<VarianteColore> colori = varianteColoreRepository.findAll(pg);
+        //PER VELOCIZZARE LA VISUALIZZAZIONE DELLA TABELLA DECOMMENTARE QUI SOTTO.
 //        colori.forEach(c -> {
-//            c.setProdottiColori(new ArrayList<>());
+//            c.setProdottiColori(null);
 //        });
         logger.info("---------------------");
         logger.info("Sono qui" + new ListaPagineDto(colori.getContent(), colori.getPageable().getPageNumber(), colori.getTotalPages()));

@@ -43,7 +43,7 @@ public class AnagraficaColoriController {
     @RequestMapping("modifica-colore")
     @ResponseBody
     public ListaPagineDto<VarianteColore> modificaColore(@RequestBody ColoreDto dto) {
-        return anagraficaColoriService.modificaColore(dto.getVarianteColore(), 1);
+        return anagraficaColoriService.modificaColore(dto.getVarianteColore(), dto.getPageNum());
     }
 
     @RequestMapping("ricerca-colore")
