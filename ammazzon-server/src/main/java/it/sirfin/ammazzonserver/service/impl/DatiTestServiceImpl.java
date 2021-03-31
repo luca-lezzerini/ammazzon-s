@@ -20,12 +20,16 @@ import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.ThreadLocalRandom;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Example;
 import org.springframework.stereotype.Service;
 
 @Service
 public class DatiTestServiceImpl implements DatiTestService {
+    
+    static final Logger logger = LoggerFactory.getLogger(DatiTestServiceImpl.class);
 
     /////////////////////////////////////////////////////////////////////////
     /////////////////////////DATI TEST///////////////////////////////////////
@@ -101,7 +105,7 @@ public class DatiTestServiceImpl implements DatiTestService {
 
             p = new Prodotto("p" + i, "t-shirt", prezzoFormattato);
             p = prodottoRepository.save(p);
-            System.out.println("id " + p.getCodice() + " = " + p.getId());
+            logger.info("id " + p.getCodice() + " = " + p.getId());
             //Prodotti con id % 3 == 0 -> 1 colore e 2 taglie
             //genera 34 pantaloni con colore casuale con taglie disponibili S o M
             if (i % 3 == 0) {
