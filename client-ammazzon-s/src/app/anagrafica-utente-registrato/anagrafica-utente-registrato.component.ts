@@ -22,10 +22,10 @@ export class AnagraficaUtenteRegistratoComponent implements OnInit, Automabile {
   utente = new UtenteRegistrato();
   listaUtenti: ListaPagineDto[] = [];
   paginaDto = new PaginaDto();
-  paginaCorrente: number = 1;
+  paginaCorrente: number = 1; //da sistemare (bisogna recuperare il num dall'input)
   numeroPagine: number = 12;
-
-  listaUtentiPag:UtenteRegistrato[] = [];
+  prova = "";
+  listaUtentiPag: UtenteRegistrato[] = [];
 
   @Input() pagina: number;
   @Input() totali: number;
@@ -201,21 +201,40 @@ export class AnagraficaUtenteRegistratoComponent implements OnInit, Automabile {
   }
   //-------------------------------------------
   //metodi del paginate
-  
+
   primoE(event) {
     console.log(event);
+    console.log(event);
+    let PagDto = new ListaPagineDto();
+    PagDto.pageNum = this.paginaCorrente; //forzatura per le prove (fino a che non si sitema l'acquisizione di paginaCorrente)
+    PagDto.totalPages = this.numeroPagine;
+    this.http.post<ListaPagineDto>("http://localhost:8080/aggiorna-tabella", PagDto)
+      .subscribe(r => this.listaUtenti = r.listaPagine);
   }
   successivoE(event) {
     console.log(event);
+    let PagDto = new ListaPagineDto();
+    PagDto.pageNum = this.paginaCorrente + 1; //incremento forzato per le prove (fino a che non si sitema l'acquisizione di paginaCorrente)
+    PagDto.totalPages = this.numeroPagine;
+    this.http.post<ListaPagineDto>("http://localhost:8080/aggiorna-tabella", PagDto)
+      .subscribe(r => this.listaUtenti = r.listaPagine);
+
   }
   numeroE(event) {
     console.log(event);
   }
   precedenteE(event) {
     console.log(event);
+    console.log(event);
+    let PagDto = new ListaPagineDto();
+    PagDto.pageNum = this.paginaCorrente - 1; //decremento forzato per le prove (fino a che non si sitema l'acquisizione di paginaCorrente)
+    PagDto.totalPages = this.numeroPagine;
+    this.http.post<ListaPagineDto>("http://localhost:8080/aggiorna-tabella", PagDto)
+      .subscribe(r => this.listaUtenti = r.listaPagine);
   }
   ultimoE(event) {
     console.log(event);
+    
   }
 
 }

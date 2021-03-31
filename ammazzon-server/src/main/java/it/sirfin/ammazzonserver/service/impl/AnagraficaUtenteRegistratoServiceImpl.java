@@ -69,4 +69,16 @@ public class AnagraficaUtenteRegistratoServiceImpl implements AnagraficaUtenteRe
                 page.getTotalPages());  // numero complessivo di pagine
     }
 
+    @Override
+    public ListaPagineDto<UtenteRegistrato> aggiornaPag(ListaPagineDto ap) {
+        Page<UtenteRegistrato> page = utenteRegistratoRepository.findAll(PageRequest.of(ap.getPageNum(), 3));
+        return new ListaPagineDto<UtenteRegistrato>(
+                page.getContent(), // lista elementi nella pagina
+                page.getPageable().getPageNumber(), // numero della pagina corrente
+                page.getTotalPages());  // numero complessivo di pagine
+    }
+    
+    
+    
+
 }
