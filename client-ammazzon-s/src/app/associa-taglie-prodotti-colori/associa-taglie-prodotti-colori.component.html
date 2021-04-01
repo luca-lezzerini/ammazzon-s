@@ -20,21 +20,25 @@
     </form>
     <br>
     <br>
-    <table *ngIf="prodotti.length>0">
+    <div *ngIf="prodotti.length>0">
         <app-app-paginate [pagina]="paginaCorrente" [totali]="numeroPagine" (cambiaPagina)="cerca($event)">
         </app-app-paginate>
-        <tr>
-            <th>Codice</th>
-            <th>Descrizione</th>
-            <th>Prezzo</th>
-        </tr>
-        <tr *ngFor="let p of prodotti">
-            <td>{{p.codice}}</td>
-            <td>{{p.descrizione}}</td>
-            <td>{{p.prezzo}}</td>
-            <td><button class="pulsante" (click)="selezionaProdotto(p)">Seleziona</button></td>
-        </tr>
-    </table>
+        <table>
+            <tr>
+                <th>Codice</th>
+                <th>Descrizione</th>
+                <th>Prezzo</th>
+            </tr>
+            <tr *ngFor="let p of prodotti">
+                <td>{{p.codice}}</td>
+                <td>{{p.descrizione}}</td>
+                <td>{{p.prezzo}}</td>
+                <td><button class="pulsante" (click)="selezionaProdotto(p)">Seleziona</button></td>
+            </tr>
+        </table>
+        <app-app-paginate [pagina]="paginaCorrente" [totali]="numeroPagine" (cambiaPagina)="cerca($event)">
+        </app-app-paginate>
+    </div>
     <br>
     <br>
     <div *ngIf="prodottiColore.length>0">
