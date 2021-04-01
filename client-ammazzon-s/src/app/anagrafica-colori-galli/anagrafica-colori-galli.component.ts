@@ -48,6 +48,12 @@ export class AnagraficaColoriGalliComponent implements OnInit, Automabile {
 
   ngOnInit(): void {
   }
+  cambiaPagina(event: PaginaDto) {
+    console.log(event);
+    this.aggiorna(event);
+    this.paginaCorrente = event.pageNum;
+    console.log(event.pageNum);
+  }
 
   primo(event: PaginaDto) {
     console.log(event);
@@ -107,6 +113,7 @@ export class AnagraficaColoriGalliComponent implements OnInit, Automabile {
     this.automa.next(new RicercaEvent(), this.automa);
   }
   aggiorna(dtox: PaginaDto) {
+    dtox.pageNum = 1;
     this.http.post<ListaColoriDto>(this.url + "aggiorna-colore", dtox)
       .subscribe(r => {
         this.variantiColori = r.listaPagine;

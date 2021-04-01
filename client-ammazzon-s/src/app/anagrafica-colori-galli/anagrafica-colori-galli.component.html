@@ -32,9 +32,7 @@
     </div>
     <br><br>
     <div class="tabella">
-        <app-app-paginate [pagina]="paginaCorrente" [totali]="numeroPagine" (primo)="primo($event)"
-            (precedente)="precedente($event)" (numero)="numero($event)" (successivo)="successivo($event)"
-            (ultimo)="ultimo($event)">
+        <app-app-paginate [pagina]="paginaCorrente" [totali]="numeroPagine" (cambiaPagina)="cambiaPagina($event)">
         </app-app-paginate>
         <table *ngIf="tabella">
             <tr>
@@ -51,8 +49,6 @@
             </tr>
         </table>
         <br>
-        <app-app-paginate [pagina]="paginaCorrente" [totali]="numeroPagine" (primo)="primo($event)"
-            (precedente)="precedente($event)" (numero)="numero($event)" (successivo)="successivo($event)"
-            (ultimo)="ultimo($event)">
+        <app-app-paginate [pagina]="paginaCorrente" [totali]="numeroPagine" (cambiaPagina)="cambiaPagina($event)">
         </app-app-paginate>
     </div>
