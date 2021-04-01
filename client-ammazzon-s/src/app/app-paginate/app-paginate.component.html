@@ -1,11 +1,11 @@
-<button [disabled]="pagina <= 1" (click)="onFirst()"> &lt;&lt; </button>
+<button [disabled]="pagina <= 1" (click)="onFirst()" class="pulsante"> &lt;&lt; </button>
 
-<button [disabled]="pagina <= 1" (click)="onPrevious()">&lt;</button>
+<button [disabled]="pagina <= 1" (click)="onPrevious()" class="pulsante">&lt;</button>
 <!-- min si riferisce al valore minimo che puo avere l' input
         max si riferisce al valore massimo che puo avere l' input 
         totalPage si riferisce al totale delle pagine che puo avere l' input 
         value si riferisce al valore di default del input -->
-<input (blur)="numeroPagina()" type=number min="1" [max]="paginaDto.totalPages" [(ngModel)]="pagina" />
+<input (blur)="numeroPagina()" type=text min="1" [max]="paginaDto.totalPages" [(ngModel)]="pagina" />
 
 <select [(ngModel)]="paginaDto.numeroRisultati">
         <option Value="2">2</option>
@@ -13,6 +13,6 @@
         <option Value="10">10</option>
 </select>
 
-<button [disabled]="pagina >= paginaDto.totalPages" (click)="onNext()">&gt;</button>
+<button [disabled]="pagina >= paginaDto.totalPages" (click)="onNext()" class="pulsante">&gt;</button>
 
-<button [disabled]="pagina >= paginaDto.totalPages" (click)="onFin()"> &gt;&gt; </button>
+<button [disabled]="pagina >= paginaDto.totalPages" (click)="onFin()" class="pulsante"> &gt;&gt; </button>
