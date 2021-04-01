@@ -203,7 +203,7 @@ export class AnagraficaUtenteRegistratoComponent implements OnInit, Automabile {
   //-------------------------------------------
   //metodi del paginate
 
-  primoE(event) {
+  primoE(event: PaginaDto) {
     console.log(event);
     console.log(event);
     let PagDto = new ListaPagineDto();
@@ -211,6 +211,8 @@ export class AnagraficaUtenteRegistratoComponent implements OnInit, Automabile {
     PagDto.totalPages = this.numeroPagine;
     this.http.post<ListaPagineDto>("http://localhost:8080/aggiorna-tabella", PagDto)
       .subscribe(r => this.listaUtenti = r.listaPagine);
+      this.paginaCorrente = event.pageNum;
+      console.log(event.pageNum);
   }
   successivoE(event: PaginaDto) {
     console.log(event);

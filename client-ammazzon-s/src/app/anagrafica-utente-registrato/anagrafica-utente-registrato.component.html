@@ -35,7 +35,7 @@
     </div>
     <br><br>
 
-    <div class="tabella" *ngIf="listaUtenti.length > 0">
+    <div class="tabella">
         <app-app-paginate [pagina]="paginaCorrente" [totali]="numeroPagine" (primo)="primoE($event)"
             (precedente)="precedenteE($event)" (numero)="numeroE($event)" (successivo)="successivoE($event)"
             (ultimo)="ultimoE($event)"></app-app-paginate>
