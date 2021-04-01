@@ -18,10 +18,10 @@
     </form>
     <br>
     <br>
-    <app-app-paginate [pagina]="paginaCorrente" [totali]="numeroPagine" (primo)="cerca($event)"
-        (precedente)="cerca($event)" (numero)="cerca($event)" (successivo)="cerca($event)" (ultimo)="cerca($event)">
-    </app-app-paginate>
     <table *ngIf="prodotti.length>0">
+        <app-app-paginate [pagina]="paginaCorrente" [totali]="numeroPagine" (primo)="cerca($event)"
+            (precedente)="cerca($event)" (numero)="cerca($event)" (successivo)="cerca($event)" (ultimo)="cerca($event)">
+        </app-app-paginate>
         <tr>
             <th>Codice</th>
             <th>Descrizione</th>
