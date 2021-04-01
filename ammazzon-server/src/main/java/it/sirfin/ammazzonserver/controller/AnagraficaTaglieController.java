@@ -33,13 +33,13 @@ public class AnagraficaTaglieController {
     @RequestMapping("/aggiorna-taglia")
     @ResponseBody
     public ListaPagineDto<VarianteTaglia> aggiornaTaglie(@RequestBody TagliaDto dto) {
-        var pag = anagraficaTaglieService.aggiorna(dto.getPageNum(), 0);
+        var pag = anagraficaTaglieService.aggiornaListaPaginata(dto.getPageNum(), 0);
         return new ListaPagineDto<>(pag.getContent(), pag.getPageable().getPageNumber(), pag.getTotalPages());
     }
 
     @RequestMapping("aggiungi-taglia")
     @ResponseBody
-    public ListaPagineDto<VarianteTaglia> aggiungiColore(@RequestBody TagliaDto dto) {
+    public ListaPagineDto<VarianteTaglia> aggiungiTaglia(@RequestBody TagliaDto dto) {
         var pag = anagraficaTaglieService.aggiungiTaglia(dto.getVarianteTaglia(), dto.getPageNum(), 0);
         return new ListaPagineDto<>(pag.getContent(), pag.getPageable().getPageNumber(), pag.getTotalPages());
     }

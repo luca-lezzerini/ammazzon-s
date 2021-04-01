@@ -1,3 +1,5 @@
+import { PaginaDto } from "../app-paginate/pagina-dto";
+
 export interface Automabile{
 
     entraStatoRicerca();

@@ -1,3 +1,4 @@
+import { PaginaDto } from "../app-paginate/pagina-dto";
 import { Automabile } from "./automabile";
 import { AddEvent, AnnullaEvent, ConfermaEvent, Event, ModificaEvent, RicercaEvent, RimuoviEvent, SelezionaEvent } from "./eventi";
 import { State } from "./stati";

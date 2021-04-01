@@ -6,12 +6,11 @@
 package it.sirfin.ammazzonserver.service.impl;
 
 import it.sirfin.ammazzonserver.dto.ListaTaglieDto;
-import it.sirfin.ammazzonserver.dto.PaginaDto;
 import it.sirfin.ammazzonserver.dto.TagliaDto;
 import it.sirfin.ammazzonserver.model.VarianteTaglia;
 import it.sirfin.ammazzonserver.repository.VarianteTagliaRepository;
 import it.sirfin.ammazzonserver.service.AnagraficaTaglieService;
-import java.util.ArrayList;
+import java.util.List;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,19 +34,19 @@ public class AnagraficaTaglieServiceImpl implements AnagraficaTaglieService {
     @Override
     public Page<VarianteTaglia> aggiungiTaglia(VarianteTaglia vt, int pagina, int totalPages) {
         varianteTagliaRepository.save(vt);
-        return aggiorna(pagina, 3);
+        return aggiornaListaPaginata(pagina, 3);
     }
 
     @Override
     public Page<VarianteTaglia> rimuoviTaglia(VarianteTaglia vt, int pagina, int totalPages) {
         varianteTagliaRepository.delete(vt);
-        return aggiorna(pagina, 3);
+        return aggiornaListaPaginata(pagina, 3);
     }
 
     @Override
     public Page<VarianteTaglia> ricerca(String c, int pageNum, int totalPages) {
         if (c.isBlank()) {
-            return aggiorna(pageNum, 3);
+            return aggiornaListaPaginata(pageNum, 3);
         }
         Pageable primaPaginaCinqueElementi = PageRequest.of(pageNum, 3);
         Page<VarianteTaglia> lista = varianteTagliaRepository.trovaCodice(c, primaPaginaCinqueElementi);
@@ -63,18 +62,17 @@ public class AnagraficaTaglieServiceImpl implements AnagraficaTaglieService {
     @Override
     public Page<VarianteTaglia> conferma(VarianteTaglia vt, int pagina, int totalPages) {
         varianteTagliaRepository.save(vt);
-        return aggiorna(pagina, 3);
+        return aggiornaListaPaginata(pagina, 3);
     }
 
     @Override
-    public Page<VarianteTaglia> aggiorna(int pagina, int totalPages) {
-        Pageable primaPaginaCinqueElementi = PageRequest.of(pagina-1, 2);
+    public Page<VarianteTaglia> aggiornaListaPaginata(int pagina, int totalPages) {
+        Pageable primaPaginaCinqueElementi = PageRequest.of(pagina - 1, 2);
         Page<VarianteTaglia> lista = varianteTagliaRepository.findAll(primaPaginaCinqueElementi);
-        lista.forEach(l -> {
-            l.setColoriTaglie(new ArrayList<>());
-        });
-    logger.debug(lista.toString());
+        logger.debug(lista.toString());
         return lista;
     }
+
+  
 
 }

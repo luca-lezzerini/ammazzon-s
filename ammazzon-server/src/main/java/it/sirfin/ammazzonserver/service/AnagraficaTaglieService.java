@@ -26,7 +26,8 @@ public interface AnagraficaTaglieService {
 
     Page <VarianteTaglia>  conferma(VarianteTaglia vt, int pagina, int totalPages);
 
-    Page <VarianteTaglia> aggiorna(int pagina, int totalPages);
+    Page <VarianteTaglia> aggiornaListaPaginata(int pagina, int totalPages);
+    
     
    
 }

@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
@@ -21,7 +22,7 @@ public class VarianteTaglia implements Serializable {
     private String codice;
 
     @JsonIgnoreProperties(value = "varianteTaglia")
-    @OneToMany(mappedBy = "varianteTaglia")
+    @OneToMany(mappedBy = "varianteTaglia", fetch = FetchType.LAZY)
     private List<ColoreTaglia> coloriTaglie;
 
     public VarianteTaglia() {
