@@ -13,8 +13,13 @@
         (precedente)="precedente($event)" (numero)="numero($event)" (successivo)="successivo($event)"
         (ultimo)="ultimo($event)"></app-app-paginate>
     <hr>
-    <input type="search" placeholder="Cosa stai cercando?" [(ngModel)]="criterioRicerca" [ngModelOptions]="{standalone: true}">
-    <button class="pulsante" (click)="cerca()">Cerca</button>
+    <form>
+        <label for="cerca">Cosa stai cercando?</label>
+        <br>
+        <input type="text" id="cerca" name="cerca" [(ngModel)]="criterioRicerca">
+        <button class="pulsante" (click)="cerca()">Cerca</button>
+    </form>
+
     <br>
     <br>
     <table *ngIf="prodotti.length>0">

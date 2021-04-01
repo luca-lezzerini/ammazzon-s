@@ -16,6 +16,8 @@
     <button class="pulsante" (click)="nuova()" *ngIf="aggiungi">Nuova</button>
     <br><br>
     <div *ngIf='form'>
+        <label for="fname">First Name</label>
+        <br>
         <input type="text" placeholder="taglia" [(ngModel)]="taglia.codice" [disabled]="codiceC">
 
         <br><br>

@@ -91,10 +91,26 @@
     margin: 0.5%;
   }
   
+  /* Stile pulsante colore di sfondo */
+
   .pulsante:hover {background-color: blue}
   
   .pulsante:active {
     background-color: blue;
     box-shadow: 0 5px #666;
     transform: translateY(4px);
+  }
+
+  input[type=text] {
+    width: 50%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    box-sizing: border-box;
+    border: 1px solid #555;
+    outline: none;
+    border-radius: 15px;
+  }
+  
+  input[type=text]:focus {
+    background-color: orangered;
   }

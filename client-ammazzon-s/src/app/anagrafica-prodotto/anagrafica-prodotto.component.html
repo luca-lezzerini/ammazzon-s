@@ -24,7 +24,7 @@
         <input type="text" placeholder="prezzo" [(ngModel)]="prodotto.prezzo" [disabled]="codiceC">
 
         <br><br>
-        <button class="pulsate" (click)="modifica()" *ngIf="edit">Modifica</button>
+        <button class="pulsante" (click)="modifica()" *ngIf="edit">Modifica</button>
         <button class="pulsante" (click)="conferma()" *ngIf="conf">Conferma</button>
         <button class="pulsante" (click)="annulla()" *ngIf="annull">Annulla</button>
         <button class="pulsante" (click)="rimuovi()" *ngIf="remove">Rimuovi</button>
