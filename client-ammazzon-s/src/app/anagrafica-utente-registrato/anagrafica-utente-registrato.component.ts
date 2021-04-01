@@ -229,27 +229,33 @@ export class AnagraficaUtenteRegistratoComponent implements OnInit, Automabile {
   }
   numeroE(event: PaginaDto) {
     console.log(event);
-    this.paginaCorrente = event.pageNum + 1;
+    this.paginaCorrente = event.pageNum;
     console.log(event.pageNum);
   }
   precedenteE(event: PaginaDto) {
     console.log(event);
     console.log(event);
-    let PagDto = new ListaPagineDto();
-    PagDto.pageNum = this.paginaCorrente - 1; //decremento forzato per le prove (fino a che non si sitema l'acquisizione di paginaCorrente)
-    PagDto.totalPages = this.numeroPagine;
-    this.http.post<ListaPagineDto>("http://localhost:8080/aggiorna-tabella", PagDto)
+    let pagDto = new ListaPagineDto();
+    pagDto.pageNum = this.paginaCorrente; 
+    pagDto.totalPages = this.numeroPagine;
+    this.http.post<ListaPagineDto>("http://localhost:8080/aggiorna-tabella", pagDto)
       .subscribe(r => {
         this.listaUtenti = r.listaPagine;
-        this.paginaCorrente = r.pageNum - 1;
+        this.paginaCorrente = r.pageNum + 1;
       });
     console.log(event.pageNum);
   }
   ultimoE(event: PaginaDto) {
     console.log(event);
-    this.paginaCorrente = event.pageNum - 1;
-    console.log(event.pageNum);
-
+    console.log(event);
+    let pagDto = new ListaPagineDto();
+    pagDto.pageNum = event.totalPages; 
+    pagDto.totalPages = this.numeroPagine;
+    this.http.post<ListaPagineDto>("http://localhost:8080/aggiorna-tabella", pagDto)
+      .subscribe(r => {
+        this.listaUtenti = r.listaPagine;
+        this.paginaCorrente = r.pageNum + 1;
+      });
   }
 
 }
