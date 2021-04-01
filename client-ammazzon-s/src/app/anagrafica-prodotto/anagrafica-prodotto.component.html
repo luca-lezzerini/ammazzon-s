@@ -53,4 +53,7 @@
                 <td> <button class="pulsante" (click)="seleziona(p)">Seleziona</button></td>
             </tr>
         </table>
+        <app-app-paginate [pagina]="paginaCorrente" [totali]="numeroPagine"
+            (cambiaPagina)="aggiornaRisultatiRicerca($event)">
+        </app-app-paginate>
     </div>
