@@ -58,7 +58,6 @@ public class DatiTestServiceImpl implements DatiTestService {
     @Override
     public void datiTest() {
         
-        Instant i1 = Instant.now();
         
         coloreTagliaRepository.deleteAllInBatch();
         prodottoColoreRepository.deleteAllInBatch();
@@ -263,9 +262,9 @@ public class DatiTestServiceImpl implements DatiTestService {
         List<Prodotto> listaPPP = prodottoRepository.findAll(Example.of(ppp));
         System.out.println("\n\n\n Lista prodotto con query by example " + listaPPP);
         
-        Instant i2 = Instant.now();
+       
         
-        System.out.println("TEMPO DATI TEST = "+Duration.between(i1, i2).toMinutes());
+        
         
     }
 
