@@ -139,26 +139,26 @@ export class AnagraficaTagliaComponent implements OnInit, Automabile {
     let dto = new TagliaDto();
     dto.varianteTaglia = this.taglia;
     dto.pageNum = this.paginaCorrente;
-    this.http.post<ListaTaglieDto>("http://localhost:8080/conferma-taglia", dto)
+    this.http.post<ListaPagineDto>("http://localhost:8080/conferma-taglia", dto)
       .subscribe(r => {
-        this.listaTaglie = r.listaTaglie;
+        this.listaTaglie = r.listaPagine;
         this.paginaCorrente = r.pageNum + 1;
         this.numeroPagine = r.totalPages;
       });
-      this.aggiorna(dto);
+      // this.aggiorna(dto);
   }
 
   eliminaDati() {
     let dto = new TagliaDto();
     dto.varianteTaglia = this.taglia;
     dto.pageNum = this.paginaCorrente;
-    this.http.post<ListaTaglieDto>("http://localhost:8080/rimuovi-taglia", dto)
+    this.http.post<ListaPagineDto>("http://localhost:8080/rimuovi-taglia", dto)
       .subscribe(r => {
-        this.listaTaglie = r.listaTaglie;
+        this.listaTaglie = r.listaPagine;
         this.paginaCorrente = r.pageNum + 1;
         this.numeroPagine = r.totalPages;
       });
-      this.aggiorna(dto);
+      // this.aggiorna(dto);
   }
 
   aggiornaRisultatiRicerca() {
