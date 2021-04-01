@@ -21,6 +21,7 @@ export class AppPaginateComponent implements OnInit {
   @Output() ultimo: EventEmitter<PaginaDto> = new EventEmitter<PaginaDto>();
   @Output() cambiaPagina: EventEmitter<PaginaDto> = new EventEmitter<PaginaDto>();
 
+  
   paginaDto = new PaginaDto();
 
   url = "http://localhost:8080/";

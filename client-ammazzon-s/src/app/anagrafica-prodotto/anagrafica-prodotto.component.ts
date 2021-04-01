@@ -137,30 +137,17 @@ export class AnagraficaProdottoComponent implements OnInit, Automabile {
       });
   }
   ricercaPaginata(numPagina: number, criterioRicerca?: String) {
-    console.log("numero di pagina per ricerca: ", numPagina)
-    let dto = new ChiediPaginaDto();
-    dto.criterioRicerca = this.inputRicerca;
-    dto.numeroPagina = numPagina;
-    this.http.post<ListaPagineDto>("http://localhost:8080/ricerca-prodotti-paginata", dto)
-      .subscribe(pc => {
-        this.listaProdotti = pc.listaPagine;
-        console.log(pc.listaPagine);
-        this.paginaCorrente = pc.pageNum;
-        console.log(pc.pageNum);
-        this.numeroPagine = pc.totalPages;
-        console.log(this.numeroPagine);
-      });
+
   }
   aggiornaRisultatiRicerca(event?: PaginaDto) {
     let dto = new ChiediPaginaDto();
     dto.criterioRicerca = this.inputRicerca;
-    dto.numeroRisultati = this.numeroRisultati;
     if (event) {
       dto.numeroPagina = event.pageNum;
+      dto.numeroRisultati = event.numeroRisultati;
     }
-
     console.log("pagina richiesta: ", dto.numeroPagina);
-    console.log("numero prodotti da visualizzare: ",dto.numeroRisultati);
+    console.log("numero prodotti da visualizzare: ", dto.numeroRisultati);
     this.errore = "";
     this.http.post<ListaPagineDto>("http://localhost:8080/ricerca-prodotto", dto)
       .subscribe(r => {
