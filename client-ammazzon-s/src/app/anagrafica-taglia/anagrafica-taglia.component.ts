@@ -133,7 +133,7 @@ export class AnagraficaTagliaComponent implements OnInit, Automabile {
     this.http.post<ListaTaglieDto>("http://localhost:8080/aggiungi-taglia", dto)
       .subscribe(r => {
         this.listaTaglie = r.listaTaglie;
-        this.paginaCorrente = r.pageNum;
+        this.paginaCorrente = r.pageNum + 1;
         this.numeroPagine = r.totalPages;
         this.taglia = new VarianteTaglia();
       });
@@ -145,7 +145,7 @@ export class AnagraficaTagliaComponent implements OnInit, Automabile {
     this.http.post<ListaTaglieDto>("http://localhost:8080/conferma-taglia", dto)
       .subscribe(r => {
         this.listaTaglie = r.listaTaglie;
-        this.paginaCorrente = r.pageNum;
+        this.paginaCorrente = r.pageNum + 1;
         this.numeroPagine = r.totalPages;
       });
   }
@@ -156,7 +156,7 @@ export class AnagraficaTagliaComponent implements OnInit, Automabile {
     this.http.post<ListaTaglieDto>("http://localhost:8080/rimuovi-taglia", dto)
       .subscribe(r => {
         this.listaTaglie = r.listaTaglie;
-        this.paginaCorrente = r.pageNum;
+        this.paginaCorrente = r.pageNum + 1;
         this.numeroPagine = r.totalPages;
       });
   }
@@ -171,7 +171,7 @@ export class AnagraficaTagliaComponent implements OnInit, Automabile {
       this.http.post<ListaPagineDto>("http://localhost:8080/ricerca-taglia", dto)
         .subscribe(r => {
           this.listaTaglie = r.listaPagine;
-          this.paginaCorrente = r.pageNum;
+          this.paginaCorrente = r.pageNum + 1;
           this.numeroPagine = r.totalPages;
         });
     }
@@ -183,7 +183,7 @@ export class AnagraficaTagliaComponent implements OnInit, Automabile {
     this.http.post<TagliaDto>("http://localhost:8080/rit-taglia", dto)
       .subscribe(r => {
         this.taglia = r.varianteTaglia;
-        this.paginaCorrente = r.pageNum;
+        this.paginaCorrente = r.pageNum + 1;
         this.numeroPagine = r.totalPages;
       });
   }
@@ -196,7 +196,7 @@ export class AnagraficaTagliaComponent implements OnInit, Automabile {
     this.http.post<ListaPagineDto>("http://localhost:8080/aggiorna-taglia", dto2)
       .subscribe(r => {
         this.listaTaglie = r.listaPagine;
-        this.paginaCorrente = r.pageNum;
+        this.paginaCorrente = r.pageNum + 1;
         this.numeroPagine = r.totalPages;
       });
   }
