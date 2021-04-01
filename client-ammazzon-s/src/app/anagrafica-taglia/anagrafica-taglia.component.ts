@@ -48,27 +48,22 @@ export class AnagraficaTagliaComponent implements OnInit, Automabile {
   primo(event: PaginaDto) {
     console.log(event);
     this.aggiorna(event);
-    this.paginaCorrente = event.pageNum;
   }
   successivo(event: PaginaDto) {
     this.aggiorna(event);
     console.log(event);
-    this.paginaCorrente = event.pageNum;
   }
   numero(event: PaginaDto) {
     console.log(event);
     this.aggiorna(event);
-    this.paginaCorrente = event.pageNum;
   }
   precedente(event: PaginaDto) {
     this.aggiorna(event);
     console.log(event);
-    this.paginaCorrente = event.pageNum;
   }
   ultimo(event: PaginaDto) {
     console.log(event);
     this.aggiorna(event);
-    this.paginaCorrente = event.pageNum;
   }
 
   entraStatoRicerca() {

@@ -73,6 +73,4 @@ public class AnagraficaTaglieServiceImpl implements AnagraficaTaglieService {
         return lista;
     }
 
-  
-
 }
