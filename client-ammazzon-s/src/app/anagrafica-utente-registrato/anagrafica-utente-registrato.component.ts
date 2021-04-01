@@ -26,7 +26,7 @@ export class AnagraficaUtenteRegistratoComponent implements OnInit, Automabile {
   numeroPagine: number = 12;
   prova = "";
   listaUtentiPag: UtenteRegistrato[] = [];
-  
+
 
   @Input() pagina: number;
   @Input() totali: number;
@@ -210,23 +210,26 @@ export class AnagraficaUtenteRegistratoComponent implements OnInit, Automabile {
     PagDto.pageNum = this.paginaCorrente; //forzatura per le prove (fino a che non si sitema l'acquisizione di paginaCorrente)
     PagDto.totalPages = this.numeroPagine;
     this.http.post<ListaPagineDto>("http://localhost:8080/aggiorna-tabella", PagDto)
-      .subscribe(r => this.listaUtenti = r.listaPagine);
-      this.paginaCorrente = event.pageNum;
-      console.log(event.pageNum);
+      .subscribe(r => {
+        this.listaUtenti = r.listaPagine;
+        this.paginaCorrente = r.pageNum + 1;
+      });
+    console.log(event.pageNum);
   }
   successivoE(event: PaginaDto) {
-    console.log(event);
-    let PagDto = new ListaPagineDto();
+    console.log(event); let PagDto = new ListaPagineDto();
     PagDto.pageNum = this.paginaCorrente + 1; //incremento forzato per le prove (fino a che non si sitema l'acquisizione di paginaCorrente)
     PagDto.totalPages = this.numeroPagine;
     this.http.post<ListaPagineDto>("http://localhost:8080/aggiorna-tabella", PagDto)
-      .subscribe(r => this.listaUtenti = r.listaPagine);
-      this.paginaCorrente = event.pageNum;
-      console.log(event.pageNum);
+      .subscribe(r => {
+        this.listaUtenti = r.listaPagine;
+        this.paginaCorrente = r.pageNum + 1;
+      });
+    console.log(event.pageNum);
   }
   numeroE(event: PaginaDto) {
     console.log(event);
-    this.paginaCorrente = event.pageNum;
+    this.paginaCorrente = event.pageNum + 1;
     console.log(event.pageNum);
   }
   precedenteE(event: PaginaDto) {
@@ -236,15 +239,17 @@ export class AnagraficaUtenteRegistratoComponent implements OnInit, Automabile {
     PagDto.pageNum = this.paginaCorrente - 1; //decremento forzato per le prove (fino a che non si sitema l'acquisizione di paginaCorrente)
     PagDto.totalPages = this.numeroPagine;
     this.http.post<ListaPagineDto>("http://localhost:8080/aggiorna-tabella", PagDto)
-      .subscribe(r => this.listaUtenti = r.listaPagine);
-      this.paginaCorrente = event.pageNum;
-      console.log(event.pageNum);
+      .subscribe(r => {
+        this.listaUtenti = r.listaPagine;
+        this.paginaCorrente = r.pageNum - 1;
+      });
+    console.log(event.pageNum);
   }
   ultimoE(event: PaginaDto) {
     console.log(event);
-    this.paginaCorrente = event.pageNum;
+    this.paginaCorrente = event.pageNum - 1;
     console.log(event.pageNum);
-    
+
   }
 
 }
