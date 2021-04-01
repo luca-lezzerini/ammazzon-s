@@ -101,16 +101,23 @@
     transform: translateY(4px);
   }
 
+  /* Stile text-area */
+
   input[type=text] {
-    width: 50%;
+    width: 100%;
     padding: 12px 20px;
-    margin: 8px 0;
+    margin: 8px 20px;
     box-sizing: border-box;
     border: 1px solid #555;
     outline: none;
     border-radius: 15px;
+
   }
   
+  /* Stile text area colore di sfondo */
+
   input[type=text]:focus {
     background-color: orangered;
   }
+
+  
