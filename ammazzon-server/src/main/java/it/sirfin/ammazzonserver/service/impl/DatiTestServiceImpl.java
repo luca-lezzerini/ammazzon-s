@@ -234,22 +234,22 @@ public class DatiTestServiceImpl implements DatiTestService {
         System.out.println("\t numero Pantaloni rossi: " + pantaloniRossi);
         System.out.println("\t numero Pantaloni blu: " + pantaloniBlu);
         System.out.println("\t numero Pantaloni gialli: " + pantaloniGialli);
-        System.out.println("\t numero Pantaloni gialli: " + pantaloniVerdi);
-        System.out.println("\t numero Pantaloni gialli: " + pantaloniBianchi);
+        System.out.println("\t numero Pantaloni verdi: " + pantaloniVerdi);
+        System.out.println("\t numero Pantaloni bianchi: " + pantaloniBianchi);
 
         System.out.println("numero t-shirt create = " + contatore2);
         System.out.println("\t numero t-shirt rossi: " + tShirtRosse);
         System.out.println("\t numero t-shirt blu: " + tShirtBlu);
         System.out.println("\t numero t-shirt gialli: " + tShirtGiallo);
-        System.out.println("\t numero t-shirt gialli: " + tShirtVerde);
-        System.out.println("\t numero t-shirt gialli: " + tShirtBianco);
+        System.out.println("\t numero t-shirt verdi: " + tShirtVerde);
+        System.out.println("\t numero t-shirt bianchi: " + tShirtBianco);
         
         System.out.println("numero cappelli creati = " + contatore3);
         System.out.println("\t numero cappelli rossi: " + cappelliRossi);
         System.out.println("\t numero cappelli blu: " + cappelliBlu);
         System.out.println("\t numero cappelli gialli: " + cappelliGialli);
-        System.out.println("\t numero cappelli gialli: " + cappelliVerdi);
-        System.out.println("\t numero cappelli gialli: " + cappelliBianchi);
+        System.out.println("\t numero cappelli verdi: " + cappelliVerdi);
+        System.out.println("\t numero cappelli bianchi: " + cappelliBianchi);
         
         System.out.println("totale prodotti creati su DB = " + prodottoRepository.findAll().size());
         
