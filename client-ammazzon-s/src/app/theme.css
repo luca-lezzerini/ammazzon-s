@@ -116,5 +116,12 @@
   /* Stile text area colore di sfondo */
 
   input[type=text]:focus {
-    background-color: orangered;
+    background-color: #ddd;
+    color: black;
+  }
+
+.colonne{
+    column-count: 3;
+    column-gap: 60px;
+    column-rule: solid black;
   }
