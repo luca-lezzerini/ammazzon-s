@@ -77,6 +77,10 @@ public class DatiTestServiceImpl implements DatiTestService {
         vcRosso = varianteColoreRepository.save(vcRosso);
         VarianteColore vcGiallo = new VarianteColore("g1", "giallo");
         vcGiallo = varianteColoreRepository.save(vcGiallo);
+        VarianteColore vcVerde = new VarianteColore("v1", "verde");
+        vcVerde = varianteColoreRepository.save(vcVerde);
+        VarianteColore vcBianco = new VarianteColore("g1", "bianco");
+        vcBianco = varianteColoreRepository.save(vcBianco);
 
         //////////creazione taglia////////
         VarianteTaglia tagliaS = new VarianteTaglia("S");
@@ -211,29 +215,41 @@ public class DatiTestServiceImpl implements DatiTestService {
         int pantaloniRossi = prodottoColoreRepository.prodottoColore("rosso", "pantalone").size();
         int pantaloniBlu = prodottoColoreRepository.prodottoColore("blu", "pantalone").size();
         int pantaloniGialli = prodottoColoreRepository.prodottoColore("giallo", "pantalone").size();
+        int pantaloniVerdi = prodottoColoreRepository.prodottoColore("verde", "pantalone").size();
+        int pantaloniBianchi = prodottoColoreRepository.prodottoColore("bianco", "pantalone").size();
         
         int tShirtRosse = prodottoColoreRepository.prodottoColore("rosso", "t-shirt").size();
         int tShirtBlu = prodottoColoreRepository.prodottoColore("blu", "t-shirt").size();
         int tShirtGiallo = prodottoColoreRepository.prodottoColore("giallo", "t-shirt").size();
+        int tShirtVerde = prodottoColoreRepository.prodottoColore("verde", "t-shirt").size();
+        int tShirtBianco = prodottoColoreRepository.prodottoColore("bianco", "t-shirt").size();
         
         int cappelliRossi = prodottoColoreRepository.prodottoColore("rosso", "cappello").size();
         int cappelliBlu = prodottoColoreRepository.prodottoColore("blu", "cappello").size();
         int cappelliGialli = prodottoColoreRepository.prodottoColore("giallo", "cappello").size();
+        int cappelliVerdi = prodottoColoreRepository.prodottoColore("verde", "cappello").size();
+        int cappelliBianchi = prodottoColoreRepository.prodottoColore("bianco", "cappello").size();
         
         System.out.println("numero Pantaloni creati = " + contatore1);
         System.out.println("\t numero Pantaloni rossi: " + pantaloniRossi);
         System.out.println("\t numero Pantaloni blu: " + pantaloniBlu);
         System.out.println("\t numero Pantaloni gialli: " + pantaloniGialli);
+        System.out.println("\t numero Pantaloni gialli: " + pantaloniVerdi);
+        System.out.println("\t numero Pantaloni gialli: " + pantaloniBianchi);
 
         System.out.println("numero t-shirt create = " + contatore2);
         System.out.println("\t numero t-shirt rossi: " + tShirtRosse);
         System.out.println("\t numero t-shirt blu: " + tShirtBlu);
         System.out.println("\t numero t-shirt gialli: " + tShirtGiallo);
+        System.out.println("\t numero t-shirt gialli: " + tShirtVerde);
+        System.out.println("\t numero t-shirt gialli: " + tShirtBianco);
         
         System.out.println("numero cappelli creati = " + contatore3);
         System.out.println("\t numero cappelli rossi: " + cappelliRossi);
         System.out.println("\t numero cappelli blu: " + cappelliBlu);
         System.out.println("\t numero cappelli gialli: " + cappelliGialli);
+        System.out.println("\t numero cappelli gialli: " + cappelliVerdi);
+        System.out.println("\t numero cappelli gialli: " + cappelliBianchi);
         
         System.out.println("totale prodotti creati su DB = " + prodottoRepository.findAll().size());
         
