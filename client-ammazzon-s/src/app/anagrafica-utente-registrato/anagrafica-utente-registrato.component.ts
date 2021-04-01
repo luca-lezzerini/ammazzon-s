@@ -26,6 +26,7 @@ export class AnagraficaUtenteRegistratoComponent implements OnInit, Automabile {
   numeroPagine: number = 12;
   prova = "";
   listaUtentiPag: UtenteRegistrato[] = [];
+  
 
   @Input() pagina: number;
   @Input() totali: number;
@@ -211,19 +212,22 @@ export class AnagraficaUtenteRegistratoComponent implements OnInit, Automabile {
     this.http.post<ListaPagineDto>("http://localhost:8080/aggiorna-tabella", PagDto)
       .subscribe(r => this.listaUtenti = r.listaPagine);
   }
-  successivoE(event) {
+  successivoE(event: PaginaDto) {
     console.log(event);
     let PagDto = new ListaPagineDto();
     PagDto.pageNum = this.paginaCorrente + 1; //incremento forzato per le prove (fino a che non si sitema l'acquisizione di paginaCorrente)
     PagDto.totalPages = this.numeroPagine;
     this.http.post<ListaPagineDto>("http://localhost:8080/aggiorna-tabella", PagDto)
       .subscribe(r => this.listaUtenti = r.listaPagine);
-
+      this.paginaCorrente = event.pageNum;
+      console.log(event.pageNum);
   }
-  numeroE(event) {
+  numeroE(event: PaginaDto) {
     console.log(event);
+    this.paginaCorrente = event.pageNum;
+    console.log(event.pageNum);
   }
-  precedenteE(event) {
+  precedenteE(event: PaginaDto) {
     console.log(event);
     console.log(event);
     let PagDto = new ListaPagineDto();
@@ -231,9 +235,13 @@ export class AnagraficaUtenteRegistratoComponent implements OnInit, Automabile {
     PagDto.totalPages = this.numeroPagine;
     this.http.post<ListaPagineDto>("http://localhost:8080/aggiorna-tabella", PagDto)
       .subscribe(r => this.listaUtenti = r.listaPagine);
+      this.paginaCorrente = event.pageNum;
+      console.log(event.pageNum);
   }
-  ultimoE(event) {
+  ultimoE(event: PaginaDto) {
     console.log(event);
+    this.paginaCorrente = event.pageNum;
+    console.log(event.pageNum);
     
   }
 

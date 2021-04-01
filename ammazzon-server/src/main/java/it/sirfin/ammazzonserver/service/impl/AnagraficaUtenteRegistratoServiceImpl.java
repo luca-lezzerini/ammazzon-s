@@ -62,7 +62,7 @@ public class AnagraficaUtenteRegistratoServiceImpl implements AnagraficaUtenteRe
 
     @Override
     public ListaPagineDto<UtenteRegistrato> aggiorna(int pagina) {
-        Page<UtenteRegistrato> page = utenteRegistratoRepository.findAll(PageRequest.of(pagina, 3));
+        Page<UtenteRegistrato> page = utenteRegistratoRepository.findAll(PageRequest.of(pagina-1, 3));
         return new ListaPagineDto<UtenteRegistrato>(
                 page.getContent(), // lista elementi nella pagina
                 page.getPageable().getPageNumber(), // numero della pagina corrente
@@ -71,7 +71,7 @@ public class AnagraficaUtenteRegistratoServiceImpl implements AnagraficaUtenteRe
 
     @Override
     public ListaPagineDto<UtenteRegistrato> ricerca(String c, int pagina) {
-        Page<UtenteRegistrato> page = utenteRegistratoRepository.trovaUtenteRegistrato(c, PageRequest.of(pagina, 3));
+        Page<UtenteRegistrato> page = utenteRegistratoRepository.trovaUtenteRegistrato(c, PageRequest.of(pagina-1, 3));
         return new ListaPagineDto<UtenteRegistrato>(
                 page.getContent(), // lista elementi nella pagina
                 page.getPageable().getPageNumber(), // numero della pagina corrente
@@ -80,7 +80,7 @@ public class AnagraficaUtenteRegistratoServiceImpl implements AnagraficaUtenteRe
 
     @Override
     public ListaPagineDto<UtenteRegistrato> aggiornaPag(ListaPagineDto ap) {
-        Page<UtenteRegistrato> page = utenteRegistratoRepository.findAll(PageRequest.of(ap.getPageNum(), 3));
+        Page<UtenteRegistrato> page = utenteRegistratoRepository.findAll(PageRequest.of(ap.getPageNum()-1, 3));
         return new ListaPagineDto<UtenteRegistrato>(
                 page.getContent(), // lista elementi nella pagina
                 page.getPageable().getPageNumber(), // numero della pagina corrente
