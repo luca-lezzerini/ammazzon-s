@@ -21,7 +21,7 @@ export class AppPaginateComponent implements OnInit {
   @Output() ultimo: EventEmitter<PaginaDto> = new EventEmitter<PaginaDto>();
   @Output() cambiaPagina: EventEmitter<PaginaDto> = new EventEmitter<PaginaDto>();
 
-  
+
   paginaDto = new PaginaDto();
 
   url = "http://localhost:8080/";
@@ -66,10 +66,19 @@ export class AppPaginateComponent implements OnInit {
   }
 
   numeroPagina() {
+    if (this.pagina == null || this.pagina == 0) {
+      this.pagina = 1;
+    }
     this.paginaDto.pageNum = this.pagina;
     this.numero.emit(this.paginaDto);
     this.cambiaPagina.emit(this.paginaDto);
   }
 
-
+  omit_special_char(event) {
+    var k = event.charCode;
+    return ((k > 64 && k < 91) ||
+      (k > 96 && k < 123) ||
+      k == 8 || k == 32 ||
+      (k >= 48 && k <= 57));
+  }
 }
