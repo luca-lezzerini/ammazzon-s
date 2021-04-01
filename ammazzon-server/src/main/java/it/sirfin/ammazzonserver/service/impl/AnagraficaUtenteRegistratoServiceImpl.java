@@ -37,12 +37,15 @@ public class AnagraficaUtenteRegistratoServiceImpl implements AnagraficaUtenteRe
         logger.debug("id AnagraficaUtenteRegistrato" + ur);
         return aggiorna(1);
     }
-
+    
     @Override
     public ListaPagineDto<UtenteRegistrato> rimuoviUtente(UtenteRegistrato ur) {
         logger.info("Richiesta cancellazione di " + ur);
+          if (ur == null) {
+            logger.error("Tentativo di salvare null!!!!");
+        }
         utenteRegistratoRepository.delete(ur);
-        logger.debug("bella zio");
+        logger.debug("id AnagraficaUtenteRegistrato" + ur);
         return aggiorna(1);
     }
 

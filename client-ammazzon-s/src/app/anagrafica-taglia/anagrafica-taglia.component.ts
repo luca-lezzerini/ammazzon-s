@@ -45,22 +45,30 @@ export class AnagraficaTagliaComponent implements OnInit, Automabile {
   ngOnInit(): void {
   }
 
-  primo(event) {
+  primo(event: PaginaDto) {
     console.log(event);
+    this.aggiorna(event);
+    this.paginaCorrente = event.pageNum;
   }
   successivo(event: PaginaDto) {
     this.aggiorna(event);
     console.log(event);
+    this.paginaCorrente = event.pageNum;
   }
-  numero(event) {
+  numero(event: PaginaDto) {
     console.log(event);
+    this.aggiorna(event);
+    this.paginaCorrente = event.pageNum;
   }
-  precedente(event) {
+  precedente(event: PaginaDto) {
     this.aggiorna(event);
     console.log(event);
+    this.paginaCorrente = event.pageNum;
   }
-  ultimo(event) {
+  ultimo(event: PaginaDto) {
     console.log(event);
+    this.aggiorna(event);
+    this.paginaCorrente = event.pageNum;
   }
 
   entraStatoRicerca() {
@@ -184,7 +192,7 @@ export class AnagraficaTagliaComponent implements OnInit, Automabile {
     let dto2 = new TagliaDto();
     dto2.pageNum = dto.pageNum;
     console.log(dto2.pageNum);
-    
+
     this.http.post<ListaPagineDto>("http://localhost:8080/aggiorna-taglia", dto2)
       .subscribe(r => {
         this.listaTaglie = r.listaPagine;
