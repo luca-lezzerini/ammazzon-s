@@ -8,6 +8,8 @@ import it.sirfin.ammazzonserver.model.ProdottoColore;
 import it.sirfin.ammazzonserver.repository.ProdottoColoreRepository;
 import it.sirfin.ammazzonserver.repository.ProdottoRepository;
 import it.sirfin.ammazzonserver.service.AnagraficaProdottoService;
+import java.time.Duration;
+import java.time.Instant;
 import java.util.List;
 import javax.transaction.Transactional;
 import org.slf4j.Logger;
@@ -30,23 +32,28 @@ public class AnagraficaProdottoServiceImpl implements AnagraficaProdottoService 
     @Autowired
     ProdottoColoreRepository prodottoColoreRepository;
 
+    
     @Override
     public ListaProdottiDto inserisci(Prodotto p) {
         prodottoRepository.save(p);
         return aggiorna();
     }
-
+    
+    /**
+     * disassocia un Prodotto da ColoreProdotto
+     * dopodiché elimina il Prodotto dal DB
+     * 
+     * @param prodotto
+     * @return ListaProdottiDto
+     */
     @Override
-    public ListaProdottiDto elimina(Prodotto p) {
-
-        List<ProdottoColore> listaProdottiColori
-                = prodottoColoreRepository.findAll();
-
-        listaProdottiColori.forEach(prodottoColore -> {
-            prodottoColoreRepository.disassociaColoreProdotto(p.getId());
-        });
-
-        prodottoRepository.delete(p);
+    public ListaProdottiDto elimina(Prodotto prodotto) {
+        Instant i1 = Instant.now();
+        int prodottiDisassociati = prodottoColoreRepository.disassociaColoreProdotto(prodotto.getId());
+        Instant i2 = Instant.now();
+        System.out.println("Prodotti disassociati = "+ prodottiDisassociati);
+        System.out.println("Tempo query disassociaColoreProdotto(p.getId()) = " + Duration.between(i1, i2).toMillis() + "ms");
+        prodottoRepository.delete(prodotto);
         return aggiorna();
     }
 
@@ -76,7 +83,6 @@ public class AnagraficaProdottoServiceImpl implements AnagraficaProdottoService 
             logger.error("numero pagina richiesta < 0, o problema con numero risultati richiesti");
             throw new RuntimeException();
         }
-        
 
     }
 

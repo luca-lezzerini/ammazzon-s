@@ -17,6 +17,8 @@ import it.sirfin.ammazzonserver.repository.VarianteColoreRepository;
 import it.sirfin.ammazzonserver.repository.VarianteTagliaRepository;
 import it.sirfin.ammazzonserver.service.DatiTestService;
 import java.text.DecimalFormat;
+import java.time.Duration;
+import java.time.Instant;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.ThreadLocalRandom;
@@ -55,7 +57,9 @@ public class DatiTestServiceImpl implements DatiTestService {
 
     @Override
     public void datiTest() {
-
+        
+        Instant i1 = Instant.now();
+        
         coloreTagliaRepository.deleteAllInBatch();
         prodottoColoreRepository.deleteAllInBatch();
         varianteTagliaRepository.deleteAllInBatch();
@@ -258,7 +262,11 @@ public class DatiTestServiceImpl implements DatiTestService {
         ppp.setCodice("p1");
         List<Prodotto> listaPPP = prodottoRepository.findAll(Example.of(ppp));
         System.out.println("\n\n\n Lista prodotto con query by example " + listaPPP);
-                
+        
+        Instant i2 = Instant.now();
+        
+        System.out.println("TEMPO DATI TEST = "+Duration.between(i1, i2).toMinutes());
+        
     }
 
     @Override

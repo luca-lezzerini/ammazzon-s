@@ -60,6 +60,6 @@ public interface ProdottoColoreRepository extends JpaRepository<ProdottoColore, 
 
     @Modifying
     @Query("update ProdottoColore pc set pc.prodotto.id = null where pc.prodotto.id =:id")
-    void disassociaColoreProdotto(@Param("id") Long id);
+    int disassociaColoreProdotto(@Param("id") Long id);
 
 }
