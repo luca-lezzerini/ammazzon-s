@@ -61,7 +61,7 @@ public class AnagraficaProdottoController {
     @RequestMapping("ricerca-prodotto")
     @ResponseBody
     public ListaPagineDto<Prodotto> cercaProdotto(@RequestBody ChiediPaginaDto dto) {
-        return anagraficaProdottoService.ricerca(dto.getCriterioRicerca(), dto.getNumeroPagina()-1);
+        return anagraficaProdottoService.ricerca(dto.getCriterioRicerca(), dto.getNumeroPagina()-1,dto.getNumeroRisultati());
     }
 
     @RequestMapping("ricerca-prodotti-paginata")

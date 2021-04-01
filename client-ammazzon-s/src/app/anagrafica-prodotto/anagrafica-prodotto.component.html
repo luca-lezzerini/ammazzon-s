@@ -30,8 +30,12 @@
     <br><br>
     <div *ngIf="search">
         <input type="text" placeholder="Criterio Ricerca" [(ngModel)]="inputRicerca">
+        <select [(ngModel)]="numeroRisultati">
+            <option Value="2">2</option>
+            <option Value="5">5</option>
+            <option Value="10">10</option>
+        </select>
         <button class="pulsante" (click)="cerca()">Cerca</button>
-        <button class="pulsante" (click)="ricercaPaginata()">Ricerca paginata</button>
         <br>
     </div>
     <br><br>

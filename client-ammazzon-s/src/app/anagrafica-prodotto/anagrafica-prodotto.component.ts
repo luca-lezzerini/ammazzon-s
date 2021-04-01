@@ -40,6 +40,8 @@ export class AnagraficaProdottoComponent implements OnInit, Automabile {
   paginaCorrente = 1;
   numeroPagine: number;
 
+  numeroRisultati = 5;
+
   constructor(private http: HttpClient) {
     this.automa = new Automa(this);
 
@@ -152,10 +154,13 @@ export class AnagraficaProdottoComponent implements OnInit, Automabile {
   aggiornaRisultatiRicerca(event?: PaginaDto) {
     let dto = new ChiediPaginaDto();
     dto.criterioRicerca = this.inputRicerca;
+    dto.numeroRisultati = this.numeroRisultati;
     if (event) {
       dto.numeroPagina = event.pageNum;
     }
-    console.log("pagina richiesta: ",dto.numeroPagina);
+
+    console.log("pagina richiesta: ", dto.numeroPagina);
+    console.log("numero prodotti da visualizzare: ",dto.numeroRisultati);
     this.errore = "";
     this.http.post<ListaPagineDto>("http://localhost:8080/ricerca-prodotto", dto)
       .subscribe(r => {

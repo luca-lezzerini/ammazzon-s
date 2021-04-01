@@ -10,6 +10,8 @@ import it.sirfin.ammazzonserver.repository.ProdottoRepository;
 import it.sirfin.ammazzonserver.service.AnagraficaProdottoService;
 import java.util.List;
 import javax.transaction.Transactional;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -19,6 +21,8 @@ import org.springframework.stereotype.Service;
 @Transactional
 @Service
 public class AnagraficaProdottoServiceImpl implements AnagraficaProdottoService {
+
+    static final Logger logger = LoggerFactory.getLogger(AnagraficaProdottoServiceImpl.class);
 
     @Autowired
     ProdottoRepository prodottoRepository;
@@ -59,15 +63,21 @@ public class AnagraficaProdottoServiceImpl implements AnagraficaProdottoService 
     }
 
     @Override
-    public ListaPagineDto<Prodotto> ricerca(String criterio, int numeroPagina) {
+    public ListaPagineDto<Prodotto> ricerca(String criterio, int numeroPagina, int numeroRisultati) {
+        try {
+            Page p = prodottoRepository.trovaCodiceODescrizionePageable(
+                    criterio, PageRequest.of(numeroPagina, numeroRisultati));
+            ListaPagineDto<Prodotto> dtoRes = new ListaPagineDto<>();
+            dtoRes.setListaPagine(p.getContent());
+            dtoRes.setPageNum(p.getPageable().getPageNumber() + 1);
+            dtoRes.setTotalPages(p.getTotalPages());
+            return dtoRes;
+        } catch (Exception e) {
+            logger.error("numero pagina richiesta < 0, o problema con numero risultati richiesti");
+            throw new RuntimeException();
+        }
+        
 
-        Page p = prodottoRepository.trovaCodiceODescrizionePageable(
-                criterio, PageRequest.of(numeroPagina, 10));
-        ListaPagineDto<Prodotto> dtoRes = new ListaPagineDto<Prodotto>();
-        dtoRes.setListaPagine(p.getContent());
-        dtoRes.setPageNum(p.getPageable().getPageNumber()+1 );
-        dtoRes.setTotalPages(p.getTotalPages());
-        return dtoRes;
     }
 
     @Override

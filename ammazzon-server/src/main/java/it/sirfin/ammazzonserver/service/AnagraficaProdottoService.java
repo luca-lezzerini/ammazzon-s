@@ -20,7 +20,7 @@ public interface AnagraficaProdottoService {
 
     ProdottoDto seleziona(Prodotto p);
 
-    ListaPagineDto<Prodotto> ricerca(String criterio,int numeroPagina);
+    ListaPagineDto<Prodotto> ricerca(String criterio,int numeroPagina,int numeroRisultati);
 
     ListaProdottiDto aggiorna();
     
