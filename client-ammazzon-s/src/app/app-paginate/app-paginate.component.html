@@ -6,17 +6,16 @@
 -->
 
 
-<button [disabled]="paginaDto.pageNum == 1" (click)="onFirst()">
-</button>
+<button [disabled]="pagina == 1" (click)="onFirst()"> &lt;&lt; </button>
 
-<button [disabled]="paginaDto.pageNum == 1" (click)="onPrevious()">previous</button>
+<button [disabled]="pagina == 1" (click)="onPrevious()">previous</button>
 <!-- min si riferisce al valore minimo che puo avere l' input
         max si riferisce al valore massimo che puo avere l' input 
         totalPage si riferisce al totale delle pagine che puo avere l' input 
         value si riferisce al valore di default del input -->
-<input (blur)="numeroPagina()" type=number min="1" [max]="paginaDto.totalPages" [(ngModel)]="paginaDto.pageNum" />
+<input (blur)="numeroPagina()" type=number min="1" [max]="paginaDto.totalPages" [(ngModel)]="pagina" />
 
 
-<button [disabled]="paginaDto.pageNum >= paginaDto.totalPages" (click)="onNext()">next</button>
+<button [disabled]="pagina >= paginaDto.totalPages" (click)="onNext()">next</button>
 
-<button [disabled]="paginaDto.pageNum >= paginaDto.totalPages" (click)="onFin()"> >> </button>
+<button [disabled]="pagina >= paginaDto.totalPages" (click)="onFin()"> &gt;&gt; </button>

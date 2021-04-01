@@ -18,7 +18,7 @@ public class Prodotto implements Serializable {
     @GeneratedValue
     private Long id;
 
-    @Column
+    @Column(nullable = false, length = 40)
     private String codice;
 
     @Column

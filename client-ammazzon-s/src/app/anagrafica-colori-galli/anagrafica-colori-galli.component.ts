@@ -53,23 +53,33 @@ export class AnagraficaColoriGalliComponent implements OnInit, Automabile {
     console.log(event);
     event.pageNum = 1;
     this.aggiorna(event);
+    this.paginaCorrente = event.pageNum;
+    console.log(event.pageNum);
   }
   successivo(event: PaginaDto) {
     console.log(event);
     this.aggiorna(event);
+    this.paginaCorrente = event.pageNum;
+    console.log(event.pageNum);
   }
   precedente(event: PaginaDto) {
     console.log(event);
     this.aggiorna(event);
+    this.paginaCorrente = event.pageNum;
+    console.log(event.pageNum);
   }
   ultimo(event: PaginaDto) {
     console.log(event);
     event.pageNum = this.numeroPagine;
     this.aggiorna(event);
+    this.paginaCorrente = event.pageNum;
+    console.log(event.pageNum);
   }
   numero(event: PaginaDto) {
     console.log(event);
     this.aggiorna(event);
+    this.paginaCorrente = event.pageNum;
+    console.log(event.pageNum);
   }
   nuova() {
     this.automa.next(new AddEvent(), this.automa);

@@ -29,6 +29,10 @@ public class AnagraficaUtenteRegistratoServiceImpl implements AnagraficaUtenteRe
 
     @Override
     public ListaPagineDto<UtenteRegistrato> aggiungiUtente(UtenteRegistrato ur) {
+        logger.debug("Entrato in servizio aggiungiUtente " + ur);
+        if (ur == null) {
+            logger.error("Tentativo di salvare null!!!!");
+        }
         utenteRegistratoRepository.save(ur);
         logger.debug("id AnagraficaUtenteRegistrato" + ur);
         return aggiorna(1);
@@ -36,6 +40,7 @@ public class AnagraficaUtenteRegistratoServiceImpl implements AnagraficaUtenteRe
 
     @Override
     public ListaPagineDto<UtenteRegistrato> rimuoviUtente(UtenteRegistrato ur) {
+        logger.info("Richiesta cancellazione di " + ur);
         utenteRegistratoRepository.delete(ur);
         logger.debug("bella zio");
         return aggiorna(1);
