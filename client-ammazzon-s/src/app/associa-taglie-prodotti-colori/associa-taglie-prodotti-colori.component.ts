@@ -41,13 +41,13 @@ export class AssociaTaglieProdottiColoriComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  cerca(numPag?: number) {
+  cerca(event?: PaginaDto) {
     let dto = new ChiediPaginaDto();
     dto.criterioRicerca = this.criterioRicerca;
-    if (numPag) {
-      dto.numeroPagina = numPag;
+    if (event) {
+      dto.numeroPagina = event.pageNum;
     } else dto.numeroPagina = 1;
-    console.log("voglio la pagina numero: ", numPag);
+    console.log("voglio la pagina numero: ", dto.numeroPagina);
     this.http.post<ListaPagineDto>("http://localhost:8080/cerca-prodotti-codice-esatto-descrizione-like", dto)
       .subscribe(l => {
         if (l.listaPagine.length < 1) {
@@ -62,6 +62,7 @@ export class AssociaTaglieProdottiColoriComponent implements OnInit {
         this.taglieNonAssociate = [];
         this.numeroPagine = l.totalPages;
         this.paginaCorrente = l.pageNum;
+        console.log("server dice -> siamo a pagina: ", l.pageNum)
       });
   }
 
@@ -142,19 +143,14 @@ export class AssociaTaglieProdottiColoriComponent implements OnInit {
   }
 
   primo(event: PaginaDto) {
-    this.cerca(event.pageNum);
   }
   precedente(event: PaginaDto) {
-    this.cerca(event.pageNum);
   }
   numero(event: PaginaDto) {
-    this.cerca(event.pageNum);
   }
   successivo(event: PaginaDto) {
-    this.cerca(event.pageNum);
   }
   ultimo(event: PaginaDto) {
-    this.cerca(event.pageNum);
   }
 
 

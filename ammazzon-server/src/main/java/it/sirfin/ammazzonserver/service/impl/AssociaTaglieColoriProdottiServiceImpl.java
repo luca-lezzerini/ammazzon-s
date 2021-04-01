@@ -57,14 +57,18 @@ public class AssociaTaglieColoriProdottiServiceImpl implements AssociaTaglieColo
             Page pag = prodottoRepository.trovaCodiceODescrizionePageable(
                     criterioRic,
                     PageRequest.of(numeroPagina - 1, 10));
+            List<Prodotto> listaProdotti = pag.getContent();
+            listaProdotti.forEach(lp -> {
+                lp.setProdottiColori(new ArrayList<>());
+            });
             ListaPagineDto<Prodotto> prodottiPag = new ListaPagineDto<>(
                     pag.getContent(),
-                    pag.getPageable().getPageNumber(),
+                    pag.getPageable().getPageNumber() +1,
                     pag.getTotalPages());
             return prodottiPag;
         } catch (Exception e) {
             logger.error("PAGINA RICHIESTA < 0");
-            ListaPagineDto<Prodotto> prodottiPag = new ListaPagineDto<Prodotto>();
+            ListaPagineDto<Prodotto> prodottiPag = new ListaPagineDto<>();
             return prodottiPag;
 
         }

@@ -9,9 +9,6 @@
     <h3><a href="app-anagrafica-prodotto">Anagrafica prodotto</a></h3>
 </div>
 <div class="contenuto">
-    <app-app-paginate [pagina]="paginaCorrente" [totali]="numeroPagine" (primo)="primo($event)"
-        (precedente)="precedente($event)" (numero)="numero($event)" (successivo)="successivo($event)"
-        (ultimo)="ultimo($event)"></app-app-paginate>
     <hr>
     <form>
         <label for="cerca">Cosa stai cercando?</label>
@@ -19,9 +16,11 @@
         <input type="text" id="cerca" name="cerca" [(ngModel)]="criterioRicerca">
         <button class="pulsante" (click)="cerca()">Cerca</button>
     </form>
-
     <br>
     <br>
+    <app-app-paginate [pagina]="paginaCorrente" [totali]="numeroPagine" (primo)="cerca($event)"
+        (precedente)="cerca($event)" (numero)="cerca($event)" (successivo)="cerca($event)" (ultimo)="cerca($event)">
+    </app-app-paginate>
     <table *ngIf="prodotti.length>0">
         <tr>
             <th>Codice</th>
