@@ -58,9 +58,6 @@ public class AssociaTaglieColoriProdottiServiceImpl implements AssociaTaglieColo
                     criterioRic,
                     PageRequest.of(numeroPagina - 1, 10));
             List<Prodotto> listaProdotti = pag.getContent();
-            listaProdotti.forEach(lp -> {
-                lp.setProdottiColori(new ArrayList<>());
-            });
             ListaPagineDto<Prodotto> prodottiPag = new ListaPagineDto<>(
                     pag.getContent(),
                     pag.getPageable().getPageNumber() +1,

@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
@@ -28,7 +29,7 @@ public class Prodotto implements Serializable {
     private Double prezzo;
 
     @JsonIgnoreProperties(value = "prodotto")
-    @OneToMany(mappedBy = "prodotto")
+    @OneToMany(mappedBy = "prodotto", fetch = FetchType.LAZY)
     private List<ProdottoColore> prodottiColori;
 
     public Prodotto() {

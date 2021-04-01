@@ -19,6 +19,7 @@ export class AppPaginateComponent implements OnInit {
   @Output() numero: EventEmitter<PaginaDto> = new EventEmitter<PaginaDto>();
   @Output() successivo: EventEmitter<PaginaDto> = new EventEmitter<PaginaDto>();
   @Output() ultimo: EventEmitter<PaginaDto> = new EventEmitter<PaginaDto>();
+  @Output() cambiaPagina: EventEmitter<PaginaDto> = new EventEmitter<PaginaDto>();
 
   paginaDto = new PaginaDto();
 
@@ -38,18 +39,21 @@ export class AppPaginateComponent implements OnInit {
     this.pagina = 1;
     this.paginaDto.pageNum = this.pagina;
     this.primo.emit(this.paginaDto)
+    this.cambiaPagina.emit(this.paginaDto);
   }
   onPrevious() {
     this.paginaDto.totalPages = this.totali;
     this.pagina--;
     this.paginaDto.pageNum = this.pagina;
     this.precedente.emit(this.paginaDto);
+    this.cambiaPagina.emit(this.paginaDto);
   }
   onNext() {
     this.paginaDto.totalPages = this.totali;
     this.pagina++;
     this.paginaDto.pageNum = this.pagina;
     this.successivo.emit(this.paginaDto);
+    this.cambiaPagina.emit(this.paginaDto);
   }
 
   onFin() {
@@ -57,11 +61,13 @@ export class AppPaginateComponent implements OnInit {
     this.pagina = this.paginaDto.totalPages;
     this.paginaDto.pageNum = this.pagina;
     this.ultimo.emit(this.paginaDto);
+    this.cambiaPagina.emit(this.paginaDto);
   }
 
   numeroPagina() {
     this.paginaDto.pageNum = this.pagina;
     this.numero.emit(this.paginaDto);
+    this.cambiaPagina.emit(this.paginaDto);
   }
 
 
