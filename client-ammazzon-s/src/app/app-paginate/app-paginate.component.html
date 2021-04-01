@@ -5,7 +5,7 @@
         max si riferisce al valore massimo che puo avere l' input 
         totalPage si riferisce al totale delle pagine che puo avere l' input 
         value si riferisce al valore di default del input -->
-<input (blur)="numeroPagina()" type=text min="1" [max]="paginaDto.totalPages" [(ngModel)]="pagina" />
+<input (blur)="numeroPagina()" type="number" min="1" [max]="paginaDto.totalPages" [(ngModel)]="pagina" />
 
 <select [(ngModel)]="paginaDto.numeroRisultati">
         <option Value="2">2</option>
