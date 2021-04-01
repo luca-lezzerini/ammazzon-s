@@ -30,32 +30,37 @@ export class AppPaginateComponent implements OnInit {
     this.paginaDto.pageNum = this.pagina;
     this.paginaDto.totalPages = this.totali;
   }
-  
+
 
 
   onFirst() {
     this.paginaDto.totalPages = this.totali;
-    this.paginaDto.pageNum = 1;
+    this.pagina = 1;
+    this.paginaDto.pageNum = this.pagina;
     this.primo.emit(this.paginaDto)
   }
   onPrevious() {
     this.paginaDto.totalPages = this.totali;
-    this.paginaDto.pageNum--;
+    this.pagina--;
+    this.paginaDto.pageNum = this.pagina;
     this.precedente.emit(this.paginaDto);
   }
   onNext() {
     this.paginaDto.totalPages = this.totali;
-    this.paginaDto.pageNum++;
+    this.pagina++;
+    this.paginaDto.pageNum = this.pagina;
     this.successivo.emit(this.paginaDto);
   }
 
   onFin() {
     this.paginaDto.totalPages = this.totali;
-    this.paginaDto.pageNum = this.paginaDto.totalPages;
+    this.pagina = this.paginaDto.totalPages;
+    this.paginaDto.pageNum = this.pagina;
     this.ultimo.emit(this.paginaDto);
   }
 
   numeroPagina() {
+    this.paginaDto.pageNum = this.pagina;
     this.numero.emit(this.paginaDto);
   }
 
