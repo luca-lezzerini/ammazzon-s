@@ -57,7 +57,6 @@ public class AssociaTaglieColoriProdottiServiceImpl implements AssociaTaglieColo
             Page pag = prodottoRepository.trovaCodiceODescrizionePageable(
                     criterioRic,
                     PageRequest.of(numeroPagina - 1, 10));
-            List<Prodotto> listaProdotti = pag.getContent();
             ListaPagineDto<Prodotto> prodottiPag = new ListaPagineDto<>(
                     pag.getContent(),
                     pag.getPageable().getPageNumber() +1,
