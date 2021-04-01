@@ -142,18 +142,6 @@ export class AssociaTaglieProdottiColoriComponent implements OnInit {
       });
   }
 
-  primo(event: PaginaDto) {
-  }
-  precedente(event: PaginaDto) {
-  }
-  numero(event: PaginaDto) {
-  }
-  successivo(event: PaginaDto) {
-  }
-  ultimo(event: PaginaDto) {
-  }
-
-
 }
 
 
