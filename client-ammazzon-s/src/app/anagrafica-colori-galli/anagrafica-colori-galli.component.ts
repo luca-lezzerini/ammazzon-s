@@ -48,6 +48,7 @@ export class AnagraficaColoriGalliComponent implements OnInit, Automabile {
 
   ngOnInit(): void {
   }
+
   cambiaPagina(event: PaginaDto) {
     console.log(event);
     this.aggiorna(event);
@@ -55,38 +56,38 @@ export class AnagraficaColoriGalliComponent implements OnInit, Automabile {
     console.log(event.pageNum);
   }
 
-  primo(event: PaginaDto) {
-    console.log(event);
-    event.pageNum = 1;
-    this.aggiorna(event);
-    this.paginaCorrente = event.pageNum;
-    console.log(event.pageNum);
-  }
-  successivo(event: PaginaDto) {
-    console.log(event);
-    this.aggiorna(event);
-    this.paginaCorrente = event.pageNum;
-    console.log(event.pageNum);
-  }
-  precedente(event: PaginaDto) {
-    console.log(event);
-    this.aggiorna(event);
-    this.paginaCorrente = event.pageNum;
-    console.log(event.pageNum);
-  }
-  ultimo(event: PaginaDto) {
-    console.log(event);
-    event.pageNum = this.numeroPagine;
-    this.aggiorna(event);
-    this.paginaCorrente = event.pageNum;
-    console.log(event.pageNum);
-  }
-  numero(event: PaginaDto) {
-    console.log(event);
-    this.aggiorna(event);
-    this.paginaCorrente = event.pageNum;
-    console.log(event.pageNum);
-  }
+  // primo(event: PaginaDto) {
+  //   console.log(event);
+  //   event.pageNum = 1;
+  //   this.aggiorna(event);
+  //   this.paginaCorrente = event.pageNum;
+  //   console.log(event.pageNum);
+  // }
+  // successivo(event: PaginaDto) {
+  //   console.log(event);
+  //   this.aggiorna(event);
+  //   this.paginaCorrente = event.pageNum;
+  //   console.log(event.pageNum);
+  // }
+  // precedente(event: PaginaDto) {
+  //   console.log(event);
+  //   this.aggiorna(event);
+  //   this.paginaCorrente = event.pageNum;
+  //   console.log(event.pageNum);
+  // }
+  // ultimo(event: PaginaDto) {
+  //   console.log(event);
+  //   event.pageNum = this.numeroPagine;
+  //   this.aggiorna(event);
+  //   this.paginaCorrente = event.pageNum;
+  //   console.log(event.pageNum);
+  // }
+  // numero(event: PaginaDto) {
+  //   console.log(event);
+  //   this.aggiorna(event);
+  //   this.paginaCorrente = event.pageNum;
+  //   console.log(event.pageNum);
+  // }
   nuova() {
     this.automa.next(new AddEvent(), this.automa);
   }
@@ -113,7 +114,6 @@ export class AnagraficaColoriGalliComponent implements OnInit, Automabile {
     this.automa.next(new RicercaEvent(), this.automa);
   }
   aggiorna(dtox: PaginaDto) {
-    dtox.pageNum = 1;
     this.http.post<ListaColoriDto>(this.url + "aggiorna-colore", dtox)
       .subscribe(r => {
         this.variantiColori = r.listaPagine;
@@ -187,8 +187,8 @@ export class AnagraficaColoriGalliComponent implements OnInit, Automabile {
   salvaDati() {
     let dto = new ColoreDto();
     dto.varianteColore = this.varianteColore;
-    dto.pageNum = 1;
-    dto.totalPages = 5;
+    dto.pageNum = this.paginaCorrente;
+    dto.totalPages = this.numeroPagine;
     if (this.varianteColore.codice && this.varianteColore.descrizione == null) {
       this.errore = "Errore! Devi inserire un colore PORCA ZOZZA";
     } else {
@@ -225,8 +225,8 @@ export class AnagraficaColoriGalliComponent implements OnInit, Automabile {
   aggiornaRisultatiRicerca() {
     let stringa = new RicercaColoreOProdottoDto();
     stringa.criterioRicerca = this.inputRicerca;
-    stringa.pageNum = 0;
-    stringa.totalPages = 5;
+    stringa.pageNum = this.paginaCorrente - 1;
+    stringa.totalPages = this.numeroPagine;
     if (this.inputRicerca == null) {
       this.errore = "ERRORE! DEVI INSERIRE UN CRITERIO DI RICERCA PORCA ZOZZA ";
     } else {
