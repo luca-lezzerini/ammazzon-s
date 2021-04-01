@@ -133,9 +133,13 @@ export class AnagraficaProdottoComponent implements OnInit, Automabile {
     this.http.post<ListaProdottiDto>("http://localhost:8080/rimuovi-prodotto", dto)
       .subscribe(r => {
         //this.listaProdotti = r.listaProdotti;
-        this.ricercaPaginata(this.paginaCorrente + 1);
+        let dto = new PaginaDto();
+        dto.pageNum = this.paginaCorrente;
+        this.aggiornaRisultatiRicerca(dto);
       });
   }
+
+
   ricercaPaginata(numPagina: number, criterioRicerca?: String) {
 
   }
@@ -217,6 +221,7 @@ export class AnagraficaProdottoComponent implements OnInit, Automabile {
     this.ricercaPaginata(event.pageNum)
   }
   successivo(event: PaginaDto) {
+   
     this.ricercaPaginata(event.pageNum);
   }
   ultimo(event: PaginaDto) {
