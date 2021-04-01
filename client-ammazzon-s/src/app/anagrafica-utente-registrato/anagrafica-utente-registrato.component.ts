@@ -23,7 +23,7 @@ export class AnagraficaUtenteRegistratoComponent implements OnInit, Automabile {
   listaUtenti: ListaPagineDto[] = [];
   paginaDto = new PaginaDto();
   paginaCorrente: number = 1; //da sistemare (bisogna recuperare il num dall'input)
-  numeroPagine: number = 12;
+  numeroPagine: number;
   prova = "";
   listaUtentiPag: UtenteRegistrato[] = [];
 
@@ -166,7 +166,12 @@ export class AnagraficaUtenteRegistratoComponent implements OnInit, Automabile {
 
   aggiorna() {
     this.http.get<ListaPagineDto>("http://localhost:8080/aggiorna-utente")
-      .subscribe(r => this.listaUtenti = r.listaPagine);
+      .subscribe(r => {
+        this.listaUtenti = r.listaPagine;
+        this.paginaCorrente = r.pageNum + 1;
+        this.numeroPagine = r.totalPages;
+        console.log(r);
+      });
   }
 
 
@@ -206,55 +211,65 @@ export class AnagraficaUtenteRegistratoComponent implements OnInit, Automabile {
   primoE(event: PaginaDto) {
     console.log(event);
     console.log(event);
-    let PagDto = new ListaPagineDto();
-    PagDto.pageNum = this.paginaCorrente; //forzatura per le prove (fino a che non si sitema l'acquisizione di paginaCorrente)
-    PagDto.totalPages = this.numeroPagine;
-    this.http.post<ListaPagineDto>("http://localhost:8080/aggiorna-tabella", PagDto)
+    let pagDto = new ListaPagineDto();
+    pagDto.pageNum = 1;
+    this.http.post<ListaPagineDto>("http://localhost:8080/aggiorna-tabella", pagDto)
       .subscribe(r => {
         this.listaUtenti = r.listaPagine;
         this.paginaCorrente = r.pageNum + 1;
+        this.numeroPagine = r.totalPages;
+        console.log(r);
       });
     console.log(event.pageNum);
   }
   successivoE(event: PaginaDto) {
-    console.log(event); let PagDto = new ListaPagineDto();
-    PagDto.pageNum = this.paginaCorrente + 1; //incremento forzato per le prove (fino a che non si sitema l'acquisizione di paginaCorrente)
-    PagDto.totalPages = this.numeroPagine;
-    this.http.post<ListaPagineDto>("http://localhost:8080/aggiorna-tabella", PagDto)
+    console.log(event);
+    let pagDto = new ListaPagineDto();
+    pagDto.pageNum = event.pageNum;
+    this.http.post<ListaPagineDto>("http://localhost:8080/aggiorna-tabella", pagDto)
       .subscribe(r => {
         this.listaUtenti = r.listaPagine;
         this.paginaCorrente = r.pageNum + 1;
+        this.numeroPagine = r.totalPages;
+        console.log(r);
       });
     console.log(event.pageNum);
   }
   numeroE(event: PaginaDto) {
     console.log(event);
-    this.paginaCorrente = event.pageNum;
-    console.log(event.pageNum);
-  }
-  precedenteE(event: PaginaDto) {
-    console.log(event);
-    console.log(event);
     let pagDto = new ListaPagineDto();
-    pagDto.pageNum = this.paginaCorrente; 
-    pagDto.totalPages = this.numeroPagine;
+    pagDto.pageNum = event.pageNum;
     this.http.post<ListaPagineDto>("http://localhost:8080/aggiorna-tabella", pagDto)
       .subscribe(r => {
         this.listaUtenti = r.listaPagine;
         this.paginaCorrente = r.pageNum + 1;
+        this.numeroPagine = r.totalPages;
+        console.log(r);
+      });
+  }
+  precedenteE(event: PaginaDto) {
+    console.log(event);
+    let pagDto = new ListaPagineDto();
+    pagDto.pageNum = event.pageNum;
+    this.http.post<ListaPagineDto>("http://localhost:8080/aggiorna-tabella", pagDto)
+      .subscribe(r => {
+        this.listaUtenti = r.listaPagine;
+        this.paginaCorrente = r.pageNum + 1;
+        this.numeroPagine = r.totalPages;
+        console.log(r);
       });
     console.log(event.pageNum);
   }
   ultimoE(event: PaginaDto) {
     console.log(event);
-    console.log(event);
     let pagDto = new ListaPagineDto();
-    pagDto.pageNum = event.totalPages; 
-    pagDto.totalPages = this.numeroPagine;
+    pagDto.pageNum = event.totalPages;
     this.http.post<ListaPagineDto>("http://localhost:8080/aggiorna-tabella", pagDto)
       .subscribe(r => {
         this.listaUtenti = r.listaPagine;
         this.paginaCorrente = r.pageNum + 1;
+        this.numeroPagine = r.totalPages;
+        console.log(r);
       });
   }
 
