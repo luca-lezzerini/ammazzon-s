@@ -11,9 +11,6 @@
 </div>
 <br><br>
 <div class="contenuto">
-    <app-app-paginate [pagina]="paginaCorrente" [totali]="numeroPagine" (primo)="primo($event)"
-        (precedente)="precedente($event)" (numero)="numero($event)" (successivo)="successivo($event)"
-        (ultimo)="ultimo($event)"></app-app-paginate>
     <hr>
     <br><br>
     <button class="pulsante" (click)="nuova()" *ngIf="aggiungi">Nuova</button>
@@ -38,8 +35,12 @@
         <br>
     </div>
     <br><br>
-    <div class="tabella">
-        <table *ngIf="tabella">
+    <div class="tabella" *ngIf="tabella">
+        <app-app-paginate [pagina]="paginaCorrente" [totali]="numeroPagine"
+            (cambiaPagina)="aggiornaRisultatiRicerca($event)">
+        </app-app-paginate>
+
+        <table>
             <tr>
                 <th>Codice</th>
                 <th>Descrizione</th>

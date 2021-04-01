@@ -39,7 +39,7 @@ public class AnagraficaProdottoServiceImpl implements AnagraficaProdottoService 
                 = prodottoColoreRepository.findAll();
 
         listaProdottiColori.forEach(prodottoColore -> {
-            prodottoColoreRepository.disassociaColoreProdotto(p.getId());      
+            prodottoColoreRepository.disassociaColoreProdotto(p.getId());
         });
 
         prodottoRepository.delete(p);
@@ -59,8 +59,15 @@ public class AnagraficaProdottoServiceImpl implements AnagraficaProdottoService 
     }
 
     @Override
-    public ListaProdottiDto ricerca(String criterio) {
-        return new ListaProdottiDto(prodottoRepository.trovaCodiceODescrizione(criterio));
+    public ListaPagineDto<Prodotto> ricerca(String criterio, int numeroPagina) {
+
+        Page p = prodottoRepository.trovaCodiceODescrizionePageable(
+                criterio, PageRequest.of(numeroPagina, 10));
+        ListaPagineDto<Prodotto> dtoRes = new ListaPagineDto<Prodotto>();
+        dtoRes.setListaPagine(p.getContent());
+        dtoRes.setPageNum(p.getPageable().getPageNumber()+1 );
+        dtoRes.setTotalPages(p.getTotalPages());
+        return dtoRes;
     }
 
     @Override

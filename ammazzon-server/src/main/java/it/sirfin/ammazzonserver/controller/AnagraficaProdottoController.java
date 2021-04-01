@@ -48,27 +48,27 @@ public class AnagraficaProdottoController {
 
     @RequestMapping("conferma-prodotto")
     @ResponseBody
-    public ListaProdottiDto confermaTaglia(@RequestBody ProdottoDto dto) {
+    public ListaProdottiDto confermaProdotto(@RequestBody ProdottoDto dto) {
         return anagraficaProdottoService.modifica(dto.getProdotto());
     }
 
     @RequestMapping("seleziona-prodotti")
     @ResponseBody
-    public ProdottoDto ritornaTaglia(@RequestBody ProdottoDto dto) {
+    public ProdottoDto selezionaProdotto(@RequestBody ProdottoDto dto) {
         return anagraficaProdottoService.seleziona(dto.getProdotto());
     }
 
     @RequestMapping("ricerca-prodotto")
     @ResponseBody
-    public ListaProdottiDto confermaTaglia(@RequestBody RicercaProdottoDto dto) {
-        return anagraficaProdottoService.ricerca(dto.getCriterioRicerca());
+    public ListaPagineDto<Prodotto> cercaProdotto(@RequestBody ChiediPaginaDto dto) {
+        return anagraficaProdottoService.ricerca(dto.getCriterioRicerca(), dto.getNumeroPagina()-1);
     }
-    
+
     @RequestMapping("ricerca-prodotti-paginata")
     @ResponseBody
     public ListaPagineDto<Prodotto> ricercaProdottiPaginata(@RequestBody ChiediPaginaDto dto) {
         return anagraficaProdottoService.ricercaProdottiPaginata(
                 dto.getCriterioRicerca(), dto.getNumeroPagina());
     }
-    
+
 }

@@ -34,7 +34,7 @@ export class AnagraficaProdottoComponent implements OnInit, Automabile {
   search: boolean;
   tabella: boolean;
   codiceC: boolean;
-  inputRicerca: string;
+  inputRicerca = "";
   errore = "";
 
   paginaCorrente = 1;
@@ -42,7 +42,8 @@ export class AnagraficaProdottoComponent implements OnInit, Automabile {
 
   constructor(private http: HttpClient) {
     this.automa = new Automa(this);
-    this.ricercaPaginata(1, this.inputRicerca);
+
+    this.aggiornaRisultatiRicerca();
   }
   ngOnInit(): void {
   }
@@ -120,7 +121,7 @@ export class AnagraficaProdottoComponent implements OnInit, Automabile {
     this.http.post<ListaProdottiDto>("http://localhost:8080/conferma-prodotto", dto)
       .subscribe(r => {
         this.listaProdotti = r.listaProdotti;
-        this.ricercaPaginata(this.paginaCorrente+1);
+        this.ricercaPaginata(this.paginaCorrente + 1);
       });
   }
 
@@ -130,7 +131,7 @@ export class AnagraficaProdottoComponent implements OnInit, Automabile {
     this.http.post<ListaProdottiDto>("http://localhost:8080/rimuovi-prodotto", dto)
       .subscribe(r => {
         //this.listaProdotti = r.listaProdotti;
-        this.ricercaPaginata(this.paginaCorrente+1);
+        this.ricercaPaginata(this.paginaCorrente + 1);
       });
   }
   ricercaPaginata(numPagina: number, criterioRicerca?: String) {
@@ -148,18 +149,21 @@ export class AnagraficaProdottoComponent implements OnInit, Automabile {
         console.log(this.numeroPagine);
       });
   }
-  aggiornaRisultatiRicerca() {
-    let dto = new RicercaProdottoDto();
+  aggiornaRisultatiRicerca(event?: PaginaDto) {
+    let dto = new ChiediPaginaDto();
     dto.criterioRicerca = this.inputRicerca;
-    if (this.inputRicerca == null) {
-      this.errore = "Inserisci il criterio di ricerca";
-    } else {
-      this.errore = "";
-      this.http.post<ListaProdottiDto>("http://localhost:8080/ricerca-prodotto", dto)
-        .subscribe(r => {
-          this.listaProdotti = r.listaProdotti;
-        });
+    if (event) {
+      dto.numeroPagina = event.pageNum;
     }
+    console.log("pagina richiesta: ",dto.numeroPagina);
+    this.errore = "";
+    this.http.post<ListaPagineDto>("http://localhost:8080/ricerca-prodotto", dto)
+      .subscribe(r => {
+        this.listaProdotti = r.listaPagine;
+        this.paginaCorrente = r.pageNum;
+        this.numeroPagine = r.totalPages;
+      });
+
   }
 
   selezionaProdotto(p: Prodotto) {
