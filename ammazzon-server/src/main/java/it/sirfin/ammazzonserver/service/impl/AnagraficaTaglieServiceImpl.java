@@ -67,7 +67,7 @@ public class AnagraficaTaglieServiceImpl implements AnagraficaTaglieService {
 
     @Override
     public Page<VarianteTaglia> aggiornaListaPaginata(int pagina, int totalPages) {
-        Pageable primaPaginaCinqueElementi = PageRequest.of(pagina - 1, 2);
+        Pageable primaPaginaCinqueElementi = PageRequest.of(pagina - 1, 3);
         Page<VarianteTaglia> lista = varianteTagliaRepository.findAll(primaPaginaCinqueElementi);
         logger.debug(lista.toString());
         return lista;

@@ -138,23 +138,27 @@ export class AnagraficaTagliaComponent implements OnInit, Automabile {
   modificaDati() {
     let dto = new TagliaDto();
     dto.varianteTaglia = this.taglia;
+    dto.pageNum = this.paginaCorrente;
     this.http.post<ListaTaglieDto>("http://localhost:8080/conferma-taglia", dto)
       .subscribe(r => {
         this.listaTaglie = r.listaTaglie;
         this.paginaCorrente = r.pageNum + 1;
         this.numeroPagine = r.totalPages;
       });
+      this.aggiorna(dto);
   }
 
   eliminaDati() {
     let dto = new TagliaDto();
     dto.varianteTaglia = this.taglia;
+    dto.pageNum = this.paginaCorrente;
     this.http.post<ListaTaglieDto>("http://localhost:8080/rimuovi-taglia", dto)
       .subscribe(r => {
         this.listaTaglie = r.listaTaglie;
         this.paginaCorrente = r.pageNum + 1;
         this.numeroPagine = r.totalPages;
       });
+      this.aggiorna(dto);
   }
 
   aggiornaRisultatiRicerca() {
@@ -176,10 +180,11 @@ export class AnagraficaTagliaComponent implements OnInit, Automabile {
   ritornaTaglia(l: VarianteTaglia) {
     let dto = new TagliaDto();
     dto.varianteTaglia = l;
+    dto.pageNum = this.paginaCorrente;
     this.http.post<TagliaDto>("http://localhost:8080/rit-taglia", dto)
       .subscribe(r => {
         this.taglia = r.varianteTaglia;
-        this.paginaCorrente = r.pageNum + 1;
+        this.paginaCorrente = r.pageNum;
         this.numeroPagine = r.totalPages;
       });
   }
