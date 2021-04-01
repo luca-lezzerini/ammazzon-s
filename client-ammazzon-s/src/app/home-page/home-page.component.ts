@@ -9,6 +9,9 @@ import { Router } from '@angular/router';
 })
 export class HomePageComponent implements OnInit {
 
+  paginaCorrente = 1;
+  numeroPagine = 5;
+
   constructor(private router: Router, private http: HttpClient) { }
 
   ngOnInit(): void {
@@ -22,4 +25,20 @@ export class HomePageComponent implements OnInit {
   immagine6: string = "assets/css/6.jpg";
   immagine7: string = "assets/css/7.jpg";
   immagine8: string = "assets/css/8.jpg";
+
+  primo(event) {
+    console.log(event);
+  }
+  successivo(event) {
+    console.log(event);
+  }
+  numero(event) {
+    console.log(event);
+  }
+  precedente(event) {
+    console.log(event);
+  }
+  ultimo(event) {
+    console.log(event);
+  }
 }
