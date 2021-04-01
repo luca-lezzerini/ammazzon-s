@@ -10,7 +10,7 @@
 </div>
 <div class="contenuto">
     <br><br>
-    <button (click)="nuova()" *ngIf="aggiungi">Nuova</button>
+    <button class="pulsante" (click)="nuova()" *ngIf="aggiungi">Nuova</button>
     <br><br>
     <div *ngIf='form'>
         <input type="text" placeholder="codice" [(ngModel)]="varianteColore.codice" [disabled]="codiceInput"> &nbsp;
