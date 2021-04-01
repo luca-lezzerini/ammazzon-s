@@ -110,7 +110,8 @@ public class UtenteRegistrato extends UtenteAnonimo implements Serializable {
     //Provvisorio, da modificare se necessario
     @Override
     public String toString() {
-        return "UtenteRegistrato{" + "nome=" + nome + ", cognome=" + cognome + ", username=" + username + ", password=" + password + ", codiceFiscale=" + codiceFiscale + ", tokenRegistrato=" + tokenRegistrato + ",numero ordini=" + ordini.size() + '}';
+        return "UtenteRegistrato{" + "nome=" + nome + ", cognome=" + cognome + ", username=" + username + ", password=" + password + ", codiceFiscale=" + codiceFiscale + ", tokenRegistrato=" + tokenRegistrato + ",numero ordini="
+                + getOrdini().size() + '}';
     }
 
 }
