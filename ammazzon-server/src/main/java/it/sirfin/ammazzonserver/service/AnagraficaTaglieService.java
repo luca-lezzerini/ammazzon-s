@@ -5,7 +5,7 @@
  */
 package it.sirfin.ammazzonserver.service;
 
-import it.sirfin.ammazzonserver.dto.ListaTaglieDto;
+import it.sirfin.ammazzonserver.dto.ListaPagineDto;
 import it.sirfin.ammazzonserver.dto.TagliaDto;
 import it.sirfin.ammazzonserver.model.VarianteTaglia;
 import org.springframework.data.domain.Page;
@@ -16,18 +16,16 @@ import org.springframework.data.domain.Page;
  */
 public interface AnagraficaTaglieService {
 
-    Page <VarianteTaglia>  aggiungiTaglia(VarianteTaglia vt, int pagina, int totalPages);
+    ListaPagineDto<VarianteTaglia> aggiungiTaglia(VarianteTaglia vt, int pagina, int totalPages);
 
-    Page <VarianteTaglia>  rimuoviTaglia(VarianteTaglia vt,int pagina, int totalPages);
+    ListaPagineDto<VarianteTaglia> rimuoviTaglia(VarianteTaglia vt, int pagina, int totalPages);
 
-    Page <VarianteTaglia>  ricerca(String c, int pagina, int totalPages);
+    ListaPagineDto<VarianteTaglia> ricerca(String c, int pagina, int totalPages);
 
     TagliaDto ritornaTaglia(VarianteTaglia vt, int pageNum);
 
-    Page <VarianteTaglia>  conferma(VarianteTaglia vt, int pagina, int totalPages);
+    ListaPagineDto<VarianteTaglia> conferma(VarianteTaglia vt, int pagina, int totalPages);
 
-    Page <VarianteTaglia> aggiornaListaPaginata(int pagina, int totalPages);
-    
-    
-   
+    ListaPagineDto<VarianteTaglia> aggiornaListaPaginata(int pagina, int totalPages);
+
 }

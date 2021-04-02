@@ -5,7 +5,7 @@
  */
 package it.sirfin.ammazzonserver.service.impl;
 
-import it.sirfin.ammazzonserver.dto.ListaTaglieDto;
+import it.sirfin.ammazzonserver.dto.ListaPagineDto;
 import it.sirfin.ammazzonserver.dto.TagliaDto;
 import it.sirfin.ammazzonserver.model.VarianteTaglia;
 import it.sirfin.ammazzonserver.repository.VarianteTagliaRepository;
@@ -32,26 +32,26 @@ public class AnagraficaTaglieServiceImpl implements AnagraficaTaglieService {
     VarianteTagliaRepository varianteTagliaRepository;
 
     @Override
-    public Page<VarianteTaglia> aggiungiTaglia(VarianteTaglia vt, int pagina, int totalPages) {
+    public ListaPagineDto<VarianteTaglia> aggiungiTaglia(VarianteTaglia vt, int pagina, int totalPages) {
         varianteTagliaRepository.save(vt);
         return aggiornaListaPaginata(pagina, 3);
     }
 
     @Override
-    public Page<VarianteTaglia> rimuoviTaglia(VarianteTaglia vt, int pagina, int totalPages) {
+    public ListaPagineDto<VarianteTaglia> rimuoviTaglia(VarianteTaglia vt, int pagina, int totalPages) {
         varianteTagliaRepository.delete(vt);
         return aggiornaListaPaginata(pagina, 3);
     }
 
     @Override
-    public Page<VarianteTaglia> ricerca(String c, int pageNum, int totalPages) {
+    public ListaPagineDto<VarianteTaglia> ricerca(String c, int pageNum, int totalPages) {
         if (c.isBlank()) {
             return aggiornaListaPaginata(pageNum, 3);
         }
-        Pageable primaPaginaCinqueElementi = PageRequest.of(pageNum, 3);
+        Pageable primaPaginaCinqueElementi = PageRequest.of(pageNum -1, 3);
         Page<VarianteTaglia> lista = varianteTagliaRepository.trovaCodice(c, primaPaginaCinqueElementi);
         logger.debug(lista.toString());
-        return lista;
+        return new ListaPagineDto(lista.getContent(), lista.getPageable().getPageNumber(), lista.getTotalPages());
     }
 
     @Override
@@ -60,17 +60,21 @@ public class AnagraficaTaglieServiceImpl implements AnagraficaTaglieService {
     }
 
     @Override
-    public Page<VarianteTaglia> conferma(VarianteTaglia vt, int pagina, int totalPages) {
+    public ListaPagineDto<VarianteTaglia> conferma(VarianteTaglia vt, int pagina, int totalPages) {
         varianteTagliaRepository.save(vt);
         return aggiornaListaPaginata(pagina, 3);
     }
 
     @Override
-    public Page<VarianteTaglia> aggiornaListaPaginata(int pagina, int totalPages) {
-        Pageable primaPaginaCinqueElementi = PageRequest.of(pagina - 1, 3);
-        Page<VarianteTaglia> lista = varianteTagliaRepository.findAll(primaPaginaCinqueElementi);
-        logger.debug(lista.toString());
-        return lista;
+    public ListaPagineDto<VarianteTaglia> aggiornaListaPaginata(int pagina, int totalPages) {
+        PageRequest pg = PageRequest.of(pagina - 1, 3);
+        Page<VarianteTaglia> taglie = varianteTagliaRepository.findAll(pg);
+
+        logger.info("---------------------");
+        logger.info("Sono qui" + new ListaPagineDto(taglie.getContent(), taglie.getPageable().getPageNumber(), taglie.getTotalPages()));
+        logger.info("---------------------");
+        return new ListaPagineDto(taglie.getContent(), taglie.getPageable().getPageNumber(), taglie.getTotalPages());
+
     }
 
 }

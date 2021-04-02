@@ -145,7 +145,7 @@ export class AnagraficaTagliaComponent implements OnInit, Automabile {
         this.paginaCorrente = r.pageNum + 1;
         this.numeroPagine = r.totalPages;
       });
-      // this.aggiorna(dto);
+    // this.aggiorna(dto);
   }
 
   eliminaDati() {
@@ -158,21 +158,23 @@ export class AnagraficaTagliaComponent implements OnInit, Automabile {
         this.paginaCorrente = r.pageNum + 1;
         this.numeroPagine = r.totalPages;
       });
-      // this.aggiorna(dto);
+    // this.aggiorna(dto);
   }
 
   aggiornaRisultatiRicerca() {
     let dto = new RicercaTaglieDto();
     dto.criterioRicerca = this.inputRicerca;
+    dto.pageNum = this.paginaCorrente;
+    dto.totalPages = this.numeroPagine;
     if (this.inputRicerca == null) {
       this.errore = "Inserisci il criterio di ricerca";
     } else {
       this.errore = "";
       this.http.post<ListaPagineDto>("http://localhost:8080/ricerca-taglia", dto)
         .subscribe(r => {
-          this.listaTaglie = r.listaPagine;
-          this.paginaCorrente = r.pageNum + 1;
-          this.numeroPagine = r.totalPages;
+            this.listaTaglie = r.listaPagine;
+            this.paginaCorrente = r.pageNum + 1;
+            this.numeroPagine = r.totalPages;
         });
     }
   }

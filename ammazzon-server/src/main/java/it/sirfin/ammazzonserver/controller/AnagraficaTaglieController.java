@@ -33,29 +33,25 @@ public class AnagraficaTaglieController {
     @RequestMapping("/aggiorna-taglia")
     @ResponseBody
     public ListaPagineDto<VarianteTaglia> aggiornaTaglie(@RequestBody TagliaDto dto) {
-        var pag = anagraficaTaglieService.aggiornaListaPaginata(dto.getPageNum(), 0);
-        return new ListaPagineDto<>(pag.getContent(), pag.getPageable().getPageNumber(), pag.getTotalPages());
+        return anagraficaTaglieService.aggiornaListaPaginata(dto.getPageNum(), 0);
     }
 
     @RequestMapping("aggiungi-taglia")
     @ResponseBody
     public ListaPagineDto<VarianteTaglia> aggiungiTaglia(@RequestBody TagliaDto dto) {
-        var pag = anagraficaTaglieService.aggiungiTaglia(dto.getVarianteTaglia(), dto.getPageNum(), 0);
-        return new ListaPagineDto<>(pag.getContent(), pag.getPageable().getPageNumber(), pag.getTotalPages());
+        return anagraficaTaglieService.aggiungiTaglia(dto.getVarianteTaglia(), dto.getPageNum(), 0);
     }
 
     @RequestMapping("rimuovi-taglia")
     @ResponseBody
     public ListaPagineDto<VarianteTaglia> rimuoviTaglia(@RequestBody TagliaDto dto) {
-        var pag = anagraficaTaglieService.rimuoviTaglia(dto.getVarianteTaglia(), dto.getPageNum(), 0);
-        return new ListaPagineDto<>(pag.getContent(), pag.getPageable().getPageNumber(), pag.getTotalPages());
+        return anagraficaTaglieService.rimuoviTaglia(dto.getVarianteTaglia(), dto.getPageNum(), 0);
     }
 
     @RequestMapping("conferma-taglia")
     @ResponseBody
     public ListaPagineDto<VarianteTaglia> confermaTaglia(@RequestBody TagliaDto dto) {
-        var pag = anagraficaTaglieService.conferma(dto.getVarianteTaglia(), dto.getPageNum(), 0);
-        return new ListaPagineDto<>(pag.getContent(), pag.getPageable().getPageNumber(), pag.getTotalPages());
+        return anagraficaTaglieService.conferma(dto.getVarianteTaglia(), dto.getPageNum(), 0);
     }
 
     @RequestMapping("rit-taglia")
@@ -67,7 +63,6 @@ public class AnagraficaTaglieController {
     @RequestMapping("ricerca-taglia")
     @ResponseBody
     public ListaPagineDto<VarianteTaglia> ricercaTaglia(@RequestBody RicercaTagliaDto dto) {
-        var pag = anagraficaTaglieService.ricerca(dto.getCriterioRicerca(), dto.getPageNum(), dto.getTotalPages());
-        return new ListaPagineDto<>(pag.getContent(), pag.getPageable().getPageNumber(), pag.getTotalPages());
+        return anagraficaTaglieService.ricerca(dto.getCriterioRicerca(), dto.getPageNum(), dto.getTotalPages());
     }
 }
