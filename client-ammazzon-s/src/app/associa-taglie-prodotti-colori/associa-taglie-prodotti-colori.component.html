@@ -57,13 +57,13 @@
     </div>
     <br>
     <br>
-    <div *ngIf="coloriTaglie.length>0">
-        <h4 *ngIf="taglieNonAssociate.length<1">
+    <div class="contenitore1" *ngIf="coloriTaglie.length>0">
+        <h4 *ngIf="taglieNonAssociate.length>1">
             {{prodottoSelezionato.codice}} {{prodottoColoreSelezionato.varianteColore.descrizione}}
             è disponibile in tutte le taglie!</h4>
-        <h3>Taglie disponibili per {{prodottoSelezionato.codice}}
-            {{prodottoColoreSelezionato.varianteColore.descrizione}}</h3>
         <table>
+            <h3>Taglie disponibili per {{prodottoSelezionato.codice}}
+                {{prodottoColoreSelezionato.varianteColore.descrizione}}</h3>
             <tr>
                 <th>Codice</th>
             </tr>
@@ -72,19 +72,19 @@
                 <td><button class="pulsante" (click)="rimuoviTagliaProdotto(ct)">rimuovi</button></td>
             </tr>
         </table>
-        <br>
-        <br>
-        <button class="pulsante" (click)="disassociaTutti()">Disassocia tutti</button>
+        <div class="contenitore3">
+            <button class="pulsante" (click)="disassociaTutti()">Disassocia tutti</button>
+            <button class="pulsante" (click)="associaTutti()">Associa tutti</button>
+        </div>
     </div>
     <br>
-    <div *ngIf="taglieNonAssociate.length>0">
+    <div class="contenitore2" *ngIf="taglieNonAssociate.length>0">
         <h3 *ngIf="coloriTaglie.length<1">Nessuna taglia disponibile per
             {{prodottoSelezionato.codice}} {{prodottoColoreSelezionato.varianteColore.descrizione}}</h3>
-        <button class="pulsante" (click)="associaTutti()">Associa tutti</button>
         <br>
         <br>
-        <h4>Taglie non disponibili</h4>
         <table>
+            <h3>Taglie non disponibili</h3>
             <tr>
                 <th>Codice</th>
             </tr>

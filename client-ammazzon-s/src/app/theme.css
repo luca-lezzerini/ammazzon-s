@@ -39,7 +39,6 @@
     padding-left: 20px;
 }
 
-
 /* Stile titolo */
 
 .titolo {
@@ -89,21 +88,23 @@
     border-radius: 15px;
     box-shadow: 0 9px #999;
     margin: 0.5%;
-  }
-  
-  /* Stile pulsante colore di sfondo */
+}
 
-  .pulsante:hover {background-color: blue}
-  
-  .pulsante:active {
+/* Stile pulsante colore di sfondo */
+
+.pulsante:hover {
+    background-color: blue
+}
+
+.pulsante:active {
     background-color: blue;
     box-shadow: 0 5px #666;
     transform: translateY(4px);
-  }
+}
 
-  /* Stile text-area */
+/* Stile text-area */
 
-  input[type=text] {
+input[type=text] {
     width: 50%;
     padding: 12px 20px;
     margin: 8px 20px;
@@ -111,17 +112,26 @@
     border: 1px solid #555;
     outline: none;
     border-radius: 15px;
-  }
-  
-  /* Stile text area colore di sfondo */
+}
 
-  input[type=text]:focus {
+/* Stile text area colore di sfondo */
+
+input[type=text]:focus {
     background-color: #ddd;
     color: black;
-  }
+}
 
-.colonne{
-    column-count: 3;
-    column-gap: 60px;
-    column-rule: solid black;
-  }
+.contenitore1 {
+    float: left;
+    margin: auto auto;
+}
+
+.contenitore3 {
+    float: inline-end;
+    margin: auto auto;
+}
+
+.contenitore2 {
+    float: right;
+    margin: auto auto;
+}
